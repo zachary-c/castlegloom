@@ -1,0 +1,70 @@
+.kb {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        width: 1300px;
+    }
+    $scale: 3;
+    $f-row-height: calc(1em * $scale);
+    $f-key-width: calc($f-row-height * (1.7));
+
+    $esc-key-width: calc($f-row-height * 2.3);
+    $esc-scaled-width: calc($esc-key-width * $scale);
+    $regular-row-height: calc(1.5em * $scale);
+    $regular-row-height-scalar: 1.5;
+    $regular-row-width: $regular-row-height;
+    $bkspce-width: calc($regular-row-height * (3.4 / $regular-row-height-scalar));
+    $tab-width: calc($regular-row-height * (2.4 / $regular-row-height-scalar));
+    $caps-width: calc($regular-row-height * (2.9 / $regular-row-height-scalar));
+    $enter-width: calc($regular-row-height * (3.9 / $regular-row-height-scalar));
+    $right-shift: calc($regular-row-height * (4.8 / $regular-row-height-scalar));
+    &__row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 1rem;
+        &__group {
+            display: flex;
+            flex-direction: row;
+            gap: .5rem;
+            width: 100%;
+            &.reg-keys {
+                & span {
+                    width: $regular-row-width;
+                    height: $regular-row-height;
+                }
+            }
+            & > span.kb__backspace { width: $bkspce-width;}
+            & > span.kb__tab { width: $tab-width;}
+            & > span.kb__caps { width: $caps-width; }
+            & > span.kb__enter { width: $enter-width; }
+            & > span.kb__right-shift { width: $right-shift; }
+            & > span.kb__lctrl { width: calc($regular-row-height * (2 / $regular-row-height-scalar)); }
+            & > span.kb__rctrl { width: calc($regular-row-height * (2.9 / $regular-row-height-scalar)); }
+            & > span.kb__space { width: calc($regular-row-height * (11 / $regular-row-height-scalar)); }
+            & span {
+                background-color: rgb(27, 27, 27);
+                border-radius: 5px;
+                color: white;
+                padding: .5rem;
+                box-sizing: border-box;
+                flex-grow: 1;
+                &.pressed {
+                    background-color: rgb(109, 109, 109);
+                }
+            }
+            &.f-keys {
+                // function keys are 1.7 x 1 cm
+                & span {
+                    height: $f-row-height;
+                    width: $f-key-width;
+                    &.kb__esc { // esc is 2.3 x 1 cm
+                        width: $esc-key-width;
+                    }
+                }
+            }
+        }
+    }
+    
+}
