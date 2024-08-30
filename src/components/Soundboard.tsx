@@ -13,7 +13,7 @@ function togglePress(record : Record<string, boolean>, code : string) {
 
 export default function Soundboard({preset} : { preset : SoundPreset }) {
     const [log, setLog] = useState<string>("")
-    const [audioCtx, setAudioCtx] = useState(new AudioContext())
+    const [audioCtx, setAudioCtx] = useState<AudioContext | null>(null)
     const [currentlyPressed, setCurrentlyPressed] = useState<Record<string, boolean>>({})
     const [audioBuffer, setAudioBuffer] = useState<AudioBuffer>()
     const [audioBuffers, setAudioBuffers] = useState<Record<string, AudioBuffer>>({})
@@ -25,16 +25,21 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
         }
     })
     function playSound(buffer : AudioBuffer) {
+        if (!audioCtx) return
+
         var src = audioCtx.createBufferSource();
 
         src.buffer = buffer
         src.connect(audioCtx.destination)
         src.start()
     }
+    useEffect(() => {
+        setAudioCtx(new AudioContext())
+    }, [])
 
     useEffect(() => {
         async function loadAudio(audio : Sound_t | null) {
-            if (audio === null) {
+            if (audio === null || audioCtx === null) {
                 return
             }
             const request = await fetch(audio.url)
@@ -155,7 +160,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
                             <span className={currentlyPressed['KeyK'] ? 'pressed' : ''}>K {preset.KeyK?.filename ?? ''}</span>
                             <span className={currentlyPressed['KeyL'] ? 'pressed' : ''}>L {preset.KeyL?.filename ?? ''}</span>
                             <span className={currentlyPressed['Semicolon'] ? 'pressed' : ''}>; {preset.Semicolon?.filename ?? ''}</span>
-                            <span className={currentlyPressed['Quote'] ? 'pressed' : ''}>' {preset.Quote?.filename ?? ''}</span>
+                            <span className={currentlyPressed['Quote'] ? 'pressed' : ''}>{"'"} {preset.Quote?.filename ?? ''}</span>
                             <span className={`kb__ra kb__enter fill-space ${currentlyPressed['Enter'] ? 'pressed' : ''}`}>Enter</span>
                         </div>
                     </div>
