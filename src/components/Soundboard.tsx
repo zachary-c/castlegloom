@@ -38,6 +38,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
     }, [])
 
     useEffect(() => {
+        if (!audioCtx) return
         async function loadAudio(audio : Sound_t | null) {
             if (audio === null || audioCtx === null) {
                 return
@@ -58,7 +59,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
             const key = k as keyof SoundPreset
             loadAudio(preset[key])
         }
-    }, [preset])
+    }, [preset, audioCtx])
 
     function keyDownLogger(e : KeyboardEvent<HTMLElement>) {
         if ((currentlyPressed[e.code] && currentlyPressed[e.code] === true) || e.code === 'CapsLock') {
