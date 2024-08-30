@@ -3,6 +3,7 @@
 import { Sound_t, SoundPreset } from "$/schemaTypes/soundPreset"
 import "&/soundboard.scss"
 import { KeyboardEvent, Ref, RefObject, useEffect, useRef, useState } from "react"
+import { start } from "repl"
 const audio = 'http://localhost:3000/project2/penta_noise.mp3'
 
 function togglePress(record : Record<string, boolean>, code : string) {
@@ -11,12 +12,28 @@ function togglePress(record : Record<string, boolean>, code : string) {
     return t
 }
 
+function audioKey(playingSrcs : Record<string, AudioBufferSourceNode>, e : KeyboardEvent<HTMLElement>) : boolean {
+    let recognized = false;
+    switch (e.code) {
+        case 'Backspace': 
+            recognized = true;
+            console.log("Backspacing")
+            Object.keys(playingSrcs).forEach((k : string) => {
+                playingSrcs[k].stop()
+            })
+            break;
+    }
+    return recognized
+}
+
 export default function Soundboard({preset} : { preset : SoundPreset }) {
     const [log, setLog] = useState<string>("")
     const [audioCtx, setAudioCtx] = useState<AudioContext | null>(null)
     const [currentlyPressed, setCurrentlyPressed] = useState<Record<string, boolean>>({})
     const [audioBuffer, setAudioBuffer] = useState<AudioBuffer>()
     const [audioBuffers, setAudioBuffers] = useState<Record<string, AudioBuffer>>({})
+    const [playingSrcs, setPlayingSrcs] = useState<Record<string, AudioBufferSourceNode>>({})
+    const [sequentialQueue, setSequentialQueue] = useState<AudioBufferSourceNode[]>([])
     const inp = useRef<HTMLInputElement>(null)
     
     useEffect(() => {
@@ -24,14 +41,34 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
             inp.current.focus()
         }
     })
-    function playSound(buffer : AudioBuffer) {
-        if (!audioCtx) return
 
-        var src = audioCtx.createBufferSource();
+    useEffect(() => {
+        console.log("src", playingSrcs)
+    }, [playingSrcs])
 
+    function readyAudioBufferSourceNode(buffer : AudioBuffer) {
+        var src = (audioCtx as AudioContext).createBufferSource();
         src.buffer = buffer
-        src.connect(audioCtx.destination)
+        src.connect((audioCtx as AudioContext).destination)
+        return src;
+    }
+
+    function playSound(src : AudioBufferSourceNode) {
+
+        const now = Date.now()
         src.start()
+        setPlayingSrcs(p => {
+            const t = {...p}
+            t[now] = src;
+            return t;
+        })
+        src.addEventListener('ended', () => {
+            setPlayingSrcs(p => {
+                const t = {...p}
+                delete t[now]
+                return t;
+            })
+        })
     }
     useEffect(() => {
         setAudioCtx(new AudioContext())
@@ -62,6 +99,8 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
     }, [preset, audioCtx])
 
     function keyDownLogger(e : KeyboardEvent<HTMLElement>) {
+        if (!audioCtx) return
+        if (audioKey(playingSrcs, e)) return
         if ((currentlyPressed[e.code] && currentlyPressed[e.code] === true) || e.code === 'CapsLock') {
             console.log("returning", e, currentlyPressed)
             return
@@ -74,13 +113,31 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
             setCurrentlyPressed(c => togglePress(c, "CapsLock"))
         }
         console.log("e", e.code, e)
-        console.log(audioBuffers)
-        if (audioBuffers[e.code]) {
-            playSound(audioBuffers[e.code])
+        const source = readyAudioBufferSourceNode(audioBuffers[e.code])
+        // if shifted, queue it
+        if (currentlyPressed["ShiftLeft"]) {
+            console.log("Left Shift is on!")
+            setSequentialQueue(sq => [...sq, source])
+        // if not, play it immediately
+        } else if (audioBuffers[e.code]) {
+            playSound(source)
         }
     }
     function keyUpLogger(e : KeyboardEvent<HTMLElement>) {
-        //console.log("KEYUP", e.code, e)
+        if (e.code === 'ShiftLeft') {
+            console.log("queueing tracks!", sequentialQueue)
+            for (let i = 0; i < sequentialQueue.length-1; i++) {
+                const src = sequentialQueue[i]
+                if (!src.buffer) continue;
+
+                src.addEventListener('ended', () => {
+                    playSound(sequentialQueue[i+1])
+                })
+            }
+            playSound(sequentialQueue[0])
+            setSequentialQueue([])
+        }
+        console.log("KEYUP", e.code, e)
         setCurrentlyPressed(cp => togglePress(cp, e.code))
     }
 
