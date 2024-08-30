@@ -1,17 +1,30 @@
 .kb {
     &__wrapper {
         display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 1300px;
+        font-size: .75rem;
+    }
+
+    &__center-group {
+        display: flex;
         flex-direction: column;
         gap: .5rem;
-        width: 1300px;
+        width: 860px;
     }
-    $scale: 3;
-    $f-row-height: calc(1em * $scale);
+    &__arrow-group {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    $scale: 2;
+    $f-row-height: calc(1rem * $scale);
     $f-key-width: calc($f-row-height * (1.7));
 
     $esc-key-width: calc($f-row-height * 2.3);
     $esc-scaled-width: calc($esc-key-width * $scale);
-    $regular-row-height: calc(1.5em * $scale);
+    $regular-row-height: calc(1.5rem * $scale);
     $regular-row-height-scalar: 1.5;
     $regular-row-width: $regular-row-height;
     $bkspce-width: calc($regular-row-height * (3.4 / $regular-row-height-scalar));
@@ -19,6 +32,22 @@
     $caps-width: calc($regular-row-height * (2.9 / $regular-row-height-scalar));
     $enter-width: calc($regular-row-height * (3.9 / $regular-row-height-scalar));
     $right-shift: calc($regular-row-height * (4.8 / $regular-row-height-scalar));
+    &__numpad-layout {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        .kb__numpad-tall {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            & > span {
+                flex-grow: 1;
+                width: $regular-row-width;
+                height: $regular-row-height;
+            }
+
+        }
+    }
     &__row {
         display: flex;
         flex-direction: row;
@@ -35,25 +64,6 @@
                     height: $regular-row-height;
                 }
             }
-            & > span.kb__backspace { width: $bkspce-width;}
-            & > span.kb__tab { width: $tab-width;}
-            & > span.kb__caps { width: $caps-width; }
-            & > span.kb__enter { width: $enter-width; }
-            & > span.kb__right-shift { width: $right-shift; }
-            & > span.kb__lctrl { width: calc($regular-row-height * (2 / $regular-row-height-scalar)); }
-            & > span.kb__rctrl { width: calc($regular-row-height * (2.9 / $regular-row-height-scalar)); }
-            & > span.kb__space { width: calc($regular-row-height * (11 / $regular-row-height-scalar)); }
-            & span {
-                background-color: rgb(27, 27, 27);
-                border-radius: 5px;
-                color: white;
-                padding: .5rem;
-                box-sizing: border-box;
-                flex-grow: 1;
-                &.pressed {
-                    background-color: rgb(109, 109, 109);
-                }
-            }
             &.f-keys {
                 // function keys are 1.7 x 1 cm
                 & span {
@@ -64,7 +74,60 @@
                     }
                 }
             }
+            &.util-keys {
+                & span {
+                    height: $f-row-height;
+                    width: $regular-row-width;
+                }
+            }
+            &.centered {
+                justify-content: center;
+            }
+            & > span.fill-space { flex-grow: 1; }
+            & > span.kb__backspace { width: $bkspce-width; }
+            & > span.kb__tab { width: $tab-width;}
+            & > span.kb__caps { width: $caps-width; }
+            & > span.kb__enter { width: $enter-width; }
+            & > span.kb__right-shift { width: $right-shift; }
+            & > span.kb__lctrl { width: calc($regular-row-height * (2 / $regular-row-height-scalar)); }
+            & > span.kb__rctrl { width: calc($regular-row-height * (2.9 / $regular-row-height-scalar)); }
+            & > span.kb__space { width: calc($regular-row-height * (11 / $regular-row-height-scalar)); }
+            & > span.spacer-key { background-color: transparent; color: transparent; }
+            
         }
     }
-    
+    &__input {
+        color: transparent;
+        background-color: transparent;
+    }
+}
+span {
+    background-color: rgb(27, 27, 27);
+    border-radius: 5px;
+    color: white;
+    padding: .5rem;
+    box-sizing: border-box;
+    //flex-grow: 1;
+    &.pressed {
+        background-color: rgb(109, 109, 109);
+    }
+    &.unpressable {
+        background-color: gray;
+    }
+    &:hover {
+        z-index: 100;
+        position:relative;
+    }/* 
+    &:hover:after {
+        content: '';
+        position: relative;
+        height: 100%;
+        z-index: 99;
+        background-color: blue;
+        width: auto !important;
+        display:block;
+        left: 0;
+        top: 0;
+        //top: -100%;
+    } */
 }

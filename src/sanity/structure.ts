@@ -5,6 +5,9 @@ export const structure: StructureResolver = (S) =>
     S.list()
 .title('Content')
 .items([
+    S.documentTypeListItem('soundPreset')
+        .title("Sound Presets")
+        .id('soundPresets'),
     S.documentTypeListItem('page')
         .title('Pages')
         .id('pages'),

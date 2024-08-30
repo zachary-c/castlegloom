@@ -58,3 +58,69 @@ export type EmailableMeme = {
     cslug: string,
     youtubeURL: string
 }
+
+function keyFragment(name : string) {
+    return groq`{
+        "key": "${name}",
+        "url": soundfile.asset->url,
+        "filename": soundfile.asset->originalFilename
+    }`
+}
+
+export const soundPresetQuery = groq`
+*[_type == 'soundPreset'][0] {
+    "Backquote": Backquote ${keyFragment("Backquote")},
+    "Digit1": Digit1 ${keyFragment("Digit1")},
+    "Digit2": Digit2 ${keyFragment("Digit2")},
+    "Digit3": Digit3 ${keyFragment("Digit3")},
+    "Digit4": Digit4 ${keyFragment("Digit4")},
+    "Digit5": Digit5 ${keyFragment("Digit5")},
+    "Digit6": Digit6 ${keyFragment("Digit6")},
+    "Digit7": Digit7 ${keyFragment("Digit7")},
+    "Digit8": Digit8 ${keyFragment("Digit8")},
+    "Digit9": Digit9 ${keyFragment("Digit9")},
+    "Digit0": Digit0 ${keyFragment("Digit0")},
+    "Minus": Minus ${keyFragment("Minus")},
+    "Equal": Equal ${keyFragment("Equal")},
+
+    "KeyQ": KeyQ ${keyFragment("KeyQ")},
+    "KeyW": KeyW ${keyFragment("KeyW")},
+    "KeyE": KeyE ${keyFragment("KeyE")},
+    "KeyR": KeyR ${keyFragment("KeyR")},
+    "KeyT": KeyT ${keyFragment("KeyT")},
+    "KeyY": KeyY ${keyFragment("KeyY")},
+    "KeyU": KeyU ${keyFragment("KeyU")},
+    "KeyI": KeyI ${keyFragment("KeyI")},
+    "KeyO": KeyO ${keyFragment("KeyO")},
+    "KeyP": KeyP ${keyFragment("KeyP")},
+    "BracketLeft": BracketLeft ${keyFragment("BracketLeft")},
+    "BracketRight": BracketRight ${keyFragment("BracketRight")},
+    "Backslash": Backslash ${keyFragment("Backslash")},
+
+    // second row
+    "KeyA": KeyA ${keyFragment("KeyA")},
+    "KeyS": KeyS ${keyFragment("KeyS")},
+    "KeyD": KeyD ${keyFragment("KeyD")},
+    "KeyF": KeyF ${keyFragment("KeyF")},
+    "KeyG": KeyG ${keyFragment("KeyG")},
+    "KeyH": KeyH ${keyFragment("KeyH")},
+    "KeyJ": KeyJ ${keyFragment("KeyJ")},
+    "KeyK": KeyK ${keyFragment("KeyK")},
+    "KeyL": KeyL ${keyFragment("KeyL")},
+    "KeyM": KeyM ${keyFragment("KeyM")},
+    "Semicolon": Semicolon ${keyFragment("Semicolon")},
+    "Quote": Quote ${keyFragment("Quote")},
+
+    // third row
+    "KeyZ": KeyZ ${keyFragment("KeyZ")},
+    "KeyX": KeyX ${keyFragment("KeyX")},
+    "KeyC": KeyC ${keyFragment("KeyC")},
+    "KeyV": KeyV ${keyFragment("KeyV")},
+    "KeyB": KeyB ${keyFragment("KeyB")},
+    "KeyN": KeyN ${keyFragment("KeyN")},
+    "KeyM": KeyM ${keyFragment("KeyM")},
+    "Comma": Comma ${keyFragment("Comma")},
+    "Period": Period ${keyFragment("Period")},
+    "Slash": Slash ${keyFragment("Slash")},
+}
+`
