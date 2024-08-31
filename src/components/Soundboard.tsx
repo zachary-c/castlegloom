@@ -3,39 +3,19 @@
 import { Sound_t, SoundPreset } from "$/schemaTypes/soundPreset"
 import "&/soundboard.scss"
 import { KeyboardEvent, Ref, RefObject, useEffect, useRef, useState } from "react"
-import { start } from "repl"
-const audio = 'http://localhost:3000/project2/penta_noise.mp3'
 
 function togglePress(record : Record<string, boolean>, code : string) {
     const t= {...record}
     t[code] = !t[code]
     return t
 }
+const CAPS_ON_FADE_TIME = 5
+const CAPS_OFF_FADE_TIME = 10
 
-function audioKey(playingSrcs : Record<string, AudioBufferSourceNode>, e : KeyboardEvent<HTMLElement>) : boolean {
-    let recognized = false;
-    switch (e.code) {
-        case 'Backspace': 
-            recognized = true;
-            console.log("Backspacing")
-            Object.keys(playingSrcs).forEach((k : string) => {
-                playingSrcs[k].stop()
-            })
-            break;
-        case "PageUp":
-            recognized = true;
-            const oldest = [...Object.keys(playingSrcs)].sort((a, b) => a >= b ? 1 : -1)[0]
-            console.log("oldest", oldest, playingSrcs)
-            playingSrcs[oldest].stop()
-            break;
-        case "PageDown":
-            recognized = true;
-            const newest = [...Object.keys(playingSrcs)].sort((a, b) => a < b ? 1 : -1)[0]
-            console.log("newest", newest, playingSrcs)
-            playingSrcs[newest].stop()
-            break;
-    }
-    return recognized
+
+type PlayingSrcAndNode = {
+    source : AudioBufferSourceNode
+    effectNode : GainNode
 }
 
 export default function Soundboard({preset} : { preset : SoundPreset }) {
@@ -44,45 +24,112 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
     const [currentlyPressed, setCurrentlyPressed] = useState<Record<string, boolean>>({})
     const [audioBuffer, setAudioBuffer] = useState<AudioBuffer>()
     const [audioBuffers, setAudioBuffers] = useState<Record<string, AudioBuffer>>({})
-    const [playingSrcs, setPlayingSrcs] = useState<Record<string, AudioBufferSourceNode>>({})
-    const [sequentialQueue, setSequentialQueue] = useState<AudioBufferSourceNode[]>([])
+    const [playingSrcs, setPlayingSrcs] = useState<Record<string, PlayingSrcAndNode>>({})
+    const [sequentialQueue, setSequentialQueue] = useState<PlayingSrcAndNode[]>([])
     const inp = useRef<HTMLInputElement>(null)
+    const [allLoaded, setAllLoaded] = useState<boolean>(false)
+
+    function stopHandler(e : KeyboardEvent<HTMLElement>, srcs : PlayingSrcAndNode[]) {
+        const ctx = audioCtx as AudioContext
+
+        if (currentlyPressed["ContextMenu"]) {
+            srcs.forEach((src) => {
+                src.effectNode.gain.setValueAtTime(src.effectNode.gain.value, ctx.currentTime)
+                src.effectNode.gain.exponentialRampToValueAtTime(0.001, 
+                    ctx.currentTime + 
+                    (e.getModifierState("CapsLock") ? CAPS_ON_FADE_TIME : CAPS_OFF_FADE_TIME)
+                )
+            })
+            srcs.forEach((src) => {
+                src.source.stop(ctx.currentTime + (e.getModifierState("CapsLock") ? CAPS_ON_FADE_TIME : CAPS_OFF_FADE_TIME))
+            })
+        } else {
+            srcs.forEach((src) => {
+                src.source.stop()
+            })
+        }
+
+    }
+
+    function audioKey(e : KeyboardEvent<HTMLElement>) : boolean {
+        let recognized = false;
+        const ctx = audioCtx as AudioContext
+        switch (e.code) {
+            case 'Backspace': 
+                recognized = true;
+                console.log("Backspacing", currentlyPressed, currentlyPressed["ContextMenu"])
+                stopHandler(e, Object.values(playingSrcs))
+                break; 
+            case "PageUp":
+                recognized = true;
+                const oldest = [...Object.keys(playingSrcs)].sort((a, b) => a >= b ? 1 : -1)[0]
+                console.log("oldest", oldest, playingSrcs)
+                //playingSrcs[oldest].source.stop()
+                stopHandler(e, [playingSrcs[oldest]])
+                break;
+            case "PageDown":
+                recognized = true;
+                const newest = [...Object.keys(playingSrcs)].sort((a, b) => a < b ? 1 : -1)[0]
+                console.log("newest", newest, playingSrcs)
+                stopHandler(e, [playingSrcs[newest]])
+                break;
+            case "ControlLeft":
+                recognized = true;
+                break;
+            case "Space":
+                recognized = true;
+                if (ctx.state === 'suspended') {
+                    ctx.resume()
+                } else {
+                    ctx.suspend()
+                }
+                break;
+
+        }
+        return recognized
+    }
     
-    useEffect(() => {
+    function focusInput() {
         if (inp.current) {
             inp.current.focus()
         }
-    })
+    }
 
     useEffect(() => {
         console.log("src", playingSrcs)
+        focusInput()
     }, [playingSrcs])
 
-    function readyAudioBufferSourceNode(buffer : AudioBuffer, fadeIn? : number) {
-        var src = (audioCtx as AudioContext).createBufferSource();
+    function readyAudioBufferSourceNode(buffer : AudioBuffer, fadeIn? : number) : PlayingSrcAndNode {
+        const ctx = audioCtx as AudioContext
+        var src = ctx.createBufferSource();
         src.buffer = buffer
+        const gainNode = ctx.createGain()
+        gainNode.gain.setValueAtTime(fadeIn ? 0.01 : 1, ctx.currentTime)
+        console.log("gain node created!", gainNode, fadeIn)
+        src.connect(gainNode)
         if (fadeIn) {
-            const gainNode = new GainNode(audioCtx as AudioContext)
-            src.connect(gainNode)
-            gainNode.gain.setValueAtTime(0.01, (audioCtx as AudioContext).currentTime)
-            gainNode.gain.exponentialRampToValueAtTime(1, fadeIn)
-            gainNode.connect((audioCtx as AudioContext).destination)
-        } else {
-            src.connect((audioCtx as AudioContext).destination)
+            console.log("fading in!", gainNode, fadeIn)
+            console.log("gainNode", gainNode.gain.value)
+            gainNode.gain.exponentialRampToValueAtTime(1, ctx.currentTime + fadeIn)
         }
-        return src;
+        gainNode.connect(ctx.destination)
+        return {
+            source: src,
+            effectNode: gainNode
+        };
     }
 
-    function playSound(src : AudioBufferSourceNode) {
+    function playSound(srcObj : PlayingSrcAndNode) {
 
         const now = Date.now()
-        src.start()
+        srcObj.source.start()
         setPlayingSrcs(p => {
             const t = {...p}
-            t[now] = src;
+            t[now] = srcObj;
             return t;
         })
-        src.addEventListener('ended', () => {
+        srcObj.source.addEventListener('ended', () => {
             setPlayingSrcs(p => {
                 const t = {...p}
                 delete t[now]
@@ -102,7 +149,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
             }
             const request = await fetch(audio.url)
             const body = await request.arrayBuffer()
-            audioCtx.decodeAudioData(body, (buffer) => {
+            return audioCtx.decodeAudioData(body, (buffer) => {
                 console.log("decoded!", )
                 setAudioBuffers(b => {
                     const newBuffers = { ...b }
@@ -111,21 +158,30 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
                 })
             })
         }
-        const keys = Object.keys(preset)
-        for (const k of keys) {
-            const key = k as keyof SoundPreset
-            loadAudio(preset[key])
+        async function loadAllAudio() {
+            const keys = Object.keys(preset)
+            const promises = []
+            for (const k of keys) {
+                const key = k as keyof SoundPreset
+                promises.push(loadAudio(preset[key]))
+            }
+    
+            Promise.all(promises).then((r) => {
+                setAllLoaded(true)
+            })
         }
+        loadAllAudio()
     }, [preset, audioCtx])
 
     function keyDownLogger(e : KeyboardEvent<HTMLElement>) {
+        focusInput()
         if (!audioCtx) return
         if ((currentlyPressed[e.code] && currentlyPressed[e.code] === true) || e.code === 'CapsLock') {
             console.log("returning", e, currentlyPressed)
             return
         }
         setCurrentlyPressed(cp => togglePress(cp, e.code))
-        if (audioKey(playingSrcs, e)) return
+        if (audioKey(e) || !audioBuffers[e.code]) return
 
         if (currentlyPressed["CapsLock"] && !e.getModifierState("CapsLock")) {
             setCurrentlyPressed(c => togglePress(c, "CapsLock"))
@@ -136,7 +192,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
         let source
         if (currentlyPressed["ControlLeft"]) {
             console.log("queueing with delay", e.getModifierState("CapsLock"))
-            const fadeIn = e.getModifierState("CapsLock") ? 5 : 10
+            const fadeIn = e.getModifierState("CapsLock") ? CAPS_ON_FADE_TIME : CAPS_OFF_FADE_TIME
             source = readyAudioBufferSourceNode(audioBuffers[e.code], fadeIn)
         } else {
             source = readyAudioBufferSourceNode(audioBuffers[e.code])
@@ -155,9 +211,9 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
             console.log("queueing tracks!", sequentialQueue)
             for (let i = 0; i < sequentialQueue.length-1; i++) {
                 const src = sequentialQueue[i]
-                if (!src.buffer) continue;
+                if (!src.source.buffer) continue;
 
-                src.addEventListener('ended', () => {
+                src.source.addEventListener('ended', () => {
                     playSound(sequentialQueue[i+1])
                 })
             }
@@ -169,8 +225,8 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
     }
 
     return (
-        <main onKeyDown={(e) => keyDownLogger(e)} onKeyUp={(e) => keyUpLogger(e)} tabIndex={0}>
-            <div>hello {log}</div>
+        <main onClick={focusInput} onKeyDown={(e) => keyDownLogger(e)} onKeyUp={(e) => keyUpLogger(e)} tabIndex={0}>
+            <h1>Soundboard</h1>
             <div className="kb__wrapper">
                 <div className="kb__center-group">
                     <div id="f-keys" className="kb__row">
@@ -373,7 +429,12 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
                     </div>
                </div>
             </div>
-            <input className="kb__input" ref={inp} />
+            <input className={`kb__input ${!allLoaded ? 'loading' : ''}`} ref={inp} />
+            {/* <ul>
+                {Object.keys(playingSrcs).map((k) => 
+                    <li>Duration: {playingSrcs[k].source.buffer?.duration} | Gain:{playingSrcs[k].effectNode.gain.value}</li>
+                )}
+            </ul> */}
         </main>
     )
 }

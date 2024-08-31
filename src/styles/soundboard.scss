@@ -99,7 +99,23 @@
     &__input {
         color: transparent;
         background-color: transparent;
+        outline: none !important;
+        border: none;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: .5rem;
+        height: 100px;
+        background-color: rgb(195, 111, 0);
+        &:focus {
+            background-color: rgb(0, 105, 0);
+            border-width: .5rem;
+            box-shadow: none;
+        }
+        &.loading {
+            background-color: gray;
+        }
     }
+
 }
 span {
     background-color: rgb(27, 27, 27);
