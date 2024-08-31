@@ -22,6 +22,18 @@ function audioKey(playingSrcs : Record<string, AudioBufferSourceNode>, e : Keybo
                 playingSrcs[k].stop()
             })
             break;
+        case "PageUp":
+            recognized = true;
+            const oldest = [...Object.keys(playingSrcs)].sort((a, b) => a >= b ? 1 : -1)[0]
+            console.log("oldest", oldest, playingSrcs)
+            playingSrcs[oldest].stop()
+            break;
+        case "PageDown":
+            recognized = true;
+            const newest = [...Object.keys(playingSrcs)].sort((a, b) => a < b ? 1 : -1)[0]
+            console.log("newest", newest, playingSrcs)
+            playingSrcs[newest].stop()
+            break;
     }
     return recognized
 }
@@ -46,10 +58,18 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
         console.log("src", playingSrcs)
     }, [playingSrcs])
 
-    function readyAudioBufferSourceNode(buffer : AudioBuffer) {
+    function readyAudioBufferSourceNode(buffer : AudioBuffer, fadeIn? : number) {
         var src = (audioCtx as AudioContext).createBufferSource();
         src.buffer = buffer
-        src.connect((audioCtx as AudioContext).destination)
+        if (fadeIn) {
+            const gainNode = new GainNode(audioCtx as AudioContext)
+            src.connect(gainNode)
+            gainNode.gain.setValueAtTime(0.01, (audioCtx as AudioContext).currentTime)
+            gainNode.gain.exponentialRampToValueAtTime(1, fadeIn)
+            gainNode.connect((audioCtx as AudioContext).destination)
+        } else {
+            src.connect((audioCtx as AudioContext).destination)
+        }
         return src;
     }
 
@@ -100,20 +120,27 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
 
     function keyDownLogger(e : KeyboardEvent<HTMLElement>) {
         if (!audioCtx) return
-        if (audioKey(playingSrcs, e)) return
         if ((currentlyPressed[e.code] && currentlyPressed[e.code] === true) || e.code === 'CapsLock') {
             console.log("returning", e, currentlyPressed)
             return
         }
-        
         setCurrentlyPressed(cp => togglePress(cp, e.code))
+        if (audioKey(playingSrcs, e)) return
+
         if (currentlyPressed["CapsLock"] && !e.getModifierState("CapsLock")) {
             setCurrentlyPressed(c => togglePress(c, "CapsLock"))
         } else if (!currentlyPressed["CapsLock"] && e.getModifierState("CapsLock")) {
             setCurrentlyPressed(c => togglePress(c, "CapsLock"))
         }
         console.log("e", e.code, e)
-        const source = readyAudioBufferSourceNode(audioBuffers[e.code])
+        let source
+        if (currentlyPressed["ControlLeft"]) {
+            console.log("queueing with delay", e.getModifierState("CapsLock"))
+            const fadeIn = e.getModifierState("CapsLock") ? 5 : 10
+            source = readyAudioBufferSourceNode(audioBuffers[e.code], fadeIn)
+        } else {
+            source = readyAudioBufferSourceNode(audioBuffers[e.code])
+        }
         // if shifted, queue it
         if (currentlyPressed["ShiftLeft"]) {
             console.log("Left Shift is on!")
@@ -124,7 +151,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
         }
     }
     function keyUpLogger(e : KeyboardEvent<HTMLElement>) {
-        if (e.code === 'ShiftLeft') {
+        if (e.code === 'ShiftLeft' && sequentialQueue.length > 0) {
             console.log("queueing tracks!", sequentialQueue)
             for (let i = 0; i < sequentialQueue.length-1; i++) {
                 const src = sequentialQueue[i]
