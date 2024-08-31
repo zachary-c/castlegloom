@@ -32,7 +32,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
     function stopHandler(e : KeyboardEvent<HTMLElement>, srcs : PlayingSrcAndNode[]) {
         const ctx = audioCtx as AudioContext
 
-        if (currentlyPressed["ContextMenu"]) {
+        if (currentlyPressed["AltRight"]) {
             srcs.forEach((src) => {
                 src.effectNode.gain.setValueAtTime(src.effectNode.gain.value, ctx.currentTime)
                 src.effectNode.gain.exponentialRampToValueAtTime(0.001, 
@@ -57,7 +57,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
         switch (e.code) {
             case 'Backspace': 
                 recognized = true;
-                console.log("Backspacing", currentlyPressed, currentlyPressed["ContextMenu"])
+                console.log("Backspacing", currentlyPressed, currentlyPressed["AltRight"])
                 stopHandler(e, Object.values(playingSrcs))
                 break; 
             case "PageUp":
@@ -73,7 +73,7 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
                 console.log("newest", newest, playingSrcs)
                 stopHandler(e, [playingSrcs[newest]])
                 break;
-            case "ControlLeft":
+            case "AltLeft":
                 recognized = true;
                 break;
             case "Space":
@@ -190,8 +190,8 @@ export default function Soundboard({preset} : { preset : SoundPreset }) {
         }
         console.log("e", e.code, e)
         let source
-        if (currentlyPressed["ControlLeft"]) {
-            console.log("queueing with delay", e.getModifierState("CapsLock"))
+        if (currentlyPressed["AltLeft"]) {
+            console.log("playing with fade", e.getModifierState("CapsLock"))
             const fadeIn = e.getModifierState("CapsLock") ? CAPS_ON_FADE_TIME : CAPS_OFF_FADE_TIME
             source = readyAudioBufferSourceNode(audioBuffers[e.code], fadeIn)
         } else {
