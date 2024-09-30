@@ -1,0 +1,243 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #dcdedf;
+    gap: 1rem;
+    max-width: 80%;
+    margin: 0 auto;
+
+    background-color: #171d25;
+    @media screen and (min-width:1024px) {
+        padding: 2rem;
+    }
+}
+body {
+    background: #171d25;
+
+}
+html {
+    height: 100%;
+    background-color: #171d25;
+}
+.games-list {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: .5rem;
+    & > span {
+        padding: .4rem;
+        color: #ffffff;
+        font-weight: bold;
+        border: 2px #42536a solid;
+        background-color: #293442;
+
+        border-radius: 3px;
+        min-width: 300px;
+        max-width: 300px;
+        display: block;
+        flex-grow: 0;
+        cursor: pointer;
+    }
+    &.notgames > span {
+        color: rgb(145, 145, 145);
+        border: 2px rgb(42, 54, 68) solid;
+        background-color: rgb(31, 40, 50);
+    }
+
+}
+/*
+.games-list {
+    //background-color: blue;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: .25rem;
+    width: 100%;
+    & > span {
+        padding: .25rem;
+        border: 2px gray solid;
+        border-radius: 3px;
+        background-color: hwb(0 95% 5%);
+        max-width: 300px;
+    }
+    &.notgames > span {
+        color: lightslategray;
+    }
+    @media screen and (min-width: 1700px) {
+        height: 2400px;
+        &.size-sm {
+            height: 300px;
+        }
+        &.size-md {
+            height: 400px;
+        }
+        &.size-md-2 {
+            height: 630px;
+        }
+        &.size-lg {
+            height: 1200px;
+        }
+    }
+    &.no-entries {
+        height: 25px; 
+    }
+}*/
+.steamid-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    .steamid-list {
+        padding: 0 2rem;
+        border: 2px dotted blue;
+        list-style-type:none;
+    }    
+}
+.steamid-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.steamid-by-friends {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    & > input {
+        padding: .2rem;
+    }
+    & > button {
+        padding: .2rem;
+        cursor: pointer;
+    }
+}
+.error-message {
+    color: crimson;
+    font-size: .9rem;
+    
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: row;
+    padding-bottom: 1rem;
+}
+.friends-info {
+    border-top: 3px #dcdedf solid;
+    width: 100%;
+    & > h4 {
+        padding:1rem;
+        font-size: 1.5rem;
+    }
+    
+}
+.user-summary {
+    display: flex;
+    flex-direction: row;
+    padding: .25rem;
+    height: 45px;
+    max-width: 300px;
+    min-width: 300px;
+    justify-content: space-between;
+    background-color: #506073;
+    color: #DCDEDF;
+    cursor: pointer;
+    &.selected {
+        border: 4px #00ffe5 solid !important;
+    }
+    &__start {
+        gap: .4rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+    }
+    &__text {
+        display: flex;
+        flex-direction: column;
+    }
+    .us-pfp {
+        height: 100%;
+    }
+    .us-name {
+        font-size: .9rem;
+    }
+    .us-playing {
+        font-size: .75rem;
+    }
+    .us-status {
+        font-size: .75rem;
+    }
+    &.state {
+        &__0 {
+            background-color: none;
+        }
+        &__1 {
+            background-color: rgb(78, 137, 78);
+            border: 2px solid rgb(1, 64, 1);
+        }
+        &__2 {
+            background-color: lightcoral;
+            border: 2px solid maroon;
+        }
+        &__3 {
+            background-color: rgb(141, 112, 75);
+            border: 2px solid rgb(123, 92, 13);
+        }
+        &__4 {
+            background-color: rgb(113, 152, 164);
+            border: 2px solid rgb(75, 128, 128);
+        }
+    }
+}
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    gap: .25rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    @media screen and (min-width: 805px) {
+        &.size-sm {
+            height: 585px;
+        }
+        &.size-md {
+            height: 1200px;
+        }
+        &.size-lg {
+            height: 2400px;
+        }
+    }
+    @media screen and (min-width: 1300px) {
+        &.size-sm {
+            height: 425px;
+        }
+        &.size-md {
+            height: 800px;
+        }
+        &.size-lg {
+            height: 1600px;
+        }
+    }
+    @media screen and (min-width: 1700px) {
+        height: 2400px;
+        &.size-sm {
+            height: 300px;
+        }
+        &.size-md {
+            height: 400px;
+        }
+        &.size-md-2 {
+            height: 630px;
+        }
+        &.size-lg {
+            height: 1200px;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+html, body, main{
+    background-color: orange;
+    color: black;
+}
+.page-body {
+    display: flex;
+    flex-direction: column;
+}
+.page--vflex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.page--global-notfound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 5rem;
+}
+.daynav__container {
+    margin-bottom: 1rem;
+}
+a.button {
+    background-color: black;
+    border-radius: 15px;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    width: 150px;
+    display: block;
+}
+a.external {
+    background-color: rgb(72, 40, 0);
+    color: white;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: .5rem;
+    &.memoriam {
+        max-width: 500px;
+    }
+}
