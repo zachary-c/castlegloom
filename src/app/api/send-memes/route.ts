@@ -11,7 +11,7 @@ export async function GET(request : NextRequest) {
     }
     const emails = await client.fetch(recipient_list);
     const todaysMeme : EmailableMeme = await client.fetch(todays_meme);
-    let emailsList = emails.map((email : any) => email.email);
+    let emailsList = emails.map((email : any) => email.email);//.filter((e : string) => e === 'zhc@iastate.edu');
     console.log(emailsList);
     console.log(todaysMeme)
 

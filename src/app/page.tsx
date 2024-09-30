@@ -6,7 +6,7 @@ export default function Home() {
     <main>
         <h1>Castle Gloom</h1>
         <p>This site is under construction. Please check back later for updates.</p>
-        <a href="/soundboard">Soundboard</a>
+        {/* <a href="/soundboard">Soundboard</a> */}
     </main>
   );
 }

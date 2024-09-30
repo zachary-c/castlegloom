@@ -53,7 +53,7 @@ export default function DayNavigation(props : DayNavigationProps) {
             </div>
             {!props.homepage &&
                 <div className='daynav__button'>
-                    <Link className="button" href={'/'}>Home</Link>
+                    <Link className="button" href={pathPrefix}>Home</Link>
                 </div>
             }
         </>
