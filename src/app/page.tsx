@@ -8,7 +8,7 @@ export default function Home() {
         <h1>Castle Gloom</h1>
         <p>With the success of my first domain (spook-tober.com) and the project it hosted, I found myself in pursuit of a new one. There were three basic criteria:</p>
         <ol>
-            <li>It shouldn't contain hyphens -- it must be a recognizable word or two.</li>
+            <li>It shouldn&apos;t contain hyphens -- it must be a recognizable word or two.</li>
             <li>It should be something reasonable enough that it could be given in a professional context as an example of my web development work.</li>
             <li>It should be related to me, in some way, shape or form.</li>
         </ol>
