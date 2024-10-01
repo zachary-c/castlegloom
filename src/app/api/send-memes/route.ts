@@ -51,7 +51,7 @@ export async function GET(request : NextRequest) {
     const info = await mailer.sendMail({
         from: process.env.ORACLE_LOGIN,
         to: '314oracle@gmail.com',
-        bcc: 'zacharyhcampbell@gmail.com',//emailsList.join(','),
+        bcc: emailsList.join(','),
         subject: `Happy October 1st!`,
         //text: emailBody,
         html: `
@@ -75,8 +75,8 @@ export async function GET(request : NextRequest) {
     if (!info.response.includes('250')) {
         console.log("Errored, info: ", info)
         return NextResponse.json("Error sending email", {status: 500})
-    }
-    console.log(`Email sent to `, emailsList);
+    } 
+    //console.log(`Email sent to `, emailsList);
     
     return NextResponse.json({status: 200})
 }

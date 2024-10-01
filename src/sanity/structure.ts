@@ -28,7 +28,7 @@ export const structure: StructureResolver = (S) =>
                     S.documentList()
                         .id('2024_list')
                         .schemaType('meme')
-                        .title('Spooktober 202$')
+                        .title('Spooktober 2024')
                         .filter('_type == "meme" && date > \'2023-11-09\' && date < \'2024-11-02\'')
                 ),
                 S.listItem()
