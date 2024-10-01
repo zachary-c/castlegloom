@@ -51,9 +51,23 @@ export async function GET(request : NextRequest) {
     const info = await mailer.sendMail({
         from: process.env.ORACLE_LOGIN,
         to: '314oracle@gmail.com',
-        bcc: emailsList.join(','),
-        subject: `It's November 8th`,
-        text: emailBody,
+        bcc: 'zacharyhcampbell@gmail.com',//emailsList.join(','),
+        subject: `Happy October 1st!`,
+        //text: emailBody,
+        html: `
+        <p>
+            Happy October 1st! Spooky season has begun and it is time to get excited for fall, the best season. 
+        </p>
+        <p>
+            You are receiving this email because last year you signed up for daily spooky memes from <a href="spook-tober.com">spook-tober.com</a>. That domain is no longer in use! Spooktober memes have moved to <a href="https://castlegloom.com/spooktober">castlegloom.com/spooktober</a>. The site has received a fresh coat of paint, and more improvements and updates will be coming Soon™. 
+        </p>
+        <p>
+            If you do not wish to receive daily spooktober memes at this address, please reply to this email stating as much and you willl be removed from the list.
+        </p>
+        <p>
+            Happy Autumn!
+        </p>
+        `,
         attachments: attachments
     })
     

@@ -1,4 +1,4 @@
-html, body, main{
+html.spooktober-layout {
 //    background-color: orange;
 //    color: black;
     background-color: rgb(59, 59, 59);
@@ -24,8 +24,8 @@ html, body, main{
     margin-bottom: 1rem;
 }
 a.button {
-    background-color: rgb(238, 159, 13);
-    border-radius: 15px;
+    background-color: orange;
+    border-radius: 10px;
     color: black;
     padding: 1rem;
     text-align: center;
