@@ -41,13 +41,13 @@ export default function DayNavigation(props : DayNavigationProps) {
             <div className="daynav__container">
                 {props.currentYear !== 2022 || props.currentDay !== 1 ?
                     <div className='daynav__button'>
-                        <Link className="button" href={prevLink}>Previous</Link>
+                        <Link className="button" href={prevLink}>{"<"} Previous</Link>
                     </div> : null
                 }
 
                 {!(props.currentDay === 32 && props.currentYear === new Date().getFullYear()) && !props.homepage && nextLink ?
                     <div className='daynav__button'>
-                        <Link className="button" href={nextLink}>Next</Link>
+                        <Link className="button" href={nextLink}>Next {">"}</Link>
                     </div> : null
                 }
             </div>

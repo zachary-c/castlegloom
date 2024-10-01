@@ -19,9 +19,9 @@ export default async function Home() {
     const meme : Meme_t = await client.fetch(latest_meme, {
         "now": cstDate.toISOString()
     })
-    const date = new Date(meme.date);
+    const date = new Date(meme.date + "T12:00:00.000Z");
     let currentDate = date.getDate();
-    console.log(meme.date.slice(5, 7));
+    //console.log("cdate", date.toLocaleString(undefined, {}), date.getMonth(), meme.date.slice(5, 7));
     if (meme.date.slice(5, 7) === "11" && meme.date.slice(8) == "1") {
         currentDate = 32;
     } else if (meme.date.slice(5, 7) === "11") {

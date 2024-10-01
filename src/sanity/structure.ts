@@ -22,6 +22,16 @@ export const structure: StructureResolver = (S) =>
             .title('Memes')
             .items([
                 S.listItem()
+                .id('2024')
+                .title('2024')
+                .child(
+                    S.documentList()
+                        .id('2024_list')
+                        .schemaType('meme')
+                        .title('Spooktober 202$')
+                        .filter('_type == "meme" && date > \'2023-11-09\' && date < \'2024-11-02\'')
+                ),
+                S.listItem()
                 .id('2023')
                 .title('2023')
                 .child(

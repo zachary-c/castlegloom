@@ -19,10 +19,9 @@ export default function HomeHeader() {
                     `Happy ${date.toLocaleDateString('en-US', {month: 'long', day: 'numeric'}) + suffix(date.getDate())}!`]
     return (
         <div className='home-header'>
-            {
-                // <h1>{titles[Math.floor(date.getUTCMinutes()%titles.length)]}</h1>
-            }
-            <h1>Happy November!</h1>
+            <h1>{titles[Math.floor(date.getUTCMinutes()%titles.length)]}</h1>
+            
+            {/* <h1>Happy November!</h1> */}
         </div>
     )
 }
