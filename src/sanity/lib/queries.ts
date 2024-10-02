@@ -42,6 +42,7 @@ export const todays_meme = groq`
     },
     "cslug": slug.current,
     youtubeURL,
+    date
 }
 `
 export type EmailableMeme = {
@@ -56,7 +57,8 @@ export type EmailableMeme = {
         url: string
     },
     cslug: string,
-    youtubeURL: string
+    youtubeURL: string,
+    date : string
 }
 
 function keyFragment(name : string) {

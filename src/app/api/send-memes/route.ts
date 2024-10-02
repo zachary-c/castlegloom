@@ -1,6 +1,7 @@
 import { client } from '$/lib/client';
 import { todays_meme, recipient_list, EmailableMeme } from '$/lib/queries';
 import { NextRequest, NextResponse } from 'next/server';
+import { suffix } from 'R/util';
 
 export async function GET(request : NextRequest) {
     const secret = request.nextUrl.searchParams.get("secret");
@@ -14,6 +15,7 @@ export async function GET(request : NextRequest) {
     let emailsList = emails.map((email : any) => email.email);//.filter((e : string) => e === 'zhc@iastate.edu');
     console.log(emailsList);
     console.log(todaysMeme)
+    const todaysDate = new Date(`${todaysMeme.date}T12:00:00.000Z`);
 
     let attachments;
     let emailBody = '';
@@ -35,9 +37,6 @@ export async function GET(request : NextRequest) {
         emailBody = todaysMeme.youtubeURL
     }
 
-    
-
-    console.log(todaysMeme)
     const nodemailer = require('nodemailer');
     const mailer = nodemailer.createTransport({
         service: "Gmail",
@@ -52,9 +51,9 @@ export async function GET(request : NextRequest) {
         from: process.env.ORACLE_LOGIN,
         to: '314oracle@gmail.com',
         bcc: emailsList.join(','),
-        subject: `Happy October 1st!`,
-        //text: emailBody,
-        html: `
+        subject: `Happy October ${todaysDate.getDate()}${suffix(todaysDate.getDate())}!`,
+        text: emailBody,
+        /* html: `
         <p>
             Happy October 1st! Spooky season has begun and it is time to get excited for fall, the best season. 
         </p>
@@ -67,7 +66,7 @@ export async function GET(request : NextRequest) {
         <p>
             Happy Autumn!
         </p>
-        `,
+        `, */
         attachments: attachments
     })
     
@@ -75,8 +74,8 @@ export async function GET(request : NextRequest) {
     if (!info.response.includes('250')) {
         console.log("Errored, info: ", info)
         return NextResponse.json("Error sending email", {status: 500})
-    } 
-    //console.log(`Email sent to `, emailsList);
+    }
+    console.log(`Email sent to ${emailsList.length} emails:`, emailsList);
     
     return NextResponse.json({status: 200})
 }
