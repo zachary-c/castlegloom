@@ -53,7 +53,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
     // if there is some responders in there at the moment/still/already
     if (data.responses[chosenIndex].listOfResponders) {
         patch = client.patch(data._id, {
-            set: {
+            insert: {
                 before: `responses[1].listOfResponders[0]`,
                 items: [{_type: 'reference', _key: `${responder}_${choice}`, _ref: responder}]
             }

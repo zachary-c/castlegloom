@@ -38,8 +38,8 @@ export async function GET(request : NextRequest) {
     
     if (secret != process.env.SEND_MEMES_SECRET) {
         return NextResponse.json({status: 401, message: "Not Allowed"});
-    }
-    const emails : Recipient_t[] = [{_id: 'recipient-zacharyhcampbell-gmail-com', email: 'zacharyhcampbell@gmail.com'}] //await client.fetch(recipient_list);
+    } // 
+    const emails : Recipient_t[] = await client.fetch(recipient_list);
     const todaysMeme : EmailableMeme = await client.fetch(todays_meme);
     const pollQuestion : PollQuestion_t | undefined = todaysMeme.pollQuestion
     let emailsList = emails.map((email : any) => email.email);//.filter((e : string) => e === 'zhc@iastate.edu');
@@ -90,10 +90,7 @@ export async function GET(request : NextRequest) {
                     </style>
                 </head>
                 <body>
-                    <p>Happy Second Half of Spooktober! The smiths at Castle Gloom have been hard at work and are pleased to announce the newest way to <strike>collect data</strike> provide entertainment: Polling! </p>
-                    <p>Each day for the second half of the month, you will receive a poll such as the following: </p>
-                    ${pollHtml}
-                    <p>You will then (if you so desire) click one of the responses. This will record your response and redirect you to that meme's page, where you can see it and other poll responses (yours is likely not to be displayed immediately; it takes a few seconds for the response to be recorded and show up). (Voting subsequent times changes your vote, theoretically, but the skeleton crew hasn't tested that very well so it might break :P)</p>
+                ${pollHtml}
                 </body>
             </html>
             
@@ -102,7 +99,7 @@ export async function GET(request : NextRequest) {
                 from: process.env.ORACLE_LOGIN,
                 to: recipient.email,
                 // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-                subject: `Happy October ${todaysDate.getDate()}${suffix(todaysDate.getDate())} + POLLS!`,
+                subject: `Happy October ${todaysDate.getDate()}${suffix(todaysDate.getDate())}!`,
                 html: html,
                 attachments: attachments
             })
@@ -147,3 +144,11 @@ export async function GET(request : NextRequest) {
 <p>
     Happy Autumn!
 </p>*/
+
+/*
+
+                    <p>Happy second half of Spooktober! The smiths at Castle Gloom have been hard at work and are pleased to announce the newest way to <strike>collect data</strike> provide entertainment: Polling! </p>
+                    <p>Each day for the second half of the month (in addition to the spooktober meme of the day), you will receive a poll such as the following: </p>
+                    <p>You will then (if you so desire) click one of the responses. This will record your response and redirect you to that meme's page, where you can see it and other poll responses (Voting again changes your vote, theoretically, but the skeleton crew hasn't tested that very well so it might break :P).</p>
+                    <p>Happy Haunting!</p>
+*/
