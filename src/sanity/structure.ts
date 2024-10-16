@@ -14,6 +14,9 @@ export const structure: StructureResolver = (S) =>
     S.documentTypeListItem('recipient')
         .title('Recipients')
         .id('recipients'),
+    S.documentTypeListItem('pollQuestion')
+        .title('Poll Questions')
+        .id('pollQuestions'),
     S.listItem()
         .id('memes')
         .title('Memes')

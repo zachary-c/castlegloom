@@ -3,7 +3,7 @@ import React from 'react'
 import './spooktober/styles/spookySignup.scss'
 
 
-export default function SpookySignup() {
+export default function SpookySignup({title} : { title? : string}) {
     const formRef = React.useRef<HTMLFormElement>(null)
     const [buttonDisabled, setButtonDisabled] = React.useState(false)
     const [submitMessage, setSubmitMessage] = React.useState("")
@@ -43,7 +43,7 @@ export default function SpookySignup() {
 
     return (
         <div className='spooky-signup'>
-            <h3>Get Spooky Memes In Your Inbox!</h3> {/** @ts-ignore -- mysterious onSubmit handler */}
+            <h3>{title ?? 'Get Spooky Memes In Your Inbox!'}</h3> {/** @ts-ignore -- mysterious onSubmit handler */}
             <form title={'Spooky Scary Signup'} ref={formRef} onSubmit={submitFormHandler}>
                 <div className='input-group'>
                     <label htmlFor="email">Email: </label>

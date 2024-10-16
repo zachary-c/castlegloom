@@ -57,6 +57,12 @@ export default defineType({
             name: 'youtubeURL',
             type: 'url',
             title: 'Youtube URL'
+        },
+        {
+            title: 'Poll Question',
+            type: 'reference',
+            to: [{ type: 'pollQuestion'}],
+            name: 'question',
         }
     ],
     orderings: [

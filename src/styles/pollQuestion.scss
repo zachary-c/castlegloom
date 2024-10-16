@@ -1,0 +1,70 @@
+.poll {
+    display: block;
+    background-color: orange;
+    width: 100%;
+    max-width: 500px;
+    color: black;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    border-radius: 10px;
+    position: relative;
+
+    &__header {
+        display: block;
+        margin: .5rem;
+        &:after {
+            content: 'POLL';
+            position: absolute;
+            font-size: 3rem;
+            right: .5rem;
+            z-index: 1;
+            top: .5rem;
+            color: rgb(59, 59, 59);
+            //color: rgba(255, 255, 255, 0.836);
+            transform: rotate(10deg);
+            padding: .2rem;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: .1rem;
+        }
+    }
+    &__options {
+        padding: 0 1rem;
+        position: relative;
+        z-index: 2;
+        &__item {
+            list-style: none;
+            background-color: rgba(255, 255, 255, 0.655);
+            border-radius: 5px;
+            margin: .4rem .25rem ; 
+            padding: .25rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            position: relative;
+            z-index: 4;
+            &__text {
+                position: relative;
+                z-index: 4;                
+            }
+            &__count {
+                padding-right: .25rem;
+            }
+            &__fill-bar {
+                top: 0;
+                left: 0;
+                bottom: 0;
+                position: absolute;
+                border-radius: 5px;
+                z-index: 3;
+                height: auto;
+                background-color: rgba(255, 255, 255, 0.96);
+            }
+        }
+    }
+    &__response_count {
+        display: block;
+        text-align: end;
+        padding-right: 1.25rem;
+    }
+}

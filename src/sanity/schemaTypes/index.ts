@@ -4,6 +4,8 @@ import meme from './meme'
 import recipient from './recipient'
 import sound from './sound'
 import soundPreset from './soundPreset'
+import pollQuestion from './pollQuestion'
+import pollResponse from './pollResponse'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -11,6 +13,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     meme,
     recipient,
     sound,
-    soundPreset
+    soundPreset,
+
+    pollQuestion,
+    pollResponse
   ],
 }

@@ -7,8 +7,10 @@ import { client } from '../../../../sanity/lib/client'
 import MemeContainer from '../../../../components/MemeContainer'
 import { notFound } from 'next/navigation'
 import DayNavigation from '../../../../components/DayNavigation'
+import PollQuestion from 'R/src/components/PollQuestion'
+import SpookySignup from 'R/src/components/SpookySignup'
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export default async function Day2022({params} : {params : {day : string, cslug : string}}) {
     const dayOfMonth  = parseInt(params.day);
@@ -23,9 +25,9 @@ export default async function Day2022({params} : {params : {day : string, cslug 
         date = new Date(year, 10, 1)
      //   date = `${year}-11-01`;
     }
-    if (date > new Date()) {
+    /* if (date > new Date()) {
         notFound();
-    }
+    } */
     //let date2 = new Date(date);
     //date2.setDate(date2.getDate()+1);
     //console.log(date);
@@ -43,6 +45,9 @@ export default async function Day2022({params} : {params : {day : string, cslug 
             <HomeHeader />
             <MemeContainer meme={data}/>
             <DayNavigation currentDay={dayOfMonth} currentYear={year}/>
+            {data.pollQuestion && 
+                <PollQuestion question={data.pollQuestion} date={dateString}/>
+            }
         </main>
     )
 }

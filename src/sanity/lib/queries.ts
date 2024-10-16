@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { meme_fields } from '../types/documents'
+import { meme_fields, PollQuestion_t, pollQuestionFragment } from '../types/documents'
 
 export const page_by_slug = groq`
     *[_type == 'page' && slug.current == $cslug][0]
@@ -25,6 +25,7 @@ export const latest_meme = groq`
 `
 export const recipient_list = groq`
     *[_type == 'recipient'] {
+        _id,
         email
     }
 `
@@ -42,7 +43,8 @@ export const todays_meme = groq`
     },
     "cslug": slug.current,
     youtubeURL,
-    date
+    date,
+    "pollQuestion": ${pollQuestionFragment}
 }
 `
 export type EmailableMeme = {
@@ -58,7 +60,8 @@ export type EmailableMeme = {
     },
     cslug: string,
     youtubeURL: string,
-    date : string
+    date : string,
+    pollQuestion : PollQuestion_t | undefined
 }
 
 function keyFragment(name : string) {
