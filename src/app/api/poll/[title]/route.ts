@@ -23,7 +23,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
         projectId: projectId,
         dataset: 'production',
         apiVersion: apiVersion,
-        useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
+        useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
         token: process.env.CAMPBELL_TOKEN
     })
 
@@ -32,6 +32,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
     const alreadyVoted = data.responses.find((res) => res.listOfResponders?.some((responded) => responded._ref === responder))
     const chosenIndex = data.responses.findIndex((res) => res.responseSlug.current === choice)
     console.log("Chosen Response", chosenIndex)
+    console.log("Already Voted found ", alreadyVoted)
     if (alreadyVoted?._key === data.responses[chosenIndex]._key) {
         console.log("VOTING FOR SAME ONE ALREADY VOTED FOR, SHORT CIRCUIT")
         return redirect(`/spooktober/${date}`)
@@ -42,9 +43,11 @@ export async function GET(request : NextRequest, { params } : { params : { title
         //const filtered = alreadyVoted.listOfResponders.filter((r) => r._ref !== responder)
         let deletion
         if (alreadyVoted.listOfResponders.length === 1) {
+            console.log("Only one vote (us) so removing it wholesale")
             deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders`]})
         } else {
-            deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders[0]`]})
+            console.log("Multiple other votes, removing just us")
+            deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders[_ref == "${responder}"]`]})
         }
         console.log("Deletion commit response", (await deletion.commit()).responses)
     }
@@ -52,22 +55,23 @@ export async function GET(request : NextRequest, { params } : { params : { title
     let patch;
     // if there is some responders in there at the moment/still/already
     if (data.responses[chosenIndex].listOfResponders) {
+        console.log("Insert Patch; other people have said this")
         patch = client.patch(data._id, {
             insert: {
-                before: `responses[${chosenIndex}].listOfResponders[0]`,
+                after: `responses[${chosenIndex}].listOfResponders[-1]`,
                 items: [{_type: 'reference', _key: `${responder}_${choice}`, _ref: responder}]
             }
         })
     } else {
         const setpatch : any = {}
         setpatch[`responses[${chosenIndex}].listOfResponders`] = [{_type: 'reference', _key: `${responder}_${choice}`, _ref: responder}]
-        console.log("setpatch", setpatch)
+        console.log("setpatch -- no one has responded with this yet", setpatch)
         patch = client.patch(data._id, {
             set: setpatch
         })
     }
 
-    console.log("Patch Insert", (await patch.commit()))
+    console.log("Patch .commit()", (await patch.commit()))
 
     return redirect(`/spooktober/${date}`)
 }
