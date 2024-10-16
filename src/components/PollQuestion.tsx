@@ -1,5 +1,5 @@
 'use client'
-import { client } from "$/lib/client";
+import { apiClient, client } from "$/lib/client";
 import { meme_by_date } from "$/lib/queries";
 import { PollQuestion_t } from "$/types/documents";
 import "R/src/styles/pollQuestion.scss"
@@ -21,7 +21,7 @@ export default function PollQuestion({ question, date } : { question : PollQuest
     }, [questionData])
 
     async function getData() {
-        const data = await client.fetch(meme_by_date, { date: date })
+        const data = await apiClient.fetch(meme_by_date, { date: date })
         setQuestionData(data.pollQuestion)
     }
     useEffect(() => {
