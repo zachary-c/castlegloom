@@ -54,7 +54,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
     if (data.responses[chosenIndex].listOfResponders) {
         patch = client.patch(data._id, {
             insert: {
-                before: `responses[1].listOfResponders[0]`,
+                before: `responses[${chosenIndex}].listOfResponders[0]`,
                 items: [{_type: 'reference', _key: `${responder}_${choice}`, _ref: responder}]
             }
         })
