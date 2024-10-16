@@ -10,8 +10,6 @@ import DayNavigation from '../../../../components/DayNavigation'
 import PollQuestion from 'R/src/components/PollQuestion'
 import SpookySignup from 'R/src/components/SpookySignup'
 
-export const dynamic = 'force-dynamic';
-
 export default async function Day2022({params} : {params : {day : string, cslug : string}}) {
     const dayOfMonth  = parseInt(params.day);
     const year = parseInt(params.cslug);
@@ -35,7 +33,7 @@ export default async function Day2022({params} : {params : {day : string, cslug 
     let month = date.getMonth() < 9 ? `0${date.getMonth()+1}` : `${date.getMonth()+1}`;
     let day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
     let dateString = `${date.getFullYear()}-${month}-${day}`;
-    const data : Meme_t = await client.fetch(meme_by_date, {date: dateString})
+    const data : Meme_t = await client.fetch(meme_by_date, {date: dateString}, { cache: 'no-store' })
     //console.log(data);
     //console.log(data);
     if (!data) notFound();

@@ -93,7 +93,7 @@ export async function GET(request : NextRequest) {
                     <p>Happy Second Half of Spooktober! The smiths at Castle Gloom have been hard at work and are pleased to announce the newest way to <strike>collect data</strike> provide entertainment: Polling! </p>
                     <p>Each day for the second half of the month, you will receive a poll such as the following: </p>
                     ${pollHtml}
-                    <p>You will then (if you so desire) click one of the responses. This will record your response and redirect you to that meme's page, where you can see it and other poll responses. (Voting again changes your vote, theoretically, but the skeleton crew hasn't tested that very well so it might break :P)</p>
+                    <p>You will then (if you so desire) click one of the responses. This will record your response and redirect you to that meme's page, where you can see it and other poll responses (yours is likely not to be displayed immediately; it takes a few seconds for the response to be recorded and show up). (Voting subsequent times changes your vote, theoretically, but the skeleton crew hasn't tested that very well so it might break :P)</p>
                 </body>
             </html>
             
@@ -106,7 +106,11 @@ export async function GET(request : NextRequest) {
                 html: html,
                 attachments: attachments
             })
-        
+            console.log(info);
+            if (!info.response.includes('250')) {
+                console.log("Errored, info: ", info)
+                return NextResponse.json("Error sending email", {status: 500})
+            }
         }
     }
         
