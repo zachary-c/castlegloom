@@ -23,9 +23,9 @@ export default async function Day2022({params} : {params : {day : string, cslug 
         date = new Date(year, 10, 1)
      //   date = `${year}-11-01`;
     }
-    /* if (date > new Date()) {
+    if (date > new Date()) {
         notFound();
-    } */
+    }
     //let date2 = new Date(date);
     //date2.setDate(date2.getDate()+1);
     //console.log(date);
