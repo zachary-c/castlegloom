@@ -6,7 +6,7 @@ import { suffix } from 'R/util';
 
 function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, date :  string) {
     const pollStyle = 'background-color: rgb(59, 59, 59);padding: 1rem 0; border-radius: 8px;max-width: 600px;'
-    const headerStyle = 'margin-top:0; margin-left: 1rem;color:white;'
+    const headerStyle = 'margin-top:0; margin-left: 1rem;color:white; margin-right: 1rem;'
     const listStyles = "list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;"
     const listItemStyles = 'margin:0; padding: 0; background-color: rgb(75, 75, 75);'
     const anchorStyles = 'display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: #ffbf00; padding: .25rem .5rem; margin: 0 0 .5rem 0;'
