@@ -4,6 +4,8 @@ import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { suffix } from 'R/util';
 
+export const maxDuration = 55;
+
 function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, date :  string) {
     const pollStyle = 'background-color: rgb(59, 59, 59);padding: 1rem 0; border-radius: 8px;max-width: 600px;'
     const headerStyle = 'margin-top:0; margin-left: 1rem;color:white; margin-right: 1rem;'
@@ -119,15 +121,15 @@ export async function GET(request : NextRequest) {
         text: emailBody,
         html: ,
         attachments: attachments
-    }) */
+    })
     /* 
     //console.log(info);
     if (!info.response.includes('250')) {
         console.log("Errored, info: ", info)
         return NextResponse.json("Error sending email", {status: 500})
-    }  */
+    }  
+    */
     console.log(`Email sent to ${emailsList.length} emails:`, emailsList);
-    
     return NextResponse.json({status: 200})
 }
 
