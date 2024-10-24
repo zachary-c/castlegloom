@@ -4,7 +4,7 @@ import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { suffix } from 'R/util';
 
-export const maxDuration = 55;
+export const maxDuration = 60;
 
 function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, date :  string) {
     const pollStyle = 'background-color: rgb(59, 59, 59);padding: 1rem 0; border-radius: 8px;max-width: 600px;'
