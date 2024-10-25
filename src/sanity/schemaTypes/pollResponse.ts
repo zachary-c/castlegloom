@@ -28,12 +28,13 @@ export default defineType({
     preview: {
         select: {
             responseText: 'responseText',
-            responseSlug: 'responseSlug'
+            responseSlug: 'responseSlug',
+            listOfResponders: 'listOfResponders'
         },
         prepare: (e : any) => {
             return {
-                title: e.responseText,
-                subtitle: e.responseSlug?.current ?? ''
+                title: `${e.responseSlug?.current ?? ''} | ${e.responseText}`,
+                subtitle: `Votes: ${e.listOfResponders?.length ?? '0'}`
             }
         }
     }
