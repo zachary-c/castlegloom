@@ -33,7 +33,9 @@ export type Meme_t = {
 export const pollQuestionFragment = `question->{
         ...,
         responses[] {
-          ...,
+          "listOfResponders": listOfResponders[] {},
+          responseSlug,
+          responseText
         }
     }
 `

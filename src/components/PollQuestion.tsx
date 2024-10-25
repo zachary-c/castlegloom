@@ -7,7 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function PollQuestion({ question, date } : { question : PollQuestion_t, date : string}) {
     const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
-    console.log('question', question);
+    //console.log('question', question);
     //let totalResponses = 0;
     //question.responses.forEach((r) => totalResponses += r.listOfResponders?.length ?? 0)
 
