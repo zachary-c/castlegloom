@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 
 export default function PollQuestion({ question, date } : { question : PollQuestion_t, date : string}) {
     const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
+    const [loadingData, setLoadingData] = useState<boolean>(true)
     //console.log('question', question);
     //let totalResponses = 0;
     //question.responses.forEach((r) => totalResponses += r.listOfResponders?.length ?? 0)
@@ -21,8 +22,11 @@ export default function PollQuestion({ question, date } : { question : PollQuest
     }, [questionData])
 
     async function getData() {
-        const data = await apiClient.fetch(meme_by_date, { date: date })
+        setLoadingData(true)
+        const response = await fetch(`/api/get-poll?date=${date}`)
+        const data = await response.json()
         setQuestionData(data.pollQuestion)
+        setLoadingData(false)
     }
     useEffect(() => {
         getData()
@@ -47,5 +51,6 @@ export default function PollQuestion({ question, date } : { question : PollQuest
         </ul>
         <span className="poll__response_count">Total Responses: {totalResponses ?? '?'}</span>
         <button onClick={getData}>Refresh</button>
+        {loadingData && <span className="loading-notice">Refreshing...</span>}
     </div>
 }

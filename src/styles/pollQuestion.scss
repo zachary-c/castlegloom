@@ -69,4 +69,21 @@
         text-align: end;
         padding-right: 1.25rem;
     }
+    .loading-notice {
+        margin-left: .5rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: .8rem;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        animation-name: fade;
+        animation-duration: .8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+    @keyframes fade {
+        0% { opacity: 1; }
+        50% { opacity: .2;}
+        100% { opacity: 1;}
+        
+    }
 }
