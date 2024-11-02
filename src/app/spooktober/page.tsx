@@ -10,7 +10,7 @@ import DayNavigation from '../../components/DayNavigation'
 
 export const revalidate = 60;
 
-const FIVE_HOURS_OF_MILLISECONDS = 1000 * 60 * 60 * 5;
+export const FIVE_HOURS_OF_MILLISECONDS = 1000 * 60 * 60 * 5;
 
 export default async function Home() {
 

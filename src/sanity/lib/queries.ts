@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { meme_fields, PollQuestion_t, pollQuestionFragment } from '../types/documents'
+import { meme_fields, PollQuestion_t, pollQuestionFields, pollQuestionFragment } from '../types/documents'
 
 export const page_by_slug = groq`
     *[_type == 'page' && slug.current == $cslug][0]
@@ -18,6 +18,26 @@ export const meme_by_date = groq`
         ${meme_fields}
     }
     `
+export const latest_poll = groq`
+    *[_type == 'pollQuestion' && date < now()] | order(date desc)[0] {
+        ${pollQuestionFields}
+    }
+`
+export const poll_by_date = groq`
+*[_type == 'pollQuestion' && date == $date][0] {
+        ${pollQuestionFields}
+    }
+    `
+export const poll_date_surrounding = groq`{
+    "today": ${poll_by_date},
+    "yesterday": *[_type == 'pollQuestion' && date == $previous][0] {
+        _id
+    },
+    "tomorrow": *[_type == 'pollQuestion' && date == $nextPoll][0] {
+        _id
+    }
+}
+`
 export const latest_meme = groq`
     *[_type == 'meme' && date < $now] | order(date desc)[0] {
         ${meme_fields}
@@ -25,6 +45,12 @@ export const latest_meme = groq`
 `
 export const recipient_list = groq`
     *[_type == 'recipient'] {
+        _id,
+        email
+    }
+`
+export const daily_polled = groq`
+    *[_type == 'recipient' && isPolledDaily] {
         _id,
         email
     }
