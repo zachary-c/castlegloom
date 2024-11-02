@@ -21,12 +21,12 @@ export const dynamic = "force-static";
 export default async function Page() {
     const datetime = new Date()
     const dateString = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${padToTwo(datetime.getDate())}`
-    //console.log('data', datetime)
+    console.log('data', datetime)
 
-    const y = new Date(datetime.getTime() - (1000*60*60*24) + FIVE_HOURS_OF_MILLISECONDS);
+    const y = new Date(datetime.getTime() - (1000*60*60*24) + (1000*60*60*3));
     const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getDate())}`
-    //console.log('date', y, datetime)
-    //console.log('string', yString, dateString)
+    console.log('date', y, datetime)
+    console.log('string', yString, dateString)
     
     const data : {today: PollQuestion_t, yesterday: { _id : string }, tomorrow: { _id : string }} 
         = await client.fetch(
