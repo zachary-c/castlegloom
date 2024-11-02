@@ -73,5 +73,5 @@ export async function GET(request : NextRequest, { params } : { params : { title
 
     console.log("Patch .commit()", (await patch.commit()))
 
-    return redirect(`/spooktober/${date}`)
+    return redirect(`/poll/${date}`)
 }

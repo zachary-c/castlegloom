@@ -1,6 +1,6 @@
 .poll {
     display: block;
-    background-color: orange;
+    background-color: rgb(255, 254, 214);
     width: 100%;
     max-width: 500px;
     color: black;
@@ -35,7 +35,7 @@
         z-index: 2;
         &__item {
             list-style: none;
-            background-color: rgba(255, 255, 255, 0.655);
+            background-color: rgb(114, 51, 17);
             border-radius: 5px;
             margin: .4rem .25rem ; 
             padding: .25rem;
@@ -46,11 +46,13 @@
             z-index: 4;
             &__text {
                 position: relative;
-                z-index: 4;                
+                z-index: 4;      
+                color:rgb(255, 243, 178);          
             }
             &__count {
                 padding-right: .25rem;
                 z-index: 4;
+                color:rgb(255, 243, 178);          
             }
             &__fill-bar {
                 top: 0;
@@ -60,7 +62,7 @@
                 border-radius: 5px;
                 z-index: 3;
                 height: auto;
-                background-color: rgba(255, 255, 255, 0.96);
+                background-color: rgb(161, 73, 18);
             }
         }
     }

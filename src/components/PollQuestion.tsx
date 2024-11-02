@@ -1,6 +1,4 @@
 'use client'
-import { apiClient, client } from "$/lib/client";
-import { meme_by_date } from "$/lib/queries";
 import { PollQuestion_t } from "$/types/documents";
 import "R/src/styles/pollQuestion.scss"
 import { useEffect, useMemo, useState } from "react";
@@ -15,7 +13,7 @@ export default function PollQuestion({ question, date } : { question : PollQuest
     const totalResponses = useMemo(() => {
         let count = 0;
         if (questionData?.responses) {
-            questionData.responses.forEach((r) => count += r.listOfResponders?.length ?? 0)
+            questionData.responses.forEach((r) => count += r.responseCount)
         }
         
         return count;
@@ -23,9 +21,11 @@ export default function PollQuestion({ question, date } : { question : PollQuest
 
     async function getData() {
         setLoadingData(true)
-        const response = await fetch(`/api/get-poll?date=${date}`)
+        let response = await fetch(`/api/get-poll?date=${date}`)
+        
         const data = await response.json()
-        setQuestionData(data.pollQuestion)
+        setQuestionData(data)
+        console.log(data)
         setLoadingData(false)
     }
     useEffect(() => {
@@ -37,9 +37,9 @@ export default function PollQuestion({ question, date } : { question : PollQuest
         <ul className="poll__options">
             {questionData ? questionData.responses.map((r, i) => 
                 <li key={i} className="poll__options__item">
-                    <div className="poll__options__item__fill-bar" style={{ width: `${((r.listOfResponders?.length ?? 0)/totalResponses) * 100}%`}}></div>
+                    <div className="poll__options__item__fill-bar" style={{ width: `${(r.responseCount/totalResponses) * 100}%`}}></div>
                     <span className="poll__options__item__text">{r.responseText}</span>
-                    <span className="poll__options__item__count">{(r.listOfResponders?.length ?? 0) > 0 ? `${r.listOfResponders.length}` : ''}</span>
+                    <span className="poll__options__item__count">{r.responseCount > 0 ? `${r.responseCount}` : ''}</span>
                 </li>
             ) : question.responses.map((r, i) => 
                 <li key={i} className="poll__options__item">

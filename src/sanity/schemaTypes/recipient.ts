@@ -12,6 +12,12 @@ export default {
             name: 'receiveOther',
             title: 'Receive Other Emails',
             type: 'boolean'
+        },
+        {
+            name: 'isPolledDaily',
+            title: 'Is Polled Daily?',
+            type: 'boolean',
+            default: false
         }
     ],
     preview: {

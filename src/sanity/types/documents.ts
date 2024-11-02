@@ -10,6 +10,7 @@ export type PollResponse_t = {
     _key : string
     responseSlug : { current : string }
     responseText : string
+    responseCount : number
     listOfResponders : ({ _key : string, _ref : string })[]
 }
 
@@ -18,6 +19,7 @@ export type PollQuestion_t = {
     questionText : string
     title : string
     responses : PollResponse_t[]
+    date : string
 }
 
 export type Meme_t = {
@@ -30,13 +32,16 @@ export type Meme_t = {
     youtubeURL : string
     pollQuestion : PollQuestion_t
 }
+export const pollQuestionFields = `
+    ...,
+    responses[] {
+        "responseCount": count(listOfResponders),
+        responseSlug,
+        responseText
+    }
+`
 export const pollQuestionFragment = `question->{
-        ...,
-        responses[] {
-          "listOfResponders": listOfResponders[] {},
-          responseSlug,
-          responseText
-        }
+        ${pollQuestionFields}
     }
 `
 export const meme_fields = `

@@ -1,12 +1,11 @@
 import { client } from '$/lib/client';
-import { todays_meme, recipient_list, EmailableMeme } from '$/lib/queries';
+import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
-import { suffix } from 'R/util';
 
 export const maxDuration = 60;
 
-function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, date :  string) {
+function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t) {
     const pollStyle = 'background-color: rgb(59, 59, 59);padding: 1rem 0; border-radius: 8px;max-width: 600px;'
     const headerStyle = 'margin-top:0; margin-left: 1rem;color:white; margin-right: 1rem;'
     const listStyles = "list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;"
@@ -14,7 +13,7 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, da
     const anchorStyles = 'display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: #ffbf00; padding: .25rem .5rem; margin: 0 0 .5rem 0;'
     const title = encodeURIComponent(question.title)
     const responder = encodeURIComponent(recipient._id)
-    const encodedDate = encodeURIComponent(date)
+    const encodedDate = encodeURIComponent(question.date)
     let html = `
     <div style="${pollStyle}">
         <h3 style="${headerStyle}">${question.questionText}</h3>
@@ -36,38 +35,17 @@ type Recipient_t = {
 
 export async function GET(request : NextRequest) {
     const secret = request.nextUrl.searchParams.get("secret");
-    console.log("secret provided: ", secret);
-    
     if (secret != process.env.SEND_MEMES_SECRET) {
         return NextResponse.json({status: 401, message: "Not Allowed"});
-    } // [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]
-    const emails : Recipient_t[] = await client.fetch(recipient_list);
-    const todaysMeme : EmailableMeme = await client.fetch(todays_meme);
-    const pollQuestion : PollQuestion_t | undefined = todaysMeme.pollQuestion
-    let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
-    console.log(emailsList);
-    console.log(todaysMeme)
-    const todaysDate = new Date(`${todaysMeme.date}T12:00:00.000Z`);
+    } 
 
-    let attachments;
-    let emailBody = '';
-    if (todaysMeme.imgAsset) {
-        attachments = [
-            {
-                filename: todaysMeme.cslug + '.' + todaysMeme.imgAsset.extension,
-                path: todaysMeme.imgAsset.url
-            }
-        ]
-    } else if (todaysMeme.videoAsset) {
-        attachments = [
-            {
-                filename: todaysMeme.cslug + '.' + todaysMeme.videoAsset.extension,
-                path: todaysMeme.videoAsset.url
-            }
-        ]
-    } else if (todaysMeme.youtubeURL) {
-        emailBody = todaysMeme.youtubeURL
-    }
+    //    console.log("secret provided: ", secret);
+    // [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]
+    const emails : Recipient_t[] = await client.fetch(daily_polled);
+    const pollQuestion : PollQuestion_t = await client.fetch(latest_poll)
+    let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
+    console.log(emailsList)
+    console.log(pollQuestion);
 
     const nodemailer = require('nodemailer');
     const mailer = nodemailer.createTransport({
@@ -79,9 +57,8 @@ export async function GET(request : NextRequest) {
     })
     //console.log('Mailer:', mailer);
     if (pollQuestion) {
-        const datePath = `${todaysDate.getFullYear()}/${todaysDate.getDate()}`
         for (const recipient of emails) {
-            let pollHtml = generatePollHTML(pollQuestion, recipient, datePath)
+            let pollHtml = generatePollHTML(pollQuestion, recipient)
             const html = `
             <html>
                 <head>
@@ -101,9 +78,8 @@ export async function GET(request : NextRequest) {
                 from: process.env.ORACLE_LOGIN,
                 to: recipient.email,
                 // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-                subject: `Happy November ${todaysDate.getDate()}${suffix(todaysDate.getDate())}!`,
-                html: html,
-                attachments: attachments
+                subject: `Post-Spooktober Poll ${pollQuestion.date}`,
+                html: html
             })
             console.log(info);
             if (!info.response.includes('250')) {
