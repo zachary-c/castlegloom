@@ -4,10 +4,9 @@ import { poll_date_surrounding } from '../../sanity/lib/queries'
 import { PollQuestion_t } from '../../sanity/types/documents'
 import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/PollQuestion'
-import { FIVE_HOURS_OF_MILLISECONDS } from '@/spooktober/page'
 import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
-import { padToTwo } from 'R/util'
+import { FIVE_HOURS_OF_MILLISECONDS, padToTwo } from 'R/util'
 
 export const dynamic = "force-static";
 
