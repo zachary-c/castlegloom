@@ -7,10 +7,9 @@ import { client } from '../../sanity/lib/client'
 import MemeContainer from '../../components/MemeContainer'
 import SpookySignup from '../../components/SpookySignup'
 import DayNavigation from '../../components/DayNavigation'
+import { FIVE_HOURS_OF_MILLISECONDS } from 'R/util'
 
 export const revalidate = 60;
-
-export const FIVE_HOURS_OF_MILLISECONDS = 1000 * 60 * 60 * 5;
 
 export default async function Home() {
 
