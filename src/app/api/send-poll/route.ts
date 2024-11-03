@@ -78,7 +78,7 @@ export async function GET(request : NextRequest) {
                 from: process.env.ORACLE_LOGIN,
                 to: recipient.email,
                 // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-                subject: `Post-Spooktober Poll ${pollQuestion.date}`,
+                subject: `Spooktover Poll ${pollQuestion.date}`,
                 html: html
             })
             console.log(info);

@@ -1,3 +1,4 @@
+import { PollResponse_t } from "$/types/documents";
 import { defineType } from "sanity";
 
 export default defineType({
@@ -13,8 +14,7 @@ export default defineType({
         {
             name: 'title',
             type: 'string',
-            title: 'Question Title',
-            description: 'Not displayed to user',
+            title: 'Question Title'
         },
         {
             name: 'date',
@@ -48,7 +48,7 @@ export default defineType({
             type: 'array',
             of: [{ type: 'pollResponse' }]
         }
-    ],/* 
+    ],
     orderings: [
         {
             title: 'Date Order',
@@ -57,5 +57,20 @@ export default defineType({
                 {field: 'date', direction: 'desc'}
             ]
         }
-    ], */
+    ],
+    preview: {
+        select: {
+            questionSlug: 'title',
+            date: 'date',
+            responses: 'responses'
+        },
+        prepare: (e : any) => {
+            let responseCount = 0;
+            e.responses?.forEach((r : PollResponse_t) => responseCount += r.listOfResponders?.length ?? 0)
+            return {
+                title: e.questionSlug,
+                subtitle: `${e.date} | ${responseCount} responses`
+            }
+        }
+    }
 })

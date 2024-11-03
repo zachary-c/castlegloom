@@ -1,5 +1,5 @@
 import React from 'react'
-import { client } from '../../../sanity/lib/client'
+import { apiClient, client } from '../../../sanity/lib/client'
 import { poll_date_surrounding } from '../../../sanity/lib/queries'
 import { PollQuestion_t } from '../../../sanity/types/documents'
 import { notFound } from 'next/navigation'
@@ -30,17 +30,17 @@ export default async function Page({params} : {params : {date : string}}) {
     const t = new Date(datetime.getTime() + (1000*60*60*24) + FIVE_HOURS_OF_MILLISECONDS);
     const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getDate())}`
     const tString = `${t.getFullYear()}-${t.getMonth()+1}-${padToTwo(t.getDate())}`
-    console.log('date', y, datetime, t)
-    console.log('string', yString, datetime, tString)
+    //console.log('date', y, datetime, t)
+    //console.log('string', yString, datetime, tString)
     
     const data : {today: PollQuestion_t, yesterday: { _id : string }, tomorrow: { _id : string }} 
-        = await client.fetch(
+        = await apiClient.fetch(
             poll_date_surrounding, 
             { date: params.date, previous: yString, nextPoll: tString }, 
             { cache: 'no-store' }
         )
 
-    console.log("poll", data)
+    //console.log("poll", data)
     if (!data) {
         notFound()
     }
@@ -48,6 +48,7 @@ export default async function Page({params} : {params : {date : string}}) {
     return <>
         <h1>{data.today.title}</h1>
         <PollQuestion question={data.today} date={params.date}/>
+        <span style={{marginTop: '-2rem', marginBottom: '1rem', fontWeight: 'bold'}}>{params.date}</span>
         <div className='daynav__container'>
             {data.yesterday && 
                 <div className='daynav__button'>
