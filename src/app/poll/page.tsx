@@ -8,7 +8,7 @@ import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { FIVE_HOURS_OF_MILLISECONDS, padToTwo } from 'R/util'
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 /* export async function generateStaticParams() {
     const pages = await client.fetch(page_slugs);
@@ -48,11 +48,12 @@ export default async function Page() {
         <PollQuestion question={data.today} date={dateString}/>
         <div className='daynav__container'>
             {data.yesterday && 
-            <div className='daynav__button'>
-                <Link className='button' href={`/poll/${yString}`}>Previous</Link>
-            </div>
+                <div className='daynav__button'>
+                    <Link className='button' style={{backgroundColor: 'rgb(114, 51, 17)', color: 'white'}} href={`/poll/${yString}`}>Previous</Link>
+                </div>
             }
         </div>
+        <a className='button' style={{width: '250px', backgroundColor:'rgb(255, 255, 228)', border:'2px solid rgb(114, 51, 17)', color: 'rgb(114, 51, 17)'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Poll Submission Form</a>
         <p style={{maxWidth:'500px', textAlign:'center'}}>
             Color scheme, layout, functionality, and other qualities subject to change.
             There is currently no direct sign up for polling; if you feel strongly you would like to be polled <a href='/spooktober'>sign
