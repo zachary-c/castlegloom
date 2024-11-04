@@ -7,14 +7,14 @@ import { client } from '../../sanity/lib/client'
 import MemeContainer from '../../components/MemeContainer'
 import SpookySignup from '../../components/SpookySignup'
 import DayNavigation from '../../components/DayNavigation'
-import { FIVE_HOURS_OF_MILLISECONDS } from 'R/util'
+import { SEVEN_HOURS_OF_MILLISECONDS } from 'R/util'
 
 export const revalidate = 60;
 
 export default async function Home() {
 
     // THANKS UTC
-    const cstDate = new Date(Date.now() - FIVE_HOURS_OF_MILLISECONDS);
+    const cstDate = new Date(Date.now() - SEVEN_HOURS_OF_MILLISECONDS);
     const meme : Meme_t = await client.fetch(latest_meme, {
         "now": cstDate.toISOString()
     })

@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/PollQuestion'
 import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
-import { FIVE_HOURS_OF_MILLISECONDS, padToTwo } from 'R/util'
+import { SEVEN_HOURS_OF_MILLISECONDS, padToTwo } from 'R/util'
 
 export const dynamic = "force-dynamic";
 
