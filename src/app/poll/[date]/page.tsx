@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/PollQuestion'
 import '../../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
-import { SEVEN_HOURS_OF_MILLISECONDS, padToTwo } from 'R/util'
+import { padToTwo } from 'R/util'
 
 export const revalidate = 60;
 
@@ -26,13 +26,13 @@ export default async function Page({params} : {params : {date : string}}) {
     }
 
     const datetime = new Date(params.date);
-    const y = new Date(datetime.getTime() - (1000*60*60*24) + SEVEN_HOURS_OF_MILLISECONDS);
-    const t = new Date(datetime.getTime() + (1000*60*60*24) + SEVEN_HOURS_OF_MILLISECONDS);
-    const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getDate())}`
-    const tString = `${t.getFullYear()}-${t.getMonth()+1}-${padToTwo(t.getDate())}`
-    console.log('t', t.getDate())
-    console.log('date', y, datetime, t)
-    console.log('string', yString, datetime, tString)
+    const y = new Date(datetime.getTime() - (1000*60*60*24));
+    const t = new Date(datetime.getTime() + (1000*60*60*24));
+    const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getUTCDate())}`
+    const tString = `${t.getFullYear()}-${t.getMonth()+1}-${padToTwo(t.getUTCDate())}`
+   // console.log('t', t.getDate())
+   // console.log('date', y, datetime, t)
+   // console.log('string', yString, datetime, tString)
     
     const data : {today: PollQuestion_t, yesterday: { _id : string }, tomorrow: { _id : string }} 
         = await apiClient.fetch(
@@ -53,16 +53,16 @@ export default async function Page({params} : {params : {date : string}}) {
         <div className='daynav__container'>
             {data.yesterday && 
                 <div className='daynav__button'>
-                    <Link className='button' style={{backgroundColor: 'rgb(114, 51, 17)', color: 'white'}} href={`/poll/${yString}`}>Previous</Link>
+                    <Link className='button thanksgiving' href={`/poll/${yString}`}>Previous</Link>
                 </div>
             }
             {data.tomorrow && 
                 <div className='daynav__button'>
-                    <Link className='button' style={{backgroundColor: 'rgb(114, 51, 17)', color: 'white'}} href={`/poll/${tString}`}>Next</Link>
+                    <Link className='button thanksgiving' href={`/poll/${tString}`}>Next</Link>
                 </div>
             }
         </div>
-        <Link className='button' style={{backgroundColor: 'rgb(114, 51, 17)', color: 'white'}} href={`/poll`}>Home</Link>
+        <Link className='button thanksgiving' href={`/poll`}>Home</Link>
 
     </>
 

@@ -25,7 +25,7 @@ export default function PollQuestion({ question, date } : { question : PollQuest
         
         const data = await response.json()
         setQuestionData(data)
-        console.log(data)
+        //console.log(data)
         setLoadingData(false)
     }
     useEffect(() => {

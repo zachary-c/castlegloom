@@ -38,6 +38,16 @@ export const poll_date_surrounding = groq`{
     }
 }
 `
+export const poll_latest_surrounding = groq`{
+    "today": *[_type == 'pollQuestion' && date < now()] | order(date desc)[0] {
+        ${pollQuestionFields}
+    },
+    "previous": *[_type == 'pollQuestion' && date < now()] | order(date desc)[1] {
+        _id
+    }
+}
+`
+
 export const latest_meme = groq`
     *[_type == 'meme' && date < $now] | order(date desc)[0] {
         ${meme_fields}

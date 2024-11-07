@@ -1,12 +1,12 @@
 import React from 'react'
 import { apiClient, client } from '../../sanity/lib/client'
-import { poll_date_surrounding } from '../../sanity/lib/queries'
+import { latest_poll, poll_date_surrounding, poll_latest_surrounding } from '../../sanity/lib/queries'
 import { PollQuestion_t } from '../../sanity/types/documents'
 import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/PollQuestion'
 import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
-import { SEVEN_HOURS_OF_MILLISECONDS, padToTwo } from 'R/util'
+import { padToTwo } from 'R/util'
 
 export const dynamic = "force-dynamic";
 
@@ -19,41 +19,38 @@ export const dynamic = "force-dynamic";
 } */
 
 export default async function Page() {
-    const datetime = new Date()
-    const dateString = `${datetime.getFullYear()}-${datetime.getMonth()+1}-${padToTwo(datetime.getDate())}`
     //console.log('data', datetime)
 
-    const y = new Date(datetime.getTime() - (1000*60*60*24) + (1000*60*60*3));
-    const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getDate())}`
-    //console.log('date', y, datetime)
-    //console.log('string', yString, dateString)
-    
-    const data : {today: PollQuestion_t, yesterday: { _id : string }, tomorrow: { _id : string }} 
+
+    const data : {today: PollQuestion_t, previous: { _id : string }} 
         = await apiClient.fetch(
-            poll_date_surrounding, 
-            { date: dateString, previous: yString, nextPoll: '0000-00-00' }, 
+            poll_latest_surrounding, 
+            {}, 
             { cache: 'no-store' }
         )
-    if (!data.today) {
-        notFound()
-    }
+    const datetime = new Date(data.today.date)
 
-    //console.log("poll", data)
-    if (!data) {
+    const y = new Date(datetime.getTime() - (1000*60*60*24) + (1000*60*60*3));
+    const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getUTCDate())}`
+    //console.log('yesterday, datetime', y, datetime, yString),
+    //console.log("components", y.getFullYear(), y.getMonth()+1, padToTwo(y.getUTCDate()))
+    
+    if (!data.today) {
         notFound()
     }
 
     return <>
         <h1>{data.today.title}</h1>
-        <PollQuestion question={data.today} date={dateString}/>
+        <PollQuestion question={data.today} date={data.today.date}/>
+        <span style={{marginTop: '-2rem', marginBottom: '1rem', fontWeight: 'bold'}}>{data.today.date}</span>
         <div className='daynav__container'>
-            {data.yesterday && 
+            {data.previous && 
                 <div className='daynav__button'>
-                    <Link className='button' style={{backgroundColor: 'rgb(114, 51, 17)', color: 'white'}} href={`/poll/${yString}`}>Previous</Link>
+                    <Link className='button thanksgiving' href={`/poll/${yString}`}>Previous</Link>
                 </div>
             }
         </div>
-        <a className='button' style={{width: '250px', backgroundColor:'rgb(255, 255, 228)', border:'2px solid rgb(114, 51, 17)', color: 'rgb(114, 51, 17)'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Poll Submission Form</a>
+        <a className='button thanksgiving outline' style={{width: '250px'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Poll Submission Form</a>
         <p style={{maxWidth:'500px', textAlign:'center'}}>
             Color scheme, layout, functionality, and other qualities subject to change.
             There is currently no direct sign up for polling; if you feel strongly you would like to be polled <a href='/spooktober'>sign
