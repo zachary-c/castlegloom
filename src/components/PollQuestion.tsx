@@ -3,6 +3,15 @@ import { PollQuestion_t } from "$/types/documents";
 import "R/src/styles/pollQuestion.scss"
 import { useEffect, useMemo, useState } from "react";
 
+// alignment fixes on the left
+// poll response with header text with refresh button
+// poll response text off white with background
+// width 70 of the h3
+// increasing padding and margin on the response boxes
+// vertically aligning the refresh and the total responses
+// very light dropshadow to light white box
+// 
+
 export default function PollQuestion({ question, date } : { question : PollQuestion_t, date : string}) {
     const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
     const [loadingData, setLoadingData] = useState<boolean>(true)
@@ -49,8 +58,12 @@ export default function PollQuestion({ question, date } : { question : PollQuest
                 </li>
             )}
         </ul>
-        <span className="poll__response_count">Total Responses: {totalResponses ?? '?'}</span>
-        <button onClick={getData}>Refresh</button>
-        {loadingData && <span className="loading-notice">Refreshing...</span>}
+        <div className="poll__footer">
+            <div>
+                <button className="poll__footer__refresh" onClick={getData}>Refresh</button>
+                {loadingData && <span className="loading-notice">Refreshing...</span>}
+            </div>
+            <span className="poll__footer__rc">Total Responses: {totalResponses ?? '?'}</span>
+        </div>
     </div>
 }

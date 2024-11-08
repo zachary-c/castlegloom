@@ -1,19 +1,21 @@
 .poll {
     display: block;
-    background-color: rgb(255, 255, 228);
+    background-color: $ghost-of-october;
     width: 100%;
     max-width: 500px;
     color: black;
-    padding: 1rem;
+    padding: 1.25rem;
     margin-top: 1rem;
     margin-bottom: 3rem;
     border-radius: 10px;
     position: relative;
+    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
 
     &__header {
         display: block;
-        margin: .5rem;
-        width: 75%;
+        margin: 0;
+        margin-bottom: .5rem;
+        width: 70%;
         &:after {
             content: 'POLL';
             position: absolute;
@@ -21,7 +23,7 @@
             right: .5rem;
             z-index: 1;
             top: .5rem;
-            color: rgb(59, 59, 59);
+            color: $thanksgiving-brown;
             //color: rgba(255, 255, 255, 0.836);
             transform: rotate(10deg);
             padding: .2rem;
@@ -30,15 +32,16 @@
         }
     }
     &__options {
-        padding: 0 1rem;
+        padding: 0 0rem;
         position: relative;
         z-index: 2;
+        margin: 1rem 0;
         &__item {
             list-style: none;
-            background-color: rgb(114, 51, 17);
+            background-color: $thanksgiving-brown;
             border-radius: 5px;
-            margin: .4rem .25rem ; 
-            padding: .25rem;
+            margin: .5rem 0rem ; 
+            padding: .4rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -47,12 +50,12 @@
             &__text {
                 position: relative;
                 z-index: 4;      
-                color:rgb(255, 243, 178);          
+                color: $ghost-of-october;          
             }
             &__count {
                 padding-right: .25rem;
                 z-index: 4;
-                color:rgb(255, 243, 178);          
+                color: $ghost-of-october;          
             }
             &__fill-bar {
                 top: 0;
@@ -62,14 +65,31 @@
                 border-radius: 5px;
                 z-index: 3;
                 height: auto;
-                background-color: rgb(161, 73, 18);
+                background-color: $thursday-ochre;
             }
         }
     }
-    &__response_count {
-        display: block;
-        text-align: end;
-        padding-right: 1.25rem;
+    &__footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        &__rc {
+            display:inline;
+            line-height: 1.6;
+            vertical-align: middle;
+        }
+        &__refresh {
+            background-color: $november-tan;
+            color: $thanksgiving-brown;
+            border: 1px solid $thanksgiving-brown;
+            border-radius: 4px;
+            padding: .25rem .5rem;
+            transition-duration: .1s;
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+        }
     }
     .loading-notice {
         margin-left: .5rem;

@@ -1,3 +1,5 @@
+
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
@@ -9,7 +11,10 @@ const nextConfig = {
                 pathname: '/images/**',
             }
         ]
-    }
+    },
+    sassOptions: {
+        prependData: `@import "&/variables.scss";`,
+    },
 
 };
 
