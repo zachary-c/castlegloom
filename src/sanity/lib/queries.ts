@@ -19,7 +19,7 @@ export const meme_by_date = groq`
     }
     `
 export const latest_poll = groq`
-    *[_type == 'pollQuestion' && date < now()] | order(date desc)[0] {
+    *[_type == 'pollQuestion'  && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     }
 `
