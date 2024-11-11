@@ -41,7 +41,7 @@ export default async function Page() {
 
     return <>
         <h1>{data.today.title}</h1>
-        <PollQuestion question={data.today} date={data.today.date}/>
+        <PollQuestion question={data.today} date={data.today.date} theme='november'/>
         <span style={{marginTop: '-2rem', marginBottom: '1rem', fontWeight: 'bold'}}>{data.today.date}</span>
         <div className='daynav__container'>
             {data.previous && 

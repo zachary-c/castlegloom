@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/PollQuestion'
 import '../../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
-import { padToTwo } from 'R/util'
+import { padToTwo, SEVEN_HOURS_OF_MILLISECONDS, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
 
 export const revalidate = 60;
 
@@ -26,6 +26,7 @@ export default async function Page({params} : {params : {date : string}}) {
     }
 
     const datetime = new Date(params.date);
+    const now = new Date()
     const y = new Date(datetime.getTime() - (1000*60*60*24));
     const t = new Date(datetime.getTime() + (1000*60*60*24));
     const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getUTCDate())}`
@@ -48,7 +49,7 @@ export default async function Page({params} : {params : {date : string}}) {
 
     return <>
         <h1>{data.today.title}</h1>
-        <PollQuestion question={data.today} date={params.date}/>
+        <PollQuestion question={data.today} date={params.date} theme='november'/>
         <span style={{marginTop: '-2rem', marginBottom: '1rem', fontWeight: 'bold'}}>{params.date}</span>
         <div className='daynav__container'>
             {data.yesterday && 
@@ -56,7 +57,7 @@ export default async function Page({params} : {params : {date : string}}) {
                     <Link className='button thanksgiving' href={`/poll/${yString}`}>Previous</Link>
                 </div>
             }
-            {data.tomorrow && 
+            {data.tomorrow && t.getTime() < Date.now() - SIX_HOURS_OF_MILLISECONDS && 
                 <div className='daynav__button'>
                     <Link className='button thanksgiving' href={`/poll/${tString}`}>Next</Link>
                 </div>

@@ -1,6 +1,7 @@
+
 .poll {
     display: block;
-    background-color: $ghost-of-october;
+    background-color: white;
     width: 100%;
     max-width: 500px;
     color: black;
@@ -23,7 +24,7 @@
             right: .5rem;
             z-index: 1;
             top: .5rem;
-            color: $thanksgiving-brown;
+            color: black;
             //color: rgba(255, 255, 255, 0.836);
             transform: rotate(10deg);
             padding: .2rem;
@@ -38,7 +39,7 @@
         margin: 1rem 0;
         &__item {
             list-style: none;
-            background-color: $thanksgiving-brown;
+            background-color: white;
             border-radius: 5px;
             margin: .5rem 0rem ; 
             padding: .4rem;
@@ -50,12 +51,12 @@
             &__text {
                 position: relative;
                 z-index: 4;      
-                color: $ghost-of-october;          
+                color: black;          
             }
             &__count {
                 padding-right: .25rem;
                 z-index: 4;
-                color: $ghost-of-october;          
+                color: black;          
             }
             &__fill-bar {
                 top: 0;
@@ -65,7 +66,7 @@
                 border-radius: 5px;
                 z-index: 3;
                 height: auto;
-                background-color: $thursday-ochre;
+                background-color: gray;
             }
         }
     }
@@ -79,9 +80,9 @@
             vertical-align: middle;
         }
         &__refresh {
-            background-color: $november-tan;
-            color: $thanksgiving-brown;
-            border: 1px solid $thanksgiving-brown;
+            background-color: white;
+            color: black;
+            border: 1px solid black;
             border-radius: 4px;
             padding: .25rem .5rem;
             transition-duration: .1s;
@@ -107,5 +108,142 @@
         50% { opacity: .2;}
         100% { opacity: 1;}
         
+    }
+}
+.november {
+    &.poll {
+        background-color: $ghost-of-october;
+        color: black;
+        box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+    }
+    .poll {
+        &__header {
+            &:after {
+                content: 'POLL';
+                color: $thanksgiving-brown;
+                transform: rotate(10deg);
+                font-family: 'Courier New', Courier, monospace;
+            }
+        }
+        &__options {
+            &__item {
+                background-color: $thanksgiving-brown;
+                &__text {
+                    color: $ghost-of-october;          
+                }
+                &__count {
+                    color: $ghost-of-october;          
+                }
+                &__fill-bar {
+                    background-color: $thursday-ochre;
+                }
+            }
+        }
+        &__footer {
+            &__rc {
+            }
+            &__refresh {
+                background-color: $november-tan;
+                color: $thanksgiving-brown;
+                border: 1px solid $thanksgiving-brown;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+}
+.october-light {
+&.poll {
+    background-color: orange;
+    color: #000;
+    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+}
+
+.poll {
+    &__header {
+        &:after {
+            content: 'POLL';
+            color: $charcoal-mining;
+            transform: rotate(10deg);
+            font-family: 'Courier New', Courier, monospace;
+        }
+    }
+    &__options {
+        &__item {
+            background-color: $transparent-1;
+            &__text {
+                color: black;          
+            }
+            &__count {
+                color: black;          
+            }
+            &__fill-bar {
+                background-color: $transparent-2;
+            }
+        }
+    }
+    &__footer {
+        &__rc {
+            color:black;
+        }
+        &__refresh {
+            background-color: $transparent-1;
+            color: black;
+            border: 1px solid black;
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+        }
+    }
+}
+}
+
+.october-dark {
+    &.poll {
+        background-color: $charcoal-mining;
+        color: $white;
+        box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+    }
+
+    .poll {
+        &__header {
+            &:after {
+                content: 'POLL';
+                color: $white;
+                transform: rotate(10deg);
+                font-family: 'Courier New', Courier, monospace;
+            }
+        }
+        &__options {
+            &__item {
+                background-color: $gray-leiter;
+                &__text {
+                    color: $corn-yellow;          
+                }
+                &__count {
+                    color: $corn-yellow;          
+                }
+                &__fill-bar {
+                    background-color: $ashen-cue;
+                }
+            }
+        }
+        &__footer {
+            &__rc {
+                color:$white;
+            }
+            &__refresh {
+                background-color: $gray-leiter;
+                color: $white;
+                border: 1px solid $white;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+            }
+        }
     }
 }

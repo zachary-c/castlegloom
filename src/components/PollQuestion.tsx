@@ -11,8 +11,9 @@ import { useEffect, useMemo, useState } from "react";
 // vertically aligning the refresh and the total responses
 // very light dropshadow to light white box
 // 
+export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe'
 
-export default function PollQuestion({ question, date } : { question : PollQuestion_t, date : string}) {
+export default function PollQuestion({ question, date, theme } : { question : PollQuestion_t, date : string, theme : Theme}) {
     const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
     const [loadingData, setLoadingData] = useState<boolean>(true)
     //console.log('question', question);
@@ -41,7 +42,7 @@ export default function PollQuestion({ question, date } : { question : PollQuest
         getData()
     }, []) 
 
-    return <div className="poll">
+    return <div className={`poll ${theme ?? 'november'}`}>
         <h3 className="poll__header">{question.questionText}</h3> 
         <ul className="poll__options">
             {questionData ? questionData.responses.map((r, i) => 

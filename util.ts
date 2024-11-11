@@ -12,6 +12,7 @@ export function padToTwo(num : number) : string{
     }
 }
 export const SEVEN_HOURS_OF_MILLISECONDS = 1000 * 60 * 60 * 7;
+export const SIX_HOURS_OF_MILLISECONDS = 1000 * 60 * 60 * 6;
 
 export async function getSteamGames() {
     const data = await (await fetch('https://api.steampowered.com/ISteamApps/GetAppList/v2/')).json()

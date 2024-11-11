@@ -2,15 +2,21 @@ import { client } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
+import { Theme } from 'R/src/components/PollQuestion';
 
 export const maxDuration = 60;
+const backgroundColor = 'rgb(255, 255, 228)'
+const headerColor = 'black'
+const itemDefaultColor = 'rgb(114, 51, 17)'
+const itemHoverColor = 'rgb(161, 73, 18)'
+const itemTextColor = 'rgb(255, 255, 228)'
 
-function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t) {
-    const pollStyle = 'background-color: rgb(59, 59, 59);padding: 1rem 0; border-radius: 8px;max-width: 600px;'
-    const headerStyle = 'margin-top:0; margin-left: 1rem;color:white; margin-right: 1rem;'
-    const listStyles = "list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;"
-    const listItemStyles = 'margin:0; padding: 0; background-color: rgb(75, 75, 75);'
-    const anchorStyles = 'display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: #ffbf00; padding: .25rem .5rem; margin: 0 0 .5rem 0;'
+function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, theme? : Theme) {
+    const pollStyle = `background-color: ${backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${itemDefaultColor}`
+    const headerStyle = `margin-top:0; margin-left: 1rem;color:${headerColor}; margin-right: 1rem;`
+    const listStyles = `list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;`
+    const listItemStyles = `margin:0; padding: 0; background-color: ${itemDefaultColor}; border-radius: 3px;`
+    const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
     const title = encodeURIComponent(question.title)
     const responder = encodeURIComponent(recipient._id)
     const encodedDate = encodeURIComponent(question.date)
@@ -64,7 +70,8 @@ export async function GET(request : NextRequest) {
                 <head>
                     <style>
                         .spook-response:hover {
-                            background-color: rgb(100, 100, 100);
+                            background-color: ${itemHoverColor};
+                            border-radius:3px;
                         }
                     </style>
                 </head>

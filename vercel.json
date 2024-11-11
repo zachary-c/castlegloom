@@ -1,7 +1,7 @@
 {
     "crons": [
         {
-            "path": "/api/cron-test?secret=spooktoberspooktoberspooktoberspooktober",
+            "path": "/api/send-poll?secret=spooktoberspooktoberspooktoberspooktober",
             "schedule": "30 17 * * *"
         }
     ]

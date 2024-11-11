@@ -44,7 +44,7 @@ export default async function Day2022({params} : {params : {day : string, cslug 
             <MemeContainer meme={data}/>
             <DayNavigation currentDay={dayOfMonth} currentYear={year}/>
             {data.pollQuestion && 
-                <PollQuestion question={data.pollQuestion} date={dateString}/>
+                <PollQuestion question={data.pollQuestion} date={dateString} theme={'october-light'}/>
             }
         </main>
     )
