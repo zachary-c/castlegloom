@@ -7,6 +7,7 @@ import PollQuestion from 'R/src/components/PollQuestion'
 import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo } from 'R/util'
+import { theme } from './pollUtil'
 
 export const dynamic = "force-dynamic";
 
@@ -40,17 +41,17 @@ export default async function Page() {
     }
 
     return <>
-        <h1>{data.today.title}</h1>
-        <PollQuestion question={data.today} date={data.today.date} theme='november'/>
-        <span style={{marginTop: '-2rem', marginBottom: '1rem', fontWeight: 'bold'}}>{data.today.date}</span>
+        <h1 className={`poll__page-title ${theme}`}>{data.today.title}</h1>
+        <PollQuestion question={data.today} date={data.today.date} theme={theme}/>
+        <span className={`poll__date ${theme}`}>{data.today.date}</span>
         <div className='daynav__container'>
             {data.previous && 
                 <div className='daynav__button'>
-                    <Link className='button thanksgiving' href={`/poll/${yString}`}>Previous</Link>
+                    <Link className={`button poll__btn ${theme}`} href={`/poll/${yString}`}>Previous</Link>
                 </div>
             }
         </div>
-        <a className='button thanksgiving outline' style={{width: '250px'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
+        <a className={`button poll__btn ${theme} outline`} style={{width: '250px'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
         <p style={{maxWidth:'500px', textAlign:'center'}}>
             Color scheme, layout, functionality, and other qualities subject to change.
             There is currently no direct sign up for polling; if you feel strongly you would like to be polled <a href='/spooktober'>sign

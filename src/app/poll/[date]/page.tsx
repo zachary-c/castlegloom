@@ -7,6 +7,7 @@ import PollQuestion from 'R/src/components/PollQuestion'
 import '../../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo, SEVEN_HOURS_OF_MILLISECONDS, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
+import { theme } from '../pollUtil'
 
 export const revalidate = 60;
 
@@ -48,22 +49,22 @@ export default async function Page({params} : {params : {date : string}}) {
     }
 
     return <>
-        <h1>{data.today.title}</h1>
-        <PollQuestion question={data.today} date={params.date} theme='november'/>
-        <span style={{marginTop: '-2rem', marginBottom: '1rem', fontWeight: 'bold'}}>{params.date}</span>
+        <h1 className={`poll__page-title ${theme}`}>{data.today.title}</h1>
+        <PollQuestion question={data.today} date={params.date} theme={theme}/>
+        <span className={`poll__date ${theme}`}>{params.date}</span>
         <div className='daynav__container'>
             {data.yesterday && 
                 <div className='daynav__button'>
-                    <Link className='button thanksgiving' href={`/poll/${yString}`}>Previous</Link>
+                    <Link className={`button poll__btn ${theme}`} href={`/poll/${yString}`}>Previous</Link>
                 </div>
             }
             {data.tomorrow && t.getTime() < Date.now() - SIX_HOURS_OF_MILLISECONDS && 
                 <div className='daynav__button'>
-                    <Link className='button thanksgiving' href={`/poll/${tString}`}>Next</Link>
+                    <Link className={`button poll__btn ${theme}`} href={`/poll/${tString}`}>Next</Link>
                 </div>
             }
         </div>
-        <Link className='button thanksgiving' href={`/poll`}>Home</Link>
+        <Link className={`button poll__btn ${theme}`} href={`/poll`}>Home</Link>
 
     </>
 
