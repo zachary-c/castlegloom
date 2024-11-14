@@ -13,7 +13,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
     const date = decodeURIComponent(request.nextUrl.searchParams.get('date') ?? '')
     console.log("title", params.title, responder, choice, date)
      
-    if (!process.env.CAMPBELL_TOKEN) {
+    if (!process.env.PROJECT_API_TOKEN) {
         return NextResponse.json({
             message: 'Sorry, something went wrong.'
         }, { status: 500 })
@@ -24,7 +24,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
         dataset: 'production',
         apiVersion: apiVersion,
         useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
-        token: process.env.CAMPBELL_TOKEN
+        token: process.env.PROJECT_API_TOKEN
     })
 
     const data : PollQuestion_t = await client.fetch(`*[_type == 'pollQuestion' && title == $paramTitle][0]`, { paramTitle: title})

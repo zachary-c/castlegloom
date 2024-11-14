@@ -20,7 +20,7 @@ export async function POST(request : Request) {
         ]
     }
     const headers = {    
-        "Authorization": `Bearer ${process.env.CAMPBELL_TOKEN}`,
+        "Authorization": `Bearer ${process.env.PROJECT_API_TOKEN}`,
         "Content-Type": 'application/json'
     }
     const init : RequestInit = {
