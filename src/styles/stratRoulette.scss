@@ -1,0 +1,174 @@
+
+$cs2-orange: #EFAF42;
+$cs2-orange-light: #ffc562;
+$cs2-blue-dark: #1a2149;
+$green-go: rgb(77, 216, 77);
+$cs2-blue: #2C387A;
+$cs2-black: black;
+$cs2-white: white;
+
+
+.sr {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+
+    button {
+        transition-duration: .2s;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+    &__body {
+        margin: 0;
+    }
+    &__main {
+        background-color: $cs2-white;
+        h1 {
+            margin: 0;
+            padding: 2rem;
+            text-align: center;
+            color: $cs2-black;
+
+        }
+    }
+    &__map-select {
+        padding: 1rem 2rem ;
+        & > ul {
+            padding-left: 0;
+            list-style:none;
+            display: flex;
+            gap: .5rem;
+            margin: 0 auto;
+            & > li {
+                //flex: 1 1 30%;
+                flex-wrap:wrap;
+                width: 50%;
+                & > button {
+                    width: 100%;
+                    padding: 1rem 2rem;
+                    color: $cs2-white;
+                    border:none;
+                    border-radius: 15px;
+                    background-color: $cs2-blue;
+                    font-weight:bold;
+                    font-size: 1.2rem;
+                    
+                }
+                &.selected {
+                    & > button {
+                        background-color: $cs2-orange;
+                    }
+                }
+            }    
+        }
+    }
+    &__generate {
+        width: 100%;
+        & > button {
+            display: block;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+            width: 100%;
+            max-width: 20%;
+            border: none;
+            border-radius: 15px;
+            background-color: $cs2-orange;
+            color:white;
+            font-size: 1.7rem;
+            font-weight: bold;
+            
+        }
+    }
+    &__output {
+        margin: 1rem;
+        display: block;
+        &__box {
+            margin: 0 auto;
+            max-width: 75%;
+            width: 100%;
+            border: 5px solid $cs2-blue-dark;
+            h2 {
+                text-align: center;
+                background-color: $cs2-blue;
+                margin: 0;
+                color:white;
+                padding: 1rem;
+                font-size: 1.7rem;
+            }
+            p {
+                margin: 2rem;
+                font-size: 1.3rem;
+                text-align: center;
+            }
+        }
+        &.hidden { 
+            display:none;
+        }
+    }
+    &__selections {
+        padding: 0rem 2rem ;
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        &__side {
+            border-right: 5px solid $cs2-blue-dark;
+            padding-right: 3rem;
+        
+        }
+        &__round {
+            padding-left: 3rem;
+        }
+        & .choice {
+            width: 50%;
+
+        }
+
+        & ul {
+            
+            display: flex;
+            padding-left: 0;
+            list-style:none;
+            gap: .5rem;
+            & > li {
+                //flex: 1 1 30%;
+                flex-wrap:wrap;
+                width: 75%;
+                & > button {
+                    width: 100%;
+                    padding: 1rem 2rem;
+                    color: $cs2-white;
+                    border:none;
+                    border-radius: 15px;
+                    background-color: $cs2-blue;
+                    font-weight:bold;
+                    font-size: 1.2rem;
+                    
+                }
+                &.selected {
+                    & > button {
+                        background-color: $cs2-orange;
+                    }
+                }
+            }    
+        }
+
+    }
+    &__repeat-count {
+        display: block;
+        margin: 1rem auto 2rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        & > input {
+            border: 2px solid $cs2-orange;
+            max-width: 50px;
+            padding: .2rem;
+            font-size: 1.3rem;
+            border-radius: 3px;
+        }
+
+    }
+}
