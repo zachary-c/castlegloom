@@ -157,6 +157,61 @@ const strats : Strat[] = [
         description: "Buy kevlar.",
         round: "Pistol"
     },
+    {
+        title: "Red Light Green Light",
+        description: "You are now playing Red Light Green Light. The bottom frag decides if you move or not."
+    },
+    {
+        title: "Criss Cross! Reverse! Reverse!",
+        description: "Cross your arms and play with right hand on keyboard, left hand on mouse."  
+    },
+    {
+        title: "He's 1hp",
+        description: "You aren't allowed to say any true statements this round."
+    },
+/*     {
+        title: "Indian Tech Support",
+        description: "One person is Indian Tech Support and stays in spawn. The rest of the team plays as normal but you must roleplay calling indian tech support through in-game voice "
+    }
+ */
+    {
+        title: "Generosity",
+        description: "Buy your most hated gun and give it to a teammate",
+        round: 'Gun'
+    },
+    {
+        title: "MLG Pro",
+        description: "Use precision semi-automatic weapons and do a 360 anytime you miss a shot."
+    },
+    {
+        title: "Highlights",
+        description: "Buy snipers, all shots must be 360 noscopes.",
+        round: 'Gun'
+    },
+    {
+        title: "Peekaboo",
+        description: "You may only open your eyes while standing still."
+    },
+    {
+        title: "Hey Now",
+        description: "As a team, sing 'All Star' one line at a time in scoreboard order."
+    },
+    {
+        title: "Small Talk",
+        description: "Dead players must talk loudly about something utterly unrelated to the game. If only one person is dead, they must sing."
+    },
+    {
+        title: "The Zach Special",
+        description: "Take off your headset, turn it around, and put it on backwards."
+    },
+    {
+        title: "MVP",
+        description: "Play this round like normal. The MVP (or last man alive) is your god-king for the next round."
+    },
+    {
+        title: "Gun Game",
+        description: "If you kill a player, you must collect their gun and use it for the remainder of the round."
+    },
 
     // CT-side
     {
@@ -192,9 +247,15 @@ const strats : Strat[] = [
     },
     {
         title: "Look Ma",
-        description: "Buy deagles, and any time you get a kill you must inspect spam until you get the rare one. Show it to your mom in its entirety, and then continue the game.",
+        description: "Buy deagles, and any time you get a kill you must inspect spam until you get the rare animation. Watch it entirely, and then continue the game.",
         side: "CT",
         round: "Pistol"
+    },
+    {
+        title: "SWAG-7",
+        description: "MAG-7 and knives only this round.",
+        side: "CT",
+        round: 'Gun'
     },
 
     // T-side
@@ -232,7 +293,12 @@ const strats : Strat[] = [
         description: "Burst mode glocks only.",
         side: "T",
         round: "Pistol"
-    }
+    },
+    {
+        title: "Graffiti",
+        description: "You must get to CT spawn and place your spray in an obvious place before planting the bomb.",
+        side: "T"
+    },
 ]
 const maps : MapData[] = [
     {
