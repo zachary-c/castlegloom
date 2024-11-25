@@ -139,6 +139,10 @@ const strats : Strat[] = [
         description: "One player is the commander and must issue movement & shooting commands to the team. Other players are not allowed to act unless ordered to do so."
     },
     {
+        title: "Are we blind?",
+        description: "Everyone buy a decoy, and throw them all at different parts of the map.",
+    },
+    {
         title: "Utility Value",
         description: "Everyone buy four grenades; if you don't use all 4, instead of doing next round's strat you must shift-walk around the map looking at the ground and type \"I am a dunce who didn't use my utility\" every 10 seconds.",
         round: "Gun"
@@ -147,6 +151,11 @@ const strats : Strat[] = [
         title: "Glass Houses",
         description: "No one may buy armor or helmet. You must purchase the most expensive weapon you can.",
         round: "Gun",
+    },
+    {
+        title: "Kevlar",
+        description: "Buy kevlar.",
+        round: "Pistol"
     },
 
     // CT-side
@@ -174,6 +183,18 @@ const strats : Strat[] = [
         title: "Rotation Nation",
         description: "Until the bomb is planted, you may only be on a bombsite for 20 seconds and then you must rotate to the other one.",
         side: "CT"
+    },
+    {
+        title: "This is still T-side, right?",
+        description: "Unsuppress your USPs and rush.",
+        side: "CT",
+        round: "Pistol"
+    },
+    {
+        title: "Look Ma",
+        description: "Buy deagles, and any time you get a kill you must inspect spam until you get the rare one. Show it to your mom in its entirety, and then continue the game.",
+        side: "CT",
+        round: "Pistol"
     },
 
     // T-side
@@ -205,6 +226,12 @@ const strats : Strat[] = [
         title: "Inside Man",
         description: "Send a lurk to hang out behind enemy lines and pretend to be a CT.",
         side: "T"
+    },
+    {
+        title: "Glomck",
+        description: "Burst mode glocks only.",
+        side: "T",
+        round: "Pistol"
     }
 ]
 const maps : MapData[] = [

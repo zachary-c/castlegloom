@@ -7,6 +7,8 @@ $cs2-blue: #2C387A;
 $cs2-black: black;
 $cs2-white: white;
 
+$tablet-width: 812px;
+
 
 .sr {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -70,13 +72,18 @@ $cs2-white: white;
             margin: 0 auto;
             padding: 2rem 3rem;
             width: 100%;
-            max-width: 20%;
+            max-width: 30%;
             border: none;
             border-radius: 15px;
             background-color: $cs2-orange;
             color:white;
             font-size: 1.7rem;
             font-weight: bold;
+            @media screen and (max-width:$tablet-width) {
+                padding: 1rem;
+                font-size: 1.2rem;
+                max-width: 50%
+            }
             
         }
     }
@@ -101,6 +108,14 @@ $cs2-white: white;
                 font-size: 1.3rem;
                 text-align: center;
             }
+            @media screen and (max-width: $tablet-width) {
+                h2 {
+                    font-size: 1rem;
+                }
+                p {
+                    font-size: 1rem;
+                }
+            }
         }
         &.hidden { 
             display:none;
@@ -114,14 +129,28 @@ $cs2-white: white;
         &__side {
             border-right: 5px solid $cs2-blue-dark;
             padding-right: 3rem;
-        
         }
         &__round {
             padding-left: 3rem;
         }
         & .choice {
             width: 50%;
+        }
 
+        @media screen and (max-width: $tablet-width) {
+            flex-direction: column;
+            align-items: center;
+            &__side { 
+                border: none;
+                padding: 0;
+            }
+            &__round {
+                padding: 0;
+            }
+            & .choice {
+                width: 100%;
+            }
+            
         }
 
         & ul {
@@ -143,7 +172,10 @@ $cs2-white: white;
                     background-color: $cs2-blue;
                     font-weight:bold;
                     font-size: 1.2rem;
-                    
+                    @media screen and (max-width: $tablet-width) {
+                        padding: .5rem 1rem;
+                        font-size: 1rem;;
+                    }
                 }
                 &.selected {
                     & > button {
