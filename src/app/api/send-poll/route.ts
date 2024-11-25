@@ -49,8 +49,8 @@ export async function GET(request : NextRequest) {
     // [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]
     const emails : Recipient_t[] = await client.fetch(daily_polled);
     const pollQuestion : PollQuestion_t = await client.fetch(latest_poll)
-    let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
-    console.log(emailsList)
+    //let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
+    //console.log(emailsList)
     console.log(pollQuestion);
 
     const nodemailer = require('nodemailer');
@@ -112,7 +112,7 @@ export async function GET(request : NextRequest) {
         return NextResponse.json("Error sending email", {status: 500})
     }  
     */
-    console.log(`Email sent to ${emailsList.length} emails:`, emailsList);
+    console.log(`Email sent to ${emails.length} emails:`, emails);
     return NextResponse.json({status: 200})
 }
 
