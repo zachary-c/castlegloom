@@ -91,7 +91,7 @@ const strats : Strat[] = [
         description: "You aren't allowed to press W or S this round."
     },
     {
-        title: "Too Much for zblock",
+        title: "Too much for zblock",
         description: "You're only allowed to move by bunnyhopping this round."
     },
     {
@@ -108,7 +108,7 @@ const strats : Strat[] = [
     },
     {
         title: "The Floor is Lava",
-        description: "You must be on boxes/geometry; you may only run 5 seconds at a time before getting on something that is not the floor."
+        description: "You must be on boxes/geometry; you may only run 5 seconds at a time before getting on something that is not the floor. If you fail, you must run back to where you were last off the lava."
     },
     {
         title: "Nadeking",
@@ -169,11 +169,10 @@ const strats : Strat[] = [
         title: "He's 1hp",
         description: "You aren't allowed to say any true statements this round."
     },
-/*     {
-        title: "Indian Tech Support",
-        description: "One person is Indian Tech Support and stays in spawn. The rest of the team plays as normal but you must roleplay calling indian tech support through in-game voice "
-    }
- */
+    {
+        title: "Hudson Keyboard",
+        description: "You must jump and land before every spray/shot."
+    },
     {
         title: "Generosity",
         description: "Buy your most hated gun and give it to a teammate",
@@ -206,13 +205,30 @@ const strats : Strat[] = [
     },
     {
         title: "MVP",
-        description: "Play this round like normal. The MVP (or last man alive) is your god-king for the next round."
+        description: "Play this round like normal. The MVP (or last man alive) is your celebrity player for the next round. You must compliment them constantly and aren't allowed to say any callouts without a compliment. Do what they say also."
     },
     {
         title: "Gun Game",
         description: "If you kill a player, you must collect their gun and use it for the remainder of the round."
     },
-
+    {
+        title: "COD Reload",
+        description: "You must reload after <i>every</i> shot."
+    },/* 
+    {
+        title: "",
+        description: "There "
+    }, */
+    /* 
+    {
+        title: "Karaoke",
+        description: ""
+    }, */
+/*     {
+        title: "Indian Tech Support",
+        description: "One person is Indian Tech Support and stays in spawn. The rest of the team plays as normal but you must roleplay calling indian tech support through in-game voice "
+    }
+ */
     // CT-side
     {
         title: "Loud & Proud",
@@ -235,8 +251,8 @@ const strats : Strat[] = [
         side: "CT"
     },
     {
-        title: "Rotation Nation",
-        description: "Until the bomb is planted, you may only be on a bombsite for 20 seconds and then you must rotate to the other one.",
+        title: "Patrol Command",
+        description: "You must run repeatedly back and forth between bombsites, shooting at anyone you see along the way.",
         side: "CT"
     },
     {
