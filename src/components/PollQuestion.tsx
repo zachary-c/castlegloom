@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 // vertically aligning the refresh and the total responses
 // very light dropshadow to light white box
 // 
-export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january'
+export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark'
 
 export default function PollQuestion({ question, date, theme } : { question : PollQuestion_t, date : string, theme : Theme}) {
     const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)

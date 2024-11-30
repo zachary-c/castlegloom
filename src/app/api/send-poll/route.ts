@@ -1,6 +1,7 @@
 import { client } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
+import { theme } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 import { Theme } from 'R/src/components/PollQuestion';
 
@@ -11,12 +12,66 @@ const itemDefaultColor = 'rgb(114, 51, 17)'
 const itemHoverColor = 'rgb(161, 73, 18)'
 const itemTextColor = 'rgb(255, 255, 228)'
 
-function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, theme? : Theme) {
-    const pollStyle = `background-color: ${backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${itemDefaultColor}`
-    const headerStyle = `margin-top:0; margin-left: 1rem;color:${headerColor}; margin-right: 1rem;`
+type ThemeObject = {
+    backgroundColor : string
+    headerColor : string
+    itemDefaultColor : string
+    itemHoverColor : string
+    itemTextColor : string
+    borderColor? : string
+}
+
+function themeObject(theme : Theme) : ThemeObject {
+    let obj : ThemeObject;
+    switch (theme) {
+        case 'november':
+            obj = {
+                backgroundColor: 'rgb(255, 255, 228)',
+                headerColor: 'black',
+                itemDefaultColor: 'rgb(114, 51, 17)',
+                itemHoverColor: 'rgb(161, 73, 18)',
+                itemTextColor: 'rgb(255, 255, 228)'
+            }; 
+            break;
+        case 'december-light':
+            obj = {
+                backgroundColor: '#f2f2f2',
+                headerColor: '#01440f',
+                itemDefaultColor: '#ae0000',
+                itemHoverColor: '#00b409',
+                itemTextColor: '#f2f2f2',
+                borderColor: '#01440f'
+            }; 
+            break;
+        case 'december-dark':
+            obj = {
+                backgroundColor: '#01440f',
+                headerColor: '#f2f2f2',
+                itemDefaultColor: '#ae0000',
+                itemHoverColor: '#00b409',
+                itemTextColor: '#f2f2f2',
+                borderColor: 'none'
+            };
+            break;
+        default:
+            obj = {
+                backgroundColor: 'black',
+                headerColor: 'white',
+                itemDefaultColor: 'gray',
+                itemHoverColor: 'white',
+                itemTextColor: 'black'
+            }; 
+            break;
+    }
+    return obj;
+}
+
+function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, obj : ThemeObject) : string {
+    const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
+    const headerStyle = `margin-top:0; margin-left: 1rem;color:${obj.headerColor}; margin-right: 1rem;`
     const listStyles = `list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;`
-    const listItemStyles = `margin:0; padding: 0; background-color: ${itemDefaultColor}; border-radius: 3px;`
-    const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
+    const listItemStyles = `margin:0; padding: 0; background-color: ${obj.itemDefaultColor}; border-radius: 3px;`
+    const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
     const title = encodeURIComponent(question.title)
     const responder = encodeURIComponent(recipient._id)
     const encodedDate = encodeURIComponent(question.date)
@@ -32,8 +87,8 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, th
     `
 
     return html;
-    
 }
+
 type Recipient_t = {
     email : string
     _id : string
@@ -63,14 +118,16 @@ export async function GET(request : NextRequest) {
     })
     //console.log('Mailer:', mailer);
     if (pollQuestion) {
+        const themeObj = themeObject(theme)
+        console.log('theme', themeObj)
         for (const recipient of emails) {
-            let pollHtml = generatePollHTML(pollQuestion, recipient)
+            let pollHtml = generatePollHTML(pollQuestion, recipient, themeObj)
             const html = `
             <html>
                 <head>
                     <style>
                         .spook-response:hover {
-                            background-color: ${itemHoverColor};
+                            background-color: ${themeObj.itemHoverColor};
                             border-radius:3px;
                         }
                     </style>

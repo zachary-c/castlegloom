@@ -52,7 +52,7 @@ export default async function Page() {
             }
         </div>
         <a className={`button poll__btn ${theme} outline`} style={{width: '250px'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
-        <p style={{maxWidth:'500px', textAlign:'center'}}>
+        <p className={`poll__blurb ${theme}`} style={{maxWidth:'500px', textAlign:'center'}}>
             Color scheme, layout, functionality, and other qualities subject to change.
             There is currently no direct sign up for polling; if you feel strongly you would like to be polled <a href='/spooktober'>sign
             up for spooktober memes</a> and you will be manually added to the list.    

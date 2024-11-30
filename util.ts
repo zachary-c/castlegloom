@@ -26,3 +26,11 @@ export async function getSteamGames() {
     }
     return dict;
 }
+/*
+"crons": [
+        {
+            "path": "/api/send-poll?secret=spooktoberspooktoberspooktoberspooktober",
+            "schedule": "30 17 * * *"
+        }
+    ]
+*/
