@@ -119,8 +119,8 @@ export async function GET(request : NextRequest) {
     } 
 
     //    console.log("secret provided: ", secret);
-    // [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]
-    const emails : Recipient_t[] = [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]//await client.fetch(daily_polled);
+    // [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]//
+    const emails : Recipient_t[] = await client.fetch(daily_polled);
     const pollQuestion : PollQuestion_t = await client.fetch(latest_poll)
     //let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
     //console.log(emailsList)
