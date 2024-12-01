@@ -19,6 +19,7 @@ type ThemeObject = {
     itemHoverColor : string
     itemTextColor : string
     borderColor? : string
+    titleColor : string
 }
 
 function themeObject(theme : Theme) : ThemeObject {
@@ -30,17 +31,19 @@ function themeObject(theme : Theme) : ThemeObject {
                 headerColor: 'black',
                 itemDefaultColor: 'rgb(114, 51, 17)',
                 itemHoverColor: 'rgb(161, 73, 18)',
-                itemTextColor: 'rgb(255, 255, 228)'
+                itemTextColor: 'rgb(255, 255, 228)',
+                titleColor: 'black'
             }; 
             break;
         case 'december-light':
             obj = {
-                backgroundColor: '#f2f2f2',
+                backgroundColor: '#fff',
                 headerColor: '#01440f',
                 itemDefaultColor: '#ae0000',
-                itemHoverColor: '#00b409',
+                itemHoverColor: '#01440f',
                 itemTextColor: '#f2f2f2',
-                borderColor: '#01440f'
+                borderColor: '#01440f',
+                titleColor: '#01440f'
             }; 
             break;
         case 'december-dark':
@@ -50,7 +53,9 @@ function themeObject(theme : Theme) : ThemeObject {
                 itemDefaultColor: '#ae0000',
                 itemHoverColor: '#00b409',
                 itemTextColor: '#f2f2f2',
-                borderColor: 'none'
+                borderColor: 'none',
+                titleColor: '#01440f',
+
             };
             break;
         default:
@@ -59,7 +64,8 @@ function themeObject(theme : Theme) : ThemeObject {
                 headerColor: 'white',
                 itemDefaultColor: 'gray',
                 itemHoverColor: 'white',
-                itemTextColor: 'black'
+                itemTextColor: 'black',
+                titleColor: 'black'
             }; 
             break;
     }
@@ -68,21 +74,26 @@ function themeObject(theme : Theme) : ThemeObject {
 
 function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, obj : ThemeObject) : string {
     const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
-    const headerStyle = `margin-top:0; margin-left: 1rem;color:${obj.headerColor}; margin-right: 1rem;`
+    const headerStyle = `margin-top:0; margin-left: 1rem;color:${obj.headerColor}; margin-right: 1rem;font-size:1rem;`
     const listStyles = `list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;`
     const listItemStyles = `margin:0; padding: 0; background-color: ${obj.itemDefaultColor}; border-radius: 3px;`
+    const titleStyle = `color: ${obj.titleColor}; text-align: center;font-size: 1.25rem;`
+    const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
     const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
     const title = encodeURIComponent(question.title)
     const responder = encodeURIComponent(recipient._id)
     const encodedDate = encodeURIComponent(question.date)
     let html = `
-    <div style="${pollStyle}">
-        <h3 style="${headerStyle}">${question.questionText}</h3>
-        <ul style="${listStyles}">
-            ${question.responses.map((response) => {
-                return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
-            }).join('')}
-        </ul>
+    <div style="${wrapperStyle}">
+        <h3 style="${titleStyle}">${question.title}</h3>
+        <div style="${pollStyle}">
+            <h4 style="${headerStyle}">${question.questionText}</h4>
+            <ul style="${listStyles}">
+                ${question.responses.map((response) => {
+                    return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
+                }).join('')}
+            </ul>
+        </div>
     </div>
     `
 
@@ -139,10 +150,10 @@ export async function GET(request : NextRequest) {
             
             `
             const info = await mailer.sendMail({
-                from: process.env.ORACLE_LOGIN,
+                from: `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`,
                 to: recipient.email,
                 // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-                subject: `Spooktover Poll ${pollQuestion.date}`,
+                subject: `${pollQuestion.title} | ${pollQuestion.date}`,
                 html: html
             })
             console.log(info);

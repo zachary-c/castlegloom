@@ -23,6 +23,11 @@
         font-size: .9rem;
         font-weight: 500;
     }
+    &__blurb {
+        font-size: .8rem;
+        max-width: 500px;
+        text-align: center;
+    }
 
     &__header {
         display: block;
@@ -61,6 +66,7 @@
             justify-content: space-between;
             position: relative;
             z-index: 4;
+            gap: .2rem;
             &__text {
                 position: relative;
                 z-index: 4;      
@@ -404,7 +410,7 @@
         }
         &__options {
             &__item {
-                background-color: $tree-trimming;
+                background-color: $rudolph-nose;
                 &__text, &__count {
                     color: $snow-white;
                 }
@@ -418,9 +424,9 @@
                 color: $snow-white;
             }
             &__refresh {
-                background-color: $santa-red;
-                color: $white;
-                border: 1px solid transparent;
+                background-color: $tree-trimming;
+                color: $snow-white;
+                border: 1px solid $snow-white;
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.05);
@@ -441,19 +447,19 @@
             background-color: $fir-green;
         }
         &__page-title {
-            color: $tree-trimming;
+            color: $snow-white;
         }
         &__btn {
             background-color: $snow-white;
-            color: $tree-trimming;
+            color: $fir-green;
             &.outline {
-                border: 2px solid $tree-trimming;
+                border: 2px solid $snow-white;
                 background-color: $santa-red;
                 color: $snow-white;
             }
         }
         &__date {
-            color: $tree-trimming;
+            color: $snow-white;
         }
         &__blurb {
             color: $snow-white;
@@ -492,9 +498,9 @@
                 color: $santa-red;
             }
             &__refresh {
-                background-color: $tree-trimming;
+                background-color: $santa-red;
                 color: $white;
-                border: 1px solid $fir-green;
+                border: 1px solid transparent;
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.05);

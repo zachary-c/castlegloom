@@ -32,7 +32,7 @@ export default async function Page() {
     const datetime = new Date(data.today.date)
 
     const y = new Date(datetime.getTime() - (1000*60*60*24) + (1000*60*60*3));
-    const yString = `${y.getFullYear()}-${y.getMonth()+1}-${padToTwo(y.getUTCDate())}`
+    const yString = `${y.getUTCFullYear()}-${y.getUTCMonth()+1}-${padToTwo(y.getUTCDate())}`
     //console.log('yesterday, datetime', y, datetime, yString),
     //console.log("components", y.getFullYear(), y.getMonth()+1, padToTwo(y.getUTCDate()))
     
@@ -52,10 +52,9 @@ export default async function Page() {
             }
         </div>
         <a className={`button poll__btn ${theme} outline`} style={{width: '250px'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
-        <p className={`poll__blurb ${theme}`} style={{maxWidth:'500px', textAlign:'center'}}>
-            Color scheme, layout, functionality, and other qualities subject to change.
+        <p className={`poll__blurb ${theme}`}>
             There is currently no direct sign up for polling; if you feel strongly you would like to be polled <a href='/spooktober'>sign
-            up for spooktober memes</a> and you will be manually added to the list.    
+            up for spooktober memes</a> and you will be manually added to the list. Color scheme, layout, functionality, and other qualities subject to change.
         </p>
     </>
 
