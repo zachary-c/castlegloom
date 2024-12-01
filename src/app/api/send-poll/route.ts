@@ -84,17 +84,24 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
     const responder = encodeURIComponent(recipient._id)
     const encodedDate = encodeURIComponent(question.date)
     let html = `
-    <div style="${wrapperStyle}">
-        <h3 style="${titleStyle}">${question.title}</h3>
-        <div style="${pollStyle}">
-            <h4 style="${headerStyle}">${question.questionText}</h4>
-            <ul style="${listStyles}">
-                ${question.responses.map((response) => {
-                    return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
-                }).join('')}
-            </ul>
+    <body>
+        <div style="display:none;max-height: 0px; overflow: hidden;">${question.questionText}\n\n\n</div>
+        <div style="display: none; max-height: 0px; overflow: hidden;"> 
+ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
         </div>
-    </div>
+        <div style="${wrapperStyle}">
+            <h3 style="${titleStyle}">${question.title}</h3>
+            <div style="${pollStyle}">
+                <h4 style="${headerStyle}">${question.questionText}</h4>
+                <ul style="${listStyles}">
+                    ${question.responses.map((response) => {
+                        return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
+                    }).join('')}
+                </ul>
+            </div>
+        </div>
+    </body>
+
     `
 
     return html;
@@ -113,7 +120,7 @@ export async function GET(request : NextRequest) {
 
     //    console.log("secret provided: ", secret);
     // [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]
-    const emails : Recipient_t[] = await client.fetch(daily_polled);
+    const emails : Recipient_t[] = [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]//await client.fetch(daily_polled);
     const pollQuestion : PollQuestion_t = await client.fetch(latest_poll)
     //let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
     //console.log(emailsList)
@@ -143,9 +150,7 @@ export async function GET(request : NextRequest) {
                         }
                     </style>
                 </head>
-                <body>
                 ${pollHtml}
-                </body>
             </html>
             
             `
