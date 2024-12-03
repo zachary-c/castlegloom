@@ -1,4 +1,4 @@
-import { client } from '$/lib/client';
+import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { theme } from '@/poll/pollUtil';
@@ -136,6 +136,10 @@ export async function GET(request : NextRequest) {
     })
     //console.log('Mailer:', mailer);
     if (pollQuestion) {
+        if (pollQuestion.hasBeenSent) {
+            console.log("Tried to send poll", pollQuestion.title, "but it was already sent")
+            return NextResponse.json({status: 204})
+        }
         const themeObj = themeObject(theme)
         console.log('theme', themeObj)
         for (const recipient of emails) {
@@ -168,7 +172,13 @@ export async function GET(request : NextRequest) {
             }
         }
     }
-        
+
+    const hasBeenSentPatch = patchClient.patch(pollQuestion._id, {
+        "set": {
+            hasBeenSent: true
+        }
+    })
+    hasBeenSentPatch.commit();
     /* const info = await mailer.sendMail({
         from: process.env.ORACLE_LOGIN,
         to: '314oracle@gmail.com',

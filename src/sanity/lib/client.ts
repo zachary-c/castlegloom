@@ -15,3 +15,11 @@ export const apiClient = createClient({
     apiVersion,
     useCdn: false
 })
+
+export const patchClient = createClient({
+    projectId: projectId,
+    dataset: 'production',
+    apiVersion: apiVersion,
+    useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
+    token: process.env.PROJECT_API_TOKEN
+})

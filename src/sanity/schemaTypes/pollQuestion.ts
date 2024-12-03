@@ -29,20 +29,11 @@ export default defineType({
                 return now.getFullYear() + '-' + month + '-' + day;
             },
         },
-        /* 
         {
-            name: 'date',
-            title: 'Date',
-            type: 'date',
-            initialValue: () => {
-                const now = new Date();
-
-                const month = now.getMonth() < 9 ? `0${now.getMonth()+1}` : now.getMonth()+1;
-                const day = now.getDate() < 10 ? `0${now.getDate()}` : now.getDate();
-
-                return now.getFullYear() + '-' + month + '-' + day;
-            },
-        }, */
+            type: 'boolean',
+            title: "Sent",
+            name: 'hasBeenSent'
+        },
         {
             name: 'responses',
             type: 'array',

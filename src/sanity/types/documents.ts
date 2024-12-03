@@ -20,6 +20,7 @@ export type PollQuestion_t = {
     title : string
     responses : PollResponse_t[]
     date : string
+    hasBeenSent : boolean
 }
 
 export type Meme_t = {
