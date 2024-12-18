@@ -13,7 +13,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className='spooktober-layout'>
-        <Script async src="https://campbell-umami.vercel.app/script.js" data-website-id="0c767cfd-fb2d-48bc-89b5-54de8afad835" />
       <body>
             {children}
         </body>
