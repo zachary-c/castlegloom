@@ -18,6 +18,11 @@ export default {
             title: 'Is Polled Daily?',
             type: 'boolean',
             default: false
+        },
+        {
+            name: 'chosenTitle',
+            title: 'Title',
+            type: 'string'
         }
     ],
     preview: {

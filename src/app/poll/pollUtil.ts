@@ -10,3 +10,5 @@ export const THEME_JAN = {
     bone: "#d1d3c4",
     platinum: "#dfe0dc",
 }
+
+export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`

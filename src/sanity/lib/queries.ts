@@ -48,6 +48,17 @@ export const poll_latest_surrounding = groq`{
 }
 `
 
+export const user_dashboard_information = groq`
+*[_id == $userid][0] {
+    email,
+    isPolledDaily,
+    chosenTitle
+}`
+export type RecipientInfo = {
+    email : string
+    isPolledDaily? : boolean 
+    chosenTitle? : string
+}
 export const latest_meme = groq`
     *[_type == 'meme' && date < $now] | order(date desc)[0] {
         ${meme_fields}
