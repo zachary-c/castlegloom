@@ -48,6 +48,12 @@ export const poll_latest_surrounding = groq`{
 }
 `
 
+export const poll_question_list = groq`
+*[_type == 'pollQuestion'] | order(date desc) {
+    ${pollQuestionFields}
+}
+`
+
 export const user_dashboard_information = groq`
 *[_id == $userid][0] {
     email,

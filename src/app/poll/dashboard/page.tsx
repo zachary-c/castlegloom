@@ -1,11 +1,12 @@
 import React from 'react'
 import { apiClient } from '$/lib/client'
-import { user_dashboard_information } from '$/lib/queries'
+import { poll_question_list, user_dashboard_information } from '$/lib/queries'
 import { theme } from '../pollUtil'
 import { RecipientInfo } from '$/lib/queries'
 import { cookies } from 'next/headers'
 import { pollCookieName } from '@/api/poll/login/cookie'
 import { redirect, RedirectType } from 'next/navigation'
+import { PollQuestion_t } from '$/types/documents'
 
 export default async function Page() {
     //console.log('data', datetime)
@@ -17,9 +18,13 @@ export default async function Page() {
     }
     console.log('userid', userid)
     const info : RecipientInfo | undefined = await apiClient.fetch(user_dashboard_information, { userid: userid.value })
+    const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list)
     console.log(info)
     return <>
         <h1 className={`poll__page-title ${theme}`}>Hello {info?.email}</h1>
+        <div>
+            {}
+        </div>
     </>
 
 }
