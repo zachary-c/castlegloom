@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/prisma/lib/prisma';
+import prisma from 'R/src/prisma/lib/prisma';
 
 type ReturnedData = {
     applist: {
