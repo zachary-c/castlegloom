@@ -50,7 +50,13 @@ export const poll_latest_surrounding = groq`{
 
 export const poll_question_list = groq`
 *[_type == 'pollQuestion'] | order(date desc) {
-    ${pollQuestionFields}
+    ...,
+    responses[] {
+        ...,
+        responseSlug,
+        responseText,
+        "responseCount": count(listOfResponders)
+    }
 }
 `
 

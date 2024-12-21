@@ -1,0 +1,31 @@
+
+.pe {
+    border: 3px solid var(--theme-secondary);
+    border-radius: 10px;
+    padding: .5rem 1rem;
+box-sizing: border-box;
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        max-width: 100%;
+        gap: 1rem;
+        &__title {
+            color: var(--theme-primary);
+            flex-basis: 3;
+            //flex-grow: 1;
+        }
+
+        &__text {
+            font-size: .85rem;
+            text-overflow: ellipsis;
+            overflow:hidden;
+            white-space: nowrap;
+            flex-basis: 6;
+            width: 400px;
+        }
+        &__date {
+            flex-basis: 2;
+        }
+    }
+}

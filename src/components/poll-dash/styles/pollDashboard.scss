@@ -1,0 +1,10 @@
+.pd {
+    &__title {
+        color: var(--theme-text);
+    }
+    &__question-entries {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+}

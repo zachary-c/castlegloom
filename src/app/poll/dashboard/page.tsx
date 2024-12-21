@@ -6,7 +6,10 @@ import { RecipientInfo } from '$/lib/queries'
 import { cookies } from 'next/headers'
 import { pollCookieName } from '@/api/poll/login/cookie'
 import { redirect, RedirectType } from 'next/navigation'
-import { PollQuestion_t } from '$/types/documents'
+import { PollQuestion_t, PollResponse_t } from '$/types/documents'
+import { UserQuestionInfo } from 'R/src/components/poll-dash/types'
+import PollEntry from 'R/src/components/poll-dash/PollEntry'
+import 'R/src/components/poll-dash/styles/pollDashboard.scss'
 
 export default async function Page() {
     //console.log('data', datetime)
@@ -19,11 +22,21 @@ export default async function Page() {
     console.log('userid', userid)
     const info : RecipientInfo | undefined = await apiClient.fetch(user_dashboard_information, { userid: userid.value })
     const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list)
-    console.log(info)
+    const compared : UserQuestionInfo[] = questionData.map((q, i) => {
+        return {
+            ...q,
+            userResponse: q.responses.find((r) => r.listOfResponders?.some((v) => v._ref === userid.value))
+        }
+    })
+    console.log(compared[2].responses)
     return <>
-        <h1 className={`poll__page-title ${theme}`}>Hello {info?.email}</h1>
-        <div>
-            {}
+        <h1 className={`pd__title ${theme}`}>Hello {info?.email}</h1>
+        <div className='pd__question-entries'>
+            {
+                compared.map((q : UserQuestionInfo, i : number) => 
+                    <PollEntry info={q} key={i}/>
+                )
+            }
         </div>
     </>
 
