@@ -178,7 +178,8 @@ export async function GET(request : NextRequest) {
             hasBeenSent: true
         }
     })
-    hasBeenSentPatch.commit();
+    const res = await hasBeenSentPatch.commit();
+    console.log("result", res)
     /* const info = await mailer.sendMail({
         from: process.env.ORACLE_LOGIN,
         to: '314oracle@gmail.com',
