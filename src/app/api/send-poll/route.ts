@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { theme } from '@/poll/pollUtil';
+import { theme, THEME_JAN } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 import { Theme } from 'R/src/components/PollQuestion';
 
@@ -55,6 +55,18 @@ function themeObject(theme : Theme) : ThemeObject {
                 itemTextColor: '#f2f2f2',
                 borderColor: 'none',
                 titleColor: '#01440f',
+
+            };
+            break;
+        case 'january':
+            obj = {
+                backgroundColor: THEME_JAN.walnutBrown,
+                titleColor: THEME_JAN.jasper,
+                itemDefaultColor: THEME_JAN.bone,
+                itemHoverColor: THEME_JAN.platinum,
+                itemTextColor: THEME_JAN.blackOlive,
+                headerColor: THEME_JAN.platinum,
+                borderColor: 'none',
 
             };
             break;
