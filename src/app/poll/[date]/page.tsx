@@ -30,8 +30,8 @@ export default async function Page({params} : {params : {date : string}}) {
     const now = new Date()
     const y = new Date(datetime.getTime() - (1000*60*60*24));
     const t = new Date(datetime.getTime() + (1000*60*60*24));
-    const yString = `${y.getUTCFullYear()}-${y.getUTCMonth()+1}-${padToTwo(y.getUTCDate())}`
-    const tString = `${t.getUTCFullYear()}-${t.getUTCMonth()+1}-${padToTwo(t.getUTCDate())}`
+    const yString = `${y.getUTCFullYear()}-${padToTwo(y.getUTCMonth()+1)}-${padToTwo(y.getUTCDate())}`
+    const tString = `${t.getUTCFullYear()}-${padToTwo(t.getUTCMonth()+1)}-${padToTwo(t.getUTCDate())}`
    // console.log('t', t.getDate())
    // console.log('date', y, datetime, t)
    // console.log('string', yString, datetime, tString)

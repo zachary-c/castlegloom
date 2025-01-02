@@ -32,7 +32,7 @@ export default async function Page() {
     const datetime = new Date(data.today.date)
 
     const y = new Date(datetime.getTime() - (1000*60*60*24) + (1000*60*60*3));
-    const yString = `${y.getUTCFullYear()}-${y.getUTCMonth()+1}-${padToTwo(y.getUTCDate())}`
+    const yString = `${y.getUTCFullYear()}-${padToTwo(y.getUTCMonth()+1)}-${padToTwo(y.getUTCDate())}`
     //console.log('yesterday, datetime', y, datetime, yString),
     //console.log("components", y.getFullYear(), y.getMonth()+1, padToTwo(y.getUTCDate()))
     
