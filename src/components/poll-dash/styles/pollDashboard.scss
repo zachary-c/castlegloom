@@ -3,8 +3,10 @@
         color: var(--theme-text);
     }
     &__question-entries {
+        max-width: 1000px;
+        width: 100%;
         display: flex;
         flex-direction: column;
-        gap: .5rem;
+        gap: 1rem;
     }
 }
