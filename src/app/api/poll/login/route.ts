@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { pollCookieName } from "./cookie";
 import { apiClient } from "$/lib/client";
+import { redirect } from "next/navigation";
 
 // {params : { title : string }, searchParams : { responder : string | undefined, choice : string | undefined }}
 export async function GET(request : NextRequest) {
@@ -33,6 +34,6 @@ export async function GET(request : NextRequest) {
         //partitioned: true
     }) 
 
-    return NextResponse.json({"Woohoo": 'Overtime'}, { status: 200 })
-//    return redirect(`/poll/dashboard`)
+    //return NextResponse.json({"Woohoo": 'Overtime'}, { status: 200 })
+    return redirect(`/poll/dashboard`)
 }
