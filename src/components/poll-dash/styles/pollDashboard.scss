@@ -1,12 +1,52 @@
 .pd {
     &__title {
         color: var(--theme-text);
+        max-width: 100%;
+        text-align: center;
+        word-break: break-word;
     }
     &__question-entries {
-        max-width: 1000px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: .75rem;
+    }
+    &__body {
+        max-width: 1000px;
+        width:100%;
+        border: 2px solid black;
+        border-top: none;
+        box-sizing: border-box;
+        padding: .75rem .4rem;
+    }
+    &__tabmenu {
+        display: flex;
+        flex-direction: row;
+        gap: 0rem;
+        padding: 0;
+        justify-content: flex-start;
+        max-width: 1000px;
+        width: 100%;
+        margin-bottom: -2px;
+        & li {
+            padding: .2rem;
+            margin: 0;
+            list-style: none;
+            border: 2px solid black;
+            cursor:pointer;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            &.current {
+                border-bottom: none;
+                
+                //padding-bottom: .5rem;
+                //transform: translate(0, -.5rem);
+            }
+        }
+        & .spacer {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 2px solid black;
+        }
     }
 }

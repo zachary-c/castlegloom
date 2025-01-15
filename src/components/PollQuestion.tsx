@@ -13,7 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 // 
 export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark'
 
-export default function PollQuestion({ question, date, theme, useProvidedData } : { question : PollQuestion_t, date : string, theme : Theme, useProvidedData? : boolean}) {
+export default function PollQuestion({ question, date, theme } : { question : PollQuestion_t, date : string, theme : Theme}) {
     const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
     const [loadingData, setLoadingData] = useState<boolean>(true)
     //console.log('question', question);
@@ -39,12 +39,7 @@ export default function PollQuestion({ question, date, theme, useProvidedData } 
         setLoadingData(false)
     }
     useEffect(() => {
-        if (useProvidedData) {
-            setQuestionData(question)
-            setLoadingData(false);
-        } else {
-            getData()
-        }
+        getData()
     }, []) 
 
     return <div className={`poll ${theme ?? 'november'} ${theme !== 'october-light' ? 'montserrat' : ''}`}>

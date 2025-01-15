@@ -49,7 +49,7 @@ export const poll_latest_surrounding = groq`{
 `
 
 export const poll_question_list = groq`
-*[_type == 'pollQuestion'] | order(date desc) {
+*[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc) {
     ...,
     responses[] {
         ...,
@@ -61,12 +61,14 @@ export const poll_question_list = groq`
 `
 
 export const user_dashboard_information = groq`
-*[_id == $userid][0] {
+*[_id == $userid ][0] {
+    _id,
     email,
     isPolledDaily,
     chosenTitle
 }`
 export type RecipientInfo = {
+    _id : string
     email : string
     isPolledDaily? : boolean 
     chosenTitle? : string

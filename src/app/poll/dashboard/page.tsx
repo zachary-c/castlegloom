@@ -10,6 +10,8 @@ import { PollQuestion_t, PollResponse_t } from '$/types/documents'
 import { UserQuestionInfo } from 'R/src/components/poll-dash/types'
 import PollEntry from 'R/src/components/poll-dash/PollEntry'
 import 'R/src/components/poll-dash/styles/pollDashboard.scss'
+import DashTabs from 'R/src/components/poll-dash/DashTabs'
+
 
 export default async function Page() {
     //console.log('data', datetime)
@@ -25,19 +27,17 @@ export default async function Page() {
     const compared : UserQuestionInfo[] = questionData.map((q, i) => {
         return {
             ...q,
-            userResponse: q.responses.find((r) => r.listOfResponders?.some((v) => v._ref === userid.value))
+            userResponse: q.responses.find((r) => r.listOfResponders?.some((v) => v._ref === userid.value))?.responseSlug.current
         }
     })
     console.log(compared[2].responses)
+    if (!info) {
+        return <></>
+    }
+
     return <>
         <h1 className={`pd__title ${theme}`}>Hello {info?.email}</h1>
-        <div className='pd__question-entries'>
-            {
-                compared.map((q : UserQuestionInfo, i : number) => 
-                    <PollEntry info={q} key={i}/>
-                )
-            }
-        </div>
+        <DashTabs userQuestionData={compared} userData={info} />
     </>
 
 }
