@@ -6,6 +6,9 @@ import sound from './sound'
 import soundPreset from './soundPreset'
 import pollQuestion from './pollQuestion'
 import pollResponse from './pollResponse'
+import bingoCard from './bingoCard'
+import bingoSquare from './bingoSquare'
+import bingoSupport from './bingoSupport'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -16,6 +19,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     soundPreset,
 
     pollQuestion,
-    pollResponse
+    pollResponse,
+
+    bingoCard,
+    bingoSquare,
+    bingoSupport
   ],
 }
