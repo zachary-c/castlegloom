@@ -39,7 +39,6 @@ export default function DashTabs({ userData, userQuestionData } : { userData : C
     const [userRecord, setUserRecord] = useState<Concrete<UserRecord>>(userData)
     const [originalUserData, setOriginalUserData] = useState<Concrete<UserRecord>>(userData)
     const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
-    console.log("userRecord", userRecord)
 
     const tabs = [
         {

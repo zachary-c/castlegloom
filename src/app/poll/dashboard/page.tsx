@@ -21,11 +21,11 @@ export default async function Page() {
     if (!userid) {
         redirect('/poll', RedirectType.replace)
     }
-    console.log('userid', userid)
+
     const info : UserRecord | undefined = await apiClient.fetch(user_dashboard_information, { userId: userid.value })
     const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list, {userId: userid.value })
     
-    console.log(questionData[2])
+
     if (!info) {
         return <></>
     }
