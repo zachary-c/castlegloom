@@ -8,7 +8,6 @@ import PollQuestionInput from "../PollQuestionInput";
 export default function PollEntry({ preloadInfo } : { preloadInfo : UserQuestionInfo }) {
     const [open, setOpen] = useState<boolean>(false);
     const [info, setInfo] = useState<UserQuestionInfo>(preloadInfo)
-    useEffect(() => console.log("useeffect info", info), [info])
     return (
         <div className={`pe ${info.userResponse ? 'responded' : ''} ${open ? 'open' : ''}`}>
             <div className={`pe__header`} onClick={() => setOpen(!open)}>

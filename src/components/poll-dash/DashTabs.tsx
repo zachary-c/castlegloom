@@ -1,14 +1,45 @@
 'use client'
-import { RecipientInfo } from "$/lib/queries";
+import { Concrete, UserRecord } from "$/lib/queries";
 import { PollQuestion_t } from "$/types/documents";
-import React, { createContext, useState } from "react"
+import React, { createContext, useEffect, useMemo, useState } from "react"
 import { UserQuestionInfo } from "./types";
 import PollEntry from "./PollEntry";
+import { UserPreferences } from "./UserPreferences";
+import { randomInRange, theme } from "@/poll/pollUtil";
 
 export const UserContext = createContext<string>('')
 
-export default function DashTabs({ userData, userQuestionData } : { userData : RecipientInfo, userQuestionData : UserQuestionInfo[]}) {
+const greetings = [
+    "Greetings, "
+]
+
+function getTitle(userData : Concrete<UserRecord>) {
+    let str = ''
+    
+    if (userData.name.length > 0) {
+        str += userData.name;
+    }
+    if ((userData.title.profession?.length ?? 0) > 0) {
+        if (userData.name.length > 0) {
+            str += ', '
+        }
+        str +=  userData.title?.profession
+        if ((userData.title.qualifier?.length ?? 0) > 0) {
+            str += " " + userData.title?.qualifier
+        }
+    }
+    if (userData.name.length === 0 && (userData.title.profession?.length ?? 0) === 0) {
+        str = userData.email
+    }
+    return str;
+}
+
+export default function DashTabs({ userData, userQuestionData } : { userData : Concrete<UserRecord>, userQuestionData : UserQuestionInfo[]}) {
     const [currentTab, setCurrentTab] = useState(0);
+    const [userRecord, setUserRecord] = useState<Concrete<UserRecord>>(userData)
+    const [originalUserData, setOriginalUserData] = useState<Concrete<UserRecord>>(userData)
+    const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
+    console.log("userRecord", userRecord)
 
     const tabs = [
         {
@@ -25,15 +56,14 @@ export default function DashTabs({ userData, userQuestionData } : { userData : R
         {
             index: 1,
             title: 'Preferences',
-            body: <div>
-                        PREFERENCES WOOHOO
-            </div>
+            body: <UserPreferences userRecord={userRecord} setUserRecord={setUserRecord} originalRecord={originalUserData} setOriginalRecord={setOriginalUserData}/>
         },
     ]
     
     return (
         <>
-            <UserContext.Provider value={userData._id}>
+            <h1 className={`pd__title ${theme}`}>{greeting}</h1>
+            <UserContext.Provider value={userRecord._id}>
                 <menu className="pd__tabmenu">
                     {tabs.map((t, i) => 
                         <li key={i} className={`${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>

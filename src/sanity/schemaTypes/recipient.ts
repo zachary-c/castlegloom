@@ -20,9 +20,25 @@ export default {
             default: false
         },
         {
-            name: 'chosenTitle',
-            title: 'Title',
+            name: 'name',
+            title: 'Name',
             type: 'string'
+        },
+        {
+            type: 'object',
+            name: 'title',
+            fields: [
+                {
+                    name: 'profession',
+                    title: "Profession",
+                    type: 'string'
+                },
+                {
+                    name: 'qualifier',
+                    title: "Qualifier",
+                    type: 'string'
+                }
+            ]
         }
     ],
     preview: {

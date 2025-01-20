@@ -52,27 +52,37 @@ export const poll_question_list = groq`
 *[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc) {
     ...,
     responses[] {
-        ...,
         responseSlug,
         responseText,
         "responseCount": count(listOfResponders)
-    }
+    },
+    "userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
 }
 `
 
 export const user_dashboard_information = groq`
-*[_id == $userid ][0] {
+*[_id == $userId ][0] {
     _id,
     email,
     isPolledDaily,
-    chosenTitle
+    title {
+        profession,
+        qualifier
+    }
 }`
-export type RecipientInfo = {
+export type UserRecord = {
     _id : string
     email : string
+    name? : string
     isPolledDaily? : boolean 
-    chosenTitle? : string
+    title? : {
+        profession? : string
+        qualifier? : string
+    }
 }
+export type Concrete<Type> = {
+    [Key in keyof Type]-?: NonNullable<Type[Key]>;
+  };
 export const latest_meme = groq`
     *[_type == 'meme' && date < $now] | order(date desc)[0] {
         ${meme_fields}

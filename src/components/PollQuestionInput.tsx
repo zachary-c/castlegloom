@@ -37,9 +37,6 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
         setLoadingData(true)
         let response = await fetch(`/api/get-poll?date=${date}`)
         
-        // TODO: Need to update the query being used here (and everywhere on dashboard) to ensure 
-        // we don't share user_ids to everyone, only your data should be shared with you not anyone else's
-        // I'm going to go work on bingo card
         const data : PollQuestion_t = await response.json()
         setQuestion({
             ...data,
@@ -53,9 +50,13 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
     }   
     function selectNewAnswer(slug : string) {
         setAnswerHasChanged(true);
+        setSubmissionMessage('')
         setUserAnswer(slug)
-        console.log('ctex', userId)
-
+    }
+    function resetNewAnswer() {
+        setAnswerHasChanged(false);
+        setSubmissionMessage('')
+        setUserAnswer(question.userResponse)
     }
     async function submitNewAnswer() {
         if (!userAnswer) return;
@@ -65,11 +66,24 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
             method: 'GET'
         })
         if (response.ok) {
-            //const selectedResponse = question.responses.find((r) => r.listOfResponders.some((lr) => lr._ref === userId))
-            //if (!selectedResponse) return
-            //selectedResponse.listOfResponders = [...selectedResponse?.listOfResponders.filter((lr) => lr._ref !== userId)]
-            await getData()
-            setSubmissionMessage('New Submission Recorded! Thank you, have a nice day!');
+            let newResponses = []
+
+            for (let i = 0; i < question.responses.length; i++) {
+                if (question.responses[i].responseSlug.current === question.userResponse) {
+                    newResponses.push({ ...question.responses[i], responseCount: question.responses[i].responseCount-1 })
+                } else if (question.responses[i].responseSlug.current === userAnswer) {
+                    newResponses.push({ ...question.responses[i], responseCount: question.responses[i].responseCount+1 })
+                } else {
+                    newResponses.push({...question.responses[i]})
+                }
+            }
+            const rq = {
+                ...question,
+                responses: newResponses,
+                userResponse: userAnswer
+            }
+            setQuestion(rq)
+            setSubmissionMessage('New submission recorded! Thank you, have a nice day!');
             setSubmitting(false);
             setAnswerHasChanged(false)
         }
@@ -95,11 +109,20 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
                 <span className="poll__footer__rc">Total Responses: {totalResponses ?? '?'}</span>
             </div>
         </div>
-        <div className="poll__submit-area">
-            {answerHasChanged &&
-                <button onClick={submitNewAnswer}>Submit New Answer</button>
-            }
-            {submissionMessage.length > 0 && <p>{submissionMessage}</p>}
-        </div>
+        {(answerHasChanged || submissionMessage.length > 0) && 
+            <div className="poll__submit-area">
+                {answerHasChanged &&
+                    <button onClick={submitNewAnswer} className={`${submitting ? 'muted unclickable' : ''}`}>{submitting ? "Submitting..." : "Submit New Answer"}</button>
+                }
+                {answerHasChanged && !submitting &&
+                    <button onClick={resetNewAnswer} className={`muted`}>Reset Selection</button>
+                }
+                {submissionMessage.length > 0 && 
+                    <div className="submission-message">
+                        <span>{submissionMessage}</span>
+                    </div>
+                }
+            </div>
+        }
     </>
 }

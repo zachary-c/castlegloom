@@ -12,3 +12,7 @@ export const THEME_JAN = {
 }
 
 export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`
+
+export function randomInRange(min : number, max : number) {
+    return Math.floor(Math.random() * max) + min; 
+}

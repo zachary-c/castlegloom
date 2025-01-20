@@ -42,7 +42,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
         console.log("Found prior vote: ", alreadyVoted)
         //const filtered = alreadyVoted.listOfResponders.filter((r) => r._ref !== responder)
         let deletion
-        if (alreadyVoted.listOfResponders.length === 1) {
+        if (alreadyVoted.listOfResponders?.length === 1) {
             console.log("Only one vote (us) so removing it wholesale")
             deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders`]})
         } else {

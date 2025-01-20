@@ -49,11 +49,18 @@
         padding-bottom: .25rem;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
         gap: 1rem;
+        flex-wrap:wrap;
         & .poll {
             margin: 0;
+            min-width: 400px;
+            //max-width:620px;
         }
+    }
+}
+@media screen and (max-width: 896px) {
+    .pe .poll {
+        max-width: unset;
     }
 }
 @media screen and (max-width:612px) { 
@@ -84,7 +91,7 @@
     }
     
     .pe .poll {
-        width: unset;
+        min-width: unset;
         &__header {
             width: 100%;
             &:after {

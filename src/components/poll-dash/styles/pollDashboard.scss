@@ -22,7 +22,7 @@
     &__tabmenu {
         display: flex;
         flex-direction: row;
-        gap: 0rem;
+        column-gap: 0rem;
         padding: 0;
         justify-content: flex-start;
         max-width: 1000px;
@@ -34,8 +34,8 @@
             list-style: none;
             border: 2px solid black;
             cursor:pointer;
-            border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
             &.current {
                 border-bottom: none;
                 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { apiClient } from '$/lib/client'
-import { poll_question_list, user_dashboard_information } from '$/lib/queries'
+import { Concrete, poll_question_list, user_dashboard_information } from '$/lib/queries'
 import { theme } from '../pollUtil'
-import { RecipientInfo } from '$/lib/queries'
+import { UserRecord } from '$/lib/queries'
 import { cookies } from 'next/headers'
 import { pollCookieName } from '@/api/poll/login/cookie'
 import { redirect, RedirectType } from 'next/navigation'
@@ -22,22 +22,26 @@ export default async function Page() {
         redirect('/poll', RedirectType.replace)
     }
     console.log('userid', userid)
-    const info : RecipientInfo | undefined = await apiClient.fetch(user_dashboard_information, { userid: userid.value })
-    const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list)
-    const compared : UserQuestionInfo[] = questionData.map((q, i) => {
-        return {
-            ...q,
-            userResponse: q.responses.find((r) => r.listOfResponders?.some((v) => v._ref === userid.value))?.responseSlug.current
-        }
-    })
-    console.log(compared[2].responses)
+    const info : UserRecord | undefined = await apiClient.fetch(user_dashboard_information, { userId: userid.value })
+    const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list, {userId: userid.value })
+    
+    console.log(questionData[2])
     if (!info) {
         return <></>
     }
+    const defined_info : Concrete<UserRecord> = {
+        _id: info._id,
+        name: info.name ?? '',
+        isPolledDaily: info.isPolledDaily ?? false,
+        title: {
+            profession: info.title?.profession ?? '',
+            qualifier: info.title?.qualifier ?? ''
+        },
+        email: info.email ?? ''
+    }
 
     return <>
-        <h1 className={`pd__title ${theme}`}>Hello {info?.email}</h1>
-        <DashTabs userQuestionData={compared} userData={info} />
+        <DashTabs userQuestionData={questionData} userData={defined_info} />
     </>
 
 }
