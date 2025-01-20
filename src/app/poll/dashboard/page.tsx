@@ -23,8 +23,7 @@ export default async function Page() {
     }
 
     const info : UserRecord | undefined = await apiClient.fetch(user_dashboard_information, { userId: userid.value })
-    const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list, {userId: userid.value })
-    
+    const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list, { userId: userid.value })
 
     if (!info) {
         return <></>

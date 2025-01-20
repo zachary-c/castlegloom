@@ -64,6 +64,7 @@ export const user_dashboard_information = groq`
 *[_id == $userId ][0] {
     _id,
     email,
+    name,
     isPolledDaily,
     title {
         profession,

@@ -55,6 +55,7 @@ export const professionList = [
     "Colonel",
     "Color Commentator",
     "Conductor",
+    "Chaos Monkey",
     
     "Dentist",
     "Dermatologist",
@@ -158,7 +159,6 @@ export const professionList = [
     "Leatherworker",
 
     "Man",
-    "Monkey",
     "Moonman",
     "Monk",
     "Manager",

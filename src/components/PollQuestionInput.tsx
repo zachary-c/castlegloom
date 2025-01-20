@@ -42,16 +42,17 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
             ...data,
             userResponse: data.responses.find((r) => r.listOfResponders?.some((v) => v._ref === userId))?.responseSlug.current
         })
-        //setUserAnswer(data.responses.find((response) => response.listOfResponders && response.listOfResponders.some((responder) => responder._key === userId))?.responseSlug.current)
         console.log(data)
         setLoadingData(false)
         setAnswerHasChanged(false)
         setSubmissionMessage('')
     }   
     function selectNewAnswer(slug : string) {
-        setAnswerHasChanged(true);
-        setSubmissionMessage('')
-        setUserAnswer(slug)
+        if (slug !== userAnswer) {
+            setAnswerHasChanged(true);
+            setSubmissionMessage('')
+            setUserAnswer(slug)
+        }
     }
     function resetNewAnswer() {
         setAnswerHasChanged(false);
