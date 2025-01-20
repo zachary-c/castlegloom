@@ -16,3 +16,4 @@ export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`
 export function randomInRange(min : number, max : number) {
     return Math.floor(Math.random() * max) + min; 
 }
+export const emailRegex = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)

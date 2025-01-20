@@ -39,6 +39,11 @@ export default {
                     type: 'string'
                 }
             ]
+        },
+        {
+            name: "timesLoggedIn",
+            title: "Times Logged In",
+            type: "number"
         }
     ],
     preview: {

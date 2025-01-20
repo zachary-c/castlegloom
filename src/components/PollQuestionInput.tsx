@@ -48,7 +48,11 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
         setSubmissionMessage('')
     }   
     function selectNewAnswer(slug : string) {
-        if (slug !== userAnswer) {
+        if (slug !== userAnswer && slug === question.userResponse) {
+            setAnswerHasChanged(false)
+            setSubmissionMessage('')
+            setUserAnswer(slug)
+        } else if (slug !== userAnswer) {
             setAnswerHasChanged(true);
             setSubmissionMessage('')
             setUserAnswer(slug)

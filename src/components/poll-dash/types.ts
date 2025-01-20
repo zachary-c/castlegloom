@@ -37,6 +37,7 @@ export const professionList = [
     "Bartender",
     "Babysitter",
     "Bowling Ball",
+    "Blade",
     
     "Cook",
     "Criminal",
@@ -372,7 +373,15 @@ export const qualifierList = [
     "of the Void",
     "of the Abyss",
     "of the Rails",
+    "of the Galaxy",
+    "of the Prophets",
+    "of the Hierarchs",
+    "of the Matrix",
+    "of the Age",
+    "of the Era",
     
+    "of Command",
+    "of Frost",
     "of Vertigo",
     "of Defense",
     "of Pangaea",
@@ -381,7 +390,11 @@ export const qualifierList = [
     "of Contraband",
     "of Conquest",
     "of Vibrant Days",
+    "of Existence",
 
     "in Orbit",
     "in Color",
+    "for all Time",
+    "for all Mankind",
+    "for all the Fallen",
 ]

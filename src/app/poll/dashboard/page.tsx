@@ -19,14 +19,14 @@ export default async function Page() {
 
     const userid = cookieJar.get(pollCookieName)
     if (!userid) {
-        redirect('/poll', RedirectType.replace)
+        redirect('/poll/login', RedirectType.replace)
     }
 
     const info : UserRecord | undefined = await apiClient.fetch(user_dashboard_information, { userId: userid.value })
     const questionData : PollQuestion_t[] = await apiClient.fetch(poll_question_list, { userId: userid.value })
 
     if (!info) {
-        return <></>
+        redirect('/poll/login', RedirectType.replace)
     }
     const defined_info : Concrete<UserRecord> = {
         _id: info._id,
