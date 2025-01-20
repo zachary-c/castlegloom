@@ -29,7 +29,7 @@ export async function GET(request : NextRequest) {
             </style>
         </head>
         <body>
-            <a class="login-link" style="background-color: blue;border-radius:10px;padding: 8px 16px; text-align:center; font-weight:bold; color:white !important;transition-duration: .3s;display: block;" href="${request.nextUrl.hostname}/api/poll/login?userid=${userid}">Dashboard Login</a>
+            <a class="login-link" style="background-color: blue;border-radius:10px;padding: 8px 16px; text-align:center; font-weight:bold; color:white !important;transition-duration: .3s;display: block;" href="https://${request.nextUrl.hostname}/api/poll/login?userid=${userid}">Dashboard Login</a>
         </body>
 
     </html>
