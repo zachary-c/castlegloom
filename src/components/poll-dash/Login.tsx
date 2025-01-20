@@ -64,7 +64,7 @@ export default function Login() {
                 <span className="spacer"></span>
             </div>
             <div className={`login__body--collapsible-header${showSignup ? ' open' : ''}`} onClick={() => setShowSignup(!showSignup)}>
-                <h2>Don't have an account? Sign up for polling!</h2>
+                <h2>Don&apos;t have an account? Sign up for polling!</h2>
                 <span>{"<"}</span>
             </div>
             {showSignup && 
