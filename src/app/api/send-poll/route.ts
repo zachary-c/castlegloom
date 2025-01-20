@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { theme, THEME_JAN } from '@/poll/pollUtil';
+import { emailFrom, theme, THEME_JAN } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 import { Theme } from 'R/src/components/PollQuestion';
 
@@ -171,7 +171,7 @@ export async function GET(request : NextRequest) {
             
             `
             const info = await mailer.sendMail({
-                from: `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`,
+                from: emailFrom,
                 to: recipient.email,
                 // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
                 subject: `${pollQuestion.title} | ${pollQuestion.date}`,

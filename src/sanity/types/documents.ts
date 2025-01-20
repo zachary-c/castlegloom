@@ -11,7 +11,7 @@ export type PollResponse_t = {
     responseSlug : { current : string }
     responseText : string
     responseCount : number
-    listOfResponders : ({ _key : string, _ref : string })[]
+    listOfResponders? : ({ _key : string, _ref : string })[]
 }
 
 export type PollQuestion_t = {

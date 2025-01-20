@@ -1,3 +1,4 @@
+import { emailFrom } from '@/poll/pollUtil';
 import { NextResponse } from 'next/server';
 
 export async function POST(request : Request) {  
@@ -11,8 +12,7 @@ export async function POST(request : Request) {
     const patch_data = {
         'mutations': [
             {
-                "createIfNotExists": {
-                    "_id": `recipient-${email.replace('@', '-').replace('.', '-')}`,
+                "create": {
                     "_type": 'recipient',
                     "email": email,
                 }
@@ -28,13 +28,12 @@ export async function POST(request : Request) {
         method: 'POST',
         headers: headers
     }
-
     
     const response = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2023-09-29/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`, init)
     if (response.ok) {
         console.log('Sanity POST OK!')
     } else {
-        console.log('Mutation Failed:', response);
+        console.log('Mutation Failed:', await response.text());
         return NextResponse.json("Error creating recipient", {status: 500})
     }    
 
@@ -50,7 +49,7 @@ export async function POST(request : Request) {
     
     const emailBody = `Thanks for signing up for spooky memes! You can expect to receive about one a day for the duration of October. Happy Haunting!`
     const info = await mailer.sendMail({
-        from: process.env.ORACLE_LOGIN,
+        from: emailFrom,
         to: email,
         bcc: "zacharyhcampbell@gmail.com",
         subject: `Happy Spooktober!`,

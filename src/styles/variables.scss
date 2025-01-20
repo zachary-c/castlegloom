@@ -30,3 +30,19 @@ $tree-trimming: #00b409;
 $night-skies: #404343;
 $santa-red: #840000;
 $rudolph-nose: #c51d1d;
+
+.december-light {
+    --theme-primary: #{$fir-green};
+    --theme-secondary: #{$santa-red};
+    --theme-tertiary: #{$tree-trimming};
+    --theme-text: #{$tree-trimming};
+    --theme-background: #{$snow-white};
+}
+.january {
+    --theme-primary: #{$walnut-brown};
+    --theme-secondary: #{$jasper};
+    --theme-tertiary: #{$black-olive};
+    --theme-text: #{$walnut-brown};
+    --theme-background: #{$platinum};
+    --theme-alt-background: #{$bone};
+}

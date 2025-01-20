@@ -1,0 +1,106 @@
+.poll.input {
+    & .poll__options__item {
+        cursor: pointer;
+        transition-duration: .2s;
+        transition-property: transform;
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+    & .poll__options__item.selected { 
+        background-color: var(--theme-background);
+        //margin-left: 2rem;
+
+        & > .poll__options__item__fill-bar {
+            background-color: var(--theme-background);
+        }
+        & > .poll__options__item__text, & > .poll__options__item__count {
+            color: var(--theme-primary);
+
+        }
+    }   
+}
+@keyframes pulse {
+    0% {
+        background-color: var(--theme-primary);
+    }
+    50% {
+        background-color: var(--theme-secondary);
+    }
+    100% {
+        background-color: var(--theme-primary);
+    }
+}
+.poll__submit-area {
+    //width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    button {
+        cursor: pointer;
+        box-shadow: none;
+        border:none;
+        border-radius: 5px;
+        padding: .25rem;
+        width: 100%;
+        min-width: 250px;
+        font-size: 1.25rem;
+        min-height: 50px;
+        //max-width: 540px;
+        background-color: var(--theme-primary);
+        color: var(--theme-background);
+        transition-duration: .1s;
+        animation: pulse;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        &:hover {
+            transform: scale(1.02);
+        }
+        &.muted {
+            animation: none;
+            opacity: .5;
+        }
+        &.unclickable {
+            cursor: loading;
+            &:hover {
+                transform: none;
+            }
+        }
+    }
+    .submission-message {
+        box-sizing: border-box;
+        width: 100%;
+        display: inline;
+        margin: 0;
+        min-width: 250px;
+        max-width: 540px;
+        min-height: 50px;
+        border: 2px solid var(--theme-secondary);
+        border-radius: 5px;
+        padding:.5rem;
+        > span {
+            max-width: 250px;
+            display:block;
+            margin: 0 auto;
+            text-align: center;
+            text-wrap:word-break;
+        }
+    }
+}
+@media screen and (max-width: 896px) {
+    .poll__submit-area .submission-message {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: unset;
+        > span {
+            max-width: unset;
+            display:block;
+            margin: 0 auto;
+            text-align: center;
+            text-wrap:word-break;
+        }
+    }    
+}

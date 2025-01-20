@@ -18,6 +18,27 @@ export default {
             title: 'Is Polled Daily?',
             type: 'boolean',
             default: false
+        },
+        {
+            name: 'name',
+            title: 'Name',
+            type: 'string'
+        },
+        {
+            type: 'object',
+            name: 'title',
+            fields: [
+                {
+                    name: 'profession',
+                    title: "Profession",
+                    type: 'string'
+                },
+                {
+                    name: 'qualifier',
+                    title: "Qualifier",
+                    type: 'string'
+                }
+            ]
         }
     ],
     preview: {
