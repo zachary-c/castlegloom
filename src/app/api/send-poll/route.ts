@@ -84,6 +84,14 @@ function themeObject(theme : Theme) : ThemeObject {
     return obj;
 }
 
+/*
+            <h3 style="font-weight:bold; color: red; display:block; text-align:center; padding-top:.5rem; padding-bottom:.5rem; font-size:4rem;margin: 0;">BIG NEWS</h3>
+            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">THERE"S A POLLING DASHBOARD NOW</span>
+            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">CLICK THIS STRANGE EMAIL LINK TO GO THERE: <a href="https://castlegloom.com/api/poll/login?userid=${recipient._id}">Dashboard</a></span>
+            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">OR, in the future, GO TO <a href="https://castlegloom.com/poll/login">https://castlegloom.com/poll/login</a> AND PUT IN YOUR EMAIL TO GET A MAGIC LINK EMAIL THAT WILL LET YOU SIGN IN</span>
+            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">THE DASHBOARD LETS YOU 1) SUBMIT POLL RESPONSES 2) SET YOUR USER PREFERENCES 3) SEE HOW YOU"VE VOTED IN OLD POLLS</span>
+            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">OK GREAT THANKS NOW HELP ME DECIDE WHAT TO DO NEXT:</span>
+*/
 function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, obj : ThemeObject) : string {
     const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
     const headerStyle = `margin-top:0; margin-left: 1rem;color:${obj.headerColor}; margin-right: 1rem;font-size:1rem;`
@@ -102,12 +110,6 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
         </div>
         <div style="${wrapperStyle}">
-            <h3 style="font-weight:bold; color: red; display:block; text-align:center; padding-top:.5rem; padding-bottom:.5rem; font-size:4rem;margin: 0;">BIG NEWS</h3>
-            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">THERE"S A POLLING DASHBOARD NOW</span>
-            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">CLICK THIS STRANGE EMAIL LINK TO GO THERE: <a href="https://castlegloom.com/api/poll/login?userid=${recipient._id}">Dashboard</a></span>
-            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">OR, in the future, GO TO <a href="https://castlegloom.com/poll/login">https://castlegloom.com/poll/login</a> AND PUT IN YOUR EMAIL TO GET A MAGIC LINK EMAIL THAT WILL LET YOU SIGN IN</span>
-            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">THE DASHBOARD LETS YOU 1) SUBMIT POLL RESPONSES 2) SET YOUR USER PREFERENCES 3) SEE HOW YOU"VE VOTED IN OLD POLLS</span>
-            <span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">OK GREAT THANKS NOW HELP ME DECIDE WHAT TO DO NEXT:</span>
             <h3 style="${titleStyle}">${question.title}</h3>
             <div style="${pollStyle}">
                 <h4 style="${headerStyle}">${question.questionText}</h4>
@@ -180,7 +182,7 @@ export async function GET(request : NextRequest) {
                 from: emailFrom,
                 to: recipient.email,
                 // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-                subject: `POLL QUESTION DASHBOARD! | ${pollQuestion.title} | ${pollQuestion.date}`,
+                subject: `${pollQuestion.title} | ${pollQuestion.date}`,
                 html: html
             })
             console.log(info);
