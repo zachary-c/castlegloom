@@ -32,7 +32,8 @@ export default defineType({
         {
             type: 'boolean',
             title: "Sent",
-            name: 'hasBeenSent'
+            name: 'hasBeenSent',
+            initialValue: false
         },
         {
             name: 'responses',

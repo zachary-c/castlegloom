@@ -132,7 +132,6 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
             </div>
         </div>
     </body>
-
     `
 
     return html;

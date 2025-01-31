@@ -1,0 +1,65 @@
+.pd {
+    
+    &__leaderboard {
+        padding: .5rem;
+        &__header {
+            display:flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            h3 {
+                margin: 0;
+            }
+        }
+        &__body {
+            &__entries {
+                padding: 0;
+                margin-top: 0;
+            }
+        }
+    }
+}
+.leaderboard-table-row {
+    display: flex;
+    flex-direction: row;
+    > .user {
+        width: 75%;
+    }
+    > .score {
+        width: 20%;
+    }
+    > .rank {
+        width: 5%;
+        text-align: center;
+    }
+    &.me > span {
+        background-color: rgb(255, 255, 174) !important;
+    }
+    &.header > span:nth-child(2n + 1) {
+        background-color: rgb(180, 180, 180);
+    }
+    &.header > span:nth-child(2n) {
+        background-color: rgb(203, 203, 203);
+    }
+    & > span {
+        padding: .5rem 1rem; 
+    }
+    &.header > span{
+        font-weight: bold;
+    }
+    & > span:nth-child(2n + 1) {
+        background-color: rgb(203, 203, 203);
+    }
+    & > span:nth-child(2n) {
+        background-color: rgb(215, 215, 215);
+    }
+    &:nth-child(2n) {
+        & > span:nth-child(2n + 1) {
+            background-color: rgb(182, 221, 255);
+        }
+        & > span:nth-child(2n) {
+            background-color: rgb(209, 246, 255);
+        }
+    }
+
+}
