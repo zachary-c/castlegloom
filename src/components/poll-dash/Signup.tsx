@@ -33,7 +33,7 @@ export default function Signup() {
     return (
         <div className="login__body">
             <h2>Sign Up</h2>
-            <p>Castle Gloom will send you one poll ("Census") question per day, ad infinitum, until the death of the author, robots take over, the author gets tired of the project or too busy to continue, or you edit your user preferences to opt out of future polls.</p>
+            <p>Castle Gloom will send you one poll (&quot;Census&quot;) question per day, ad infinitum, until the death of the author, robots take over, the author gets tired of the project or too busy to continue, or you edit your user preferences to opt out of future polls.</p>
             <div className="login__body__input-section signup">
                 <div className="login__body__input-section__inline-label">
                     <label>Email:</label>

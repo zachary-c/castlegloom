@@ -36,7 +36,7 @@ export default function PollQuestion({ question, date, theme } : { question : Po
     }
     useEffect(() => {
         getData()
-    }, []) 
+    }, [getData]) 
 
     return <div className={`poll ${theme ?? 'november'} ${theme !== 'october-light' ? 'montserrat' : ''}`}>
         <h3 className="poll__header">{question.questionText}</h3> 
