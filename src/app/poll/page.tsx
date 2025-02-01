@@ -8,8 +8,6 @@ import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo } from 'R/util'
 import { theme } from './pollUtil'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faSign, faSignOut, faSquareArrowUpRight, faUpDown, faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 
 export const dynamic = "force-dynamic";
 
@@ -57,13 +55,11 @@ export default async function Page() {
             <Link className={`button poll__btn outline`} href='/poll/login'>
             <span>
                 Log In
-                <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
             </span>
             </Link>
             <Link className={`button poll__btn outline cta`}  href='/poll/signup'>
                 <span>
                     Sign Up!
-                    <FontAwesomeIcon icon={faSquareArrowUpRight}></FontAwesomeIcon>
                 </span>
             </Link>
         </div>
