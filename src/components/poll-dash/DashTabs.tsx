@@ -65,9 +65,9 @@ export default function DashTabs({ userData, userQuestionData } : { userData : C
             <UserContext.Provider value={userRecord._id}>
                 <menu className="pd__tabmenu">
                     {tabs.map((t, i) => 
-                        <li key={i} className={`${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>
+                        <li key={i} className={`pd__tabmenu__tab ${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>
                     )}
-                    <li className='spacer'></li>
+                    <li className='pd__tabmenu__spacer'></li>
                 </menu>
                 <div className="pd__body">
                     {tabs[currentTab].body}

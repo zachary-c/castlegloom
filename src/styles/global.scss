@@ -1,0 +1,16 @@
+.page-body {
+    display: flex;
+    flex-direction: column;
+}
+.page--vflex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.page--global-notfound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 5rem;
+}

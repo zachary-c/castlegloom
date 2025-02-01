@@ -1,5 +1,6 @@
 'use client'
 import { PollQuestion_t } from "$/types/documents";
+import { Theme } from "@/poll/pollUtil";
 import "R/src/styles/pollQuestion.scss"
 import { useEffect, useMemo, useState } from "react";
 
@@ -11,14 +12,9 @@ import { useEffect, useMemo, useState } from "react";
 // vertically aligning the refresh and the total responses
 // very light dropshadow to light white box
 // 
-export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark'
-
 export default function PollQuestion({ question, date, theme } : { question : PollQuestion_t, date : string, theme : Theme}) {
     const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
     const [loadingData, setLoadingData] = useState<boolean>(true)
-    //console.log('question', question);
-    //let totalResponses = 0;
-    //question.responses.forEach((r) => totalResponses += r.listOfResponders?.length ?? 0)
 
     const totalResponses = useMemo(() => {
         let count = 0;
@@ -35,7 +31,7 @@ export default function PollQuestion({ question, date, theme } : { question : Po
         
         const data = await response.json()
         setQuestionData(data)
-        //console.log(data)
+
         setLoadingData(false)
     }
     useEffect(() => {

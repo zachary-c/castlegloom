@@ -2,19 +2,10 @@
 import { PollQuestion_t } from "$/types/documents";
 import "R/src/styles/pollQuestion.scss"
 import "R/src/components/poll-dash/styles/pollQuestionInput.scss"
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { UserContext } from "./poll-dash/DashTabs";
 import { UserQuestionInfo } from "./poll-dash/types";
-import { Theme } from "./PollQuestion";
-
-// alignment fixes on the left
-// poll response with header text with refresh button
-// poll response text off white with background
-// width 70 of the h3
-// increasing padding and margin on the response boxes
-// vertically aligning the refresh and the total responses
-// very light dropshadow to light white box
-// 
+import { Theme } from "@/poll/pollUtil";
 
 export default function PollQuestionInput({ question, date, theme, setQuestion } : { question : UserQuestionInfo, date : string, theme : Theme, useProvidedData? : boolean, setQuestion : (p : UserQuestionInfo) => void}) {
     const userId = useContext(UserContext)
@@ -117,10 +108,10 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
         {(answerHasChanged || submissionMessage.length > 0) && 
             <div className="poll__submit-area">
                 {answerHasChanged &&
-                    <button onClick={submitNewAnswer} className={`${submitting ? 'muted unclickable' : ''}`}>{submitting ? "Submitting..." : "Submit New Answer"}</button>
+                    <button onClick={submitNewAnswer} className={`poll__submit-area__btn ${submitting ? 'muted unclickable' : ''}`}>{submitting ? "Submitting..." : "Submit New Answer"}</button>
                 }
                 {answerHasChanged && !submitting &&
-                    <button onClick={resetNewAnswer} className={`muted`}>Reset Selection</button>
+                    <button onClick={resetNewAnswer} className={`poll__submit-area__btn muted`}>Reset Selection</button>
                 }
                 {submissionMessage.length > 0 && 
                     <div className="submission-message">

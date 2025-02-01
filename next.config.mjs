@@ -13,7 +13,7 @@ const nextConfig = {
         ]
     },
     sassOptions: {
-        prependData: `@import "&/variables.scss";`,
+        prependData: `@import "&/variables.scss";@import "&/global.scss";`,
     },
 
 };

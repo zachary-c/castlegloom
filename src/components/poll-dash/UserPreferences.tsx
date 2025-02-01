@@ -65,7 +65,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
                     <label>Title:</label> 
                     <div className="pd__preferences__field--grouped full">
                         <input value={userRecord.title.profession + " " + userRecord.title.qualifier} disabled/>
-                        <button className="select-title generate" onClick={generateTitle}>Generate Title</button>
+                        <button className="poll__btn generate" onClick={generateTitle}>Generate Title</button>
                     </div>
                 </div>
                 <div className="pd__preferences__field">
@@ -78,14 +78,14 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
                 </div>
             </div>
             {(madeChanges || message.length > 0) && 
-                <div className="divider"/>
+                <div className="pd__preferences__divider"/>
             }
             {madeChanges &&
                 <div className="pd__preferences__submission">
                     {!submitting && 
-                        <button className="muted" onClick={resetData}>Reset</button>
+                        <button className="poll__btn muted" onClick={resetData}>Reset</button>
                     }
-                    <button className={submitting ? 'muted submitting' : "primary"} onClick={submitChanges}>{submitting ? 'Submitting...' : "Save Changes"}</button>
+                    <button className={`poll__btn ${submitting ? 'muted submitting' : "primary"}`} onClick={submitChanges}>{submitting ? 'Submitting...' : "Save Changes"}</button>
                 </div>
             }
             {message.length > 0 && 

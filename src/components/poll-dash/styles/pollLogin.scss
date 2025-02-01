@@ -1,33 +1,16 @@
 
 .login {
-    &__page {
-
-    }
     &__body {
         min-width: 400px;
-        &--collapsible-header {
-            display:flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            h2 {
-                display:inline;
-                margin: 0;
-                font-size: 1rem;
-                font-weight: normal;
-                opacity: .5;
-                text-decoration: underline;
-            }
-            span {
-                padding: 0 .5rem;
-                font-weight: bold;
-                transition-duration: .2s;
-            }
-            &.open > span {
-                transform: rotate(-450deg);
-            }
-            &:hover {
-                cursor:pointer;
+        &__cta {
+            display:block;
+            margin: 1rem 0 0 0;
+            font-size: 1rem;
+            font-weight: normal;
+            opacity: .8;
+            text-align: right;
+            a {
+                color: var(--theme-tertiary);
             }
         }
         &__input-section {
@@ -54,31 +37,30 @@
                     flex-grow: 1;
                 }
             }
-            button {
+            .poll__btn {
                 border-radius: 5px;
                 transition-duration: .2s;
                 padding: .25rem 1rem;
                 font-size: 1rem;
                 align-self: flex-end;
-                cursor:pointer;
-                border: 2px solid var(--theme-secondary);
+                
+                /* border: 2px solid var(--theme-secondary);
                 background-color: var(--theme-background);
                 color: var(--theme-primary);
-                &:hover {
+                 *//* &:hover {
                     background-color: var(--theme-secondary);
                     color: var(--theme-background);
-                    //transform: scale(1.02);
-                }
-                &.submitting {
+                } */
+                /* &.submitting {
                     border: 2px solid var(--theme-tertiary);
                     color: var(--theme-tertiary);
                     background-color: var(--theme-alt-background);
-                    opacity: .5;
                     cursor:wait;
                     &:hover {
+                        background-color: var(--theme-alt-background);
                         transform: unset;
                     }
-                }
+                } */
             }
         }
         &__divider {

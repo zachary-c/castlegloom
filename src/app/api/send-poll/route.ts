@@ -1,9 +1,8 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, theme, THEME_JAN } from '@/poll/pollUtil';
+import { emailFrom, Theme, theme, THEME_FEB_LIGHT, THEME_JAN } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
-import { Theme } from 'R/src/components/PollQuestion';
 
 export const maxDuration = 60;
 const backgroundColor = 'rgb(255, 255, 228)'
@@ -67,6 +66,18 @@ function themeObject(theme : Theme) : ThemeObject {
                 itemTextColor: THEME_JAN.blackOlive,
                 headerColor: THEME_JAN.platinum,
                 borderColor: 'none',
+
+            };
+            break;
+        case 'february-light':
+            obj = {
+                backgroundColor: THEME_FEB_LIGHT.electricBlue,
+                titleColor: THEME_FEB_LIGHT.chefchaouenBlue,
+                itemDefaultColor: THEME_FEB_LIGHT.chefchaouenBlue,
+                itemHoverColor: THEME_FEB_LIGHT.blush,
+                itemTextColor: THEME_FEB_LIGHT.snow,
+                headerColor: THEME_FEB_LIGHT.prussianBlue,
+                borderColor: 'none'
 
             };
             break;
