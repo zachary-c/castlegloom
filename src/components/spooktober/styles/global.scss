@@ -4,22 +4,7 @@ html.spooktober-layout {
     background-color: rgb(59, 59, 59);
     color: white;
 }
-.page-body {
-    display: flex;
-    flex-direction: column;
-}
-.page--vflex {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.page--global-notfound {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 5rem;
-}
+
 .daynav__container {
     margin-bottom: 1rem;
 }

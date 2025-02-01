@@ -16,13 +16,6 @@ $ashen-cue:rgb(100,100,100);
 $transparent-1: hsla(0,0%,100%,.655);
 $transparent-2: hsla(0,0%,100%,.96);
 
-// january
-$walnut-brown: #5c574f;
-$black-olive: #48483a;
-$jasper: #d66853;
-$bone: #d1d3c4;
-$platinum: #dfe0dc;
-
 // december
 $snow-white: #f2f2f2;
 $fir-green: #01440f;
@@ -30,6 +23,21 @@ $tree-trimming: #00b409;
 $night-skies: #404343;
 $santa-red: #840000;
 $rudolph-nose: #c51d1d;
+
+// january
+$walnut-brown: #5c574f;
+$black-olive: #48483a;
+$jasper: #d66853;
+$bone: #d1d3c4;
+$platinum: #dfe0dc;
+
+// february
+$blush: #ed7392;
+$snow: #f7f0f0;
+$electricBlue: #8af3ff;
+$chefchaouenBlue: #3382ef;
+$prussianBlue: #0b3142;
+$uranianBlue: #b1ddf2;
 
 .december-light {
     --theme-primary: #{$fir-green};
@@ -45,4 +53,12 @@ $rudolph-nose: #c51d1d;
     --theme-text: #{$walnut-brown};
     --theme-background: #{$platinum};
     --theme-alt-background: #{$bone};
+}
+.february-light {
+    --theme-primary: #{$electricBlue};
+    --theme-secondary: #{$chefchaouenBlue};
+    --theme-tertiary: #{$blush};
+    --theme-text: #{$prussianBlue};
+    --theme-background: #{$uranianBlue};
+    --theme-alt-background: #{$snow};
 }

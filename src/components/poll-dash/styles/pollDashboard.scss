@@ -27,11 +27,13 @@
         justify-content: flex-start;
         max-width: 1000px;
         width: 100%;
-        margin-bottom: -2px;
+        margin-bottom: 0;
         & li {
+            list-style: none;
+        }
+        &__tab {
             padding: .2rem;
             margin: 0;
-            list-style: none;
             border: 2px solid black;
             cursor:pointer;
             border-top-left-radius: 6px;
@@ -43,10 +45,79 @@
                 //transform: translate(0, -.5rem);
             }
         }
-        & .spacer {
+        &__spacer {
             flex-grow: 1;
+            cursor:default;
             border: none;
+            background-color: transparent;
             border-bottom: 2px solid black;
+        }
+    }
+}
+.january {
+    // january is the default; as long as nothing changes in terms of what is assigned where, this is safely empty
+    .pe {
+        background-color: rgb(244, 243, 243);
+    }
+}
+.february-light {
+    .pd {
+        &__title {
+            color: var(--theme-text);
+        }
+        &__body {
+            background-color: $electricBlue;
+            border-color: $prussianBlue;
+        }
+        &__tabmenu {
+            &__tab {
+                background-color: $electricBlue;
+            }
+            & .spacer { }
+        }
+        &__preferences {
+            &__submission {
+                & .primary {}
+                //  background-color: var(--theme-);
+            }
+            &__divider {
+                border-color: $prussianBlue;
+            }
+        }
+    }
+    .pe {
+        border-color: $chefchaouenBlue;
+        background-color: $snow;
+        &__header {
+            &__title {
+                color: $chefchaouenBlue;
+            }
+        }
+        &.responded {
+            background-color: $uranianBlue;
+        }
+        .poll.input {
+            & .poll__options__item.selected {
+                background-color: $prussianBlue;
+                & > .poll__options__item__fill-bar {
+                    background-color: $blush;
+                    filter: brightness(.5);
+                }
+                & > .poll__options__item__text, & > .poll__options__item__count {
+                    color: $snow;
+        
+                }
+            }
+        }
+        .poll__submit-area {
+            &__btn {
+                background-color: $blush;
+                color: $snow;
+                &.muted {
+                    color: $snow;
+                    background-color: $blush;
+                }
+            }
         }
     }
 }

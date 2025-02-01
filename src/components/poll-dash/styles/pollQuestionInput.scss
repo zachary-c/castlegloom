@@ -20,24 +20,24 @@
         }
     }   
 }
-@keyframes pulse {
-    0% {
-        background-color: var(--theme-primary);
-    }
-    50% {
-        background-color: var(--theme-secondary);
-    }
-    100% {
-        background-color: var(--theme-primary);
-    }
-}
 .poll__submit-area {
     //width: 100%;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     gap: .75rem;
-    button {
+    /* @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: .75; }
+        100% { opacity: 1; }
+    } */
+    &__btn {
+        /* 
+            animation: pulse;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear; 
+        */
         cursor: pointer;
         box-shadow: none;
         border:none;
@@ -51,10 +51,6 @@
         background-color: var(--theme-primary);
         color: var(--theme-background);
         transition-duration: .1s;
-        animation: pulse;
-        animation-duration: 2s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
         &:hover {
             transform: scale(1.02);
         }
@@ -77,6 +73,7 @@
         min-width: 250px;
         max-width: 540px;
         min-height: 50px;
+        color: var(--theme-text);
         border: 2px solid var(--theme-secondary);
         border-radius: 5px;
         padding:.5rem;

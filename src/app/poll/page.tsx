@@ -1,6 +1,6 @@
 import React from 'react'
-import { apiClient, client } from '../../sanity/lib/client'
-import { latest_poll, poll_date_surrounding, poll_latest_surrounding } from '../../sanity/lib/queries'
+import { apiClient } from '../../sanity/lib/client'
+import { poll_latest_surrounding } from '../../sanity/lib/queries'
 import { PollQuestion_t } from '../../sanity/types/documents'
 import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/PollQuestion'
@@ -51,11 +51,19 @@ export default async function Page() {
                 </div>
             }
         </div>
-        <a className={`button poll__btn ${theme} outline`} style={{width: '250px'}} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
-        <p className={`poll__blurb ${theme}`}>
-            There is currently no direct sign up for polling; if you feel strongly you would like to be polled <a href='/spooktober'>sign
-            up for spooktober memes</a> and you will be manually added to the list. Color scheme, layout, functionality, and other qualities subject to change.
-        </p>
+        <div className='poll__page-footer'>
+            <Link className={`button poll__btn outline`} href='/poll/login'>
+            <span>
+                Log In
+            </span>
+            </Link>
+            <Link className={`button poll__btn outline cta`}  href='/poll/signup'>
+                <span>
+                    Sign Up!
+                </span>
+            </Link>
+        </div>
+        <a className={`button poll__btn outline`} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
     </>
 
 }
