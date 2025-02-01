@@ -34,7 +34,7 @@ export default function Login() {
             <h2>Login</h2>
             <div className="login__body__input-section login">
                 <label>Enter your email address to receive a login link:</label>
-                <input value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />
+                <input value={emailInput} onKeyDown={(e) => {if (e.key === 'Enter') submitLogin() }} onChange={(e) => setEmailInput(e.target.value)} />
                 <button onClick={submitLogin} className={`poll__btn outline submit ${submittingLogin ? 'submitting' : ''}`}>{submittingLogin ? 'Submitting...' : "Submit"}</button>
                 {loginMessage.length > 0 &&
                     <span className="login__body__input-section__message">{loginMessage}</span>
