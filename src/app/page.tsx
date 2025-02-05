@@ -7,6 +7,13 @@ export default function Home() {
         <body> 
             <main className="homepage">
                 <h1>Castle Gloom</h1>
+                <Link href="/poll/signup" style={{
+                    width: '100%', 
+                    textAlign: 'center',
+                    display: 'block',
+                    fontSize: '1.2rem'
+                    
+                    }}>SIGN UP FOR POLLS</Link>
                 <p>With the success and silliness of my first domain (spook-tober.com) and the project it hosted, I found myself in pursuit of a new internet home. There were three basic criteria:</p>
                 <ol>
                     <li>It shouldn&apos;t contain hyphens -- it must be a recognizable word or two.</li>
