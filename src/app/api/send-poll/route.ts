@@ -111,6 +111,7 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
     const titleStyle = `color: ${obj.titleColor}; text-align: center;font-size: 1.25rem;`
     const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
     const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
+    const postscriptStyle = `background-color: ${obj.itemHoverColor}; color: ${obj.itemTextColor}; display: block; padding: .5rem 1rem; margin-bottom: 1rem; font-size: 1rem;`;
     const title = encodeURIComponent(question.title)
     const responder = encodeURIComponent(recipient._id)
     const encodedDate = encodeURIComponent(question.date)
@@ -123,6 +124,12 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
         <div style="${wrapperStyle}">
             <h3 style="${titleStyle}">${question.title}</h3>
             <div style="${pollStyle}">
+            ${question.suggestedBy ? `
+                <div style="${postscriptStyle}">
+                    Today's poll question was suggested by the <b>${question.suggestedBy}</b>!
+                </div>`
+                : ''
+            }
                 <h4 style="${headerStyle}">${question.questionText}</h4>
                 <ul style="${listStyles}">
                     ${question.responses.map((response) => {
@@ -132,9 +139,8 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
             </div>
         </div>
     </body>
-
     `
-
+//                         <span style="${postscriptStyle}"><img width="25px" height="25px" src= alt={"User-suggested poll question!"}/></span>
     return html;
 }
 
@@ -150,7 +156,7 @@ export async function GET(request : NextRequest) {
     } 
 
     //    console.log("secret provided: ", secret);
-    // [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}]//
+    // //[{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}] 
     const emails : Recipient_t[] = await client.fetch(daily_polled);
     const pollQuestion : PollQuestion_t = await client.fetch(latest_poll)
     //let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');

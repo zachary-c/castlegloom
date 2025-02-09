@@ -21,6 +21,7 @@ export type PollQuestion_t = {
     responses : PollResponse_t[]
     date : string
     hasBeenSent : boolean
+    suggestedBy : string
 }
 
 export type Meme_t = {
@@ -39,7 +40,9 @@ export const pollQuestionFields = `
         "responseCount": count(listOfResponders),
         responseSlug,
         responseText
-    }
+    },
+    "suggestedBy": suggestedBy->{"joinedTitle": title.profession + " " + title.qualifier}.joinedTitle
+
 `
 export const pollQuestionFragment = `question->{
         ${pollQuestionFields}

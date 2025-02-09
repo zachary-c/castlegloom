@@ -1,11 +1,13 @@
 'use client'
-import { Concrete, UserRecord } from "$/lib/queries";
+import { Concrete } from "$/lib/queries";
+import { LeaderboardRecord, UserRecord } from "$/lib/dashboard_queries"
 import { PollQuestion_t } from "$/types/documents";
 import React, { createContext, useEffect, useMemo, useState } from "react"
 import { UserQuestionInfo } from "./types";
 import PollEntry from "./PollEntry";
 import { UserPreferences } from "./UserPreferences";
 import { randomInRange, theme } from "@/poll/pollUtil";
+import { Leaderboard } from "./Leaderboard";
 
 export const UserContext = createContext<string>('')
 
@@ -13,7 +15,7 @@ const greetings = [
     "Greetings, "
 ]
 
-function getTitle(userData : Concrete<UserRecord>) {
+export function getTitle(userData : Concrete<UserRecord>) {
     let str = ''
     
     if (userData.name.length > 0) {
@@ -34,12 +36,13 @@ function getTitle(userData : Concrete<UserRecord>) {
     return str;
 }
 
-export default function DashTabs({ userData, userQuestionData } : { userData : Concrete<UserRecord>, userQuestionData : UserQuestionInfo[]}) {
+export default function DashTabs({ userData, userQuestionData, staticLeaderboardData } : { userData : Concrete<UserRecord>, userQuestionData : UserQuestionInfo[], staticLeaderboardData : LeaderboardRecord[] }) {
     const [currentTab, setCurrentTab] = useState(0);
     const [userRecord, setUserRecord] = useState<Concrete<UserRecord>>(userData)
     const [originalUserData, setOriginalUserData] = useState<Concrete<UserRecord>>(userData)
+    const [leaderboardData, setLeaderboardData] = useState<LeaderboardRecord[]>(staticLeaderboardData)
     const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
-
+    console.log("leader", leaderboardData)
     const tabs = [
         {
             index: 0,
@@ -56,7 +59,12 @@ export default function DashTabs({ userData, userQuestionData } : { userData : C
             index: 1,
             title: 'Preferences',
             body: <UserPreferences userRecord={userRecord} setUserRecord={setUserRecord} originalRecord={originalUserData} setOriginalRecord={setOriginalUserData}/>
-        },
+        },/* 
+        {
+            index: 2,
+            title: 'Leaderboard',
+            body: <Leaderboard leaderboardData={leaderboardData} setLeaderboardData={setLeaderboardData}/>
+        }, */
     ]
     
     return (

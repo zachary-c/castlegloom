@@ -20,6 +20,12 @@ export default {
             default: false
         },
         {
+            name: "showNamePublically",
+            title: "Show name on leaderboard?",
+            type: "boolean",
+            default: false
+        },
+        {
             name: 'name',
             title: 'Name',
             type: 'string'
@@ -48,7 +54,20 @@ export default {
     ],
     preview: {
         select: {
-            title: 'email'
+            profession: "title.profession",
+            qualifier: "title.qualifier",
+            email: 'email'
+        },
+        prepare: (data : any) => {
+            if (data.profession) {
+                return {
+                    title: data.profession + " " + data.qualifier,
+                    subtitle: data.email
+                }
+            } else {
+                return { title: data.email } 
+
+            }
         }
     }
 }

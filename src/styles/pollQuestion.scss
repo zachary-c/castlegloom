@@ -128,6 +128,12 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        &__group {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: .75rem;
+        }
         &__rc {
             display:inline;
             line-height: 1.6;
@@ -142,6 +148,26 @@
             &:hover {
                 cursor: pointer;
                 transform: scale(1.05);
+            }
+        }
+    }
+    &__postscript {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        margin-top: .75rem;
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        padding: 1rem 1.25rem;
+        background-color: lightgray;
+        span {
+            display: block;
+        }
+
+        &__suggested-pfp {
+            font-size: .65rem;
+            img {
+                border-radius: 50%;
             }
         }
     }
@@ -628,6 +654,10 @@
                     transform: scale(1.05);
                 }
             }
+        }
+        &__postscript {
+            background-color: $blush;
+            color: white;
         }
     }
 }

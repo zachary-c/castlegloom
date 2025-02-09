@@ -1,5 +1,5 @@
 import { apiVersion, projectId } from "$/env";
-import { UserRecord } from "$/lib/queries";
+import { UserRecord } from "$/lib/dashboard_queries";
 import { createClient } from "next-sanity";
 import { NextRequest } from "next/server";
 

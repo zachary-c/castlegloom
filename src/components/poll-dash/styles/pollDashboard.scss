@@ -84,6 +84,19 @@
                 border-color: $prussianBlue;
             }
         }
+        &__leaderboard {
+            &__body {
+                border-color: $prussianBlue;
+                color: $prussianBlue;
+            }
+            --me-background: #{$blush};
+            --me-text-color: #{$prussianBlue};
+            --odd-row: #{$uranianBlue};
+            --even-row: white;
+            --header-row: #{$chefchaouenBlue};
+            --header-row-text: #{$snow};
+            --leaderboard-hover-color: #{$blush};
+        }
     }
     .pe {
         border-color: $chefchaouenBlue;

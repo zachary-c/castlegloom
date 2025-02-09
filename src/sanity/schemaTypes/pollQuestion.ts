@@ -32,12 +32,19 @@ export default defineType({
         {
             type: 'boolean',
             title: "Sent",
-            name: 'hasBeenSent'
+            name: 'hasBeenSent',
+            initialValue: false
         },
         {
             name: 'responses',
             type: 'array',
             of: [{ type: 'pollResponse' }]
+        },
+        {
+            name: "suggestedBy",
+            title: "Question Suggested By",
+            type: "reference",
+            to: [{ type: "recipient" }]
         }
     ],
     orderings: [

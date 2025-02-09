@@ -394,6 +394,7 @@ export const qualifierList = [
 
     "in Orbit",
     "in Color",
+    
     "for all Time",
     "for all Mankind",
     "for all the Fallen",

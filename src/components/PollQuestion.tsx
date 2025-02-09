@@ -1,8 +1,11 @@
 'use client'
 import { PollQuestion_t } from "$/types/documents";
 import { Theme } from "@/poll/pollUtil";
+import Image from "next/image";
 import "R/src/styles/pollQuestion.scss"
 import { useEffect, useMemo, useState } from "react";
+import pfp from "%/default.png"
+import { Tooltip } from "react-tooltip";
 
 // alignment fixes on the left
 // poll response with header text with refresh button
@@ -56,11 +59,17 @@ export default function PollQuestion({ question, date, theme } : { question : Po
             )}
         </ul>
         <div className="poll__footer">
-            <div>
+            <div className="">
                 <button className="poll__footer__refresh" onClick={getData}>Refresh</button>
                 {loadingData && <span className="loading-notice">Refreshing...</span>}
             </div>
             <span className="poll__footer__rc">Total Responses: {totalResponses ?? '?'}</span>
         </div>
+        {question.suggestedBy &&
+            <div className="poll__postscript">
+                <span className="poll__postscript__suggested-pfp"><Image width={25} height={25} src={pfp.src} alt={"User-suggested poll question!"}/></span>
+                <span className="poll__postscript__suggested">Today&apos;s poll question was suggested by the <b>{question.suggestedBy}</b>!</span>
+            </div>
+        }
     </div>
 }
