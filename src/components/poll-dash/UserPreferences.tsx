@@ -77,12 +77,12 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
                 <div className="pd__preferences__field pd__preferences__field--checkbox">
                     <input type='checkbox' checked={userRecord.isPolledDaily} onChange={ (e) => setUserRecord({...userRecord, isPolledDaily: e.target.checked}) } id='daily-poll-checkbox'/>
                     <label htmlFor='daily-poll-checkbox'>I would like to receive daily polls at the above email address.</label>
-                </div>
+                </div>{/* 
                 <div className="pd__preferences__field pd__preferences__field--checkbox">
                     <input type='checkbox' checked={userRecord.showNamePublically} onChange={ (e) => setUserRecord({...userRecord, showNamePublically: e.target.checked}) } id='show-name-checkbox'/>
                     <label htmlFor='show-name-checkbox'>Display name <strong>{userRecord.name}</strong> publically in addition to title.</label>
                 </div>
-
+ */}
             </div>
             {(madeChanges || message.length > 0) && 
                 <div className="pd__preferences__divider"/>

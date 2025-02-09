@@ -24,7 +24,10 @@ export function Leaderboard({ leaderboardData, setLeaderboardData } : { leaderbo
                     <li className={`leaderboard-table-row${rec.isUser ? ' me' : ''}`}>
                         <span className="rank">#{index + 1}</span>
                         <span className="user">
-                            <span data-tooltip-id={`${index}-user`}>{rec.joinedTitle ?? barcode}</span>
+                            {rec.joinedTitle 
+                                ? <span>{rec.joinedTitle}</span>
+                                : <span data-tooltip-id={`${index}-user`} className="barcode">{barcode}</span>
+                            }
                         </span>
                         <span className="score">{rec.score}</span>
                         {!rec.joinedTitle && 
@@ -34,6 +37,7 @@ export function Leaderboard({ leaderboardData, setLeaderboardData } : { leaderbo
                 ))}
                 </ol>
             </div>
+            <span className="pd__leaderboard__note">"{barcode}" indicates user has not generated a title or name.</span>
             
         </div>
     )
