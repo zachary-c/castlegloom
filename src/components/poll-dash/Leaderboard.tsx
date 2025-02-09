@@ -21,7 +21,7 @@ export function Leaderboard({ leaderboardData, setLeaderboardData } : { leaderbo
                 </div>
                 <ol className="pd__leaderboard__body__entries">
                 {leaderboardData.map((rec, index) => (
-                    <li className={`leaderboard-table-row${rec.isUser ? ' me' : ''}`}>
+                    <li className={`leaderboard-table-row${rec.isUser ? ' me' : ''}`} key={index}>
                         <span className="rank">#{index + 1}</span>
                         <span className="user">
                             {rec.joinedTitle 
@@ -37,7 +37,7 @@ export function Leaderboard({ leaderboardData, setLeaderboardData } : { leaderbo
                 ))}
                 </ol>
             </div>
-            <span className="pd__leaderboard__note">"{barcode}" indicates user has not generated a title or name.</span>
+            <span className="pd__leaderboard__note">&quot;{barcode}&quot; indicates user has not generated a title or name.</span>
             
         </div>
     )
