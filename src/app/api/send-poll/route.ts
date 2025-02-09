@@ -126,7 +126,7 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
             <div style="${pollStyle}">
             ${question.suggestedBy ? `
                 <div style="${postscriptStyle}">
-                    Today's poll question was suggested by the <b>${question.suggestedBy}</b>!
+                    Today's poll question was suggested by <b>${question.suggestedBy}</b>!
                 </div>`
                 : ''
             }
