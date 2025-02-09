@@ -2,13 +2,10 @@ import React from 'react'
 import { apiClient } from '$/lib/client'
 import { Concrete } from '$/lib/queries'
 import { LeaderboardRecord, UserRecord, leaderboardQuery, poll_question_list, user_dashboard_information } from "$/lib/dashboard_queries"
-import { theme } from '../pollUtil'
 import { cookies } from 'next/headers'
 import { pollCookieName } from '@/api/poll/login/cookie'
 import { redirect, RedirectType } from 'next/navigation'
 import { PollQuestion_t, PollResponse_t } from '$/types/documents'
-import { UserQuestionInfo } from 'R/src/components/poll-dash/types'
-import PollEntry from 'R/src/components/poll-dash/PollEntry'
 import 'R/src/components/poll-dash/styles/pollDashboard.scss'
 import DashTabs from 'R/src/components/poll-dash/DashTabs'
 

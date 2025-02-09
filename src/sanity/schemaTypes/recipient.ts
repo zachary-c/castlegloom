@@ -54,7 +54,20 @@ export default {
     ],
     preview: {
         select: {
-            title: 'email'
+            profession: "title.profession",
+            qualifier: "title.qualifier",
+            email: 'email'
+        },
+        prepare: (data : any) => {
+            if (data.profession) {
+                return {
+                    title: data.profession + " " + data.qualifier,
+                    subtitle: data.email
+                }
+            } else {
+                return { title: data.email } 
+
+            }
         }
     }
 }

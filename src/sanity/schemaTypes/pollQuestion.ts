@@ -39,6 +39,12 @@ export default defineType({
             name: 'responses',
             type: 'array',
             of: [{ type: 'pollResponse' }]
+        },
+        {
+            name: "suggestedBy",
+            title: "Question Suggested By",
+            type: "reference",
+            to: [{ type: "recipient" }]
         }
     ],
     orderings: [

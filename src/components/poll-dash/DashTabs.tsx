@@ -59,12 +59,12 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
             index: 1,
             title: 'Preferences',
             body: <UserPreferences userRecord={userRecord} setUserRecord={setUserRecord} originalRecord={originalUserData} setOriginalRecord={setOriginalUserData}/>
-        },
+        },/* 
         {
             index: 2,
             title: 'Leaderboard',
             body: <Leaderboard leaderboardData={leaderboardData} setLeaderboardData={setLeaderboardData}/>
-        },
+        }, */
     ]
     
     return (

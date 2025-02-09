@@ -39,7 +39,8 @@ export const user_dashboard_information = groq`
     title {
         profession,
         qualifier
-    }
+    },
+    showNamePublically
 }`
 export type UserRecord = {
     _id : string

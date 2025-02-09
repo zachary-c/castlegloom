@@ -11,55 +11,78 @@
                 margin: 0;
             }
         }
+        &__note {
+            margin-top: 1rem;
+            margin-left: 1rem;
+            display: block;
+        }
         &__body {
             &__entries {
                 padding: 0;
-                margin-top: 0;
+                margin: 0;
             }
-        }
+            border: 2px solid;
+            border-radius: 5px;
+        }        
+        --header-col-odd: var(--header-row);
+        --header-col-even: var(--header-row);
+        --odd-row-odd-col: var(--odd-row);
+        --odd-row-even-col: var(--odd-row);
+        --even-row-odd-col: var(--even-row);
+        --even-row-even-col: var(--even-row);    
+
     }
 }
 .leaderboard-table-row {
     display: flex;
     flex-direction: row;
+    > span {
+        padding: .5rem 1rem; 
+        &:hover {
+            background-color: var(--leaderboard-hover-color) !important;
+        }
+        //cursor: cell;
+        &:nth-child(2n + 1) {
+            background-color: var(--odd-row-odd-col) ;
+        }
+        &:nth-child(2n) {
+            background-color: var(--odd-row-even-col);
+        }
+    }
     > .user {
         width: 75%;
+        border-right: 1px solid black;
     }
     > .score {
         width: 20%;
     }
     > .rank {
-        width: 5%;
+        width: 6%;
         text-align: center;
+        border-right: 1px solid black;
     }
     &.me > span {
-        background-color: rgb(255, 255, 174) !important;
+        background-color: var(--me-background) !important;
+        color: var(--me-text-color);
     }
-    &.header > span:nth-child(2n + 1) {
-        background-color: rgb(180, 180, 180);
-    }
-    &.header > span:nth-child(2n) {
-        background-color: rgb(203, 203, 203);
-    }
-    & > span {
-        padding: .5rem 1rem; 
-    }
-    &.header > span{
+    &.header > span {
+        color: var(--header-row-text);
         font-weight: bold;
-    }
-    & > span:nth-child(2n + 1) {
-        background-color: rgb(203, 203, 203);
-    }
-    & > span:nth-child(2n) {
-        background-color: rgb(215, 215, 215);
+        &:nth-child(2n + 1) {
+            background-color: var(--header-col-odd);
+        }
+        &:nth-child(2n) {
+            background-color: var(--header-col-even);
+        }
+
     }
     &:nth-child(2n) {
         & > span:nth-child(2n + 1) {
-            background-color: rgb(182, 221, 255);
+            background-color: var(--even-row-odd-col);
         }
         & > span:nth-child(2n) {
-            background-color: rgb(209, 246, 255);
+            background-color: var(--even-row-even-col);
         }
     }
-
+    .barcode { }
 }
