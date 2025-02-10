@@ -158,14 +158,16 @@
         margin-top: .75rem;
         margin-left: -1.25rem;
         margin-right: -1.25rem;
-        padding: 1rem 1.25rem;
+        padding: .75rem 1.25rem;
         background-color: lightgray;
+        align-items: center;
         span {
             display: block;
         }
 
         &__suggested-pfp {
-            font-size: .65rem;
+            //sfont-size: .65rem;
+            height: 25px;
             img {
                 border-radius: 50%;
             }

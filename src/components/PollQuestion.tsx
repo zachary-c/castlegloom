@@ -68,7 +68,7 @@ export default function PollQuestion({ question, date, theme } : { question : Po
         {question.suggestedBy &&
             <div className="poll__postscript">
                 <span className="poll__postscript__suggested-pfp"><Image width={25} height={25} src={pfp.src} alt={"User-suggested poll question!"}/></span>
-                <span className="poll__postscript__suggested">Today&apos;s poll question was suggested by <b>{question.suggestedBy}</b>!</span>
+                <span className="poll__postscript__suggested">Today&apos;s poll question was suggested by <b>{question.suggestedBy.trim()}</b>!</span>
             </div>
         }
     </div>

@@ -26,6 +26,7 @@ export const poll_question_list = groq`
         responseText,
         "responseCount": count(listOfResponders)
     },
+    "suggestedBy": suggestedBy->{"joinedTitle": title.profession + " " + title.qualifier}.joinedTitle,
     "userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
 }
 `

@@ -6,6 +6,8 @@ import { useContext, useMemo, useState } from "react";
 import { UserContext } from "./poll-dash/DashTabs";
 import { UserQuestionInfo } from "./poll-dash/types";
 import { Theme } from "@/poll/pollUtil";
+import Image from "next/image";
+import pfp from "%/default.png"
 
 export default function PollQuestionInput({ question, date, theme, setQuestion } : { question : UserQuestionInfo, date : string, theme : Theme, useProvidedData? : boolean, setQuestion : (p : UserQuestionInfo) => void}) {
     const userId = useContext(UserContext)
@@ -104,6 +106,12 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
                 </div>
                 <span className="poll__footer__rc">Total Responses: {totalResponses ?? '?'}</span>
             </div>
+            {question.suggestedBy &&
+                <div className="poll__postscript">
+                    <span className="poll__postscript__suggested-pfp"><Image width={25} height={25} src={pfp.src} alt={"User-suggested poll question!"}/></span>
+                    <span className="poll__postscript__suggested">This poll question was suggested by <b>{question.suggestedBy.trim()}</b>!</span>
+                </div>
+            }
         </div>
         {(answerHasChanged || submissionMessage.length > 0) && 
             <div className="poll__submit-area">
