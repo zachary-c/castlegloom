@@ -24,10 +24,10 @@ export const latest_poll = groq`
     }
 `
 export const poll_by_date = groq`
-*[_type == 'pollQuestion' && date == $date][0] {
-        ${pollQuestionFields}
-    }
-    `
+*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)][0] {
+    ${pollQuestionFields}
+}
+`
 export const poll_date_surrounding = groq`{
     "today": ${poll_by_date},
     "yesterday": *[_type == 'pollQuestion' && date == $previous][0] {
@@ -46,6 +46,11 @@ export const poll_latest_surrounding = groq`{
         _id
     }
 }
+`
+export const poll_dates = groq`
+*[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] { 
+    date
+} | order(date desc)
 `
 
 export type Concrete<Type> = {

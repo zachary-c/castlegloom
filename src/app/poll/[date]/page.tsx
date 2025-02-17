@@ -1,6 +1,6 @@
 import React from 'react'
 import { apiClient, client } from '../../../sanity/lib/client'
-import { poll_date_surrounding } from '../../../sanity/lib/queries'
+import { poll_date_surrounding, poll_dates } from '../../../sanity/lib/queries'
 import { PollQuestion_t } from '../../../sanity/types/documents'
 import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/PollQuestion'
@@ -11,13 +11,11 @@ import { theme } from '../pollUtil'
 
 export const revalidate = 60;
 
-/* export async function generateStaticParams() {
-    const pages = await client.fetch(page_slugs);
+export async function generateStaticParams() {
+    const dates = await client.fetch(poll_dates);
 
-    return pages.map((page : {slug : string}) => ({
-        cslug: page.slug
-    }));
-} */
+    return dates;
+} 
 
 export default async function Page({params} : {params : {date : string}}) {
     //console.log('data', params.date)
@@ -44,7 +42,7 @@ export default async function Page({params} : {params : {date : string}}) {
         )
 
     //console.log("poll", data)
-    if (!data) {
+    if (!data.today) {
         notFound()
     }
 
