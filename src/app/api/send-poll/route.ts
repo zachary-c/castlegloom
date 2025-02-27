@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, Theme, theme, THEME_FEB_LIGHT, THEME_JAN } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, Theme, theme, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const maxDuration = 60;
@@ -13,12 +13,14 @@ const itemTextColor = 'rgb(255, 255, 228)'
 
 type ThemeObject = {
     backgroundColor : string
-    headerColor : string
+    headerTextColor : string
+    questionTextColor : string
     itemDefaultColor : string
     itemHoverColor : string
     itemTextColor : string
     borderColor? : string
-    titleColor : string
+    postScriptBackgroundColor : string
+    postScriptTextColor : string
 }
 
 function themeObject(theme : Theme) : ThemeObject {
@@ -27,44 +29,52 @@ function themeObject(theme : Theme) : ThemeObject {
         case 'november':
             obj = {
                 backgroundColor: 'rgb(255, 255, 228)',
-                headerColor: 'black',
+                questionTextColor: 'black',
                 itemDefaultColor: 'rgb(114, 51, 17)',
                 itemHoverColor: 'rgb(161, 73, 18)',
                 itemTextColor: 'rgb(255, 255, 228)',
-                titleColor: 'black'
+                headerTextColor: 'black',
+                postScriptBackgroundColor: STANDARDS.white,
+                postScriptTextColor: STANDARDS.black
             }; 
             break;
         case 'december-light':
             obj = {
                 backgroundColor: '#fff',
-                headerColor: '#01440f',
+                questionTextColor: '#01440f',
                 itemDefaultColor: '#ae0000',
                 itemHoverColor: '#01440f',
                 itemTextColor: '#f2f2f2',
                 borderColor: '#01440f',
-                titleColor: '#01440f'
+                headerTextColor: '#01440f',
+                postScriptBackgroundColor: STANDARDS.white,
+                postScriptTextColor: STANDARDS.black
             }; 
             break;
         case 'december-dark':
             obj = {
                 backgroundColor: '#01440f',
-                headerColor: '#f2f2f2',
+                questionTextColor: '#f2f2f2',
                 itemDefaultColor: '#ae0000',
                 itemHoverColor: '#00b409',
                 itemTextColor: '#f2f2f2',
                 borderColor: 'none',
-                titleColor: '#01440f',
+                headerTextColor: '#01440f',
+                postScriptBackgroundColor: STANDARDS.white,
+                postScriptTextColor: STANDARDS.black
 
             };
             break;
         case 'january':
             obj = {
                 backgroundColor: THEME_JAN.walnutBrown,
-                titleColor: THEME_JAN.jasper,
+                headerTextColor: THEME_JAN.jasper,
                 itemDefaultColor: THEME_JAN.bone,
                 itemHoverColor: THEME_JAN.platinum,
                 itemTextColor: THEME_JAN.blackOlive,
-                headerColor: THEME_JAN.platinum,
+                questionTextColor: THEME_JAN.platinum,
+                postScriptBackgroundColor: STANDARDS.white,
+                postScriptTextColor: STANDARDS.black,
                 borderColor: 'none',
 
             };
@@ -72,23 +82,40 @@ function themeObject(theme : Theme) : ThemeObject {
         case 'february-light':
             obj = {
                 backgroundColor: THEME_FEB_LIGHT.electricBlue,
-                titleColor: THEME_FEB_LIGHT.chefchaouenBlue,
+                headerTextColor: THEME_FEB_LIGHT.chefchaouenBlue,
                 itemDefaultColor: THEME_FEB_LIGHT.chefchaouenBlue,
                 itemHoverColor: THEME_FEB_LIGHT.blush,
                 itemTextColor: THEME_FEB_LIGHT.snow,
-                headerColor: THEME_FEB_LIGHT.prussianBlue,
+                questionTextColor: THEME_FEB_LIGHT.prussianBlue,
+                postScriptBackgroundColor: STANDARDS.white,
+                postScriptTextColor: STANDARDS.black,
                 borderColor: 'none'
 
+            };
+            break;
+        case 'march-light':
+            obj = {
+                headerTextColor: THEME_MARCH_LIGHT.lapisLazuli,
+                questionTextColor: THEME_MARCH_LIGHT.columbiaBlue,
+                backgroundColor: THEME_MARCH_LIGHT.officeGreen,
+                itemDefaultColor: THEME_MARCH_LIGHT.springGreen,
+                itemHoverColor: THEME_MARCH_LIGHT.bakerMiller,
+                itemTextColor: STANDARDS.black,
+                postScriptBackgroundColor: THEME_MARCH_LIGHT.bakerMiller,
+                postScriptTextColor: STANDARDS.black,
+                borderColor: 'none',
             };
             break;
         default:
             obj = {
                 backgroundColor: 'black',
-                headerColor: 'white',
+                questionTextColor: 'white',
                 itemDefaultColor: 'gray',
                 itemHoverColor: 'white',
                 itemTextColor: 'black',
-                titleColor: 'black'
+                headerTextColor: 'black',
+                postScriptBackgroundColor: STANDARDS.white,
+                postScriptTextColor: STANDARDS.black
             }; 
             break;
     }
@@ -105,10 +132,10 @@ function themeObject(theme : Theme) : ThemeObject {
 */
 function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, obj : ThemeObject) : string {
     const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
-    const headerStyle = `margin-top:0; margin-left: 1rem;color:${obj.headerColor}; margin-right: 1rem;font-size:1rem;`
+    const questionTextStyle = `margin-top:0; margin-left: 1rem;color:${obj.questionTextColor}; margin-right: 1rem;font-size:1rem;`
     const listStyles = `list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;`
     const listItemStyles = `margin:0; padding: 0; background-color: ${obj.itemDefaultColor}; border-radius: 3px;`
-    const titleStyle = `color: ${obj.titleColor}; text-align: center;font-size: 1.25rem;`
+    const headerTextStyle = `color: ${obj.headerTextColor}; text-align: center;font-size: 1.25rem;`
     const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
     const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
     const postscriptStyle = `background-color: ${obj.itemHoverColor}; color: ${obj.itemTextColor}; display: block; padding: .5rem 1rem; margin-bottom: 1rem; font-size: 1rem;`;
@@ -122,7 +149,7 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
         </div>
         <div style="${wrapperStyle}">
-            <h3 style="${titleStyle}">${question.title}</h3>
+            <h3 style="${headerTextStyle}">${question.title}</h3>
             <div style="${pollStyle}">
             ${question.suggestedBy ? `
                 <div style="${postscriptStyle}">
@@ -130,7 +157,7 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
                 </div>`
                 : ''
             }
-                <h4 style="${headerStyle}">${question.questionText}</h4>
+                <h4 style="${questionTextStyle}">${question.questionText}</h4>
                 <ul style="${listStyles}">
                     ${question.responses.map((response) => {
                         return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`

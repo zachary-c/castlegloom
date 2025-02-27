@@ -116,7 +116,7 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
         {(answerHasChanged || submissionMessage.length > 0) && 
             <div className="poll__submit-area">
                 {answerHasChanged &&
-                    <button onClick={submitNewAnswer} className={`poll__submit-area__btn ${submitting ? 'muted unclickable' : ''}`}>{submitting ? "Submitting..." : "Submit New Answer"}</button>
+                    <button onClick={submitNewAnswer} className={`poll__submit-area__btn ${submitting ? 'muted unclickable' : ''}`}>{submitting ? "Submitting..." : "Save Response"}</button>
                 }
                 {answerHasChanged && !submitting &&
                     <button onClick={resetNewAnswer} className={`poll__submit-area__btn muted`}>Reset Selection</button>

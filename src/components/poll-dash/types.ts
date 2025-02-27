@@ -391,11 +391,16 @@ export const qualifierList = [
     "of Conquest",
     "of Vibrant Days",
     "of Existence",
+    "of Exile",
+    "of All Yet to Come",
 
     "in Orbit",
     "in Color",
+    "in Another Life",
+    "in Defense of the Accused",
     
     "for all Time",
     "for all Mankind",
     "for all the Fallen",
+    "for all Who Remain"
 ]
