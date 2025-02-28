@@ -96,11 +96,11 @@ function themeObject(theme : Theme) : ThemeObject {
         case 'march-light':
             obj = {
                 headerTextColor: THEME_MARCH_LIGHT.lapisLazuli,
-                questionTextColor: THEME_MARCH_LIGHT.columbiaBlue,
+                questionTextColor: STANDARDS.white,
                 backgroundColor: THEME_MARCH_LIGHT.officeGreen,
                 itemDefaultColor: THEME_MARCH_LIGHT.springGreen,
                 itemHoverColor: THEME_MARCH_LIGHT.bakerMiller,
-                itemTextColor: STANDARDS.black,
+                itemTextColor: THEME_MARCH_LIGHT.lapisLazuli,
                 postScriptBackgroundColor: THEME_MARCH_LIGHT.bakerMiller,
                 postScriptTextColor: STANDARDS.black,
                 borderColor: 'none',

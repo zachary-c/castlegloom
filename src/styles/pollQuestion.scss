@@ -717,7 +717,7 @@
                 transform: rotate(10deg);
                 font-family: 'Courier New', Courier, monospace;
             }
-            color: $columbia-blue;
+            color: white;
         }
         &__options {
             &__item {
@@ -733,12 +733,12 @@
         }
         &__footer {
             &__rc {
-                color: $columbia-blue;
+                color: white;
             }
             &__refresh {
                 background-color: transparent;
-                color: $columbia-blue;
-                border: 1px solid $columbia-blue;
+                color: white;
+                border: 1px solid white;
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.05);
