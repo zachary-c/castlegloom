@@ -1,5 +1,8 @@
 
 .login {
+    a {
+        color: var(--theme-tertiary);
+    }
     &__body {
         max-width: 500px;
         &__cta {
@@ -9,9 +12,6 @@
             font-weight: normal;
             opacity: .8;
             text-align: right;
-            a {
-                color: var(--theme-tertiary);
-            }
         }
         &__input-section {
             display: flex;

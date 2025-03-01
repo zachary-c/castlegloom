@@ -39,6 +39,14 @@ $chefchaouenBlue: #3382ef;
 $prussianBlue: #0b3142;
 $uranianBlue: #b1ddf2;
 
+// march
+$spring-green: #92e464;
+$baker-miller: #fa91b2;
+$columbia-blue: #c4d1d7;
+$office-green: #276904;
+$lapis-lazuli: #1f6898;
+$kelly-green: #40a505;
+
 .december-light {
     --theme-primary: #{$fir-green};
     --theme-secondary: #{$santa-red};
@@ -61,4 +69,12 @@ $uranianBlue: #b1ddf2;
     --theme-text: #{$prussianBlue};
     --theme-background: #{$uranianBlue};
     --theme-alt-background: #{$snow};
+}
+.march-light {
+    --theme-primary: #{$office-green};
+    --theme-secondary: #{$columbia-blue};
+    --theme-tertiary: #{$baker-miller};
+    --theme-text: #{$lapis-lazuli};
+    --theme-background: #{$columbia-blue};
+    --theme-alt-background: transparent;
 }
