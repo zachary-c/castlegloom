@@ -213,3 +213,100 @@
         border-color: transparent;
     }
 }
+
+.april-light {
+    .pd {
+        &__title {
+            color: $light-green
+        }
+        &__body {
+            background-color: $pale-dogwood;
+        }
+        &__tabmenu {
+            &__tab {
+                background-color: $pale-dogwood;
+                color: $paynes-gray;
+                font-weight: 500;
+                &.current {
+                    background: $pale-dogwood;
+                }
+            }
+            & .spacer { }
+        }
+        &__preferences {
+            &__field {
+                input {
+                    border-color: $paynes-gray;
+                }
+            }
+            & .generate {
+                background-color: $lavender-pink;
+                color: $paynes-gray;
+                border: $paynes-gray 2px solid;
+            }
+            &__submission {
+                & .primary {
+                    background-color: $lavender-pink;
+                    color: $paynes-gray;
+                    border: $paynes-gray 2px solid;
+                }
+            }
+            &__divider {
+            }
+        }
+        &__leaderboard {
+            &__body {
+            }
+            --me-background: #{$blush};
+            --me-text-color: #{$prussianBlue};
+            --odd-row: #{$uranianBlue};
+            --even-row: white;
+            --header-row: #{$chefchaouenBlue};
+            --header-row-text: #{$snow};
+            --leaderboard-hover-color: #{$blush};
+        }
+    }
+    .pe {
+        border-color: $periwinkle;
+        background-color: $light-green;
+        &__header {
+            &__title {
+                color: $paynes-gray;
+            }
+            &__text {
+                color: $paynes-gray;
+            }
+        }
+        &.responded {
+            background-color: $vanilla-ice;
+            .pe__header {
+                &__title {
+                }
+            }
+        }
+        .poll.input {
+            & .poll__options__item.selected {
+                & > .poll__options__item__fill-bar {
+                }
+                & > .poll__options__item__text, & > .poll__options__item__count {
+                    color: $vanilla-ice;
+        
+                }
+            }
+        }
+        .poll__submit-area {
+            &__btn {
+                background-color: $lavender-pink;
+                color:$paynes-gray;
+                &.muted {
+                    background-color: $periwinkle;
+                    color: $light-green;
+                    opacity: .8;
+                }
+            }
+        }
+    }
+    input { 
+        border-color: transparent;
+    }
+}

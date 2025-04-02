@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, STANDARDS, Theme, theme, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const maxDuration = 60;
@@ -106,6 +106,19 @@ function themeObject(theme : Theme) : ThemeObject {
                 borderColor: 'none',
             };
             break;
+        case 'april-light':
+            obj = {
+                headerTextColor: THEME_APRIL_LIGHT.robinsEgg,
+                questionTextColor: THEME_APRIL_LIGHT.paynesGray,
+                backgroundColor: THEME_APRIL_LIGHT.paleDogwood,
+                itemDefaultColor: THEME_APRIL_LIGHT.lavenderPink,
+                itemHoverColor: THEME_APRIL_LIGHT.vanillaIce,
+                itemTextColor: THEME_APRIL_LIGHT.paynesGray,
+                postScriptBackgroundColor: THEME_APRIL_LIGHT.lightGreen,
+                postScriptTextColor: STANDARDS.black,
+                borderColor: 'none',
+            };
+            break;
         default:
             obj = {
                 backgroundColor: 'black',
@@ -138,7 +151,7 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
     const headerTextStyle = `color: ${obj.headerTextColor}; text-align: center;font-size: 1.25rem;`
     const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
     const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
-    const postscriptStyle = `background-color: ${obj.itemHoverColor}; color: ${obj.itemTextColor}; display: block; padding: .5rem 1rem; margin-bottom: 1rem; font-size: 1rem;`;
+    const postscriptStyle = `background-color: ${obj.postScriptBackgroundColor}; color: ${obj.postScriptTextColor}; display: block; padding: .5rem 1rem; margin-bottom: 1rem; font-size: 1rem;`;
     const title = encodeURIComponent(question.title)
     const responder = encodeURIComponent(recipient._id)
     const encodedDate = encodeURIComponent(question.date)
@@ -184,7 +197,7 @@ export async function GET(request : NextRequest) {
 
     //    console.log("secret provided: ", secret);
     // //[{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}] 
-    const emails : Recipient_t[] = await client.fetch(daily_polled);
+    const emails : Recipient_t[] = [{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}] //await client.fetch(daily_polled);
     const pollQuestion : PollQuestion_t = await client.fetch(latest_poll)
     //let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
     //console.log(emailsList)
@@ -202,7 +215,7 @@ export async function GET(request : NextRequest) {
     if (pollQuestion) {
         if (pollQuestion.hasBeenSent) {
             console.log("Tried to send poll", pollQuestion.title, "but it was already sent")
-            return NextResponse.json({status: 204})
+            //return NextResponse.json({status: 204})
         }
         const themeObj = themeObject(theme)
         console.log('theme', themeObj)

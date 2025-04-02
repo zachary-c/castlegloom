@@ -47,6 +47,15 @@ $office-green: #276904;
 $lapis-lazuli: #1f6898;
 $kelly-green: #40a505;
 
+// april
+$periwinkle: #B7B1F2;
+$lavender-pink: #fdb7ea;
+$pale-dogwood: #ffdccc;
+$vanilla-ice: #fbf3b9;
+$light-green: #B4FFAB;
+$paynes-gray: #536271;
+$robins-egg: #1ae3e3;
+
 .december-light {
     --theme-primary: #{$fir-green};
     --theme-secondary: #{$santa-red};
@@ -76,5 +85,13 @@ $kelly-green: #40a505;
     --theme-tertiary: #{$baker-miller};
     --theme-text: #{$lapis-lazuli};
     --theme-background: #{$columbia-blue};
+    --theme-alt-background: transparent;
+}
+.april-light {
+    --theme-primary: #{$pale-dogwood};
+    --theme-secondary: #{$lavender-pink};
+    --theme-tertiary: #{$light-green};
+    --theme-text: #{$paynes-gray};
+    --theme-background: #{$periwinkle};
     --theme-alt-background: transparent;
 }
