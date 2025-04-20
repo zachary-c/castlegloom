@@ -35,7 +35,7 @@ export async function GET(request : NextRequest, { params } : { params : { title
     console.log("Already Voted found ", alreadyVoted)
     if (alreadyVoted?._key === data.responses[chosenIndex]._key) {
         console.log("VOTING FOR SAME ONE ALREADY VOTED FOR, SHORT CIRCUIT")
-        return redirect(`/spooktober/${date}`)
+        return redirect(`/poll/${date}`)
     }
     //const alreadyVotedIndex = data.responses.find((res) => res.listOfResponders.some((responded) => responded._ref === responder))
     if (alreadyVoted) {
