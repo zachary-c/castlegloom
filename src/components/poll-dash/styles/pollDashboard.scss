@@ -397,6 +397,7 @@
         }
         .poll.input {
             & .poll__options__item.selected {
+                background-color: $charcoal;
                 & > .poll__options__item__fill-bar {
                 }
                 & > .poll__options__item__text, & > .poll__options__item__count {
