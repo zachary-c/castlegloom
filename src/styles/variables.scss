@@ -56,6 +56,13 @@ $light-green: #B4FFAB;
 $paynes-gray: #536271;
 $robins-egg: #1ae3e3;
 
+// may
+$bittersweet: hsl(1, 100%, 63%);
+$mistyRose: #f1dede;
+$claret: #6e0d25;
+$saffron: #f9c22e;
+$charcoal: #424c55;
+
 .december-light {
     --theme-primary: #{$fir-green};
     --theme-secondary: #{$santa-red};
@@ -93,5 +100,13 @@ $robins-egg: #1ae3e3;
     --theme-tertiary: #{$light-green};
     --theme-text: #{$paynes-gray};
     --theme-background: #{$periwinkle};
+    --theme-alt-background: transparent;
+}
+.may-light {
+    --theme-primary: #{$bittersweet};
+    --theme-secondary: #{$mistyRose};
+    --theme-tertiary: #{$saffron};
+    --theme-text: #{$charcoal};
+    --theme-background: #{$claret};
     --theme-alt-background: transparent;
 }

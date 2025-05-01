@@ -859,3 +859,102 @@
         font-weight: bold;
     }
 }
+
+.may-dark {
+    &.poll__body {
+        background-color: $claret;
+    }
+    & .poll {
+        background-color: $bittersweet;
+        color: inherit;
+        box-shadow: inherit;
+        &__page-title {
+            color: $saffron;
+            font-weight: 500;
+        }
+        &__btn {
+            background-color: $bittersweet;
+            color: $mistyRose;
+            &.outline {
+                border: 2px solid $mistyRose;
+                background-color: transparent;;
+                //background-color: rgba(0,0,0,.15);
+                color: $mistyRose;
+                
+                &.submit:not(.submitting):hover {
+                    transform: none;
+                    background-color: $mistyRose;
+                    color: $bittersweet;                    
+                }
+                &.submit {
+                    border-color: $mistyRose;
+                    background-color: $bittersweet;
+                    color: $mistyRose;
+                }
+            }
+            &.cta {
+                background-color: $bittersweet;
+                color: $mistyRose;
+                border: none;
+                text-decoration: underline;
+            }
+        }
+        &__date {
+            //background-color: $paynes-gray;
+            //padding: 0.25rem .5rem;
+            //border-bottom-right-radius: 5px;
+            //border-bottom-left-radius: 5px;
+            //margin-top: -3rem;
+            color: $saffron;
+        }
+    }
+    .poll {
+        &__header {
+            &:after {
+                content: 'POLL';
+                color: $saffron;
+                transform: rotate(10deg);
+                font-family: 'Courier New', Courier, monospace;
+            }
+            color: $mistyRose;
+        }
+        &__options {
+            &__item {
+                background-color: $mistyRose;
+                &__text, &__count {
+                    color: $charcoal;
+                    font-weight: 500;
+                }
+                &__fill-bar {
+                    background-color: $saffron;
+                }
+            }
+        }
+        &__footer {
+            &__rc {
+                color: $mistyRose;
+            }
+            &__refresh {
+                background-color: $mistyRose;
+                color: $charcoal;
+                border: none;
+//                border: 1px solid $mistyRose;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+            }
+        }
+        &__postscript {
+            background-color: $charcoal;
+            color: $mistyRose;
+        }
+        .loading-notice {
+            color: $mistyRose;
+        }
+    }
+    a {
+        color: $vanilla-ice;
+        font-weight: bold;
+    }
+}

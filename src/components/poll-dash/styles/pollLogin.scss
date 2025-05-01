@@ -5,6 +5,7 @@
     }
     &__body {
         max-width: 500px;
+        
         &__cta {
             display:block;
             margin: 1rem 0 0 0;
@@ -81,6 +82,9 @@
             }
         }
     }
+    &__confirm {
+        
+    }
 }
 
 input, input[disabled] {
@@ -101,4 +105,17 @@ input, input[disabled] {
     padding: 1rem;
     max-width: 700px;
     width: 100%;
+}
+
+.may-dark {
+    .login__page {
+        h2, p, label {
+            color: $mistyRose;
+        }
+    }
+    .login__confirm {
+        h1, p {
+            color: $mistyRose;
+        }    
+    }
 }

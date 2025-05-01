@@ -29,7 +29,7 @@ export async function GET(request : NextRequest) {
     console.log('id', id)
 
     cookieJar.set(pollCookieName, userid, {
-        maxAge: 60 * 60 * 24 * 30,
+        maxAge: 60 * 60 * 24 * 30 * 6,
         //domain: 'castlegloom.com',
         //partitioned: true
     }) 

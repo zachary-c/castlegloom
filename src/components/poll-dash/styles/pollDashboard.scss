@@ -79,6 +79,7 @@
             &__submission {
                 & .primary {}
                 //  background-color: var(--theme-);
+
             }
             &__divider {
                 border-color: $prussianBlue;
@@ -303,6 +304,118 @@
                     color: $light-green;
                     opacity: .8;
                 }
+            }
+        }
+    }
+    input { 
+        border-color: transparent;
+    }
+}
+
+.may-dark {
+    .pd {
+        &__title {
+            color: $saffron
+        }
+        &__body {
+            background-color: $charcoal;
+        }
+        &__tabmenu {
+            &__tab {
+                background-color: $charcoal;
+                color: $mistyRose;
+                font-weight: 500;
+                &.current {
+                    //background: $charcoal;
+                }
+            }
+            & .spacer { }
+        }
+        &__preferences {
+            h3 {
+                color: $mistyRose;
+            }
+            &__field {
+                input {
+                    border-color: $mistyRose;
+                    background-color: $charcoal;
+                    color: $mistyRose
+                }
+                label {
+                    color: $mistyRose;
+                }
+            }
+            & .generate {
+                background-color: $saffron;
+                color: $charcoal;
+            }
+            &__submission {
+                & .primary {
+                    background-color: $saffron;
+                    color: $charcoal;
+                }
+
+                & .muted {
+                    border: 2px solid $mistyRose;
+                    background-color: transparent;
+                    color: $mistyRose;
+                }    
+            }
+            &__divider {
+                border-color: $mistyRose;
+            }
+        }
+        &__leaderboard {
+            &__body {
+            }
+            --me-background: #{$blush};
+            --me-text-color: #{$prussianBlue};
+            --odd-row: #{$uranianBlue};
+            --even-row: white;
+            --header-row: #{$chefchaouenBlue};
+            --header-row-text: #{$snow};
+            --leaderboard-hover-color: #{$blush};
+        }
+    }
+    .pe {
+        border: none;
+        background-color: $saffron;
+        &__header {
+            &__title {
+                color: $charcoal;
+            }
+            &__text {
+                color: $charcoal;
+            }
+        }
+        &.responded {
+            background-color: $mistyRose;
+            .pe__header {
+                &__title {
+                }
+            }
+        }
+        .poll.input {
+            & .poll__options__item.selected {
+                & > .poll__options__item__fill-bar {
+                }
+                & > .poll__options__item__text, & > .poll__options__item__count {
+                    color: $mistyRose;
+                }
+            }
+        }
+        .poll__submit-area {
+            &__btn {
+                background-color: $bittersweet;
+                color:$mistyRose;
+                &.muted {
+                    background-color: $charcoal;
+                    color: $mistyRose;
+                    opacity: .8;
+                }
+            }
+            .submission-message {
+                border-color: $charcoal;
             }
         }
     }

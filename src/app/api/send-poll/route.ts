@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_LIGHT as THEME_MAY_DARK, THEME_MAY_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const maxDuration = 60;
@@ -18,6 +18,7 @@ type ThemeObject = {
     itemDefaultColor : string
     itemHoverColor : string
     itemTextColor : string
+    itemAdditionalStyles?: string
     borderColor? : string
     postScriptBackgroundColor : string
     postScriptTextColor : string
@@ -119,6 +120,20 @@ function themeObject(theme : Theme) : ThemeObject {
                 borderColor: 'none',
             };
             break;
+        case 'may-dark':
+            obj = {
+                headerTextColor: THEME_MAY_DARK.claret,
+                questionTextColor: THEME_MAY_DARK.mistyRose,
+                backgroundColor: THEME_MAY_DARK.claret,
+                itemDefaultColor: THEME_MAY_DARK.saffron,
+                itemHoverColor: THEME_MAY_DARK.mistyRose,
+                itemTextColor: THEME_MAY_DARK.charcoal,
+                postScriptBackgroundColor: THEME_MAY_DARK.mistyRose,
+                itemAdditionalStyles: 'font-weight: bold;',
+                postScriptTextColor: THEME_MAY_DARK.charcoal,
+                borderColor: 'none',
+            };
+            break;
         default:
             obj = {
                 backgroundColor: 'black',
@@ -147,7 +162,7 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
     const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
     const questionTextStyle = `margin-top:0; margin-left: 1rem;color:${obj.questionTextColor}; margin-right: 1rem;font-size:1rem;`
     const listStyles = `list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;`
-    const listItemStyles = `margin:0; padding: 0; background-color: ${obj.itemDefaultColor}; border-radius: 3px;`
+    const listItemStyles = `margin:0; padding: 0; background-color: ${obj.itemDefaultColor};${obj.itemAdditionalStyles ?? ''} border-radius: 3px;`
     const headerTextStyle = `color: ${obj.headerTextColor}; text-align: center;font-size: 1.25rem;`
     const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
     const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
