@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_LIGHT as THEME_MAY_DARK, THEME_MAY_LIGHT } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const maxDuration = 60;
@@ -22,6 +22,7 @@ type ThemeObject = {
     borderColor? : string
     postScriptBackgroundColor : string
     postScriptTextColor : string
+    postScriptBorderColor? : string
 }
 
 function themeObject(theme : Theme) : ThemeObject {
@@ -134,6 +135,21 @@ function themeObject(theme : Theme) : ThemeObject {
                 borderColor: 'none',
             };
             break;
+        case 'june-light':
+            obj = {
+                headerTextColor: THEME_JUNE_LIGHT.flame,
+                questionTextColor: STANDARDS.white,
+                backgroundColor: THEME_JUNE_LIGHT.flame,
+                itemDefaultColor: THEME_JUNE_LIGHT.earthYellow,
+                itemHoverColor: THEME_JUNE_LIGHT.icterine,
+                itemTextColor: THEME_JUNE_LIGHT.blackOlive2,
+                postScriptBackgroundColor: THEME_JUNE_LIGHT.airSuperiority,
+                itemAdditionalStyles: `border: 2px solid ${THEME_JUNE_LIGHT.icterine}; border-radius: 5px;`,
+                postScriptTextColor: STANDARDS.white,
+                postScriptBorderColor: STANDARDS.white,
+                borderColor: 'none',
+            };
+            break;
         default:
             obj = {
                 backgroundColor: 'black',
@@ -162,11 +178,11 @@ function generatePollHTML(question : PollQuestion_t, recipient : Recipient_t, ob
     const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
     const questionTextStyle = `margin-top:0; margin-left: 1rem;color:${obj.questionTextColor}; margin-right: 1rem;font-size:1rem;`
     const listStyles = `list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;`
-    const listItemStyles = `margin:0; padding: 0; background-color: ${obj.itemDefaultColor};${obj.itemAdditionalStyles ?? ''} border-radius: 3px;`
+    const listItemStyles = `margin: 0 0 .5rem 0; padding: 0; border-radius: 3px; background-color: ${obj.itemDefaultColor};${obj.itemAdditionalStyles ?? ''}`
     const headerTextStyle = `color: ${obj.headerTextColor}; text-align: center;font-size: 1.25rem;`
     const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
-    const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0 0 .5rem 0;`
-    const postscriptStyle = `background-color: ${obj.postScriptBackgroundColor}; color: ${obj.postScriptTextColor}; display: block; padding: .5rem 1rem; margin-bottom: 1rem; font-size: 1rem;`;
+    const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0;`
+    const postscriptStyle = `background-color: ${obj.postScriptBackgroundColor}; color: ${obj.postScriptTextColor}; display: block; padding: .5rem 1rem; margin-bottom: 1rem; font-size: 1rem; border-top: 2px solid ${obj.postScriptBorderColor ?? 'transparent'}; border-bottom: 2px solid ${obj.postScriptBorderColor ?? 'transparent'}`;
     const title = encodeURIComponent(question.title)
     const responder = encodeURIComponent(recipient._id)
     const encodedDate = encodeURIComponent(question.date)

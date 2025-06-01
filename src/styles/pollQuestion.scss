@@ -958,3 +958,106 @@
         font-weight: bold;
     }
 }
+
+.june-light {
+    // page body
+    &.poll__body {
+        background-color: $icterine;
+    }
+    & .poll {
+        background-color: $flame;
+        color: inherit;
+        box-shadow: inherit;
+        &__page-title {
+            color: $flame;
+            font-weight: 500;
+        }
+        &__btn {
+            background-color: $flame;
+            color: white;
+            &.outline {
+                border: 3px solid $flame;
+                background-color: transparent;;
+                //background-color: rgba(0,0,0,.15);
+                color: $flame;
+                
+                &.submit:not(.submitting):hover {
+                    transform: scale(1.05);
+                }
+                &.submit {
+                    border-color: $flame;
+                    background-color: $flame;
+                    color: white;
+                }
+            }
+            &.cta {
+                background-color: $flame;
+                color: white;
+                border: none;
+                text-decoration: underline;
+            }
+        }
+        &__date {
+            //background-color: $paynes-gray;
+            //padding: 0.25rem .5rem;
+            //border-bottom-right-radius: 5px;
+            //border-bottom-left-radius: 5px;
+            //margin-top: -3rem;
+            color: $flame;
+            font-weight: bold;
+        }
+    }
+    .poll {
+        &__header {
+            &:after {
+                content: 'POLL';
+                color: $icterine;
+                transform: rotate(10deg);
+                font-family: 'Courier New', Courier, monospace;
+            }
+            color: white;
+        }
+        &__options {
+            &__item {
+                background-color: $earth-yellow;
+                border: 2px solid $icterine;
+                padding: 0.3rem;
+                &__text, &__count {
+                    color: $black-olive-2;
+                    font-weight: 500;
+                }
+                &__fill-bar {
+                    background-color: $icterine;
+                }
+            }
+        }
+        &__footer {
+            &__rc {
+                color: white;
+            }
+            &__refresh {
+                background-color: white;
+                color: $black-olive-2;
+                border: none;
+                //border: 2px solid $earth-yellow;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+            }
+        }
+        &__postscript {
+            background-color: $air-superiority;
+            color: white;
+            border-top: 2px solid white;
+            border-bottom: 2px solid white;
+        }
+        .loading-notice {
+            color: $mistyRose;
+        }
+    }
+    a {
+        color: $flame;
+        font-weight: bold;
+    }
+}

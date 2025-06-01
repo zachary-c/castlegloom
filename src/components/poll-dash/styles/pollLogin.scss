@@ -119,3 +119,15 @@ input, input[disabled] {
         }    
     }
 }
+.june-light {
+    .login__page {
+        h2, p, label {
+            color: $black-olive-2;
+        }
+    }
+    .login__confirm {
+        h1, p {
+            color: $black-olive-2;
+        }    
+    }
+}
