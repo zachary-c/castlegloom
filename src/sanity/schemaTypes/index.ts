@@ -9,6 +9,7 @@ import pollResponse from './pollResponse'
 import bingoCard from './bingoCard'
 import bingoSquare from './bingoSquare'
 import bingoSupport from './bingoSupport'
+import rwbbRecord from './rwbbRecord'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -17,6 +18,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     recipient,
     sound,
     soundPreset,
+
+    rwbbRecord,
 
     pollQuestion,
     pollResponse,

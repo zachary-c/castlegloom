@@ -20,6 +20,9 @@ export const structure: StructureResolver = (S) =>
     S.documentTypeListItem('bingoCard')
         .title('Bingo Cards')
         .id('bingoCards'),
+    S.documentTypeListItem('rwbbRecord')
+        .title('RWBB Records')
+        .id('rwbbRecords'),
     S.listItem()
         .id('memes')
         .title('Memes')
