@@ -1,21 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { patchClient } from '$/lib/client';
+import { redirect, RedirectType } from "next/navigation";
 
-export async function POST(req : NextRequest) {
-    const body = await req.json()
-
-    if (!body.username) {
+export async function GET(req : NextRequest) {
+    const username = req.nextUrl.searchParams.get('username')
+    
+    if (!username) {
         return NextResponse.json({message: 'Must provide username.'}, {status: 400, statusText: 'Bad Request'})
     }
 
     const rec = await patchClient.createIfNotExists({
-        _id: body.username,
+        _id: username,
         _type: 'rwbbRecord',
-        username: body.username,
+        username: username,
         count: 0
     })
     if (!!rec) {
-        return NextResponse.json({}, { status: 200 })
+        return redirect(`/rwbb/${username}`, RedirectType.push);
     }
     return NextResponse.json({message: 'Sorry, something went wrong.'}, { status: 500, statusText: 'Internal Server Error' })
 }

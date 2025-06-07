@@ -8,10 +8,10 @@ export default async function Page() {
     console.log('records', records)
     return <>
         <div className="intro">
-            <h2><span style={{fontSize: '9.5rem', lineHeight: '.8'}}><b>R</b>ED</span>
+            <h1><span style={{fontSize: '9.5rem', lineHeight: '.8'}}><b>R</b>ED</span>
             <span style={{fontSize: '4.3rem'}}><b>W</b>INGED</span>
             <span style={{fontSize: '2.8rem', lineHeight: '.8'}}><b className="orange">B</b>LACK <b className="orange">B</b>IRDS</span>
-            </h2>
+            </h1>
             <p className="">
                 Welcome to the RWBB tracking website!
             </p>
