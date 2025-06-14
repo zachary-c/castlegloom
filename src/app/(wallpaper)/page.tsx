@@ -39,7 +39,7 @@ export default function Home() {
                         </li>
                     </ul>
                     <p>
-                        Some of the projects available here at Castle Gloom. The polling project now has 8+ months of questions asked! Steamhash and CS2 Strats simply happened of their own accord.
+                        The polling project has now been providing a daily poll question for over 8 months! The Steamhash and CS2 Strats projects simply happened of their own accord, and live here as well.
                     </p>
                 </section>
                 <section>

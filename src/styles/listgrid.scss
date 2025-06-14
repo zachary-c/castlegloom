@@ -2,7 +2,7 @@ ul.list-grid {
     display: grid;
     padding: 1rem;
     margin: 0;
-    grid: auto-flow / 1fr 1fr 1fr;
+    grid: auto-flow / 1fr 1fr;
     gap: 1rem;
     li {
         aspect-ratio: 16 / 9;
@@ -88,5 +88,8 @@ ul.list-grid {
                 }
             }
         }
+    }
+    @media screen and (min-width: $laptop-width) {
+        grid: auto-flow / 1fr 1fr 1fr;
     }
 }

@@ -14,7 +14,6 @@ main.homepage {
     font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5;
 }
-
 h1 {
     margin: 0;
 }
@@ -23,9 +22,16 @@ h1 {
         padding-top: 1rem;
         h1 {
             font-family: Georgia, 'Times New Roman', Times, serif;
-            text-align: end;
-            font-size: 3.5rem;
+            text-align: center;
+            font-size: 2.5rem;
+            padding-bottom: 1rem;
             color: rgb(0, 0, 50);
+            @media screen and (min-width: $tablet-width) {
+                font-size: 3.5rem;
+            }
+            @media screen and (min-width: $laptop-width) {
+                text-align: end;
+            }
         }
     }
     main {        
@@ -38,9 +44,11 @@ h1 {
         h2, p {
             margin: 0;
         }
-        section:first-child > h2 {
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
+        @media screen and (min-width: $laptop-width) {
+            section:first-child > h2 {
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
         }
         h2 {
             font-family: var(--avenir), sans-serif;
@@ -52,8 +60,11 @@ h1 {
         }
         p {
             font-family: var(--avenir);
-            padding: .5rem 3rem 1.5rem; 
+            padding: .5rem 1rem 1.5rem; 
             text-align: center;
+            @media screen and (min-width: $laptop-width) {
+                padding: .5rem 3rem 1.5rem;
+            }
         }
     }
     footer {
@@ -68,8 +79,10 @@ h1 {
         gap: .5rem;
         font-family: var(--avenir), sans-serif;
         padding: 1rem;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+        @media screen and (min-width: 760px) {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
         .copyright {
     
         }
