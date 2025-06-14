@@ -64,7 +64,7 @@ export default function Home() {
                             </Link>
                         </li>
                     </ul>
-                    <p>Independent web development is a thing that I do for others and for fun sometimes. If you have a project you'd like to discuss, feel free to reach out!</p>
+                    <p>Independent web development is a thing that I do for others and for fun sometimes. If you have a project you&apos;d like to discuss, feel free to reach out!</p>
                 </section>
                 <section>
 
