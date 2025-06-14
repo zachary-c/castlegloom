@@ -2,7 +2,6 @@ import { apiClient } from "$/lib/client";
 import { leaderboardQuery, LeaderboardRecord } from "$/lib/dashboard_queries";
 import { meme_by_date, poll_by_date } from "$/lib/queries";
 import { NextRequest, NextResponse } from "next/server";
-import { getTitle } from "R/src/components/poll-dash/DashTabs";
 
 export async function GET(req : NextRequest) {
     const userid = new URL(req.url).searchParams.get('userid');
