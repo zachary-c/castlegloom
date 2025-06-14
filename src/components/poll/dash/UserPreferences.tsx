@@ -1,6 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from "react"
-import "R/src/components/poll-dash/styles/pollPreferences.scss"
-import { UserContext } from "./DashTabs";
+import { useEffect, useState } from "react"
+import "../styles/pollPreferences.scss"
 import { Concrete } from "$/lib/queries";
 import { UserRecord } from "$/lib/dashboard_queries"
 import { professionList, qualifierList } from "./types";

@@ -88,7 +88,7 @@ export default function Page() {
             <body>
 
 
-                <main className={`main ${myFont.className}`}>
+                <main className={`main steamhash ${myFont.className}`}>
                     <img src={'./steem.png'} width='300px' title={'Steem'}/>
                     {idList.length > 0 && (idList.length === selectedFriends.length ? 
                         <>

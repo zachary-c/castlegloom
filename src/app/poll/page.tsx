@@ -3,25 +3,21 @@ import { apiClient } from '../../sanity/lib/client'
 import { poll_latest_surrounding } from '../../sanity/lib/queries'
 import { PollQuestion_t } from '../../sanity/types/documents'
 import { notFound } from 'next/navigation'
-import PollQuestion from 'R/src/components/PollQuestion'
+import PollQuestion from 'R/src/components/poll/frontdoor/PollQuestion'
 import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo } from 'R/util'
 import { theme } from './pollUtil'
+import { Metadata } from 'next'
 
 export const dynamic = "force-dynamic";
 
-/* export async function generateStaticParams() {
-    const pages = await client.fetch(page_slugs);
-
-    return pages.map((page : {slug : string}) => ({
-        cslug: page.slug
-    }));
-} */
+export const metadata : Metadata = {
+    title: "Polling | Castle Gloom",
+    description: 'Daily poll questions, asked and answered for the good of the land.',
+}
 
 export default async function Page() {
-    //console.log('data', datetime)
-
 
     const data : {today: PollQuestion_t, previous: { _id : string }} 
         = await apiClient.fetch(
@@ -67,6 +63,3 @@ export default async function Page() {
     </>
 
 }
-
-// homepage has meme of the day
-// gallery page has all the memes -- links to memes or grid? unclear

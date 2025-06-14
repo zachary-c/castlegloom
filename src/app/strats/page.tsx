@@ -1,6 +1,5 @@
 import { Metadata } from "next";
-import "&/stratRoulette.scss"
-import StratRoulette from "R/src/components/StratRoulette";
+import StratRoulette from "R/src/components/stratroulette/StratRoulette";
 
 export const metadata : Metadata = {
     title: 'CS2 Strat Roulette',

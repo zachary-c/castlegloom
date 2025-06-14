@@ -1,0 +1,92 @@
+ul.list-grid {
+    display: grid;
+    padding: 1rem;
+    margin: 0;
+    grid: auto-flow / 1fr 1fr 1fr;
+    gap: 1rem;
+    li {
+        aspect-ratio: 16 / 9;
+        position: relative;
+        list-style: none;
+        background-color: rgb(25, 25, 25);
+        border-radius: 15px;
+        overflow: hidden;
+        &.background {
+            &--white {
+                background-color: rgb(235, 235, 235);
+            }
+        }
+        img {
+            position: absolute;
+            width: 90%;
+            height: auto;
+            margin:     auto;
+            bottom: unset;
+            top: .5rem;
+            z-index: 0;
+            transition-duration: .3s;
+            &.center {
+                bottom: 0;
+                top: 0;
+                &--top {
+                    bottom: 0;
+                    top: -7px;
+                }
+            }
+            &.squareish {
+                width: 38%;
+                &--plus {
+                    width: 50%;
+                }
+            }
+            &.full-width {
+                width: 100%;
+                top: 0;
+            }
+            &.infront {
+                z-index: 2;
+            }
+        }
+        a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            border-radius: 15px;
+            height: 100%;
+            text-decoration: none;
+            span {
+                z-index: 1;
+                display: block;
+                color: white;
+                font-size: 1.5rem;
+                font-weight: bold;
+                font-family: var(--avenir);
+                padding-bottom: .5rem;    
+                position: absolute;
+                bottom: -100%;
+                transition-duration: .3s;
+            }
+            &:hover {
+                span {
+                    bottom: 0;
+                }
+                img {
+                    &.shaded {
+                        filter:brightness(.65);
+                        &--light {
+                            filter: brightness(.85);
+                        }
+                        &--dark {
+                            filter:brightness(.5);
+                        }
+                    } 
+                    &.infront {
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+    }
+}

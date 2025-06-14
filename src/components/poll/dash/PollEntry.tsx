@@ -1,9 +1,9 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserQuestionInfo } from "./types";
 import { theme } from "@/poll/pollUtil";
-import "./styles/pollentry.scss"
-import PollQuestionInput from "../PollQuestionInput";
+import "../styles/pollentry.scss"
+import PollQuestionInput from "../frontdoor/PollQuestionInput";
 
 export default function PollEntry({ preloadInfo } : { preloadInfo : UserQuestionInfo }) {
     const [open, setOpen] = useState<boolean>(false);

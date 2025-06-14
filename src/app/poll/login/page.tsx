@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { theme } from '../pollUtil'
-import Login from 'R/src/components/poll-dash/Login';
+import Login from '_components/poll/dash/Login'
 
 export default async function Page() {
 

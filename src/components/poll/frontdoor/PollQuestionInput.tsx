@@ -1,10 +1,10 @@
 'use client'
 import { PollQuestion_t } from "$/types/documents";
-import "R/src/styles/pollQuestion.scss"
-import "R/src/components/poll-dash/styles/pollQuestionInput.scss"
+import "../styles/pollQuestion.scss"
+import "_components/poll/styles/pollQuestionInput.scss"
 import { useContext, useMemo, useState } from "react";
-import { UserContext } from "./poll-dash/DashTabs";
-import { UserQuestionInfo } from "./poll-dash/types";
+import { UserContext } from "../dash/DashTabs";
+import { UserQuestionInfo } from "../dash/types";
 import { Theme } from "@/poll/pollUtil";
 import Image from "next/image";
 import pfp from "%/default.png"

@@ -5,9 +5,9 @@ import { LeaderboardRecord, UserRecord, leaderboardQuery, poll_question_list, us
 import { cookies } from 'next/headers'
 import { pollCookieName } from '@/api/poll/login/cookie'
 import { redirect, RedirectType } from 'next/navigation'
-import { PollQuestion_t, PollResponse_t } from '$/types/documents'
-import 'R/src/components/poll-dash/styles/pollDashboard.scss'
-import DashTabs from 'R/src/components/poll-dash/DashTabs'
+import { PollQuestion_t } from '$/types/documents'
+import '_components/poll/styles/pollDashboard.scss'
+import DashTabs from '_components/poll/dash/DashTabs'
 
 
 export default async function Page() {

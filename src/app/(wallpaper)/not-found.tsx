@@ -1,6 +1,4 @@
 import React from 'react'
-import 'R/src/components/spooktober/styles/global.scss'
-import 'R/src/components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 
 export default async function NotFound() {

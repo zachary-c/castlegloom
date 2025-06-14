@@ -7,7 +7,7 @@ import { client } from '../../../../sanity/lib/client'
 import MemeContainer from '../../../../components/MemeContainer'
 import { notFound } from 'next/navigation'
 import DayNavigation from '../../../../components/DayNavigation'
-import PollQuestion from 'R/src/components/PollQuestion'
+import PollQuestion from 'R/src/components/poll/frontdoor/PollQuestion'
 import SpookySignup from 'R/src/components/SpookySignup'
 
 export default async function Day2022({params} : {params : {day : string, cslug : string}}) {

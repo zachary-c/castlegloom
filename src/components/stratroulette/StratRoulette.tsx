@@ -1,5 +1,5 @@
 'use client'
-import "&/stratRoulette.scss"
+import "./stratRoulette.scss"
 import { useEffect, useMemo, useState } from "react";
 
 type MapData = {

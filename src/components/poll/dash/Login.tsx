@@ -2,7 +2,7 @@
 import { emailRegex } from "@/poll/pollUtil"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import "R/src/components/poll-dash/styles/pollLogin.scss"
+import "../styles/pollLogin.scss"
 import { useEffect, useState } from "react"
 
 export default function Login() {

@@ -1,4 +1,4 @@
-import "R/src/components/poll-dash/styles/pollLogin.scss"
+import "_components/poll/styles/pollLogin.scss"
 
 export default function LoginConfirm({ params } : { params : { email : string }}) {
     return <div className="login__confirm">

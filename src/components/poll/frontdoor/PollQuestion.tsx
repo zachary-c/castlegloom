@@ -2,7 +2,7 @@
 import { PollQuestion_t } from "$/types/documents";
 import { Theme } from "@/poll/pollUtil";
 import Image from "next/image";
-import "R/src/styles/pollQuestion.scss"
+import "../styles/pollQuestion.scss"
 import { useEffect, useMemo, useState } from "react";
 import pfp from "%/default.png"
 import { Tooltip } from "react-tooltip";

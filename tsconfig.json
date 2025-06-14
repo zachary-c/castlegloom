@@ -22,7 +22,9 @@
       "$/*": ["./src/sanity/*"],
       "%/*": ["./public/*"],
       "&/*": ["./src/styles/*"],
-      "R/*": ["./*"]
+      "R/*": ["./*"],
+      "_components/*": ["./src/components/*"],
+      "_styles/*": ["./src/styles/*"],
     },
     "target": "ES2017"
   },
