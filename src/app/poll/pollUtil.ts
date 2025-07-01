@@ -1,7 +1,7 @@
 
-export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light'
+export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light'
 
-export const theme : Theme = 'june-light'
+export const theme : Theme = 'july-light'
 
 export const STANDARDS = {
     white: '#fff',
@@ -54,6 +54,14 @@ export const THEME_JUNE_LIGHT = {
     earthYellow: "#FFAE36",
     flame: "#DD6031",
     blackOlive2: "#2E382E",
+}
+export const THEME_JULY_LIGHT = {
+    americanBlue: "#19549C",
+    fireEngineRed: "#D01827",
+    darkOrange: "#F58F29",
+    battleshipGrey: "#818479",
+    white: "#fff",
+    strawberryRed: '#e55151'
 }
 
 export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`

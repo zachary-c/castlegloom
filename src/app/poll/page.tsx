@@ -41,13 +41,14 @@ export default async function Page() {
         <PollQuestion question={data.today} date={data.today.date} theme={theme}/>
         <span className={`poll__date ${theme}`}>{data.today.date}</span>
         <div className='daynav__container'>
+        </div>
+        <div className='poll__page-footer'>
             {data.previous && 
                 <div className='daynav__button'>
                     <Link className={`button poll__btn ${theme}`} href={`/poll/${yString}`}>Previous</Link>
                 </div>
             }
-        </div>
-        <div className='poll__page-footer'>
+            <a className={`button poll__btn outline`} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
             <Link className={`button poll__btn outline`} href='/poll/login'>
             <span>
                 Log In
@@ -59,7 +60,6 @@ export default async function Page() {
                 </span>
             </Link>
         </div>
-        <a className={`button poll__btn outline`} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
     </>
 
 }

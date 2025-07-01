@@ -70,6 +70,14 @@ $earth-yellow: #FFAE36;
 $flame: #DD6031;
 $black-olive-2: #2E382E;
 
+// july light
+$americanBlue: #19549C;
+$fireEngineRed: #D01827;
+$darkOrange: #F58F29;
+$battleshipGrey: #818479;
+$white: #fff;
+$strawberryRed: #e55151;
+
 $laptop-width: 760px;
 $tablet-width: 450px;
 
@@ -127,5 +135,13 @@ $tablet-width: 450px;
     --theme-tertiary: #{$air-superiority};
     --theme-text: #{$black-olive-2};
     --theme-background: #{$icterine};
+    --theme-alt-background: transparent;
+}
+.july-light {
+    --theme-primary: #{$americanBlue};
+    --theme-secondary: #{$fireEngineRed};
+    --theme-tertiary: #{$darkOrange};
+    --theme-text: #{$white};
+    --theme-background: #{$americanBlue};
     --theme-alt-background: transparent;
 }
