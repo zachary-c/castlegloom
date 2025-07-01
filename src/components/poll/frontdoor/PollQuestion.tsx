@@ -5,7 +5,6 @@ import Image from "next/image";
 import "../styles/pollQuestion.scss"
 import { useEffect, useMemo, useState } from "react";
 import pfp from "%/default.png"
-import { Tooltip } from "react-tooltip";
 
 // alignment fixes on the left
 // poll response with header text with refresh button

@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const maxDuration = 60;
@@ -145,6 +145,21 @@ function themeObject(theme : Theme) : ThemeObject {
                 itemTextColor: THEME_JUNE_LIGHT.blackOlive2,
                 postScriptBackgroundColor: THEME_JUNE_LIGHT.airSuperiority,
                 itemAdditionalStyles: `border: 2px solid ${THEME_JUNE_LIGHT.icterine}; border-radius: 5px;`,
+                postScriptTextColor: STANDARDS.white,
+                postScriptBorderColor: STANDARDS.white,
+                borderColor: 'none',
+            };
+            break;
+        case 'july-light':
+            obj = {
+                headerTextColor: THEME_JULY_LIGHT.americanBlue,
+                questionTextColor: STANDARDS.white,
+                backgroundColor: THEME_JULY_LIGHT.fireEngineRed,
+                itemDefaultColor: THEME_JULY_LIGHT.americanBlue,
+                itemHoverColor: THEME_JULY_LIGHT.strawberryRed,
+                itemTextColor: THEME_JULY_LIGHT.white,
+                postScriptBackgroundColor: THEME_JULY_LIGHT.americanBlue,
+                //itemAdditionalStyles: `border: 2px solid ${THEME_JULY_LIGHT.icterine}; border-radius: 5px;`,
                 postScriptTextColor: STANDARDS.white,
                 postScriptBorderColor: STANDARDS.white,
                 borderColor: 'none',

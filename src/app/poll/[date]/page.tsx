@@ -6,17 +6,17 @@ import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/poll/frontdoor/PollQuestion'
 import '../../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
-import { padToTwo, SEVEN_HOURS_OF_MILLISECONDS, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
+import { padToTwo, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
 import { theme } from '../pollUtil'
 
 export const revalidate = 60;
-
+/* 
 export async function generateStaticParams() {
     const dates = await client.fetch(poll_dates);
 
     return dates;
 } 
-
+ */
 export default async function Page({params} : {params : {date : string}}) {
     //console.log('data', params.date)
 

@@ -4,6 +4,7 @@
         max-width: 100%;
         text-align: center;
         word-break: break-word;
+        margin-top: .75rem;
     }
     &__question-entries {
         width: 100%;
@@ -550,6 +551,135 @@
             }
             .submission-message {
                 border-color: $black-olive-2;
+            }
+        }
+    }
+    input { 
+        border-color: transparent;
+    }
+}
+.july-light {
+    .pd {
+        &__title {
+            color: $white;
+        }
+        &__body {
+            background-color: $battleshipGrey;
+        }
+        &__tabmenu {
+            &__tab {
+                background-color: $battleshipGrey;
+                color: white;
+                font-weight: 500;
+                &.current {
+                    //background: $charcoal;
+                }
+            }
+            & .spacer { }
+        }
+        &__preferences {
+            h3 {
+                color: $white;
+            }
+            &__field {
+                input {
+                    //border-color: $earth-yellow;
+                    background-color: $white;
+                    color: $americanBlue;
+                }
+                label {
+                    color: $white;
+                }
+            }
+            & .generate {
+                background-color: $fireEngineRed;
+                color: $white;
+                border: 2px solid $white;
+            }
+            &__submission {
+                & .primary {
+                    background-color: $fireEngineRed;
+                    color: $white;
+                    border: 2px solid $white;
+                }
+
+                & .muted {
+                    border: 2px solid white;
+                    background-color: transparent;
+                    color: white;
+                }    
+            }
+            &__info-bar {
+                color: white;
+            }
+            &__divider {
+                border-color: white;
+            }
+        }
+        &__leaderboard {
+            &__body {
+            }
+            --me-background: #{$blush};
+            --me-text-color: #{$prussianBlue};
+            --odd-row: #{$uranianBlue};
+            --even-row: white;
+            --header-row: #{$chefchaouenBlue};
+            --header-row-text: #{$snow};
+            --leaderboard-hover-color: #{$blush};
+        }
+    }
+    .pe {
+        border: 2px solid white;
+        background-color: $strawberryRed;
+        &__header {
+            &__title, &__text, &__date {
+                color: $white;
+            }
+        }
+        &.responded {
+            background-color: $americanBlue;
+            border: 2px solid $white;
+            .pe__header {
+                &__title {
+                }
+            }
+        }
+        .poll.input {
+            & .poll__options__item.selected {
+                background-color: $americanBlue;
+                & > .poll__options__item__fill-bar {
+                }
+                & > .poll__options__item__text, & > .poll__options__item__count {
+                    color: $white;
+                }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 4px;
+                    // the border is 2px and 2px, so we add 4px here to account for it
+                    height: calc(100% + 4px);
+                    // shift upwards by the 2px on top so aligned correctly
+                    top: -2px;
+                    left: -12px;
+                    display: block;
+                    background-color: $white;
+                }
+            }
+        }
+        .poll__submit-area {
+            &__btn {
+                background-color: $americanBlue;
+                color: $white;
+                border: 2px solid white;
+                &.muted {
+                    background-color: $battleshipGrey;
+                    color: $white;
+                    opacity: .8;
+                    border: none;
+                }
+            }
+            .submission-message {
+                border-color: $battleshipGrey
             }
         }
     }
