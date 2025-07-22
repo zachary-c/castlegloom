@@ -1,0 +1,11 @@
+{
+    "chat.agent.enabled": false,
+    "chat.commandCenter.enabled": false,
+    "telemetry.feedback.enabled": false,
+    "C_Cpp.copilotHover": "disabled",
+    "pgsql.copilot.accessMode": "ro",
+    "pgsql.copilot.enable": false,
+    "pgsql.copilot.modelOptions": {
+        
+    }
+}

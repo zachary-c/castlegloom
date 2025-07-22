@@ -42,7 +42,8 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
     const [originalUserData, setOriginalUserData] = useState<Concrete<UserRecord>>(userData)
     const [leaderboardData, setLeaderboardData] = useState<LeaderboardRecord[]>(staticLeaderboardData)
     const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
-    console.log("leader", leaderboardData)
+    const countUnanswered = useMemo(() => userQuestionData.filter((q)=>!q.userResponse).length, [userQuestionData]);
+    //console.log("leader", leaderboardData)
     const tabs = [
         {
             index: 0,
@@ -56,7 +57,18 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
             </div>
         },
         {
-            index: 1,
+            index:1,
+            title:<>Unanswered <span>{countUnanswered}</span></>,
+            body: <div className='pd__question-entries'>
+            {
+                userQuestionData.filter((q)=>!q.userResponse).map((q : UserQuestionInfo, i : number) => 
+                    <PollEntry preloadInfo={q} key={'filtered'+q.title} />
+                )
+            }
+            </div>
+        },
+        {
+            index: 2,
             title: 'Preferences',
             body: <UserPreferences userRecord={userRecord} setUserRecord={setUserRecord} originalRecord={originalUserData} setOriginalRecord={setOriginalUserData}/>
         },/* 
