@@ -43,7 +43,6 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
     const [leaderboardData, setLeaderboardData] = useState<LeaderboardRecord[]>(staticLeaderboardData)
     const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
     const countUnanswered = useMemo(() => userQuestionData.filter((q)=>!q.userResponse).length, [userQuestionData]);
-    //console.log("leader", leaderboardData)
     const tabs = [
         {
             index: 0,
