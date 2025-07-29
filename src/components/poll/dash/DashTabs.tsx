@@ -42,7 +42,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
     const [originalUserData, setOriginalUserData] = useState<Concrete<UserRecord>>(userData)
     const [leaderboardData, setLeaderboardData] = useState<LeaderboardRecord[]>(staticLeaderboardData)
     const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
-    console.log("leader", leaderboardData)
+    const countUnanswered = useMemo(() => userQuestionData.filter((q)=>!q.userResponse).length, [userQuestionData]);
     const tabs = [
         {
             index: 0,
@@ -56,7 +56,22 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
             </div>
         },
         {
-            index: 1,
+            index:1,
+            title:<>Unanswered <span>{countUnanswered}</span></>,
+            body: <div className='pd__question-entries'>
+            {
+                userQuestionData.filter((q)=>!q.userResponse).map((q : UserQuestionInfo, i : number) => 
+                    <PollEntry preloadInfo={q} key={'filtered'+q.title} />
+                )
+            }
+            </div>
+        },
+        {
+            index: 2,
+            listitem: <li className='pd__tabmenu__spacer'></li>
+        },
+        {
+            index: 3,
             title: 'Preferences',
             body: <UserPreferences userRecord={userRecord} setUserRecord={setUserRecord} originalRecord={originalUserData} setOriginalRecord={setOriginalUserData}/>
         },/* 
@@ -73,9 +88,9 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
             <UserContext.Provider value={userRecord._id}>
                 <menu className="pd__tabmenu">
                     {tabs.map((t, i) => 
+                        t.listitem? t.listitem : 
                         <li key={i} className={`pd__tabmenu__tab ${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>
                     )}
-                    <li className='pd__tabmenu__spacer'></li>
                 </menu>
                 <div className="pd__body">
                     {tabs[currentTab].body}
