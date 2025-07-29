@@ -37,3 +37,6 @@ next-env.d.ts
 
 /public/ftl/*
 /scratch/*
+
+# Don't commit the local json settings
+.vscode/settings.json
