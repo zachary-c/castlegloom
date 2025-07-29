@@ -69,6 +69,10 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
         },
         {
             index: 2,
+            listitem: <li className='pd__tabmenu__spacer'></li>
+        },
+        {
+            index: 3,
             title: 'Preferences',
             body: <UserPreferences userRecord={userRecord} setUserRecord={setUserRecord} originalRecord={originalUserData} setOriginalRecord={setOriginalUserData}/>
         },/* 
@@ -85,9 +89,9 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
             <UserContext.Provider value={userRecord._id}>
                 <menu className="pd__tabmenu">
                     {tabs.map((t, i) => 
+                        t.listitem? t.listitem : 
                         <li key={i} className={`pd__tabmenu__tab ${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>
                     )}
-                    <li className='pd__tabmenu__spacer'></li>
                 </menu>
                 <div className="pd__body">
                     {tabs[currentTab].body}
