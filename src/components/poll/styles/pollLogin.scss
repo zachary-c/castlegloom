@@ -143,3 +143,15 @@ input, input[disabled] {
         }    
     }
 }
+.august-light {
+    .login__page {
+        h2, p, label {
+            color: $white;
+        }
+    }
+    .login__confirm {
+        h1, p {
+            color: $white;
+        }    
+    }
+}

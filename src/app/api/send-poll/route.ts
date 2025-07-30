@@ -1,7 +1,7 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const maxDuration = 60;
@@ -160,6 +160,20 @@ function themeObject(theme : Theme) : ThemeObject {
                 itemTextColor: THEME_JULY_LIGHT.white,
                 postScriptBackgroundColor: THEME_JULY_LIGHT.americanBlue,
                 //itemAdditionalStyles: `border: 2px solid ${THEME_JULY_LIGHT.icterine}; border-radius: 5px;`,
+                postScriptTextColor: STANDARDS.white,
+                postScriptBorderColor: STANDARDS.white,
+                borderColor: 'none',
+            };
+            break;
+        case 'august-light':
+            obj = {
+                headerTextColor: THEME_AUGUST_LIGHT.pageTitle ,
+                questionTextColor: STANDARDS.white,
+                backgroundColor: THEME_AUGUST_LIGHT.pollBackground,
+                itemDefaultColor: THEME_AUGUST_LIGHT.optionsItem,
+                itemHoverColor: THEME_AUGUST_LIGHT.optionsItemFillBar,
+                itemTextColor: THEME_AUGUST_LIGHT.optionsItemText,
+                postScriptBackgroundColor: THEME_AUGUST_LIGHT.body,
                 postScriptTextColor: STANDARDS.white,
                 postScriptBorderColor: STANDARDS.white,
                 borderColor: 'none',

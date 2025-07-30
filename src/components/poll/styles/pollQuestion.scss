@@ -323,7 +323,6 @@
     }
 }
 }
-
 .october-dark {
     &.poll {
         background-color: $charcoal-mining;
@@ -370,8 +369,6 @@
         }
     }
 }
-
-
 .december-light {
     &.poll {
         background-color: $fir-green;
@@ -520,7 +517,6 @@
         }
     }
 }
-
 .january {
     &.pd {
 
@@ -588,7 +584,6 @@
         }
     }
 }
-
 .february-light {
     &.poll__body {
         background-color: $uranianBlue;
@@ -766,7 +761,6 @@
         color: $office-green;
     }
 }
-
 .april-light {
     &.poll__body {
         background-color: $periwinkle;
@@ -868,7 +862,6 @@
         font-weight: bold;
     }
 }
-
 .may-dark {
     &.poll__body {
         background-color: $claret;
@@ -967,7 +960,6 @@
         font-weight: bold;
     }
 }
-
 .june-light {
     // page body
     &.poll__body {
@@ -1138,6 +1130,106 @@
                 }
                 &__fill-bar {
                     background-color: $americanBlue;
+                }
+            }
+        }
+        &__footer {
+            &__rc {
+                color: $white;
+            }
+            &__refresh {
+                background-color: $white;
+                color: $americanBlue;
+                border: 0 solid $white;
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+            }
+        }
+        &__postscript {
+            background-color: $americanBlue;
+            border-top: 2px solid white;
+            border-bottom: 2px solid white;
+            color: $white;
+        }
+        .loading-notice {
+            color: $white;
+        }
+    }
+    a {
+        color: $darkOrange;
+        font-weight: bold;
+    }
+}
+.august-light {
+    // page body
+    &.poll__body {
+        background-color: $body;
+    }
+    & .poll {
+        background-color: $pollBackground;
+        color: inherit;
+        box-shadow: inherit;
+        &__page-title {
+            color: $white;
+            font-weight: 500;
+        }
+        &__btn {
+            background-color: $white;
+            color: $americanBlue;
+            &.outline {
+                border: 3px solid $white;
+                background-color: transparent;
+                //background-color: rgba(0,0,0,.15);
+                color: $white;
+                
+                &.submit:not(.submitting):hover {
+                    transform: scale(1.05);
+                }
+                &.submit {
+                    border-color: $flame;
+                    background-color: $flame;
+                    color: white;
+                }
+            }
+            &.cta {
+                background-color: $buttonSignup;
+                color: white;
+                border: none;
+                text-decoration: underline;
+            }
+        }
+        &__date {
+            //background-color: $paynes-gray;
+            //padding: 0.25rem .5rem;
+            //border-bottom-right-radius: 5px;
+            //border-bottom-left-radius: 5px;
+            //margin-top: -3rem;
+            color: $white;
+            font-weight: bold;
+        }
+    }
+    .poll {
+        &__header {
+            &:before {
+                content: 'POLL';
+                color: $white;
+                transform: rotate(10deg);
+                font-family: 'Courier New', Courier, monospace;
+            }
+            color: white;
+        }
+        &__options {
+            &__item {
+                background-color: $optionsItem;
+                padding: 0.3rem;
+                &__text, &__count {
+                    color: $white;
+                    font-weight: 500;
+                }
+                &__fill-bar {
+                    background-color: $optionsItemFillBar;
                 }
             }
         }
