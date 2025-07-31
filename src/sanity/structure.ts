@@ -5,24 +5,12 @@ export const structure: StructureResolver = (S) =>
     S.list()
 .title('Content')
 .items([
-    S.documentTypeListItem('soundPreset')
-        .title("Sound Presets")
-        .id('soundPresets'),
-    S.documentTypeListItem('page')
-        .title('Pages')
-        .id('pages'),
-    S.documentTypeListItem('recipient')
-        .title('Recipients')
-        .id('recipients'),
     S.documentTypeListItem('pollQuestion')
         .title('Poll Questions')
         .id('pollQuestions'),
-    S.documentTypeListItem('bingoCard')
-        .title('Bingo Cards')
-        .id('bingoCards'),
-    S.documentTypeListItem('rwbbRecord')
-        .title('RWBB Records')
-        .id('rwbbRecords'),
+    S.documentTypeListItem('recipient')
+        .title('Recipients')
+        .id('recipients'),
     S.listItem()
         .id('memes')
         .title('Memes')
@@ -69,6 +57,25 @@ export const structure: StructureResolver = (S) =>
                             .title('Spooktober 2022')
                             .filter('_type == "meme"')
                     )
+            ])
+        ),
+    S.listItem()
+        .id("otherItem")
+        .title("Other")
+        .child(
+            S.list()
+            .title("Other")
+            .id("otherList")
+            .items([
+                S.documentTypeListItem('rwbbRecord')
+                    .title('RWBB Records')
+                    .id('rwbbRecords'),
+                S.documentTypeListItem('bingoCard')
+                    .title('Bingo Cards')
+                    .id('bingoCards'),
+                S.documentTypeListItem('soundPreset')
+                    .title("Sound Presets")
+                    .id('soundPresets'),
             ])
         ),
 ])
