@@ -257,7 +257,7 @@ export async function GET(request : NextRequest) {
 
     //    console.log("secret provided: ", secret);
     // //[{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}] 
-    const emails : Recipient_t[] = await client.fetch(daily_polled);
+    const testingRecipient = {_id:'asdf', email: 'zacharyhcampbell@gmail.com'}
     const pollQuestion : PollQuestion_t = await client.fetch(latest_poll)
     //let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
     //console.log(emailsList)
@@ -273,67 +273,38 @@ export async function GET(request : NextRequest) {
     })
     //console.log('Mailer:', mailer);
     if (pollQuestion) {
-        if (pollQuestion.hasBeenSent) {
-            console.log("Tried to send poll", pollQuestion.title, "but it was already sent")
-            return NextResponse.json({status: 204})
+    const themeObj = themeObject(theme)
+    console.log('theme', themeObj)
+        let pollHtml = generatePollHTML(pollQuestion, testingRecipient, themeObj)
+        const html = `
+        <html>
+            <head>
+                <style>
+                    .spook-response:hover {
+                        background-color: ${themeObj.itemHoverColor};
+                        border-radius:3px;
+                    }
+                </style>
+            </head>
+            ${pollHtml}
+        </html>
+        
+        `
+        const info = await mailer.sendMail({
+            from: emailFrom,
+            to: testingRecipient.email,
+            // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
+            subject: `${pollQuestion.title} | ${pollQuestion.date}`,
+            html: html
+        })
+        console.log(info);
+        if (!info.response.includes('250')) {
+            console.log("Errored, info: ", info)
+            return NextResponse.json("Error sending email", {status: 500})
         }
-        const themeObj = themeObject(theme)
-        console.log('theme', themeObj)
-        for (const recipient of emails) {
-            let pollHtml = generatePollHTML(pollQuestion, recipient, themeObj)
-            const html = `
-            <html>
-                <head>
-                    <style>
-                        .spook-response:hover {
-                            background-color: ${themeObj.itemHoverColor};
-                            border-radius:3px;
-                        }
-                    </style>
-                </head>
-                ${pollHtml}
-            </html>
-            
-            `
-            const info = await mailer.sendMail({
-                from: emailFrom,
-                to: recipient.email,
-                // bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-                subject: `${pollQuestion.title} | ${pollQuestion.date}`,
-                html: html
-            })
-            console.log(info);
-            if (!info.response.includes('250')) {
-                console.log("Errored, info: ", info)
-                return NextResponse.json("Error sending email", {status: 500})
-            }
-        }
+        
     }
 
-    const hasBeenSentPatch = patchClient.patch(pollQuestion._id, {
-        "set": {
-            hasBeenSent: true
-        }
-    })
-    const res = await hasBeenSentPatch.commit();
-    console.log("result", res)
-    /* const info = await mailer.sendMail({
-        from: process.env.ORACLE_LOGIN,
-        to: '314oracle@gmail.com',
-        bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-        subject: `Happy October ${todaysDate.getDate()}${suffix(todaysDate.getDate())} + POLLS!`,
-        text: emailBody,
-        html: ,
-        attachments: attachments
-    })
-    /* 
-    //console.log(info);
-    if (!info.response.includes('250')) {
-        console.log("Errored, info: ", info)
-        return NextResponse.json("Error sending email", {status: 500})
-    }  
-    */
-    console.log(`Email sent to ${emails.length} emails:`, emails);
     return NextResponse.json({status: 200})
 }
 
