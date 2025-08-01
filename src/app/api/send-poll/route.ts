@@ -173,8 +173,8 @@ function themeObject(theme : Theme) : ThemeObject {
                 itemDefaultColor: THEME_AUGUST_LIGHT.optionsItem,
                 itemHoverColor: THEME_AUGUST_LIGHT.optionsItemFillBar,
                 itemTextColor: THEME_AUGUST_LIGHT.optionsItemText,
-                postScriptBackgroundColor: THEME_AUGUST_LIGHT.body,
-                postScriptTextColor: STANDARDS.white,
+                postScriptBackgroundColor: THEME_AUGUST_LIGHT.pollBackground,
+                postScriptTextColor: THEME_AUGUST_LIGHT.optionsItemText,
                 postScriptBorderColor: STANDARDS.white,
                 borderColor: 'none',
             };

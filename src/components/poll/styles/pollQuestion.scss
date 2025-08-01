@@ -1225,7 +1225,7 @@
                 background-color: $optionsItem;
                 padding: 0.3rem;
                 &__text, &__count {
-                    color: $white;
+                    color: $optionsItemText;
                     font-weight: 500;
                 }
                 &__fill-bar {
