@@ -684,103 +684,140 @@
         border-color: transparent;
     }
 }
-.august-light {
-    // page body
-    &.poll__body {
-        background-color: $body;
-    }
-    & .poll {
-        background-color: $pollBackground;
-        color: inherit;
-        box-shadow: inherit;
-        &__page-title {
+.august-dark {
+    .pd {
+        &__title {
             color: $white;
-            font-weight: 500;
         }
-        &__btn {
-            background-color: $white;
-            color: $americanBlue;
-            &.outline {
-                border: 3px solid $white;
-                background-color: transparent;
-                //background-color: rgba(0,0,0,.15);
+        &__body {
+            background-color: $august_buttonSignup;
+            border-color: $august_optionsItem;
+        }
+        &__tabmenu {
+            &__tab {
+                background-color: $august_buttonSignup;
+                color: white;
+                font-weight: 500;
+                border-color: $august_optionsItem;
+            }
+            &__spacer { 
+                border-color: $august_optionsItem
+            }
+        }
+        &__preferences {
+            h3 {
                 color: $white;
-                
-                &.submit:not(.submitting):hover {
-                    transform: scale(1.05);
+            }
+            &__field {
+                input {
+                    border-color: $white;
+                    border-width: 1px;
+                    background-color: $august_header;
+                    color: $white;
                 }
-                &.submit {
-                    border-color: $flame;
-                    background-color: $flame;
+                label {
+                    color: $white;
+                }
+            }
+            & .generate {
+                background-color: $august_optionsItemFillBar;
+                color: $august_header;
+                padding: .2rem .5rem;
+                border: 2px solid $white;
+            }
+            &__submission {
+                & .primary {
+                    background-color: $august_pollBackground;
+                    color: $white;
+                    border: 2px solid $white;
+                }
+
+                & .muted {
+                    border: 2px solid white;
+                    background-color: transparent;
+                    color: white;
+                }    
+            }
+            &__info-bar {
+                color: white;
+            }
+            &__divider {
+                border-color: white;
+            }
+        }
+        &__leaderboard {
+            &__body {
+            }
+            --me-background: #{$blush};
+            --me-text-color: #{$prussianBlue};
+            --odd-row: #{$uranianBlue};
+            --even-row: white;
+            --header-row: #{$chefchaouenBlue};
+            --header-row-text: #{$snow};
+            --leaderboard-hover-color: #{$blush};
+        }
+    }
+    .pe {
+        border: 1px solid white;
+        background-color: $august_body;
+        &__header {
+            &__title, &__text, &__date {
+                color: $white;
+            }
+        }
+        &.responded {
+            background-color: $august_header;
+            border: 2px solid $white;
+            .pe__header {
+                &__title {
+                }
+            }
+        }
+        .poll.input {
+            & .poll__options__item.selected {
+                background-color: $august_body;
+                & > .poll__options__item__fill-bar {
+                    background-color: $august_body;
+
+                }
+                & > .poll__options__item__text, & > .poll__options__item__count {
+                    color:white;
+                }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 4px;
+                    // the border is 2px and 2px, so we add 4px here to account for it
+                    height: calc(100% + 4px);
+                    // shift upwards by the 2px on top so aligned correctly
+                    top: -2px;
+                    left: -12px;
+                    display: block;
+                    background-color: $white;
+                }
+            }
+        }
+        .poll__submit-area {
+            &__btn {
+                background-color: $august_optionsItemFillBar;
+                color: $white;
+                border: 2px solid white;
+                &.muted {
+                    background-color: $august_header;
+                    color: $white;
+                    opacity: .8;
+                    border: none;
+                }
+            }
+            .submission-message {
+                > span {
                     color: white;
                 }
+                border-color: white;
             }
-            &.cta {
-                background-color: $buttonSignup;
-                color: white;
-                border: none;
-                text-decoration: underline;
-            }
-        }
-        &__date {
-            //background-color: $paynes-gray;
-            //padding: 0.25rem .5rem;
-            //border-bottom-right-radius: 5px;
-            //border-bottom-left-radius: 5px;
-            //margin-top: -3rem;
-            color: $white;
-            font-weight: bold;
         }
     }
-    .poll {
-        &__header {
-            &:before {
-                content: 'POLL';
-                color: $white;
-                transform: rotate(10deg);
-                font-family: 'Courier New', Courier, monospace;
-            }
-            color: white;
-        }
-        &__options {
-            &__item {
-                background-color: $optionsItem;
-                padding: 0.3rem;
-                &__text, &__count {
-                    color: $white;
-                    font-weight: 500;
-                }
-                &__fill-bar {
-                    background-color: $optionsItemFillBar;
-                }
-            }
-        }
-        &__footer {
-            &__rc {
-                color: $white;
-            }
-            &__refresh {
-                background-color: $white;
-                color: $americanBlue;
-                border: 0 solid $white;
-                &:hover {
-                    cursor: pointer;
-                    transform: scale(1.05);
-                }
-            }
-        }
-        &__postscript {
-            background-color: $americanBlue;
-            border-top: 2px solid white;
-            border-bottom: 2px solid white;
-            color: $white;
-        }
-        .loading-notice {
-            color: $white;
-        }
-    }
-    a {
-        color: $darkOrange;
-        font-weight: bold;
+    input { 
+        border-color: transparent;
     }
 }

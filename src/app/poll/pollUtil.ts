@@ -1,7 +1,7 @@
 
-export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-light'
+export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark'
 
-export const theme : Theme = 'august-light'
+export const theme : Theme = 'august-dark'
 
 export const STANDARDS = {
     white: '#fff',
@@ -63,10 +63,10 @@ export const THEME_JULY_LIGHT = {
     white: "#fff",
     strawberryRed: '#e55151'
 }
-export const THEME_AUGUST_LIGHT = {
+export const THEME_AUGUST_DARK = {
     body : "#510C0C",
     pageTitle : "#FFFFFF", 
-    header : "#8F6B11",
+    header : "#58420b",
     pollBackground : "#950006",
     optionsItem : "#FFBF1E",
     optionsItemFillBar : "#84BF43",

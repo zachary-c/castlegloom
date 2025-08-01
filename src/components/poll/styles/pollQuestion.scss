@@ -1162,13 +1162,13 @@
         font-weight: bold;
     }
 }
-.august-light {
+.august-dark {
     // page body
     &.poll__body {
-        background-color: $body;
+        background-color: $august_body;
     }
     & .poll {
-        background-color: $pollBackground;
+        background-color: $august_pollBackground;
         color: inherit;
         box-shadow: inherit;
         &__page-title {
@@ -1181,31 +1181,25 @@
             &.outline {
                 border: 3px solid $white;
                 background-color: transparent;
-                //background-color: rgba(0,0,0,.15);
                 color: $white;
                 
                 &.submit:not(.submitting):hover {
                     transform: scale(1.05);
                 }
                 &.submit {
-                    border-color: $flame;
-                    background-color: $flame;
+                    border-color: $august_header;
+                    background-color: $august_header;
                     color: white;
                 }
             }
             &.cta {
-                background-color: $buttonSignup;
+                background-color: $august_buttonSignup;
                 color: white;
                 border: none;
                 text-decoration: underline;
             }
         }
         &__date {
-            //background-color: $paynes-gray;
-            //padding: 0.25rem .5rem;
-            //border-bottom-right-radius: 5px;
-            //border-bottom-left-radius: 5px;
-            //margin-top: -3rem;
             color: $white;
             font-weight: bold;
         }
@@ -1222,14 +1216,14 @@
         }
         &__options {
             &__item {
-                background-color: $optionsItem;
+                background-color: $august_optionsItem;
                 padding: 0.3rem;
                 &__text, &__count {
-                    color: $optionsItemText;
+                    color: $august_header;
                     font-weight: 500;
                 }
                 &__fill-bar {
-                    background-color: $optionsItemFillBar;
+                    background-color: $august_optionsItemFillBar;
                 }
             }
         }
@@ -1239,7 +1233,7 @@
             }
             &__refresh {
                 background-color: $white;
-                color: $americanBlue;
+                color: $august_header;
                 border: 0 solid $white;
                 &:hover {
                     cursor: pointer;
@@ -1248,7 +1242,7 @@
             }
         }
         &__postscript {
-            background-color: $americanBlue;
+            background-color: $august_header;
             border-top: 2px solid white;
             border-bottom: 2px solid white;
             color: $white;
@@ -1258,7 +1252,7 @@
         }
     }
     a {
-        color: $darkOrange;
+        color: $august_optionsItem;
         font-weight: bold;
     }
 }

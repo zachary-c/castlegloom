@@ -78,16 +78,15 @@ $battleshipGrey: #818479;
 $white: #fff;
 $strawberryRed: #e55151;
 
-// august light
-$body : #510C0C;
-$pageTitle : #FFFFFF; 
-$header : #8F6B11;
-$pollBackground : #950006;
-$optionsItem : #FFBF1E;
-$optionsItemFillBar : #84BF43;
-$optionsItemText : #000000;
-$optionsItemCount : #FFFFFF;
-$buttonSignup : #950006;
+// august dark
+$august_body : #510C0C;
+$august_header : #58420b;
+$august_pollBackground : #950006;
+$august_optionsItem : #FFBF1E;
+$august_optionsItemFillBar : #84BF43;
+$august_optionsItemText : #000000;
+$august_optionsItemCount : #FFFFFF;
+$august_buttonSignup : #950006;
 
 $laptop-width: 760px;
 $tablet-width: 450px;
@@ -156,11 +155,11 @@ $tablet-width: 450px;
     --theme-background: #{$americanBlue};
     --theme-alt-background: transparent;
 }
-.august-light {
-    --theme-primary: #{$body};
-    --theme-secondary: #{$pollBackground};
-    --theme-tertiary: #{$optionsItem};
-    --theme-text: #{$optionsItemText};
-    --theme-background: #{$body};
+.august-dark {
+    --theme-primary: #{$august_body};
+    --theme-secondary: #{$august_pollBackground};
+    --theme-tertiary: #{$august_optionsItem};
+    --theme-text: #{$august_optionsItemText};
+    --theme-background: #{$august_body};
     --theme-alt-background: transparent;
 }

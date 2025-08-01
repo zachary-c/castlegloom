@@ -20,7 +20,7 @@ export default function Login() {
             return;
         }
         setSubmittingLogin(true)
-        const response = await fetch(`/api/poll/send-login-email?email=${encodeURIComponent(emailInput)}`, { method: "POST" })
+        const response = await fetch(`/api/poll/send-login-email?email=${encodeURIComponent(emailInput.toLowerCase())}`, { method: "POST" })
         if (response.ok) {
             router.push(`/poll/login/login-confirm/${emailInput}`)
         } else {
