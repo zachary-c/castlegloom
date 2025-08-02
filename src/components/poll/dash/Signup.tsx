@@ -19,7 +19,7 @@ export default function Signup() {
             return;
         }
         setSubmittingSignup(true)
-        const response = await fetch(`/api/poll/signup?email=${encodeURIComponent(signupEmailInput)}`, { method: "POST" })
+        const response = await fetch(`/api/poll/signup?email=${encodeURIComponent(signupEmailInput.toLowerCase())}`, { method: "POST" })
         if (response.ok) {
             router.push(`/poll/signup/signup-confirm/${signupEmailInput}`)
         } else {
