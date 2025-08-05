@@ -19,6 +19,7 @@
         border-top: none;
         box-sizing: border-box;
         padding: .75rem .4rem;
+        margin-bottom: 2rem;
     }
     &__tabmenu {
         display: flex;
@@ -97,7 +98,7 @@
             --even-row: white;
             --header-row: #{$chefchaouenBlue};
             --header-row-text: #{$snow};
-            --leaderboard-hover-color: #{$blush};
+            --leaderboard-hover-background: #{$blush};
         }
     }
     .pe {
@@ -177,7 +178,7 @@
             --even-row: white;
             --header-row: #{$chefchaouenBlue};
             --header-row-text: #{$snow};
-            --leaderboard-hover-color: #{$blush};
+            --leaderboard-hover-background: #{$blush};
         }
     }
     .pe {
@@ -264,7 +265,7 @@
             --even-row: white;
             --header-row: #{$chefchaouenBlue};
             --header-row-text: #{$snow};
-            --leaderboard-hover-color: #{$blush};
+            --leaderboard-hover-background: #{$blush};
         }
     }
     .pe {
@@ -373,7 +374,7 @@
             --even-row: white;
             --header-row: #{$chefchaouenBlue};
             --header-row-text: #{$snow};
-            --leaderboard-hover-color: #{$blush};
+            --leaderboard-hover-background: #{$blush};
         }
     }
     .pe {
@@ -490,7 +491,7 @@
             --even-row: white;
             --header-row: #{$chefchaouenBlue};
             --header-row-text: #{$snow};
-            --leaderboard-hover-color: #{$blush};
+            --leaderboard-hover-background: #{$blush};
         }
     }
     .pe {
@@ -622,7 +623,7 @@
             --even-row: white;
             --header-row: #{$chefchaouenBlue};
             --header-row-text: #{$snow};
-            --leaderboard-hover-color: #{$blush};
+            --leaderboard-hover-background: #{$blush};
         }
     }
     .pe {
@@ -685,6 +686,7 @@
     }
 }
 .august-dark {
+    
     .pd {
         &__title {
             color: $white;
@@ -692,6 +694,18 @@
         &__body {
             background-color: $august_buttonSignup;
             border-color: $august_optionsItem;
+        }
+        &__btn {
+            background-color: $august_optionsItemFillBar;
+            color: $august_header;
+            padding: .2rem .5rem;
+            border: 2px solid $white;
+            font-weight: bold;
+            transition-duration: .2s;
+            cursor: pointer;
+            &:hover {
+                transform: scale(1.05);
+            }
         }
         &__tabmenu {
             &__tab {
@@ -748,13 +762,16 @@
         &__leaderboard {
             &__body {
             }
-            --me-background: #{$blush};
-            --me-text-color: #{$prussianBlue};
-            --odd-row: #{$uranianBlue};
-            --even-row: white;
-            --header-row: #{$chefchaouenBlue};
-            --header-row-text: #{$snow};
-            --leaderboard-hover-color: #{$blush};
+            --me-background: #{$august_optionsItem};
+            --me-text-color: #{black};
+            --odd-row: #{$august_header};
+            --even-row: #{$august_body};
+            --header-row: #{$august_optionsItem};
+            --header-row-text: #{black};
+            --body-row-text: #{white};
+            --surrounding-text-color: #{white};
+            --leaderboard-hover-background: #{$august_optionsItemFillBar};
+            --leaderboard-hover-text: #{black};
         }
     }
     .pe {

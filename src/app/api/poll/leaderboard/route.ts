@@ -14,11 +14,6 @@ export async function GET(req : NextRequest) {
         if (userid && d._id == userid) {
             newData.isUser = true;
         }
-        if (d.showNamePublically && (d.name?.length ?? 0) > 0) {
-            newData.joinedTitle = d.name + ", " + d.joinedTitle
-        } else {
-            newData.name = undefined
-        }
         cleanedData.push(newData)
      })
     

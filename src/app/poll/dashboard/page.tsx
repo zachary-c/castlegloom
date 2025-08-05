@@ -35,7 +35,6 @@ export default async function Page() {
             qualifier: info.title?.qualifier ?? ''
         },
         email: info.email ?? '',
-        showNamePublically: info.showNamePublically ?? false
     }
     const cleanedLeaderboardData : LeaderboardRecord[] = []
     leaderboardData.forEach((d) => { 
@@ -45,14 +44,8 @@ export default async function Page() {
         if (userid && d._id === userid.value) {
             newData.isUser = true;
         }
-        if (d.showNamePublically && (d.name?.length ?? 0) > 0) {
-            newData.joinedTitle = d.name + ", " + d.joinedTitle
-        } else {
-            newData.name = undefined
-        }
         cleanedLeaderboardData.push(newData)
     })
-    console.log(cleanedLeaderboardData)
 
     return <>
         <DashTabs userQuestionData={questionData} userData={defined_info} staticLeaderboardData={cleanedLeaderboardData}/>

@@ -4,16 +4,12 @@ export const leaderboardQuery = groq`
 *[_type == 'recipient'] { 
     "joinedTitle": title.profession + " " + title.qualifier, 
     "score": count(*[_type == "pollQuestion" && length(responses[length(listOfResponders[_ref == ^.^.^._id]) > 0]) > 0]),
-    name,
-    showNamePublically,
     _id
 } | order(score desc)
 `
 export type LeaderboardRecord = {
     joinedTitle? : string,
     score : number
-    showNamePublically? : string
-    name? : string
     _id? : string
     isUser : undefined | true
 }
@@ -40,8 +36,7 @@ export const user_dashboard_information = groq`
     title {
         profession,
         qualifier
-    },
-    showNamePublically
+    }
 }`
 export type UserRecord = {
     _id : string
@@ -52,5 +47,4 @@ export type UserRecord = {
         profession? : string
         qualifier? : string
     }
-    showNamePublically? : boolean
 }

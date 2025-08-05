@@ -20,12 +20,6 @@ export default {
             default: false
         },
         {
-            name: "showNamePublically",
-            title: "Show name on leaderboard?",
-            type: "boolean",
-            default: false
-        },
-        {
             name: 'name',
             title: 'Name',
             type: 'string'
