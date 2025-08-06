@@ -12,7 +12,7 @@ import { Leaderboard } from "./Leaderboard";
 export const UserContext = createContext<string>('')
 
 const greetings = [
-     "Greetings, "
+    "Greetings, "
     ,"Howdy, "
     ,"Ahoy, "
     ,"Commiserations, "
@@ -95,7 +95,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
     const [userRecord, setUserRecord] = useState<Concrete<UserRecord>>(userData)
     const [originalUserData, setOriginalUserData] = useState<Concrete<UserRecord>>(userData)
     const [leaderboardData, setLeaderboardData] = useState<LeaderboardRecord[]>(staticLeaderboardData)
-    const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
+    const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
     const countUnanswered = useMemo(() => userQuestionData.filter((q)=>!q.userResponse).length, [userQuestionData]);
     const tabs = [
         {
