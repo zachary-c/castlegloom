@@ -1,12 +1,11 @@
 'use client'
 import { Concrete } from "$/lib/queries";
 import { LeaderboardRecord, UserRecord } from "$/lib/dashboard_queries"
-import { PollQuestion_t } from "$/types/documents";
-import React, { createContext, useEffect, useMemo, useState } from "react"
+import React, { createContext, useMemo, useState } from "react"
 import { UserQuestionInfo } from "./types";
 import PollEntry from "./PollEntry";
 import { UserPreferences } from "./UserPreferences";
-import { randomInRange, theme } from "@/poll/pollUtil";
+import { theme } from "@/poll/pollUtil";
 import { Leaderboard } from "./Leaderboard";
 
 export const UserContext = createContext<string>('')
@@ -122,18 +121,18 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
         },
         {
             index: 2,
-            listitem: <li className='pd__tabmenu__spacer'></li>
+            title: 'Leaderboard',
+            body: <Leaderboard leaderboardData={leaderboardData} setLeaderboardData={setLeaderboardData}/>
         },
         {
             index: 3,
+            listitem: <li className='pd__tabmenu__spacer'></li>
+        },
+        {
+            index: 4,
             title: 'Preferences',
             body: <UserPreferences userRecord={userRecord} setUserRecord={setUserRecord} originalRecord={originalUserData} setOriginalRecord={setOriginalUserData}/>
-        },/* 
-        {
-            index: 2,
-            title: 'Leaderboard',
-            body: <Leaderboard leaderboardData={leaderboardData} setLeaderboardData={setLeaderboardData}/>
-        }, */
+        } 
     ]
     
     return (
@@ -142,7 +141,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
             <UserContext.Provider value={userRecord._id}>
                 <menu className="pd__tabmenu">
                     {tabs.map((t, i) => 
-                        t.listitem? t.listitem : 
+                        t.listitem ? <React.Fragment key={i}>{t.listitem}</React.Fragment> : 
                         <li key={i} className={`pd__tabmenu__tab ${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>
                     )}
                 </menu>

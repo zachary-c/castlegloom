@@ -5,8 +5,6 @@ import { UserRecord } from "$/lib/dashboard_queries"
 import { professionList, qualifierList } from "./types";
 import { randomInRange } from "@/poll/pollUtil";
 
-
-
 export function UserPreferences({ userRecord, setUserRecord, originalRecord, setOriginalRecord } : { userRecord : Concrete<UserRecord>, setUserRecord : (val : Concrete<UserRecord>) => void, originalRecord : Concrete<UserRecord>, setOriginalRecord : (val : Concrete<UserRecord>) => void}) {
     const [madeChanges, setMadeChanges] = useState(false)
     const [submitting, setSubmitting] = useState(false);
@@ -14,7 +12,6 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
     useEffect(() => {
         if (userRecord.email !== originalRecord.email 
             || userRecord.isPolledDaily !== originalRecord.isPolledDaily 
-            || userRecord.showNamePublically !== originalRecord.showNamePublically
             || userRecord.name !== originalRecord.name
             || userRecord.title?.profession !== originalRecord.title?.profession
             || userRecord.title?.qualifier !== originalRecord.title?.qualifier) {
@@ -76,12 +73,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
                 <div className="pd__preferences__field pd__preferences__field--checkbox">
                     <input type='checkbox' checked={userRecord.isPolledDaily} onChange={ (e) => setUserRecord({...userRecord, isPolledDaily: e.target.checked}) } id='daily-poll-checkbox'/>
                     <label htmlFor='daily-poll-checkbox'>I would like to receive daily polls at the above email address.</label>
-                </div>{/* 
-                <div className="pd__preferences__field pd__preferences__field--checkbox">
-                    <input type='checkbox' checked={userRecord.showNamePublically} onChange={ (e) => setUserRecord({...userRecord, showNamePublically: e.target.checked}) } id='show-name-checkbox'/>
-                    <label htmlFor='show-name-checkbox'>Display name <strong>{userRecord.name}</strong> publically in addition to title.</label>
                 </div>
- */}
             </div>
             {(madeChanges || message.length > 0) && 
                 <div className="pd__preferences__divider"/>

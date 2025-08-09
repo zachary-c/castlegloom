@@ -9,12 +9,14 @@
             margin-bottom: 1.5rem;
             h3 {
                 margin: 0;
+                color: var(--surrounding-text-color);
             }
         }
         &__note {
             margin-top: 1rem;
             margin-left: 1rem;
             display: block;
+            color: var(--surrounding-text-color);
         }
         &__body {
             &__entries {
@@ -23,24 +25,65 @@
             }
             border: 2px solid;
             border-radius: 5px;
-        }        
+        }  
+        &__refresh {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            span {
+                color: var(--surrounding-text-color);
+
+                margin-left: .5rem;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: .8rem;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                animation-name: fade;
+                animation-duration: .8s;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            
+                @keyframes fade {
+                    0% { opacity: 1; }
+                    50% { opacity: .2;}
+                    100% { opacity: 1;}
+                    
+                }
+            }
+        }      
         --header-col-odd: var(--header-row);
         --header-col-even: var(--header-row);
         --odd-row-odd-col: var(--odd-row);
         --odd-row-even-col: var(--odd-row);
         --even-row-odd-col: var(--even-row);
         --even-row-even-col: var(--even-row);    
+        &__table {
+            width: 100%;
+            background-color: slategray;
+            tbody {
+                width: 100%;
+                background-color: white;
+            }
+            thead th {
+                color: var(--header-row-text);
+                font-weight: bold;
+                &:nth-child(2n + 1) {
+                    background-color: var(--header-col-odd);
+                }
+                &:nth-child(2n) {
+                    background-color: var(--header-col-even);
+                }
 
+            }
+        }
     }
 }
 .leaderboard-table-row {
-    display: flex;
-    flex-direction: row;
-    > span {
+    > td {
+        border: none;
         padding: .5rem 1rem; 
-        &:hover {
-            background-color: var(--leaderboard-hover-color) !important;
-        }
+        color: var(--body-row-text);
         //cursor: cell;
         &:nth-child(2n + 1) {
             background-color: var(--odd-row-odd-col) ;
@@ -51,7 +94,6 @@
     }
     > .user {
         width: 75%;
-        border-right: 1px solid black;
     }
     > .score {
         width: 20%;
@@ -59,28 +101,16 @@
     > .rank {
         width: 6%;
         text-align: center;
-        border-right: 1px solid black;
     }
-    &.me > span {
-        background-color: var(--me-background) !important;
+    &.me > td {
+        background-color: var(--me-background);
         color: var(--me-text-color);
     }
-    &.header > span {
-        color: var(--header-row-text);
-        font-weight: bold;
-        &:nth-child(2n + 1) {
-            background-color: var(--header-col-odd);
-        }
-        &:nth-child(2n) {
-            background-color: var(--header-col-even);
-        }
-
-    }
     &:nth-child(2n) {
-        & > span:nth-child(2n + 1) {
+        & > td:nth-child(2n + 1) {
             background-color: var(--even-row-odd-col);
         }
-        & > span:nth-child(2n) {
+        & > td:nth-child(2n) {
             background-color: var(--even-row-even-col);
         }
     }
