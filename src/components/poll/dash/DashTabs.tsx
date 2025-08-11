@@ -110,7 +110,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
         },
         {
             index:1,
-            title:<>Unanswered <span>{countUnanswered}</span></>,
+            title:<>Unanswered <span className="pd__tabmenu__badge">{countUnanswered}</span></>,
             body: <div className='pd__question-entries'>
             {
                 userQuestionData.filter((q)=>!q.userResponse).map((q : UserQuestionInfo, i : number) => 
