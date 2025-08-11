@@ -10,6 +10,7 @@ import bingoCard from './bingoCard'
 import bingoSquare from './bingoSquare'
 import bingoSupport from './bingoSupport'
 import rwbbRecord from './rwbbRecord'
+import questionPrompt from './questionObjects/questionPrompt'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -23,6 +24,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     pollQuestion,
     pollResponse,
+    questionPrompt,
 
     bingoCard,
     bingoSquare,
