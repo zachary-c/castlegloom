@@ -42,9 +42,9 @@ export default async function Page({ params }: { params: { date: string } }) {
 		)
 
 	//console.log("poll", data)
-	//if (!data.today) {
-	//    notFound()
-	//}
+	if (!data.today) {
+		notFound()
+	}
 
 	return <>
 		<h1 className={`poll__page-title ${theme}`}>{data.today.title}</h1>
