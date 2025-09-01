@@ -1544,19 +1544,14 @@
       color: $munsell-blue;
 
       &.outline {
-        border: 3px solid $celadon;
-        background-color: transparent;
+        border: 2px solid $celadon;
+        background-color: $munsell-blue;
         color: $celadon;
 
         &.submit:not(.submitting):hover {
           transform: scale(1.05);
         }
 
-        &.submit {
-          border-color: $celadon;
-          background-color: $celadon;
-          color: white;
-        }
       }
 
       &.cta {

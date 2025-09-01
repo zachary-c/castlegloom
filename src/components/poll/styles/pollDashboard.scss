@@ -1014,10 +1014,10 @@
     }
 
     &__btn {
-      background-color: $august_optionsItemFillBar;
-      color: $august_header;
+      background-color: $celadon;
+      color: $pakistan-green;
       padding: .2rem .5rem;
-      border: 2px solid $white;
+      border: none;
       font-weight: bold;
       transition-duration: .2s;
       cursor: pointer;
@@ -1069,7 +1069,7 @@
 
       &__submission {
         & .primary {
-          background-color: $august_pollBackground;
+          background-color: $burgundy;
           color: $white;
           border: 2px solid $white;
         }
@@ -1095,13 +1095,13 @@
 
       --me-background: #{$celadon};
       --me-text-color: #{black};
-      --odd-row: #{$atomic-tangerine};
+      --odd-row: #{$cerulean};
       --even-row: #{$munsell-blue};
       --header-row: #{$pakistan-green};
       --header-row-text: #{white};
       --body-row-text: #{white};
       --surrounding-text-color: #{white};
-      --leaderboard-hover-background: #{$august_optionsItemFillBar};
+      --leaderboard-hover-background: #{$atomic-tangerine};
       --leaderboard-hover-text: #{black};
     }
   }

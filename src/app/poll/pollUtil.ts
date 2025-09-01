@@ -75,7 +75,12 @@ export const THEME_AUGUST_DARK = {
 	buttonSignup: "#950006;"
 }
 export const THEME_SEPTEMBER_LIGHT = {
-
+	cerulean: "#146D93",
+	munsellBlue: "#3B8EA5",
+	celadon: "#aef6c7",
+	atomicTangerine: "#FF8B55",
+	burgundy: "#880000",
+	pakistanGreen: "#0C3900"
 }
 
 export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`
