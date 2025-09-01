@@ -1,58 +1,65 @@
-
 .login {
-    a {
-        color: var(--theme-tertiary);
+  a {
+    color: var(--theme-tertiary);
+  }
+
+  &__body {
+    max-width: 500px;
+
+    &__cta {
+      display: block;
+      margin: 1rem 0 0 0;
+      font-size: 1rem;
+      font-weight: normal;
+      opacity: .8;
+      text-align: right;
     }
-    &__body {
-        max-width: 500px;
-        
-        &__cta {
-            display:block;
-            margin: 1rem 0 0 0;
-            font-size: 1rem;
-            font-weight: normal;
-            opacity: .8;
-            text-align: right;
+
+    &__input-section {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+
+      >label {
+        padding-left: .2rem;
+      }
+
+      &.signup {
+        padding-top: .5rem;
+      }
+
+      &__message {
+        text-align: right;
+        padding-top: .5rem;
+        color: var(--theme-tertiary)
+      }
+
+      &__inline-label {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+
+        input {
+          flex-grow: 1;
         }
-        &__input-section {
-            display: flex;
-            flex-direction: column;
-            gap: .25rem;
-            > label {
-                padding-left: .2rem;
-            }
-            &.signup {
-                padding-top:.5rem;
-            }
-            &__message {
-                text-align: right;
-                padding-top: .5rem;
-                color: var(--theme-tertiary)
-                
-            }
-            &__inline-label {
-                display: flex;
-                gap: .5rem;
-                align-items: center;
-                input {
-                    flex-grow: 1;
-                }
-            }
-            .poll__btn {
-                border-radius: 5px;
-                transition-duration: .2s;
-                padding: .25rem 1rem;
-                font-size: 1rem;
-                align-self: flex-end;
-                
-                /* border: 2px solid var(--theme-secondary);
+      }
+
+      .poll__btn {
+        border-radius: 5px;
+        transition-duration: .2s;
+        padding: .25rem 1rem;
+        font-size: 1rem;
+        align-self: flex-end;
+
+        /* border: 2px solid var(--theme-secondary);
                 background-color: var(--theme-background);
                 color: var(--theme-primary);
-                 *//* &:hover {
+                 */
+        /* &:hover {
                     background-color: var(--theme-secondary);
                     color: var(--theme-background);
                 } */
-                /* &.submitting {
+        /* &.submitting {
                     border: 2px solid var(--theme-tertiary);
                     color: var(--theme-tertiary);
                     background-color: var(--theme-alt-background);
@@ -62,96 +69,151 @@
                         transform: unset;
                     }
                 } */
-            }
-        }
-        &__divider {
-            margin: 2rem 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            text-transform: uppercase;
-            padding: 0 3rem;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            font-weight: 100;
-            > .spacer {
-                flex-grow:1;
-                border-bottom: 2px solid black;
-                display:block;
-            }
-        }
+      }
     }
-    &__confirm {
-        
+
+    &__divider {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      text-transform: uppercase;
+      padding: 0 3rem;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-weight: 100;
+
+      >.spacer {
+        flex-grow: 1;
+        border-bottom: 2px solid black;
+        display: block;
+      }
     }
+  }
+
+  &__confirm {}
 }
 
-input, input[disabled] {
-    margin: .25rem;
-    margin-left: 0;
-    margin-right:0;
-    border: 2px solid var(--theme-alt-background);
-    background-color: white;
-    color:black;
-    border-radius: 5px;
-    padding: .25rem .5rem;
-    @media screen and (max-width: 32rem) {
-        font-size: .9rem;
-    }
-    font-size:1rem;
+input,
+input[disabled] {
+  margin: .25rem;
+  margin-left: 0;
+  margin-right: 0;
+  border: 2px solid var(--theme-alt-background);
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  padding: .25rem .5rem;
+
+  @media screen and (max-width: 32rem) {
+    font-size: .9rem;
+  }
+
+  font-size:1rem;
 }
+
 .login__confirm {
-    padding: 1rem;
-    max-width: 700px;
-    width: 100%;
+  padding: 1rem;
+  max-width: 700px;
+  width: 100%;
 }
 
 .may-dark {
-    .login__page {
-        h2, p, label {
-            color: $mistyRose;
-        }
+  .login__page {
+
+    h2,
+    p,
+    label {
+      color: $mistyRose;
     }
-    .login__confirm {
-        h1, p {
-            color: $mistyRose;
-        }    
+  }
+
+  .login__confirm {
+
+    h1,
+    p {
+      color: $mistyRose;
     }
+  }
 }
+
 .june-light {
-    .login__page {
-        h2, p, label {
-            color: $black-olive-2;
-        }
+  .login__page {
+
+    h2,
+    p,
+    label {
+      color: $black-olive-2;
     }
-    .login__confirm {
-        h1, p {
-            color: $black-olive-2;
-        }    
+  }
+
+  .login__confirm {
+
+    h1,
+    p {
+      color: $black-olive-2;
     }
+  }
 }
+
 .july-light {
-    .login__page {
-        h2, p, label {
-            color: $white;
-        }
+  .login__page {
+
+    h2,
+    p,
+    label {
+      color: $white;
     }
-    .login__confirm {
-        h1, p {
-            color: $white;
-        }    
+  }
+
+  .login__confirm {
+
+    h1,
+    p {
+      color: $white;
     }
+  }
 }
+
 .august-dark {
-    .login__page {
-        h2, p, label {
-            color: $white;
-        }
+  .login__page {
+
+    h2,
+    p,
+    label {
+      color: $white;
     }
-    .login__confirm {
-        h1, p {
-            color: $white;
-        }    
+  }
+
+  .login__confirm {
+
+    h1,
+    p {
+      color: $white;
     }
+  }
+}
+
+.september-light {
+  .login__page {
+
+    h2,
+    p,
+    label {
+      color: $white;
+    }
+  }
+
+  .login__confirm {
+
+    h1,
+    p {
+      color: $white;
+    }
+  }
+
+  .login__body__input-section__message {
+    color: $white;
+  }
 }

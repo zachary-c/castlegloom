@@ -1,840 +1,1191 @@
 .pd {
-    &__title {
-        color: var(--theme-text);
-        max-width: 100%;
-        text-align: center;
-        word-break: break-word;
-        margin-top: .75rem;
+  &__title {
+    color: var(--theme-text);
+    max-width: 100%;
+    text-align: center;
+    word-break: break-word;
+    margin-top: .75rem;
+  }
+
+  &__question-entries {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  &__body {
+    max-width: 1000px;
+    width: 100%;
+    border: 2px solid black;
+    border-top: none;
+    box-sizing: border-box;
+    padding: .75rem .4rem;
+    margin-bottom: 2rem;
+  }
+
+  &__tabmenu {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0rem;
+    padding: 0;
+    justify-content: flex-start;
+    max-width: 1000px;
+    width: 100%;
+    margin-bottom: 0;
+
+    & li {
+      list-style: none;
     }
-    &__question-entries {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: .75rem;
+
+    &__tab {
+      padding: .2rem;
+      margin: 0;
+      border: 2px solid black;
+      cursor: pointer;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+
+      &.current {
+        border-bottom: none;
+
+        //padding-bottom: .5rem;
+        //transform: translate(0, -.5rem);
+      }
     }
-    &__body {
-        max-width: 1000px;
-        width:100%;
-        border: 2px solid black;
-        border-top: none;
-        box-sizing: border-box;
-        padding: .75rem .4rem;
-        margin-bottom: 2rem;
+
+    &__spacer {
+      flex-grow: 1;
+      cursor: default;
+      border: none;
+      background-color: transparent;
+      border-bottom: 2px solid black;
     }
-    &__tabmenu {
-        display: flex;
-        flex-direction: row;
-        column-gap: 0rem;
-        padding: 0;
-        justify-content: flex-start;
-        max-width: 1000px;
-        width: 100%;
-        margin-bottom: 0;
-        & li {
-            list-style: none;
-        }
-        &__tab {
-            padding: .2rem;
-            margin: 0;
-            border: 2px solid black;
-            cursor:pointer;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-            &.current {
-                border-bottom: none;
-                
-                //padding-bottom: .5rem;
-                //transform: translate(0, -.5rem);
-            }
-        }
-        &__spacer {
-            flex-grow: 1;
-            cursor:default;
-            border: none;
-            background-color: transparent;
-            border-bottom: 2px solid black;
-        }
-    }
+  }
 }
+
 .january {
-    // january is the default; as long as nothing changes in terms of what is assigned where, this is safely empty
-    .pe {
-        background-color: rgb(244, 243, 243);
-    }
+
+  // january is the default; as long as nothing changes in terms of what is assigned where, this is safely empty
+  .pe {
+    background-color: rgb(244, 243, 243);
+  }
 }
+
 .february-light {
-    .pd {
-        &__title {
-            color: var(--theme-text);
-        }
-        &__body {
-            background-color: $electricBlue;
-            border-color: $prussianBlue;
-        }
-        &__tabmenu {
-            &__tab {
-                background-color: $electricBlue;
-            }
-            & .spacer { }
-        }
-        &__preferences {
-            &__submission {
-                & .primary {}
-                //  background-color: var(--theme-);
+  .pd {
+    &__title {
+      color: var(--theme-text);
+    }
 
-            }
-            &__divider {
-                border-color: $prussianBlue;
-            }
-        }
-        &__leaderboard {
-            &__body {
-                border-color: $prussianBlue;
-                color: $prussianBlue;
-            }
-            --me-background: #{$blush};
-            --me-text-color: #{$prussianBlue};
-            --odd-row: #{$uranianBlue};
-            --even-row: white;
-            --header-row: #{$chefchaouenBlue};
-            --header-row-text: #{$snow};
-            --leaderboard-hover-background: #{$blush};
-        }
+    &__body {
+      background-color: $electricBlue;
+      border-color: $prussianBlue;
     }
-    .pe {
-        border-color: $chefchaouenBlue;
-        background-color: $snow;
-        &__header {
-            &__title {
-                color: $chefchaouenBlue;
-            }
-        }
-        &.responded {
-            background-color: $uranianBlue;
-        }
-        .poll.input {
-            & .poll__options__item.selected {
-                background-color: $prussianBlue;
-                & > .poll__options__item__fill-bar {
-                    background-color: $blush;
-                    filter: brightness(.5);
-                }
-                & > .poll__options__item__text, & > .poll__options__item__count {
-                    color: $snow;
-        
-                }
-            }
-        }
-        .poll__submit-area {
-            &__btn {
-                background-color: $blush;
-                color: $snow;
-                &.muted {
-                    color: $snow;
-                    background-color: $blush;
-                }
-            }
-        }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $electricBlue;
+      }
+
+      & .spacer {}
     }
+
+    &__preferences {
+      &__submission {
+        & .primary {}
+
+        //  background-color: var(--theme-);
+
+      }
+
+      &__divider {
+        border-color: $prussianBlue;
+      }
+    }
+
+    &__leaderboard {
+      &__body {
+        border-color: $prussianBlue;
+        color: $prussianBlue;
+      }
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --leaderboard-hover-background: #{$blush};
+    }
+  }
+
+  .pe {
+    border-color: $chefchaouenBlue;
+    background-color: $snow;
+
+    &__header {
+      &__title {
+        color: $chefchaouenBlue;
+      }
+    }
+
+    &.responded {
+      background-color: $uranianBlue;
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $prussianBlue;
+
+        &>.poll__options__item__fill-bar {
+          background-color: $blush;
+          filter: brightness(.5);
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $snow;
+
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $blush;
+        color: $snow;
+
+        &.muted {
+          color: $snow;
+          background-color: $blush;
+        }
+      }
+    }
+  }
 }
+
 .march-light {
-    .pd {
-        &__title {
-        }
-        &__body {
-            background-color: $columbia-blue;
-        }
-        &__tabmenu {
-            &__tab {
-                background-color: $lapis-lazuli;
-                color: white;
-                font-weight: 500;
-                &.current {
-                    background: linear-gradient($lapis-lazuli 0%, $lapis-lazuli 80%, transparent 100%);
-                }
-            }
-            & .spacer { }
-        }
-        &__preferences {
-            &__field {
-                input {
-                    border-color: transparent;
-                }
-            }
-            &__submission {
-                & .primary {}
-                //  background-color: var(--theme-);
-                
-            }
-            &__divider {
-            }
-        }
-        &__leaderboard {
-            &__body {
-            }
-            --me-background: #{$blush};
-            --me-text-color: #{$prussianBlue};
-            --odd-row: #{$uranianBlue};
-            --even-row: white;
-            --header-row: #{$chefchaouenBlue};
-            --header-row-text: #{$snow};
-            --leaderboard-hover-background: #{$blush};
-        }
+  .pd {
+    &__title {}
+
+    &__body {
+      background-color: $columbia-blue;
     }
-    .pe {
-        border-color: $office-green;
-        background-color: $spring-green;
-        &__header {
-            &__title {
-            }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $lapis-lazuli;
+        color: white;
+        font-weight: 500;
+
+        &.current {
+          background: linear-gradient($lapis-lazuli 0%, $lapis-lazuli 80%, transparent 100%);
         }
-        &.responded {
-            background-color: $columbia-blue;
-        }
-        .poll.input {
-            & .poll__options__item.selected {
-                & > .poll__options__item__fill-bar {
-                }
-                & > .poll__options__item__text, & > .poll__options__item__count {
-        
-                }
-            }
-        }
-        .poll__submit-area {
-            &__btn {
-                background-color: $kelly-green;
-                color:white;
-                &.muted {
-                    background-color: $baker-miller;
-                    color: $lapis-lazuli;
-                    opacity: .8;
-                }
-            }
-        }
+      }
+
+      & .spacer {}
     }
-    input { 
-        border-color: transparent;
+
+    &__preferences {
+      &__field {
+        input {
+          border-color: transparent;
+        }
+      }
+
+      &__submission {
+        & .primary {}
+
+        //  background-color: var(--theme-);
+
+      }
+
+      &__divider {}
     }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --leaderboard-hover-background: #{$blush};
+    }
+  }
+
+  .pe {
+    border-color: $office-green;
+    background-color: $spring-green;
+
+    &__header {
+      &__title {}
+    }
+
+    &.responded {
+      background-color: $columbia-blue;
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        &>.poll__options__item__fill-bar {}
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {}
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $kelly-green;
+        color: white;
+
+        &.muted {
+          background-color: $baker-miller;
+          color: $lapis-lazuli;
+          opacity: .8;
+        }
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
 }
+
 .april-light {
-    .pd {
-        &__title {
-            color: $light-green
-        }
-        &__body {
-            background-color: $pale-dogwood;
-        }
-        &__tabmenu {
-            &__tab {
-                background-color: $pale-dogwood;
-                color: $paynes-gray;
-                font-weight: 500;
-                &.current {
-                    background: $pale-dogwood;
-                }
-            }
-            & .spacer { }
-        }
-        &__preferences {
-            &__field {
-                input {
-                    border-color: $paynes-gray;
-                }
-            }
-            & .generate {
-                background-color: $lavender-pink;
-                color: $paynes-gray;
-                border: $paynes-gray 2px solid;
-            }
-            &__submission {
-                & .primary {
-                    background-color: $lavender-pink;
-                    color: $paynes-gray;
-                    border: $paynes-gray 2px solid;
-                }
-            }
-            &__divider {
-            }
-        }
-        &__leaderboard {
-            &__body {
-            }
-            --me-background: #{$blush};
-            --me-text-color: #{$prussianBlue};
-            --odd-row: #{$uranianBlue};
-            --even-row: white;
-            --header-row: #{$chefchaouenBlue};
-            --header-row-text: #{$snow};
-            --leaderboard-hover-background: #{$blush};
-        }
+  .pd {
+    &__title {
+      color: $light-green
     }
-    .pe {
-        border-color: $periwinkle;
-        background-color: $light-green;
-        &__header {
-            &__title {
-                color: $paynes-gray;
-            }
-            &__text {
-                color: $paynes-gray;
-            }
-        }
-        &.responded {
-            background-color: $vanilla-ice;
-            .pe__header {
-                &__title {
-                }
-            }
-        }
-        .poll.input {
-            & .poll__options__item.selected {
-                & > .poll__options__item__fill-bar {
-                }
-                & > .poll__options__item__text, & > .poll__options__item__count {
-                    color: $vanilla-ice;
-        
-                }
-            }
-        }
-        .poll__submit-area {
-            &__btn {
-                background-color: $lavender-pink;
-                color:$paynes-gray;
-                &.muted {
-                    background-color: $periwinkle;
-                    color: $light-green;
-                    opacity: .8;
-                }
-            }
-        }
+
+    &__body {
+      background-color: $pale-dogwood;
     }
-    input { 
-        border-color: transparent;
+
+    &__tabmenu {
+      &__tab {
+        background-color: $pale-dogwood;
+        color: $paynes-gray;
+        font-weight: 500;
+
+        &.current {
+          background: $pale-dogwood;
+        }
+      }
+
+      & .spacer {}
     }
+
+    &__preferences {
+      &__field {
+        input {
+          border-color: $paynes-gray;
+        }
+      }
+
+      & .generate {
+        background-color: $lavender-pink;
+        color: $paynes-gray;
+        border: $paynes-gray 2px solid;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $lavender-pink;
+          color: $paynes-gray;
+          border: $paynes-gray 2px solid;
+        }
+      }
+
+      &__divider {}
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --leaderboard-hover-background: #{$blush};
+    }
+  }
+
+  .pe {
+    border-color: $periwinkle;
+    background-color: $light-green;
+
+    &__header {
+      &__title {
+        color: $paynes-gray;
+      }
+
+      &__text {
+        color: $paynes-gray;
+      }
+    }
+
+    &.responded {
+      background-color: $vanilla-ice;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        &>.poll__options__item__fill-bar {}
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $vanilla-ice;
+
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $lavender-pink;
+        color: $paynes-gray;
+
+        &.muted {
+          background-color: $periwinkle;
+          color: $light-green;
+          opacity: .8;
+        }
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
 }
+
 .may-dark {
-    .pd {
-        &__title {
-            color: $saffron
-        }
-        &__body {
-            background-color: $charcoal;
-        }
-        &__tabmenu {
-            &__tab {
-                background-color: $charcoal;
-                color: $mistyRose;
-                font-weight: 500;
-                &.current {
-                    //background: $charcoal;
-                }
-            }
-            & .spacer { }
-        }
-        &__preferences {
-            h3 {
-                color: $mistyRose;
-            }
-            &__field {
-                input {
-                    border-color: $mistyRose;
-                    background-color: $charcoal;
-                    color: $mistyRose
-                }
-                label {
-                    color: $mistyRose;
-                }
-            }
-            & .generate {
-                background-color: $saffron;
-                color: $charcoal;
-            }
-            &__submission {
-                & .primary {
-                    background-color: $saffron;
-                    color: $charcoal;
-                }
-
-                & .muted {
-                    border: 2px solid $mistyRose;
-                    background-color: transparent;
-                    color: $mistyRose;
-                }    
-            }
-            &__divider {
-                border-color: $mistyRose;
-            }
-        }
-        &__leaderboard {
-            &__body {
-            }
-            --me-background: #{$blush};
-            --me-text-color: #{$prussianBlue};
-            --odd-row: #{$uranianBlue};
-            --even-row: white;
-            --header-row: #{$chefchaouenBlue};
-            --header-row-text: #{$snow};
-            --leaderboard-hover-background: #{$blush};
-        }
+  .pd {
+    &__title {
+      color: $saffron
     }
-    .pe {
-        border: none;
+
+    &__body {
+      background-color: $charcoal;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $charcoal;
+        color: $mistyRose;
+        font-weight: 500;
+
+        &.current {
+          //background: $charcoal;
+        }
+      }
+
+      & .spacer {}
+    }
+
+    &__preferences {
+      h3 {
+        color: $mistyRose;
+      }
+
+      &__field {
+        input {
+          border-color: $mistyRose;
+          background-color: $charcoal;
+          color: $mistyRose
+        }
+
+        label {
+          color: $mistyRose;
+        }
+      }
+
+      & .generate {
         background-color: $saffron;
-        &__header {
-            &__title {
-                color: $charcoal;
-            }
-            &__text {
-                color: $charcoal;
-            }
+        color: $charcoal;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $saffron;
+          color: $charcoal;
         }
-        &.responded {
-            background-color: $mistyRose;
-            .pe__header {
-                &__title {
-                }
-            }
+
+        & .muted {
+          border: 2px solid $mistyRose;
+          background-color: transparent;
+          color: $mistyRose;
         }
-        .poll.input {
-            & .poll__options__item.selected {
-                background-color: $charcoal;
-                & > .poll__options__item__fill-bar {
-                }
-                & > .poll__options__item__text, & > .poll__options__item__count {
-                    color: $mistyRose;
-                }
-            }
-        }
-        .poll__submit-area {
-            &__btn {
-                background-color: $bittersweet;
-                color:$mistyRose;
-                &.muted {
-                    background-color: $charcoal;
-                    color: $mistyRose;
-                    opacity: .8;
-                }
-            }
-            .submission-message {
-                border-color: $charcoal;
-            }
-        }
+      }
+
+      &__divider {
+        border-color: $mistyRose;
+      }
     }
-    input { 
-        border-color: transparent;
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --leaderboard-hover-background: #{$blush};
     }
+  }
+
+  .pe {
+    border: none;
+    background-color: $saffron;
+
+    &__header {
+      &__title {
+        color: $charcoal;
+      }
+
+      &__text {
+        color: $charcoal;
+      }
+    }
+
+    &.responded {
+      background-color: $mistyRose;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $charcoal;
+
+        &>.poll__options__item__fill-bar {}
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $mistyRose;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $bittersweet;
+        color: $mistyRose;
+
+        &.muted {
+          background-color: $charcoal;
+          color: $mistyRose;
+          opacity: .8;
+        }
+      }
+
+      .submission-message {
+        border-color: $charcoal;
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
 }
+
 .june-light {
-    .pd {
-        &__title {
-            color: $flame;
-        }
-        &__body {
-            background-color: $air-superiority;
-        }
-        &__tabmenu {
-            &__tab {
-                background-color: $air-superiority;
-                color: white;
-                font-weight: 500;
-                &.current {
-                    //background: $charcoal;
-                }
-            }
-            & .spacer { }
-        }
-        &__preferences {
-            h3 {
-                color: $white;
-            }
-            &__field {
-                input {
-                    //border-color: $earth-yellow;
-                    background-color: $icterine;
-                    color: $black-olive;
-                }
-                label {
-                    color: $white;
-                }
-            }
-            & .generate {
-                background-color: $earth-yellow;
-                color: $black-olive-2;
-                border: 2px solid $icterine
-            }
-            &__submission {
-                & .primary {
-                    background-color: $earth-yellow;
-                    color: $black-olive-2;
-                    border: 2px solid $icterine;
-                }
-
-                & .muted {
-                    border: 2px solid white;
-                    background-color: transparent;
-                    color: white;
-                }    
-            }
-            &__info-bar {
-                color: white;
-            }
-            &__divider {
-                border-color: white;
-            }
-        }
-        &__leaderboard {
-            &__body {
-            }
-            --me-background: #{$blush};
-            --me-text-color: #{$prussianBlue};
-            --odd-row: #{$uranianBlue};
-            --even-row: white;
-            --header-row: #{$chefchaouenBlue};
-            --header-row-text: #{$snow};
-            --leaderboard-hover-background: #{$blush};
-        }
+  .pd {
+    &__title {
+      color: $flame;
     }
-    .pe {
-        border: 2px solid $earth-yellow;
+
+    &__body {
+      background-color: $air-superiority;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $air-superiority;
+        color: white;
+        font-weight: 500;
+
+        &.current {
+          //background: $charcoal;
+        }
+      }
+
+      & .spacer {}
+    }
+
+    &__preferences {
+      h3 {
+        color: $white;
+      }
+
+      &__field {
+        input {
+          //border-color: $earth-yellow;
+          background-color: $icterine;
+          color: $black-olive;
+        }
+
+        label {
+          color: $white;
+        }
+      }
+
+      & .generate {
+        background-color: $earth-yellow;
+        color: $black-olive-2;
+        border: 2px solid $icterine
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $earth-yellow;
+          color: $black-olive-2;
+          border: 2px solid $icterine;
+        }
+
+        & .muted {
+          border: 2px solid white;
+          background-color: transparent;
+          color: white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --leaderboard-hover-background: #{$blush};
+    }
+  }
+
+  .pe {
+    border: 2px solid $earth-yellow;
+    background-color: $icterine;
+
+    &__header {
+      &__title {
+        color: $black-olive-2;
+      }
+
+      &__text {
+        color: $black-olive-2;
+      }
+    }
+
+    &.responded {
+      background-color: $earth-yellow;
+      border: 2px solid $icterine;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
         background-color: $icterine;
-        &__header {
-            &__title {
-                color: $black-olive-2;
-            }
-            &__text {
-                color: $black-olive-2;
-            }
-        }
-        &.responded {
-            background-color: $earth-yellow;
-            border: 2px solid $icterine;
-            .pe__header {
-                &__title {
-                }
-            }
-        }
-        .poll.input {
-            & .poll__options__item.selected {
-                background-color: $icterine;
-                & > .poll__options__item__fill-bar {
-                }
-                & > .poll__options__item__text, & > .poll__options__item__count {
-                    color: $black-olive-2;
-                }
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 4px;
-                    // the border is 2px and 2px, so we add 4px here to account for it
-                    height: calc(100% + 4px);
-                    // shift upwards by the 2px on top so aligned correctly
-                    top: -2px;
-                    left: -12px;
-                    display: block;
-                    background-color: $icterine;
-                }
-            }
-        }
-        .poll__submit-area {
-            &__btn {
-                background-color: $air-superiority;
-                color: $white;
-                border: 2px solid white;
-                &.muted {
-                    background-color: $black-olive-2;
-                    color: $earth-yellow;
-                    opacity: .8;
-                    border: none;
-                }
-            }
-            .submission-message {
-                border-color: $black-olive-2;
-            }
-        }
-    }
-    input { 
-        border-color: transparent;
-    }
-}
-.july-light {
-    .pd {
-        &__title {
-            color: $white;
-        }
-        &__body {
-            background-color: $battleshipGrey;
-        }
-        &__tabmenu {
-            &__tab {
-                background-color: $battleshipGrey;
-                color: white;
-                font-weight: 500;
-                &.current {
-                    //background: $charcoal;
-                }
-            }
-            & .spacer { }
-        }
-        &__preferences {
-            h3 {
-                color: $white;
-            }
-            &__field {
-                input {
-                    //border-color: $earth-yellow;
-                    background-color: $white;
-                    color: $americanBlue;
-                }
-                label {
-                    color: $white;
-                }
-            }
-            & .generate {
-                background-color: $fireEngineRed;
-                color: $white;
-                border: 2px solid $white;
-            }
-            &__submission {
-                & .primary {
-                    background-color: $fireEngineRed;
-                    color: $white;
-                    border: 2px solid $white;
-                }
 
-                & .muted {
-                    border: 2px solid white;
-                    background-color: transparent;
-                    color: white;
-                }    
-            }
-            &__info-bar {
-                color: white;
-            }
-            &__divider {
-                border-color: white;
-            }
+        &>.poll__options__item__fill-bar {}
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $black-olive-2;
         }
-        &__leaderboard {
-            &__body {
-            }
-            --me-background: #{$blush};
-            --me-text-color: #{$prussianBlue};
-            --odd-row: #{$uranianBlue};
-            --even-row: white;
-            --header-row: #{$chefchaouenBlue};
-            --header-row-text: #{$snow};
-            --leaderboard-hover-background: #{$blush};
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $icterine;
         }
+      }
     }
-    .pe {
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $air-superiority;
+        color: $white;
         border: 2px solid white;
-        background-color: $strawberryRed;
-        &__header {
-            &__title, &__text, &__date {
-                color: $white;
-            }
+
+        &.muted {
+          background-color: $black-olive-2;
+          color: $earth-yellow;
+          opacity: .8;
+          border: none;
         }
-        &.responded {
-            background-color: $americanBlue;
-            border: 2px solid $white;
-            .pe__header {
-                &__title {
-                }
-            }
-        }
-        .poll.input {
-            & .poll__options__item.selected {
-                background-color: $americanBlue;
-                & > .poll__options__item__fill-bar {
-                }
-                & > .poll__options__item__text, & > .poll__options__item__count {
-                    color: $white;
-                }
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 4px;
-                    // the border is 2px and 2px, so we add 4px here to account for it
-                    height: calc(100% + 4px);
-                    // shift upwards by the 2px on top so aligned correctly
-                    top: -2px;
-                    left: -12px;
-                    display: block;
-                    background-color: $white;
-                }
-            }
-        }
-        .poll__submit-area {
-            &__btn {
-                background-color: $americanBlue;
-                color: $white;
-                border: 2px solid white;
-                &.muted {
-                    background-color: $battleshipGrey;
-                    color: $white;
-                    opacity: .8;
-                    border: none;
-                }
-            }
-            .submission-message {
-                border-color: $battleshipGrey
-            }
-        }
+      }
+
+      .submission-message {
+        border-color: $black-olive-2;
+      }
     }
-    input { 
-        border-color: transparent;
-    }
+  }
+
+  input {
+    border-color: transparent;
+  }
 }
+
+.july-light {
+  .pd {
+    &__title {
+      color: $white;
+    }
+
+    &__body {
+      background-color: $battleshipGrey;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $battleshipGrey;
+        color: white;
+        font-weight: 500;
+
+        &.current {
+          //background: $charcoal;
+        }
+      }
+
+      & .spacer {}
+    }
+
+    &__preferences {
+      h3 {
+        color: $white;
+      }
+
+      &__field {
+        input {
+          //border-color: $earth-yellow;
+          background-color: $white;
+          color: $americanBlue;
+        }
+
+        label {
+          color: $white;
+        }
+      }
+
+      & .generate {
+        background-color: $fireEngineRed;
+        color: $white;
+        border: 2px solid $white;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $fireEngineRed;
+          color: $white;
+          border: 2px solid $white;
+        }
+
+        & .muted {
+          border: 2px solid white;
+          background-color: transparent;
+          color: white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --leaderboard-hover-background: #{$blush};
+    }
+  }
+
+  .pe {
+    border: 2px solid white;
+    background-color: $strawberryRed;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $white;
+      }
+    }
+
+    &.responded {
+      background-color: $americanBlue;
+      border: 2px solid $white;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $americanBlue;
+
+        &>.poll__options__item__fill-bar {}
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $white;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $white;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $americanBlue;
+        color: $white;
+        border: 2px solid white;
+
+        &.muted {
+          background-color: $battleshipGrey;
+          color: $white;
+          opacity: .8;
+          border: none;
+        }
+      }
+
+      .submission-message {
+        border-color: $battleshipGrey
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
+}
+
 .august-dark {
-    
-    .pd {
-        &__title {
-            color: $white;
-        }
-        &__body {
-            background-color: $august_buttonSignup;
-            border-color: $august_optionsItem;
-        }
-        &__btn {
-            background-color: $august_optionsItemFillBar;
-            color: $august_header;
-            padding: .2rem .5rem;
-            border: 2px solid $white;
-            font-weight: bold;
-            transition-duration: .2s;
-            cursor: pointer;
-            &:hover {
-                transform: scale(1.05);
-            }
-        }
-        &__tabmenu {
-            &__tab {
-                background-color: $august_buttonSignup;
-                color: white;
-                font-weight: 500;
-                border-color: $august_optionsItem;
-            }
-            &__spacer { 
-                border-color: $august_optionsItem
-            }
-        }
-        &__preferences {
-            h3 {
-                color: $white;
-            }
-            &__field {
-                input {
-                    border-color: $white;
-                    border-width: 1px;
-                    background-color: $august_header;
-                    color: $white;
-                }
-                label {
-                    color: $white;
-                }
-            }
-            & .generate {
-                background-color: $august_optionsItemFillBar;
-                color: $august_header;
-                padding: .2rem .5rem;
-                border: 2px solid $white;
-            }
-            &__submission {
-                & .primary {
-                    background-color: $august_pollBackground;
-                    color: $white;
-                    border: 2px solid $white;
-                }
 
-                & .muted {
-                    border: 2px solid white;
-                    background-color: transparent;
-                    color: white;
-                }    
-            }
-            &__info-bar {
-                color: white;
-            }
-            &__divider {
-                border-color: white;
-            }
-        }
-        &__leaderboard {
-            &__body {
-            }
-            --me-background: #{$august_optionsItem};
-            --me-text-color: #{black};
-            --odd-row: #{$august_header};
-            --even-row: #{$august_body};
-            --header-row: #{$august_optionsItem};
-            --header-row-text: #{black};
-            --body-row-text: #{white};
-            --surrounding-text-color: #{white};
-            --leaderboard-hover-background: #{$august_optionsItemFillBar};
-            --leaderboard-hover-text: #{black};
-        }
+  .pd {
+    &__title {
+      color: $white;
     }
-    .pe {
-        border: 1px solid white;
+
+    &__body {
+      background-color: $august_buttonSignup;
+      border-color: $august_optionsItem;
+    }
+
+    &__btn {
+      background-color: $august_optionsItemFillBar;
+      color: $august_header;
+      padding: .2rem .5rem;
+      border: 2px solid $white;
+      font-weight: bold;
+      transition-duration: .2s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $august_buttonSignup;
+        color: white;
+        font-weight: 500;
+        border-color: $august_optionsItem;
+      }
+
+      &__spacer {
+        border-color: $august_optionsItem
+      }
+    }
+
+    &__preferences {
+      h3 {
+        color: $white;
+      }
+
+      &__field {
+        input {
+          border-color: $white;
+          border-width: 1px;
+          background-color: $august_header;
+          color: $white;
+        }
+
+        label {
+          color: $white;
+        }
+      }
+
+      & .generate {
+        background-color: $august_optionsItemFillBar;
+        color: $august_header;
+        padding: .2rem .5rem;
+        border: 2px solid $white;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $august_pollBackground;
+          color: $white;
+          border: 2px solid $white;
+        }
+
+        & .muted {
+          border: 2px solid white;
+          background-color: transparent;
+          color: white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$august_optionsItem};
+      --me-text-color: #{black};
+      --odd-row: #{$august_header};
+      --even-row: #{$august_body};
+      --header-row: #{$august_optionsItem};
+      --header-row-text: #{black};
+      --body-row-text: #{white};
+      --surrounding-text-color: #{white};
+      --leaderboard-hover-background: #{$august_optionsItemFillBar};
+      --leaderboard-hover-text: #{black};
+    }
+  }
+
+  .pe {
+    border: 1px solid white;
+    background-color: $august_body;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $white;
+      }
+    }
+
+    &.responded {
+      background-color: $august_header;
+      border: 2px solid $white;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
         background-color: $august_body;
-        &__header {
-            &__title, &__text, &__date {
-                color: $white;
-            }
-        }
-        &.responded {
-            background-color: $august_header;
-            border: 2px solid $white;
-            .pe__header {
-                &__title {
-                }
-            }
-        }
-        .poll.input {
-            & .poll__options__item.selected {
-                background-color: $august_body;
-                & > .poll__options__item__fill-bar {
-                    background-color: $august_body;
 
-                }
-                & > .poll__options__item__text, & > .poll__options__item__count {
-                    color:white;
-                }
-                &:before {
-                    content: '';
-                    position: absolute;
-                    width: 4px;
-                    // the border is 2px and 2px, so we add 4px here to account for it
-                    height: calc(100% + 4px);
-                    // shift upwards by the 2px on top so aligned correctly
-                    top: -2px;
-                    left: -12px;
-                    display: block;
-                    background-color: $white;
-                }
-            }
+        &>.poll__options__item__fill-bar {
+          background-color: $august_body;
+
         }
-        .poll__submit-area {
-            &__btn {
-                background-color: $august_optionsItemFillBar;
-                color: $white;
-                border: 2px solid white;
-                &.muted {
-                    background-color: $august_header;
-                    color: $white;
-                    opacity: .8;
-                    border: none;
-                }
-            }
-            .submission-message {
-                > span {
-                    color: white;
-                }
-                border-color: white;
-            }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: white;
         }
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $white;
+        }
+      }
     }
-    input { 
-        border-color: transparent;
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $august_optionsItemFillBar;
+        color: $white;
+        border: 2px solid white;
+
+        &.muted {
+          background-color: $august_header;
+          color: $white;
+          opacity: .8;
+          border: none;
+        }
+      }
+
+      .submission-message {
+        >span {
+          color: white;
+        }
+
+        border-color: white;
+      }
     }
+  }
+
+  input {
+    border-color: transparent;
+  }
+}
+
+.september-light {
+  .pd {
+    &__title {
+      color: $white;
+    }
+
+    &__body {
+      background-color: $cerulean;
+      border-color: $pakistan-green;
+    }
+
+    &__btn {
+      background-color: $celadon;
+      color: $pakistan-green;
+      padding: .2rem .5rem;
+      border: none;
+      font-weight: bold;
+      transition-duration: .2s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $cerulean;
+        color: white;
+        font-weight: 500;
+        border-color: $pakistan-green;
+      }
+
+      &__spacer {
+        border-color: $pakistan-green;
+      }
+    }
+
+    &__preferences {
+      h3 {
+        color: $white;
+      }
+
+      &__field {
+        input {
+          border-width: 1px;
+          background-color: $munsell-blue;
+          color: $white;
+        }
+
+        label {
+          color: $white;
+        }
+
+        & .disabled input {
+          color: gray;
+        }
+      }
+
+      & .generate {
+        background-color: $atomic-tangerine;
+        color: $pakistan-green;
+        padding: .2rem .5rem;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $burgundy;
+          color: $white;
+          border: 2px solid $white;
+        }
+
+        & .muted {
+          border: 2px solid white;
+          background-color: transparent;
+          color: white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$celadon};
+      --me-text-color: #{black};
+      --odd-row: #{$cerulean};
+      --even-row: #{$munsell-blue};
+      --header-row: #{$pakistan-green};
+      --header-row-text: #{white};
+      --body-row-text: #{white};
+      --surrounding-text-color: #{white};
+      --leaderboard-hover-background: #{$atomic-tangerine};
+      --leaderboard-hover-text: #{black};
+    }
+  }
+
+  .pe {
+    border: none;
+    background-color: $celadon;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $pakistan-green;
+      }
+    }
+
+    &.responded {
+      background-color: $pakistan-green;
+
+      .pe__header {
+
+        &__title,
+        &__text,
+        &__date {
+          color: $celadon;
+        }
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $cerulean;
+
+        &>.poll__options__item__fill-bar {
+          background-color: $burgundy;
+
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: white;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $white;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $celadon;
+        color: $pakistan-green;
+        border: 2px solid $cerulean;
+
+        &.muted {
+          background-color: $munsell-blue;
+          color: $white;
+          opacity: .8;
+          border: none;
+        }
+      }
+
+      .submission-message {
+        >span {
+          color: white;
+        }
+
+        border-color: white;
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
 }

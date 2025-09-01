@@ -6,6 +6,7 @@ $november-tan: rgb(255, 236, 188);
 $ghost-of-october: rgb(255, 255, 228);
 $charcoal-cemetery: rgb(59, 59, 59);
 
+$black: black;
 // october
 $charcoal-mining: rgb(59,59,59);
 $white: white;
@@ -88,6 +89,14 @@ $august_optionsItemText : #000000;
 $august_optionsItemCount : #FFFFFF;
 $august_buttonSignup : #950006;
 
+// september light
+$cerulean: #146D93;
+$munsell-blue: #3B8EA5;
+$celadon: #aef6c7;
+$atomic-tangerine: #FF8B55;
+$burgundy: #880000;
+$pakistan-green: #0C3900;
+
 $laptop-width: 760px;
 $tablet-width: 450px;
 
@@ -161,5 +170,13 @@ $tablet-width: 450px;
     --theme-tertiary: #{$august_optionsItem};
     --theme-text: #{$august_optionsItemText};
     --theme-background: #{$august_body};
+    --theme-alt-background: transparent;
+}
+.september-light {
+    --theme-primary: #{$cerulean};
+    --theme-secondary: #{$celadon};
+    --theme-tertiary: #{$atomic-tangerine};
+    --theme-text: #000;
+    --theme-background: #{$munsell-blue};
     --theme-alt-background: transparent;
 }
