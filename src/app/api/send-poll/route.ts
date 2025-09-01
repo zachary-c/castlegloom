@@ -36,11 +36,9 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
 	let html = `
     <body>
         <div style="display:none;max-height: 0px; overflow: hidden;">${questionDescription}\n\n\n</div>
-        <div style="display: none; max-height: 0px; overflow: hidden;">
-
-
-		</div>
-
+        <div style="display: none; max-height: 0px; overflow: hidden;"> 
+ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
+        </div>
         <div style="${wrapperStyle}">
             <h3 style="${headerTextStyle}">${question.title}</h3>
             <div style="${pollStyle}">
@@ -70,6 +68,7 @@ export async function GET(request: NextRequest) {
 	}
 
 	// poll form link 
+	// [{ _id: "asdf", email: "zacharyhcampbell@gmail.com"}]
 	const emails: Recipient_t[] = await client.fetch(daily_polled);
 	const pollQuestion: PollQuestion_t = await client.fetch(latest_poll)
 	//let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
