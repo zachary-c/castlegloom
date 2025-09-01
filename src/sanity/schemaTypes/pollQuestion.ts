@@ -17,6 +17,11 @@ export default defineType({
             title: 'Question Title'
         },
         {
+            type: "questionPrompt",
+            name: "prompt",
+            title: "Question Prompt"
+        },
+        {
             name: 'date',
             title: 'Date',
             type: 'date',
