@@ -53,4 +53,5 @@ export type QuestionPrompt_t = {
 } | {
 	promptType: "richText",
 	richTextPrompt: PortableTextBlock[]
+	richTextAsPlaintext: string
 }

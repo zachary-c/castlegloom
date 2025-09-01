@@ -1,10 +1,9 @@
-
-import { client, patchClient } from '$/lib/client';
+import { client } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
-import { Recipient_t, themeObject } from '../send-poll/route';
-import { emailFrom, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT, emailToForBCC } from '@/poll/pollUtil';
+import { emailFrom, theme, emailToForBCC } from '@/poll/pollUtil';
+import { Recipient_t, themeObject } from '../apiUtil';
 
 export async function GET(request: NextRequest) {
 	const secret = request.nextUrl.searchParams.get("secret");

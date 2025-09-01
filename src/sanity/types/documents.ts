@@ -43,8 +43,11 @@ export const pollQuestionFields = `
         responseSlug,
         responseText
     },
+	"prompt": prompt {
+		...,
+		"richTextAsPlaintext": pt::text(richTextPrompt)	
+	},
     "suggestedBy": suggestedBy->{"joinedTitle": title.profession + " " + title.qualifier}.joinedTitle
-
 `
 export const pollQuestionFragment = `question->{
         ${pollQuestionFields}
