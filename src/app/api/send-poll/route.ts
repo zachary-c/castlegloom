@@ -11,7 +11,7 @@ const itemDefaultColor = 'rgb(114, 51, 17)'
 const itemHoverColor = 'rgb(161, 73, 18)'
 const itemTextColor = 'rgb(255, 255, 228)'
 
-type ThemeObject = {
+export type ThemeObject = {
 	backgroundColor: string
 	headerTextColor: string
 	questionTextColor: string
@@ -25,7 +25,7 @@ type ThemeObject = {
 	postScriptBorderColor?: string
 }
 
-function themeObject(theme: Theme): ThemeObject {
+export function themeObject(theme: Theme): ThemeObject {
 	let obj: ThemeObject;
 	switch (theme) {
 		case 'november':
@@ -258,7 +258,7 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
 	return html;
 }
 
-type Recipient_t = {
+export type Recipient_t = {
 	email: string
 	_id: string
 }
@@ -269,6 +269,7 @@ export async function GET(request: NextRequest) {
 		return NextResponse.json({ status: 401, message: "Not Allowed" });
 	}
 
+	// poll form link 
 	//    console.log("secret provided: ", secret);
 	// //[{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}] 
 	const emails: Recipient_t[] = await client.fetch(daily_polled);
