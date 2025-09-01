@@ -1,222 +1,13 @@
 import { client, patchClient } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
-import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
+import { toHTML } from '@portabletext/to-html';
+import { applyStyleToHtml, Recipient_t, themeObject, ThemeObject } from '../apiUtil';
+import { emailFrom, theme } from '@/poll/pollUtil';
 
 export const maxDuration = 60;
-const backgroundColor = 'rgb(255, 255, 228)'
-const headerColor = 'black'
-const itemDefaultColor = 'rgb(114, 51, 17)'
-const itemHoverColor = 'rgb(161, 73, 18)'
-const itemTextColor = 'rgb(255, 255, 228)'
 
-export type ThemeObject = {
-	backgroundColor: string
-	headerTextColor: string
-	questionTextColor: string
-	itemDefaultColor: string
-	itemHoverColor: string
-	itemTextColor: string
-	itemAdditionalStyles?: string
-	borderColor?: string
-	postScriptBackgroundColor: string
-	postScriptTextColor: string
-	postScriptBorderColor?: string
-}
-
-export function themeObject(theme: Theme): ThemeObject {
-	let obj: ThemeObject;
-	switch (theme) {
-		case 'november':
-			obj = {
-				backgroundColor: 'rgb(255, 255, 228)',
-				questionTextColor: 'black',
-				itemDefaultColor: 'rgb(114, 51, 17)',
-				itemHoverColor: 'rgb(161, 73, 18)',
-				itemTextColor: 'rgb(255, 255, 228)',
-				headerTextColor: 'black',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
-			};
-			break;
-		case 'december-light':
-			obj = {
-				backgroundColor: '#fff',
-				questionTextColor: '#01440f',
-				itemDefaultColor: '#ae0000',
-				itemHoverColor: '#01440f',
-				itemTextColor: '#f2f2f2',
-				borderColor: '#01440f',
-				headerTextColor: '#01440f',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
-			};
-			break;
-		case 'december-dark':
-			obj = {
-				backgroundColor: '#01440f',
-				questionTextColor: '#f2f2f2',
-				itemDefaultColor: '#ae0000',
-				itemHoverColor: '#00b409',
-				itemTextColor: '#f2f2f2',
-				borderColor: 'none',
-				headerTextColor: '#01440f',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
-
-			};
-			break;
-		case 'january':
-			obj = {
-				backgroundColor: THEME_JAN.walnutBrown,
-				headerTextColor: THEME_JAN.jasper,
-				itemDefaultColor: THEME_JAN.bone,
-				itemHoverColor: THEME_JAN.platinum,
-				itemTextColor: THEME_JAN.blackOlive,
-				questionTextColor: THEME_JAN.platinum,
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none',
-
-			};
-			break;
-		case 'february-light':
-			obj = {
-				backgroundColor: THEME_FEB_LIGHT.electricBlue,
-				headerTextColor: THEME_FEB_LIGHT.chefchaouenBlue,
-				itemDefaultColor: THEME_FEB_LIGHT.chefchaouenBlue,
-				itemHoverColor: THEME_FEB_LIGHT.blush,
-				itemTextColor: THEME_FEB_LIGHT.snow,
-				questionTextColor: THEME_FEB_LIGHT.prussianBlue,
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none'
-
-			};
-			break;
-		case 'march-light':
-			obj = {
-				headerTextColor: THEME_MARCH_LIGHT.lapisLazuli,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_MARCH_LIGHT.officeGreen,
-				itemDefaultColor: THEME_MARCH_LIGHT.springGreen,
-				itemHoverColor: THEME_MARCH_LIGHT.bakerMiller,
-				itemTextColor: THEME_MARCH_LIGHT.lapisLazuli,
-				postScriptBackgroundColor: THEME_MARCH_LIGHT.bakerMiller,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none',
-			};
-			break;
-		case 'april-light':
-			obj = {
-				headerTextColor: THEME_APRIL_LIGHT.robinsEgg,
-				questionTextColor: THEME_APRIL_LIGHT.paynesGray,
-				backgroundColor: THEME_APRIL_LIGHT.paleDogwood,
-				itemDefaultColor: THEME_APRIL_LIGHT.lavenderPink,
-				itemHoverColor: THEME_APRIL_LIGHT.vanillaIce,
-				itemTextColor: THEME_APRIL_LIGHT.paynesGray,
-				postScriptBackgroundColor: THEME_APRIL_LIGHT.lightGreen,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none',
-			};
-			break;
-		case 'may-dark':
-			obj = {
-				headerTextColor: THEME_MAY_DARK.claret,
-				questionTextColor: THEME_MAY_DARK.mistyRose,
-				backgroundColor: THEME_MAY_DARK.claret,
-				itemDefaultColor: THEME_MAY_DARK.saffron,
-				itemHoverColor: THEME_MAY_DARK.mistyRose,
-				itemTextColor: THEME_MAY_DARK.charcoal,
-				postScriptBackgroundColor: THEME_MAY_DARK.mistyRose,
-				itemAdditionalStyles: 'font-weight: bold;',
-				postScriptTextColor: THEME_MAY_DARK.charcoal,
-				borderColor: 'none',
-			};
-			break;
-		case 'june-light':
-			obj = {
-				headerTextColor: THEME_JUNE_LIGHT.flame,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_JUNE_LIGHT.flame,
-				itemDefaultColor: THEME_JUNE_LIGHT.earthYellow,
-				itemHoverColor: THEME_JUNE_LIGHT.icterine,
-				itemTextColor: THEME_JUNE_LIGHT.blackOlive2,
-				postScriptBackgroundColor: THEME_JUNE_LIGHT.airSuperiority,
-				itemAdditionalStyles: `border: 2px solid ${THEME_JUNE_LIGHT.icterine}; border-radius: 5px;`,
-				postScriptTextColor: STANDARDS.white,
-				postScriptBorderColor: STANDARDS.white,
-				borderColor: 'none',
-			};
-			break;
-		case 'july-light':
-			obj = {
-				headerTextColor: THEME_JULY_LIGHT.americanBlue,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_JULY_LIGHT.fireEngineRed,
-				itemDefaultColor: THEME_JULY_LIGHT.americanBlue,
-				itemHoverColor: THEME_JULY_LIGHT.strawberryRed,
-				itemTextColor: THEME_JULY_LIGHT.white,
-				postScriptBackgroundColor: THEME_JULY_LIGHT.americanBlue,
-				//itemAdditionalStyles: `border: 2px solid ${THEME_JULY_LIGHT.icterine}; border-radius: 5px;`,
-				postScriptTextColor: STANDARDS.white,
-				postScriptBorderColor: STANDARDS.white,
-				borderColor: 'none',
-			};
-			break;
-		case 'august-dark':
-			obj = {
-				headerTextColor: THEME_AUGUST_DARK.header,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_AUGUST_DARK.pollBackground,
-				itemDefaultColor: THEME_AUGUST_DARK.optionsItem,
-				itemHoverColor: THEME_AUGUST_DARK.optionsItemFillBar,
-				itemTextColor: THEME_AUGUST_DARK.header,
-				postScriptBackgroundColor: THEME_AUGUST_DARK.header,
-				postScriptTextColor: THEME_AUGUST_DARK.optionsItemText,
-				postScriptBorderColor: STANDARDS.white,
-				borderColor: 'none',
-			};
-			break;
-		case 'september-light':
-			obj = {
-				headerTextColor: THEME_SEPTEMBER_LIGHT.munsellBlue,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_SEPTEMBER_LIGHT.atomicTangerine,
-				itemDefaultColor: THEME_SEPTEMBER_LIGHT.cerulean,
-				itemHoverColor: THEME_SEPTEMBER_LIGHT.munsellBlue,
-				itemTextColor: STANDARDS.white,
-				postScriptBackgroundColor: THEME_SEPTEMBER_LIGHT.pakistanGreen,
-				postScriptTextColor: STANDARDS.white,
-				postScriptBorderColor: 'none',
-				borderColor: 'none',
-			};
-			break;
-		default:
-			obj = {
-				backgroundColor: 'black',
-				questionTextColor: 'white',
-				itemDefaultColor: 'gray',
-				itemHoverColor: 'white',
-				itemTextColor: 'black',
-				headerTextColor: 'black',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
-			};
-			break;
-	}
-	return obj;
-}
-
-/*
-			<h3 style="font-weight:bold; color: red; display:block; text-align:center; padding-top:.5rem; padding-bottom:.5rem; font-size:4rem;margin: 0;">BIG NEWS</h3>
-			<span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">THERE"S A POLLING DASHBOARD NOW</span>
-			<span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">CLICK THIS STRANGE EMAIL LINK TO GO THERE: <a href="https://castlegloom.com/api/poll/login?userid=${recipient._id}">Dashboard</a></span>
-			<span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">OR, in the future, GO TO <a href="https://castlegloom.com/poll/login">https://castlegloom.com/poll/login</a> AND PUT IN YOUR EMAIL TO GET A MAGIC LINK EMAIL THAT WILL LET YOU SIGN IN</span>
-			<span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">THE DASHBOARD LETS YOU 1) SUBMIT POLL RESPONSES 2) SET YOUR USER PREFERENCES 3) SEE HOW YOU"VE VOTED IN OLD POLLS</span>
-			<span style="font-weight:bold; display:block; padding-top:.5rem; padding-bottom:.5rem; font-size:1rem;">OK GREAT THANKS NOW HELP ME DECIDE WHAT TO DO NEXT:</span>
-*/
 function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj: ThemeObject): string {
 	const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
 	const questionTextStyle = `margin-top:0; margin-left: 1rem;color:${obj.questionTextColor}; margin-right: 1rem;font-size:1rem;`
@@ -229,9 +20,22 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
 	const title = encodeURIComponent(question.title)
 	const responder = encodeURIComponent(recipient._id)
 	const encodedDate = encodeURIComponent(question.date)
+	let questionHTML
+	let questionDescription
+	if (question.questionText) {
+		questionHTML = question.questionText
+		questionDescription = question.questionText
+	} else if (question.prompt?.promptType == "plainText") {
+		questionHTML = question.prompt.plaintextQuestionPrompt
+		questionDescription = question.prompt.plaintextQuestionPrompt
+	} else {
+		questionHTML = toHTML(question.prompt?.richTextPrompt ?? [])
+		questionHTML = applyStyleToHtml(questionHTML, "", "margin: 0;")
+		questionDescription = question.prompt?.richTextAsPlaintext
+	}
 	let html = `
     <body>
-        <div style="display:none;max-height: 0px; overflow: hidden;">${question.questionText}\n\n\n</div>
+        <div style="display:none;max-height: 0px; overflow: hidden;">${questionDescription}\n\n\n</div>
         <div style="display: none; max-height: 0px; overflow: hidden;"> 
  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
         </div>
@@ -244,7 +48,7 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
                 </div>`
 			: ''
 		}
-                <h4 style="${questionTextStyle}">${question.questionText}</h4>
+                <h4 style="${questionTextStyle}">${questionHTML}</h4>
                 <ul style="${listStyles}">
                     ${question.responses.map((response) => {
 			return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
@@ -254,13 +58,7 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
         </div>
     </body>
     `
-	//                         <span style="${postscriptStyle}"><img width="25px" height="25px" src= alt={"User-suggested poll question!"}/></span>
 	return html;
-}
-
-export type Recipient_t = {
-	email: string
-	_id: string
 }
 
 export async function GET(request: NextRequest) {
@@ -270,8 +68,7 @@ export async function GET(request: NextRequest) {
 	}
 
 	// poll form link 
-	//    console.log("secret provided: ", secret);
-	// //[{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}] 
+	// [{ _id: "asdf", email: "zacharyhcampbell@gmail.com"}]
 	const emails: Recipient_t[] = await client.fetch(daily_polled);
 	const pollQuestion: PollQuestion_t = await client.fetch(latest_poll)
 	//let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
@@ -286,7 +83,6 @@ export async function GET(request: NextRequest) {
 			pass: process.env.ORACLE_APP_PASSWORD,
 		}
 	})
-	//console.log('Mailer:', mailer);
 	if (pollQuestion) {
 		if (pollQuestion.hasBeenSent) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
@@ -313,7 +109,6 @@ export async function GET(request: NextRequest) {
 			const info = await mailer.sendMail({
 				from: emailFrom,
 				to: recipient.email,
-				// bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
 				subject: `${pollQuestion.title} | ${pollQuestion.date}`,
 				html: html
 			})
@@ -331,45 +126,8 @@ export async function GET(request: NextRequest) {
 		}
 	})
 	const res = await hasBeenSentPatch.commit();
-	console.log("result", res)
-	/* const info = await mailer.sendMail({
-		from: process.env.ORACLE_LOGIN,
-		to: '314oracle@gmail.com',
-		bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
-		subject: `Happy October ${todaysDate.getDate()}${suffix(todaysDate.getDate())} + POLLS!`,
-		text: emailBody,
-		html: ,
-		attachments: attachments
-	})
-	/* 
-	//console.log(info);
-	if (!info.response.includes('250')) {
-		console.log("Errored, info: ", info)
-		return NextResponse.json("Error sending email", {status: 500})
-	}  
-	*/
+
 	console.log(`Email sent to ${emails.length} emails:`, emails);
 	return NextResponse.json({ status: 200 })
 }
 
-/*
-<p>
-	Happy October 1st! Spooky season has begun and it is time to get excited for fall, the best season. 
-</p>
-<p>
-	You are receiving this email because last year you signed up for daily spooky memes from <a href="spook-tober.com">spook-tober.com</a>. That domain is no longer in use! Spooktober memes have moved to <a href="https://castlegloom.com/spooktober">castlegloom.com/spooktober</a>. The site has received a fresh coat of paint, and more improvements and updates will be coming Soon™. 
-</p>
-<p>
-	If you do not wish to receive daily spooktober memes at this address, please reply to this email stating as much and you willl be removed from the list.
-</p>
-<p>
-	Happy Autumn!
-</p>*/
-
-/*
-
-					<p>Happy second half of Spooktober! The smiths at Castle Gloom have been hard at work and are pleased to announce the newest way to <strike>collect data</strike> provide entertainment: Polling! </p>
-					<p>Each day for the second half of the month (in addition to the spooktober meme of the day), you will receive a poll such as the following: </p>
-					<p>You will then (if you so desire) click one of the responses. This will record your response and redirect you to that meme's page, where you can see it and other poll responses (Voting again changes your vote, theoretically, but the skeleton crew hasn't tested that very well so it might break :P).</p>
-					<p>Happy Haunting!</p>
-*/

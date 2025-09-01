@@ -19,7 +19,7 @@ export const meme_by_date = groq`
     }
     `
 export const latest_poll = groq`
-    *[_type == 'pollQuestion'  && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+    *[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     }
 `
@@ -54,8 +54,8 @@ export const poll_dates = groq`
 `
 
 export type Concrete<Type> = {
-    [Key in keyof Type]-?: NonNullable<Type[Key]>;
-  };
+	[Key in keyof Type]-?: NonNullable<Type[Key]>;
+};
 export const latest_meme = groq`
     *[_type == 'meme' && date < $now] | order(date desc)[0] {
         ${meme_fields}
@@ -92,24 +92,24 @@ export const todays_meme = groq`
 }
 `
 export type EmailableMeme = {
-    imgAsset: {
-        mimeType: string,
-        url: string,
-        extension: string
-    },
-    videoAsset: {
-        mimeType: string,
-        extension: string,
-        url: string
-    },
-    cslug: string,
-    youtubeURL: string,
-    date : string,
-    pollQuestion : PollQuestion_t | undefined
+	imgAsset: {
+		mimeType: string,
+		url: string,
+		extension: string
+	},
+	videoAsset: {
+		mimeType: string,
+		extension: string,
+		url: string
+	},
+	cslug: string,
+	youtubeURL: string,
+	date: string,
+	pollQuestion: PollQuestion_t | undefined
 }
 
-function keyFragment(name : string) {
-    return groq`{
+function keyFragment(name: string) {
+	return groq`{
         "key": "${name}",
         "url": soundfile.asset->url,
         "filename": soundfile.asset->originalFilename
