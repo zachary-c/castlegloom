@@ -84,6 +84,7 @@ export const THEME_SEPTEMBER_LIGHT = {
 }
 
 export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`
+export const emailToForBCC = `Citizenry <${process.env.ORACLE_LOGIN}>`
 
 export function randomInRange(min: number, max: number) {
 	return Math.floor(Math.random() * max) + min;
