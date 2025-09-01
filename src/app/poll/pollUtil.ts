@@ -1,83 +1,86 @@
 
-export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark'
+export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
 
-export const theme : Theme = 'august-dark'
+export const theme: Theme = 'september-light'
 
 export const STANDARDS = {
-    white: '#fff',
-    black: '#000' 
+	white: '#fff',
+	black: '#000'
 }
 // January Theme Colors
 export const THEME_JAN = {
-    walnutBrown: "#5c574f",
-    blackOlive: "#48483a",
-    jasper: "#d66853",
-    bone: "#d1d3c4",
-    platinum: "#dfe0dc",
+	walnutBrown: "#5c574f",
+	blackOlive: "#48483a",
+	jasper: "#d66853",
+	bone: "#d1d3c4",
+	platinum: "#dfe0dc",
 }
 
 export const THEME_FEB_LIGHT = {
-    blush: '#db5375',
-    snow: '#f7f0f0',
-    electricBlue: '#8af3ff',
-    chefchaouenBlue: '#3f8efc',
-    prussianBlue: `#0b3142`,
-    uranianBlue: '#b1ddf2'
+	blush: '#db5375',
+	snow: '#f7f0f0',
+	electricBlue: '#8af3ff',
+	chefchaouenBlue: '#3f8efc',
+	prussianBlue: `#0b3142`,
+	uranianBlue: '#b1ddf2'
 }
 export const THEME_MARCH_LIGHT = {
-    springGreen: '#92e464',
-    bakerMiller: '#fa91b2',
-    columbiaBlue: '#c4d1d7',
-    officeGreen: '#276904',
-    lapisLazuli: `#1f6898`,
-    kellyGreen: '#40a505'
+	springGreen: '#92e464',
+	bakerMiller: '#fa91b2',
+	columbiaBlue: '#c4d1d7',
+	officeGreen: '#276904',
+	lapisLazuli: `#1f6898`,
+	kellyGreen: '#40a505'
 }
 export const THEME_APRIL_LIGHT = {
-    periwinkle: "#B7B1F2",
-    lavenderPink: "#fdb7ea",
-    paleDogwood: "#ffdccc",
-    vanillaIce: "#fbf3b9",
-    lightGreen: "#B4FFAB",
-    paynesGray: '#536271',
-    robinsEgg: '#1ae3e3'
+	periwinkle: "#B7B1F2",
+	lavenderPink: "#fdb7ea",
+	paleDogwood: "#ffdccc",
+	vanillaIce: "#fbf3b9",
+	lightGreen: "#B4FFAB",
+	paynesGray: '#536271',
+	robinsEgg: '#1ae3e3'
 }
 export const THEME_MAY_DARK = {
-    bittersweet: "#ff5e5b",
-    mistyRose: "#f1dede",
-    claret: "#6e0d25",
-    saffron: "#f9c22e",
-    charcoal: "#424c55",
+	bittersweet: "#ff5e5b",
+	mistyRose: "#f1dede",
+	claret: "#6e0d25",
+	saffron: "#f9c22e",
+	charcoal: "#424c55",
 }
 export const THEME_JUNE_LIGHT = {
-    icterine: "#FFFA71",
-    airSuperiority: "#4DA5E0",
-    earthYellow: "#FFAE36",
-    flame: "#DD6031",
-    blackOlive2: "#2E382E",
+	icterine: "#FFFA71",
+	airSuperiority: "#4DA5E0",
+	earthYellow: "#FFAE36",
+	flame: "#DD6031",
+	blackOlive2: "#2E382E",
 }
 export const THEME_JULY_LIGHT = {
-    americanBlue: "#19549C",
-    fireEngineRed: "#D01827",
-    darkOrange: "#F58F29",
-    battleshipGrey: "#818479",
-    white: "#fff",
-    strawberryRed: '#e55151'
+	americanBlue: "#19549C",
+	fireEngineRed: "#D01827",
+	darkOrange: "#F58F29",
+	battleshipGrey: "#818479",
+	white: "#fff",
+	strawberryRed: '#e55151'
 }
 export const THEME_AUGUST_DARK = {
-    body : "#510C0C",
-    pageTitle : "#FFFFFF", 
-    header : "#58420b",
-    pollBackground : "#950006",
-    optionsItem : "#FFBF1E",
-    optionsItemFillBar : "#84BF43",
-    optionsItemText : "#FFFFFF",
-    optionsItemCount : "#FFFFFF",
-    buttonSignup : "#950006;"
+	body: "#510C0C",
+	pageTitle: "#FFFFFF",
+	header: "#58420b",
+	pollBackground: "#950006",
+	optionsItem: "#FFBF1E",
+	optionsItemFillBar: "#84BF43",
+	optionsItemText: "#FFFFFF",
+	optionsItemCount: "#FFFFFF",
+	buttonSignup: "#950006;"
+}
+export const THEME_SEPTEMBER_LIGHT = {
+
 }
 
 export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`
 
-export function randomInRange(min : number, max : number) {
-    return Math.floor(Math.random() * max) + min; 
+export function randomInRange(min: number, max: number) {
+	return Math.floor(Math.random() * max) + min;
 }
 export const emailRegex = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)
