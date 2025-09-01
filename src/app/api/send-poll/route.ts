@@ -3,13 +3,9 @@ import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { emailFrom, STANDARDS, Theme, theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
+import { toHTML } from '@portabletext/to-html';
 
 export const maxDuration = 60;
-const backgroundColor = 'rgb(255, 255, 228)'
-const headerColor = 'black'
-const itemDefaultColor = 'rgb(114, 51, 17)'
-const itemHoverColor = 'rgb(161, 73, 18)'
-const itemTextColor = 'rgb(255, 255, 228)'
 
 export type ThemeObject = {
 	backgroundColor: string
@@ -229,12 +225,20 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
 	const title = encodeURIComponent(question.title)
 	const responder = encodeURIComponent(recipient._id)
 	const encodedDate = encodeURIComponent(question.date)
+	let questionHTML
+	if (question.questionText) {
+		questionHTML = question.questionText
+	} else if (question.prompt?.promptType == "plainText") {
+		questionHTML = question.prompt.plaintextQuestionPrompt
+	} else {
+		questionHTML = toHTML(question.prompt?.richTextPrompt ?? [])
+
+	}
 	let html = `
     <body>
         <div style="display:none;max-height: 0px; overflow: hidden;">${question.questionText}\n\n\n</div>
-        <div style="display: none; max-height: 0px; overflow: hidden;"> 
- ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
-        </div>
+        <div style="display: none; max-height: 0px; overflow: hidden;"></div>
+
         <div style="${wrapperStyle}">
             <h3 style="${headerTextStyle}">${question.title}</h3>
             <div style="${pollStyle}">
@@ -244,7 +248,7 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
                 </div>`
 			: ''
 		}
-                <h4 style="${questionTextStyle}">${question.questionText}</h4>
+                <h4 style="${questionTextStyle}">${questionHTML}</h4>
                 <ul style="${listStyles}">
                     ${question.responses.map((response) => {
 			return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
@@ -254,7 +258,6 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
         </div>
     </body>
     `
-	//                         <span style="${postscriptStyle}"><img width="25px" height="25px" src= alt={"User-suggested poll question!"}/></span>
 	return html;
 }
 
@@ -271,8 +274,7 @@ export async function GET(request: NextRequest) {
 
 	// poll form link 
 	//    console.log("secret provided: ", secret);
-	// //[{_id:'asdf', email: 'zacharyhcampbell@gmail.com'}] 
-	const emails: Recipient_t[] = await client.fetch(daily_polled);
+	const emails: Recipient_t[] = [{ _id: 'asdf', email: 'zacharyhcampbell@gmail.com' }]//await client.fetch(daily_polled);
 	const pollQuestion: PollQuestion_t = await client.fetch(latest_poll)
 	//let emailsList = emails.map((email : any) => email.email);//.\filter((e : string) => e === 'zhc@iastate.edu');
 	//console.log(emailsList)
@@ -290,7 +292,7 @@ export async function GET(request: NextRequest) {
 	if (pollQuestion) {
 		if (pollQuestion.hasBeenSent) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
-			return NextResponse.json({ status: 204 })
+			//return NextResponse.json({ status: 204 })
 		}
 		const themeObj = themeObject(theme)
 		console.log('theme', themeObj)
@@ -313,7 +315,6 @@ export async function GET(request: NextRequest) {
 			const info = await mailer.sendMail({
 				from: emailFrom,
 				to: recipient.email,
-				// bcc: ['zacharyhcampbell@gmail.com'] ,//emailsList.join(','),
 				subject: `${pollQuestion.title} | ${pollQuestion.date}`,
 				html: html
 			})

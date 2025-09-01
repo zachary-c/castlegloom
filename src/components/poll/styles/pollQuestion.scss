@@ -92,6 +92,10 @@
     min-height: 3.2rem;
     width: 100%;
 
+    & p {
+      margin: 0;
+    }
+
     &:before {
       content: 'POLL';
       float: right;
