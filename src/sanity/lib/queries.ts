@@ -19,7 +19,7 @@ export const meme_by_date = groq`
     }
     `
 export const latest_poll = groq`
-    *[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+    *[_type == 'pollQuestion'  && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     }
 `
@@ -64,7 +64,8 @@ export const latest_meme = groq`
 export const recipient_list = groq`
     *[_type == 'recipient'] {
         _id,
-        email
+        email,
+		isPolledDaily
     }
 `
 export const daily_polled = groq`

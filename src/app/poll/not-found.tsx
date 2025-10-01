@@ -5,12 +5,12 @@ import Link from 'next/link'
 
 export default async function NotFound() {
 
-    return (
-        <main className='page--global-notfound'>
-            <h1>404 Poll Not Found</h1>
-            <div className='daynav__button'>
-                <Link className="button" href='/poll'>Return To Poll Home</Link>
-            </div>
-        </main>
-    )
+	return (
+		<main className='page--global-notfound'>
+			<h1>404 Poll Not Found</h1>
+			<div className='daynav__button'>
+				<Link className="button" href='/poll'>Return To Poll Home</Link>
+			</div>
+		</main>
+	)
 }

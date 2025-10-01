@@ -1,4 +1,4 @@
-import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT } from '@/poll/pollUtil';
+import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT, THEME_OCTOBER_DARK } from '@/poll/pollUtil';
 
 export type ThemeObject = {
 	backgroundColor: string
@@ -187,6 +187,21 @@ export function themeObject(theme: Theme): ThemeObject {
 				postScriptBorderColor: 'none',
 				borderColor: 'none',
 				questionHeaderLinkColor: THEME_SEPTEMBER_LIGHT.celadon,
+			};
+			break;
+		case 'october-dark':
+			obj = {
+				headerTextColor: THEME_OCTOBER_DARK.grayLeiter,
+				questionTextColor: STANDARDS.white,
+				backgroundColor: THEME_OCTOBER_DARK.charcoalMining,
+				itemDefaultColor: THEME_OCTOBER_DARK.grayLeiter,
+				itemHoverColor: THEME_OCTOBER_DARK.ashenCue,
+				itemTextColor: THEME_OCTOBER_DARK.pumpkinOrange,
+				postScriptBackgroundColor: THEME_OCTOBER_DARK.grayLeiter,
+				postScriptTextColor: STANDARDS.white,
+				postScriptBorderColor: 'none',
+				borderColor: 'none',
+				questionHeaderLinkColor: THEME_OCTOBER_DARK.pumpkinOrange,
 			};
 			break;
 		default:

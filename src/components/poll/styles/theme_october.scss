@@ -1,0 +1,216 @@
+.october-dark {
+  .pd {
+    &__title {
+      color: orange;
+    }
+
+    &__body {
+      background-color: $ashen-cue;
+      border-color: $corn-yellow;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $ashen-cue;
+        color: white;
+        font-weight: 500;
+      }
+
+      &__spacer,
+      &__tab {
+        border-color: $corn-yellow;
+      }
+    }
+
+    &__preferences {
+      h3 {
+        color: $pumpkin-orange;
+      }
+
+      &__field {
+        input {
+          border-width: 1px;
+          background-color: $charcoal-mining;
+          color: $white;
+
+          &[disabled] {
+            background-color: transparentize($charcoal-mining, .25);
+            color: $slaight-grey;
+          }
+        }
+
+        label {
+          color: $pumpkin-orange;
+        }
+
+      }
+
+      & .generate {
+        background-color: $pumpkin-orange;
+        color: $charcoal-mining;
+        padding: .2rem .5rem;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $pumpkin-orange;
+          color: $charcoal-mining;
+        }
+
+        & .muted {
+          border: 2px solid white;
+          background-color: transparent;
+          color: white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{orange};
+      --me-text-color: #{$charcoal-mining};
+      --odd-row: #{$gray-leiter};
+      --even-row: #{$charcoal-mining};
+      --header-row: #{$pumpkin-orange};
+      --header-row-text: #{$charcoal-mining};
+      --body-row-text: #{$pumpkin-orange};
+      --surrounding-text-color: #{white};
+      --leaderboard-hover-background: #{$transparent-1};
+      --leaderboard-hover-text: #{black};
+    }
+
+    &__btn {
+      background-color: $pumpkin-orange;
+      color: $charcoal-mining;
+      padding: .2rem .5rem;
+      border: none;
+      font-weight: bold;
+      transition-duration: .2s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .pe {
+    background-color: $pumpkin-orange;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $charcoal-mining;
+      }
+    }
+
+    &.responded {
+      background-color: $charcoal-mining;
+
+      .pe__header {
+
+        &__title,
+        &__text,
+        &__date {
+          color: $pumpkin-orange;
+
+          a {
+            color: orange;
+            font-weight: 700;
+          }
+        }
+      }
+
+      .poll.input {
+        border: none;
+      }
+    }
+
+    .poll.input {
+      border: 2px solid $ashen-cue;
+
+      & .poll__options__item.selected {
+        background-color: $ashen-cue;
+        color: orange;
+
+        &>.poll__options__item__fill-bar {
+          background-color: $gray-leiter;
+
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: white;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $white;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $white;
+        color: $charcoal-mining;
+        border: 2px solid $charcoal-mining;
+
+        &.muted {
+          background-color: $ashen-cue;
+          color: $white;
+          opacity: .8;
+          border: none;
+        }
+      }
+
+      .submission-message {
+        >span {
+          color: white;
+        }
+
+        border-color: white;
+      }
+    }
+  }
+
+  .login__page {
+
+    h2,
+    p,
+    label {
+      color: $white;
+    }
+  }
+
+  .login__confirm {
+
+    h1,
+    p {
+      color: $white;
+    }
+  }
+
+  .login__body__input-section__message {
+    color: $white;
+  }
+}

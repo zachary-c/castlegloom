@@ -3,6 +3,7 @@ import { PollQuestion_t } from "$/types/documents";
 import { Theme } from "@/poll/pollUtil";
 import Image from "next/image";
 import "../styles/pollQuestion.scss"
+
 import { useEffect, useMemo, useState } from "react";
 import pfp from "%/default.png"
 import { renderPrompt } from "./util";
@@ -15,7 +16,7 @@ import { renderPrompt } from "./util";
 // vertically aligning the refresh and the total responses
 // very light dropshadow to light white box
 // 
-export default function PollQuestion({ question, date, theme }: { question: PollQuestion_t, date: string, theme: Theme }) {
+export default function PollQuestion({ question, date, theme, embedded }: { question: PollQuestion_t, date: string, theme: Theme, embedded?: boolean }) {
 	const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
 	const [loadingData, setLoadingData] = useState<boolean>(true)
 
@@ -41,9 +42,7 @@ export default function PollQuestion({ question, date, theme }: { question: Poll
 		getData()
 	}, [])
 
-	console.log("question", question)
-
-	return <div className={`poll ${theme ?? 'november'} ${theme !== 'october-light' ? 'montserrat' : ''}`}>
+	return <div className={`poll ${theme ?? 'november'} montserrat${embedded ? " embedded" : ""}`}>
 		<h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>
 		<ul className="poll__options">
 			{questionData ? questionData.responses.map((r, i) =>
