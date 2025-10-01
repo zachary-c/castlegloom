@@ -82,6 +82,15 @@ export const THEME_SEPTEMBER_LIGHT = {
 	burgundy: "#880000",
 	pakistanGreen: "#0C3900"
 }
+export const THEME_OCTOBER_DARK = {
+	charcoalMining: "rgb(59, 59, 59)",
+	grayLeiter: "rgb(75, 75, 75)",
+	pumpkinOrange: "#ffbf00",
+	ashenCue: "rgb(100, 100, 100)",
+	transparent1: "hsla(0, 0%, 100%, .655)",
+	transparent2: "hsla(0, 0%, 100%, .96)",
+	slaightGrey: "#abb9c7"
+}
 
 export const emailFrom = `Castle Gloom Census <${process.env.ORACLE_LOGIN}>`
 export const emailToForBCC = `Citizenry <${process.env.ORACLE_LOGIN}>`
