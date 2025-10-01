@@ -46,7 +46,7 @@ export default async function Day2022({ params }: { params: { day: string, cslug
 			{data.pollQuestion &&
 				<>
 					<PollQuestion question={data.pollQuestion} date={dateString} theme={'october-dark'} embedded={true} />
-					<Link className="button cta" href="/poll">More Poll Questions</Link>
+					<Link className="button cta wide" href="/poll">More Poll Questions</Link>
 				</>
 			}
 		</>

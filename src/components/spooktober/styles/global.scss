@@ -30,9 +30,12 @@ a.button {
   }
 
   &.cta {
-    width: 300px;
     background-color: $white;
     color: $charcoal-mining;
+  }
+
+  &.wide {
+    width: 300px;
   }
 
 }
