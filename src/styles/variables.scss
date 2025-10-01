@@ -8,14 +8,15 @@ $charcoal-cemetery: rgb(59, 59, 59);
 
 $black: black;
 // october
-$charcoal-mining: rgb(59,59,59);
+$charcoal-mining: rgb(59, 59, 59);
 $white: white;
-$gray-leiter: rgb(75,75,75);
+$gray-leiter: rgb(75, 75, 75);
 $pumpkin-orange: #ffbf00;
-$corn-yellow:#ffbf00;
-$ashen-cue:rgb(100,100,100);
-$transparent-1: hsla(0,0%,100%,.655);
-$transparent-2: hsla(0,0%,100%,.96);
+$corn-yellow: #ffbf00;
+$ashen-cue: rgb(100, 100, 100);
+$transparent-1: hsla(0, 0%, 100%, .655);
+$transparent-2: hsla(0, 0%, 100%, .96);
+$slaight-grey: #abb9c7;
 
 // december
 $snow-white: #f2f2f2;
@@ -102,81 +103,90 @@ $tablet-width: 450px;
 
 
 .december-light {
-    --theme-primary: #{$fir-green};
-    --theme-secondary: #{$santa-red};
-    --theme-tertiary: #{$tree-trimming};
-    --theme-text: #{$tree-trimming};
-    --theme-background: #{$snow-white};
+  --theme-primary: #{$fir-green};
+  --theme-secondary: #{$santa-red};
+  --theme-tertiary: #{$tree-trimming};
+  --theme-text: #{$tree-trimming};
+  --theme-background: #{$snow-white};
 }
+
 .january {
-    --theme-primary: #{$walnut-brown};
-    --theme-secondary: #{$jasper};
-    --theme-tertiary: #{$black-olive};
-    --theme-text: #{$walnut-brown};
-    --theme-background: #{$platinum};
-    --theme-alt-background: #{$bone};
+  --theme-primary: #{$walnut-brown};
+  --theme-secondary: #{$jasper};
+  --theme-tertiary: #{$black-olive};
+  --theme-text: #{$walnut-brown};
+  --theme-background: #{$platinum};
+  --theme-alt-background: #{$bone};
 }
+
 .february-light {
-    --theme-primary: #{$electricBlue};
-    --theme-secondary: #{$chefchaouenBlue};
-    --theme-tertiary: #{$blush};
-    --theme-text: #{$prussianBlue};
-    --theme-background: #{$uranianBlue};
-    --theme-alt-background: #{$snow};
+  --theme-primary: #{$electricBlue};
+  --theme-secondary: #{$chefchaouenBlue};
+  --theme-tertiary: #{$blush};
+  --theme-text: #{$prussianBlue};
+  --theme-background: #{$uranianBlue};
+  --theme-alt-background: #{$snow};
 }
+
 .march-light {
-    --theme-primary: #{$office-green};
-    --theme-secondary: #{$columbia-blue};
-    --theme-tertiary: #{$baker-miller};
-    --theme-text: #{$lapis-lazuli};
-    --theme-background: #{$columbia-blue};
-    --theme-alt-background: transparent;
+  --theme-primary: #{$office-green};
+  --theme-secondary: #{$columbia-blue};
+  --theme-tertiary: #{$baker-miller};
+  --theme-text: #{$lapis-lazuli};
+  --theme-background: #{$columbia-blue};
+  --theme-alt-background: transparent;
 }
+
 .april-light {
-    --theme-primary: #{$pale-dogwood};
-    --theme-secondary: #{$lavender-pink};
-    --theme-tertiary: #{$light-green};
-    --theme-text: #{$paynes-gray};
-    --theme-background: #{$periwinkle};
-    --theme-alt-background: transparent;
+  --theme-primary: #{$pale-dogwood};
+  --theme-secondary: #{$lavender-pink};
+  --theme-tertiary: #{$light-green};
+  --theme-text: #{$paynes-gray};
+  --theme-background: #{$periwinkle};
+  --theme-alt-background: transparent;
 }
+
 .may-light {
-    --theme-primary: #{$bittersweet};
-    --theme-secondary: #{$mistyRose};
-    --theme-tertiary: #{$saffron};
-    --theme-text: #{$charcoal};
-    --theme-background: #{$claret};
-    --theme-alt-background: transparent;
+  --theme-primary: #{$bittersweet};
+  --theme-secondary: #{$mistyRose};
+  --theme-tertiary: #{$saffron};
+  --theme-text: #{$charcoal};
+  --theme-background: #{$claret};
+  --theme-alt-background: transparent;
 }
+
 .june-light {
-    --theme-primary: #{$earth-yellow};
-    --theme-secondary: #{$flame};
-    --theme-tertiary: #{$air-superiority};
-    --theme-text: #{$black-olive-2};
-    --theme-background: #{$icterine};
-    --theme-alt-background: transparent;
+  --theme-primary: #{$earth-yellow};
+  --theme-secondary: #{$flame};
+  --theme-tertiary: #{$air-superiority};
+  --theme-text: #{$black-olive-2};
+  --theme-background: #{$icterine};
+  --theme-alt-background: transparent;
 }
+
 .july-light {
-    --theme-primary: #{$americanBlue};
-    --theme-secondary: #{$fireEngineRed};
-    --theme-tertiary: #{$darkOrange};
-    --theme-text: #{$white};
-    --theme-background: #{$americanBlue};
-    --theme-alt-background: transparent;
+  --theme-primary: #{$americanBlue};
+  --theme-secondary: #{$fireEngineRed};
+  --theme-tertiary: #{$darkOrange};
+  --theme-text: #{$white};
+  --theme-background: #{$americanBlue};
+  --theme-alt-background: transparent;
 }
+
 .august-dark {
-    --theme-primary: #{$august_body};
-    --theme-secondary: #{$august_pollBackground};
-    --theme-tertiary: #{$august_optionsItem};
-    --theme-text: #{$august_optionsItemText};
-    --theme-background: #{$august_body};
-    --theme-alt-background: transparent;
+  --theme-primary: #{$august_body};
+  --theme-secondary: #{$august_pollBackground};
+  --theme-tertiary: #{$august_optionsItem};
+  --theme-text: #{$august_optionsItemText};
+  --theme-background: #{$august_body};
+  --theme-alt-background: transparent;
 }
+
 .september-light {
-    --theme-primary: #{$cerulean};
-    --theme-secondary: #{$celadon};
-    --theme-tertiary: #{$atomic-tangerine};
-    --theme-text: #000;
-    --theme-background: #{$munsell-blue};
-    --theme-alt-background: transparent;
+  --theme-primary: #{$cerulean};
+  --theme-secondary: #{$celadon};
+  --theme-tertiary: #{$atomic-tangerine};
+  --theme-text: #000;
+  --theme-background: #{$munsell-blue};
+  --theme-alt-background: transparent;
 }

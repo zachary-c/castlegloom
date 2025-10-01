@@ -8,6 +8,7 @@ import { UserQuestionInfo } from "../dash/types";
 import { Theme } from "@/poll/pollUtil";
 import Image from "next/image";
 import pfp from "%/default.png"
+import { renderPrompt } from "./util";
 
 export default function PollQuestionInput({ question, date, theme, setQuestion }: { question: UserQuestionInfo, date: string, theme: Theme, useProvidedData?: boolean, setQuestion: (p: UserQuestionInfo) => void }) {
 	const userId = useContext(UserContext)
@@ -89,7 +90,7 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 
 	return <>
 		<div className={`poll ${theme ?? 'november'} montserrat input`}>
-			<h3 className="poll__header">{question.questionText}</h3>
+			<h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>
 			<ul className="poll__options">
 				{question.responses.map((r, i) =>
 					<li key={i} className={`poll__options__item${r.responseSlug.current === userAnswer ? ' selected' : ''}`} onClick={() => selectNewAnswer(r.responseSlug.current)}>

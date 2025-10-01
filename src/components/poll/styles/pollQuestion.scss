@@ -12,6 +12,10 @@
   box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
   box-sizing: border-box;
 
+  &.embedded {
+    margin-bottom: 1rem;
+  }
+
   @media screen and (max-width: 493px) {
     border-radius: 0;
   }
@@ -336,7 +340,8 @@
     background-color: $charcoal-mining;
   }
 
-  & .poll {
+  &.poll,
+  .poll {
     background-color: orange;
     color: #000;
     box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
@@ -383,6 +388,17 @@
       }
 
       color: $charcoal-mining;
+
+      a {
+        color: $ashen-cue;
+        font-weight: bold;
+
+        transition-duration: .1s;
+
+        &:hover {
+          color: $charcoal-mining;
+        }
+      }
     }
 
     &__options {
@@ -431,9 +447,10 @@
   }
 
   a {
-    color: $ashen-cue;
+    color: $pumpkin-orange;
     font-weight: bold;
   }
+
 }
 
 
