@@ -48,9 +48,10 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
         </div>
         <div style="${wrapperStyle}">
 			<h3 style="font-size:1.5rem;">Happy Spooktober!</h3>
-			<p style="${msgParagraphStyle}">October is upon us yet again, and with it comes a season of skeletons, spooks, and 31 days of daily memes related-<em>ish</em> to such things!</p>
+			<p style="${msgParagraphStyle}">October is upon us yet again, and with it comes a season of skeletons, spooks, and 31 days of daily pictures and memes related-<em>ish</em> to such things!</p>
 			<p style="${msgParagraphStyle}">If this is your first Spooktober on the email list, welcome! Poll questions began last year as an addendum to the daily meme, and continued into November.</p>
 			<p style="${msgParagraphStyle}">If you have not been receiving polls all year, welcome back! People keep responding to the poll questions I don't know why but I keep asking and they keep answering. So there's a lot of them now. You can go to the dashboard to view all past polls, generate a title for yourself, or see the question leaderboard using <a href="https://${request.nextUrl.hostname}/api/poll/login?userid=${responder}">your personal login link here.</a></p>
+			<p style="${msgParagraphStyle}">If you were here last year and have been receiving polls since, thanks for sticking with it! It's your fault we're still here. I hope you find some daily joy in answering my questions.</p>
 			<p style="${msgParagraphStyle}">Without further ado, let the festivities commence! Here is today's question, and attached is today's meme. Happy October!</p>
 			<p>P.S. One more bit of ado if you have any good vaguely Halloween memes please send them to me I don't have as much time to go looking these days and there's a lot of bad ones I have to sift through trying to find the very best memes to share so please send me some thank you</p>
             <h3 style="${headerTextStyle}">${question.title}</h3>
