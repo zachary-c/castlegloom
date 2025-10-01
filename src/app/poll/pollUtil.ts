@@ -1,7 +1,7 @@
 
 export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
 
-export const theme: Theme = 'september-light'
+export const theme: Theme = 'october-dark'
 
 export const STANDARDS = {
 	white: '#fff',

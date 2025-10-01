@@ -331,11 +331,46 @@
   }
 }
 
-.october-light {
-  &.poll {
+.october-dark {
+  &.poll__body {
+    background-color: $charcoal-mining;
+  }
+
+  & .poll {
     background-color: orange;
     color: #000;
     box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+
+    &__body {
+      background-color: $charcoal-mining;
+    }
+
+    &__page-title {
+      color: orange;
+    }
+
+    &__btn {
+      background-color: orange;
+      color: $charcoal-mining;
+
+      &.outline {
+        border: 2px solid $pumpkin-orange;
+        background-color: transparent;
+        color: $pumpkin-orange;
+      }
+
+      &.cta {
+        background-color: $white;
+        color: $gray-leiter;
+        border: none;
+        text-decoration: underline;
+      }
+    }
+
+    &__date {
+      color: $pumpkin-orange;
+      font-weight: bold;
+    }
   }
 
   .poll {
@@ -346,6 +381,8 @@
         transform: rotate(10deg);
         font-family: 'Courier New', Courier, monospace;
       }
+
+      color: $charcoal-mining;
     }
 
     &__options {
@@ -382,62 +419,23 @@
         }
       }
     }
+
+    &__postscript {
+      background-color: $gray-leiter;
+      color: $white;
+    }
+
+    .loading-notice {
+      color: $white;
+    }
+  }
+
+  a {
+    color: $ashen-cue;
+    font-weight: bold;
   }
 }
 
-.october-dark {
-  &.poll {
-    background-color: $charcoal-mining;
-    color: $white;
-    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
-  }
-
-  .poll {
-    &__header {
-      &:before {
-        content: 'POLL';
-        color: $white;
-        transform: rotate(10deg);
-        font-family: 'Courier New', Courier, monospace;
-      }
-    }
-
-    &__options {
-      &__item {
-        background-color: $gray-leiter;
-
-        &__text {
-          color: $corn-yellow;
-        }
-
-        &__count {
-          color: $corn-yellow;
-        }
-
-        &__fill-bar {
-          background-color: $ashen-cue;
-        }
-      }
-    }
-
-    &__footer {
-      &__rc {
-        color: $white;
-      }
-
-      &__refresh {
-        background-color: $gray-leiter;
-        color: $white;
-        border: 1px solid $white;
-
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.05);
-        }
-      }
-    }
-  }
-}
 
 .december-light {
   &.poll {

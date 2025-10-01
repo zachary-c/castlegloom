@@ -41,9 +41,7 @@ export default function PollQuestion({ question, date, theme }: { question: Poll
 		getData()
 	}, [])
 
-	console.log("question", question)
-
-	return <div className={`poll ${theme ?? 'november'} ${theme !== 'october-light' ? 'montserrat' : ''}`}>
+	return <div className={`poll ${theme ?? 'november'} montserrat`}>
 		<h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>
 		<ul className="poll__options">
 			{questionData ? questionData.responses.map((r, i) =>
