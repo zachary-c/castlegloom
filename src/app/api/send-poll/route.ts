@@ -5,6 +5,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { toHTML } from '@portabletext/to-html';
 import { applyStyleToHtml, Recipient_t, themeObject, ThemeObject } from '../apiUtil';
 import { emailFrom, theme } from '@/poll/pollUtil';
+import { suffix } from 'R/util';
+import { poll_question_list } from '$/lib/dashboard_queries';
 
 // SPOOKTOBER MESSAGE VERSION
 
@@ -42,20 +44,11 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
 	}
 	let html = `
     <body>
-        <div style="display:none;max-height: 0px; overflow: hidden;">${"October is upon us yet again, and with it comes a season of skeletons, spooks, and 31 days of daily memes relatedish to such things!"
-		/*questionDescription*/
-		}\n\n\n</div>
+        <div style="display:none;max-height: 0px; overflow: hidden;">${questionDescription}\n\n\n</div>
         <div style="display: none; max-height: 0px; overflow: hidden;"> 
  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
         </div>
         <div style="${wrapperStyle}">
-			<h3 style="font-size:1.5rem;">Happy Spooktober!</h3>
-			<p style="${msgParagraphStyle}">October is upon us yet again, and with it comes a season of skeletons, spooks, and 31 days of daily pictures and memes related-<em>ish</em> to such things!</p>
-			<p style="${msgParagraphStyle}">If this is your first Spooktober on the email list, welcome! Poll questions began last year as an addendum to the daily meme, and continued into November.</p>
-			<p style="${msgParagraphStyle}">If you have not been receiving polls all year, welcome back! People keep responding to the poll questions I don't know why but I keep asking and they keep answering. So there's a lot of them now. You can go to the dashboard to view all past polls, generate a title for yourself, or see the question leaderboard using <a href="https://${request.nextUrl.hostname}/api/poll/login?userid=${responder}">your personal login link here.</a></p>
-			<p style="${msgParagraphStyle}">If you were here last year and have been receiving polls since, thanks for sticking with it! It's your fault we're still here. I hope you find some daily joy in answering my questions.</p>
-			<p style="${msgParagraphStyle}">Without further ado, let the festivities commence! Here is today's question, and attached is today's meme. Happy October!</p>
-			<p>P.S. One more bit of ado if you have any good vaguely Halloween memes please send them to me I don't have as much time to go looking these days and there's a lot of bad ones I have to sift through trying to find the very best memes to share so please send me some thank you</p>
             <h3 style="${headerTextStyle}">${question.title}</h3>
             <div style="${pollStyle}">
             ${question.suggestedBy ? `
@@ -120,6 +113,7 @@ export async function GET(request: NextRequest) {
 			pass: process.env.ORACLE_APP_PASSWORD,
 		}
 	})
+	const todaysDate = new Date(`${todaysMeme.date}T12:00:00.000Z`);
 	if (pollQuestion) {
 		if (pollQuestion.hasBeenSent) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
@@ -146,7 +140,7 @@ export async function GET(request: NextRequest) {
 			const info = await mailer.sendMail({
 				from: emailFrom,
 				to: recipient.email,
-				subject: `HAPPY SPOOKTOBER! | ${pollQuestion.title} | ${pollQuestion.date}`,
+				subject: `${pollQuestion.title} | ${pollQuestion.date} | spooktober #${todaysDate.getDate()}`,
 				html: html,
 				attachments: attachments
 			})
@@ -166,6 +160,6 @@ export async function GET(request: NextRequest) {
 	const res = await hasBeenSentPatch.commit();
 
 	console.log(`Email sent to ${emails.length} emails:`, emails);
-	return NextResponse.json({ status: 200 })
+	return NextResponse.json({ status: 200, count: emails.length })
 }
 
