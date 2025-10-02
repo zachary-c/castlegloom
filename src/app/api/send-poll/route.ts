@@ -6,6 +6,8 @@ import { toHTML } from '@portabletext/to-html';
 import { applyStyleToHtml, Recipient_t, themeObject, ThemeObject } from '../apiUtil';
 import { emailFrom, theme } from '@/poll/pollUtil';
 
+// SPOOKTOBER MESSAGE VERSION
+
 export const maxDuration = 60;
 
 function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj: ThemeObject, request: NextRequest): string {
