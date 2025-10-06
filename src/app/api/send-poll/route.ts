@@ -8,9 +8,7 @@ import { emailFrom, theme } from '@/poll/pollUtil';
 import { suffix } from 'R/util';
 import { poll_question_list } from '$/lib/dashboard_queries';
 
-// SPOOKTOBER MESSAGE VERSION
-
-export const maxDuration = 60;
+export const maxDuration = 300;
 
 function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj: ThemeObject, request: NextRequest): string {
 	const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
