@@ -7,7 +7,7 @@ import { client } from '../../sanity/lib/client'
 import MemeContainer from '../../components/MemeContainer'
 import SpookySignup from '../../components/SpookySignup'
 import DayNavigation from '../../components/DayNavigation'
-import { SEVEN_HOURS_OF_MILLISECONDS } from 'R/util'
+import { SEVEN_HOURS_OF_MILLISECONDS, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
 import { Montserrat } from 'next/font/google'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -17,10 +17,11 @@ export const revalidate = 60;
 export default async function Home() {
 
 	// THANKS UTC
-	const cstDate = new Date(Date.now() - SEVEN_HOURS_OF_MILLISECONDS);
+	const cstDate = new Date(Date.now() - SIX_HOURS_OF_MILLISECONDS);
 	const meme: Meme_t = await client.fetch(latest_meme, {
 		"now": cstDate.toISOString()
 	})
+	console.log(cstDate)
 	const date = new Date(meme.date + "T12:00:00.000Z");
 	let currentDate = date.getDate();
 	//console.log("cdate", date.toLocaleString(undefined, {}), date.getMonth(), meme.date.slice(5, 7));

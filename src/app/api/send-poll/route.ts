@@ -40,6 +40,10 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
 		questionHTML = applyStyleToHtml(questionHTML, aStyle, "margin: 0;")
 		questionDescription = question.prompt?.richTextAsPlaintext
 	}
+	let memoriam = ""
+	if (question.date === "2025-10-10") {
+		memoriam = `<p style="text-align:center;">No spooktober today; instead we pause to remember <a href="https://www.legacy.com/us/obituaries/name/christian-oswalt-obituary?id=36784490">October 10th, 2022.</p>`
+	}
 	let html = `
     <body>
         <div style="display:none;max-height: 0px; overflow: hidden;">${questionDescription}\n\n\n</div>
@@ -62,6 +66,7 @@ function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj:
 		}).join('')}
                 </ul>
             </div>
+			${memoriam}
         </div>
     </body>
     `
@@ -135,10 +140,15 @@ export async function GET(request: NextRequest) {
 			</html>
 			
 			`
+
+			let subject_note = `spooktober #${todaysDate.getDate()}`
+			if (pollQuestion.date === "2025-10-10") {
+				subject_note = `In Memory`
+			}
 			const info = await mailer.sendMail({
 				from: emailFrom,
 				to: recipient.email,
-				subject: `${pollQuestion.title} | ${pollQuestion.date} | spooktober #${todaysDate.getDate()}`,
+				subject: `${pollQuestion.title} | ${pollQuestion.date} | ${subject_note}`,
 				html: html,
 				attachments: attachments
 			})
