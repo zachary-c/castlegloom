@@ -19,12 +19,12 @@ export const meme_by_date = groq`
     }
     `
 export const latest_poll = groq`
-    *[_type == 'pollQuestion' && title == "poll-party-attendance"] | order(date desc)[0] {
+    *[_type == 'pollQuestion'  && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     }
 `
 export const poll_by_date = groq`
-*[_type == 'pollQuestion' && date == $date][0] {
+*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)][0] {
     ${pollQuestionFields}
 }
 `
