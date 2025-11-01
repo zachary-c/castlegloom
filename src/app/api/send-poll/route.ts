@@ -141,7 +141,7 @@ export async function GET(request: NextRequest) {
 			
 			`
 
-			let subject_note = `spooktober #${todaysDate.getDate()}`
+			let subject_note = `spooktober #32`
 			if (pollQuestion.date === "2025-10-10") {
 				subject_note = `In Memory`
 			}

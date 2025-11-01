@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import '_components/spooktober/styles/global.scss'
 import '_components/poll/styles/pollQuestion.scss'
+import '_components/poll/styles/theme_november.scss'
 import { theme } from './pollUtil'
 import { Montserrat } from 'next/font/google'
 

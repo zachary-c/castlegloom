@@ -1,4 +1,4 @@
-import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT, THEME_OCTOBER_DARK } from '@/poll/pollUtil';
+import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT, THEME_OCTOBER_DARK, THEME_NOVEMBER } from '@/poll/pollUtil';
 
 export type ThemeObject = {
 	backgroundColor: string
@@ -25,14 +25,17 @@ export function themeObject(theme: Theme): ThemeObject {
 	switch (theme) {
 		case 'november':
 			obj = {
-				backgroundColor: 'rgb(255, 255, 228)',
-				questionTextColor: 'black',
-				itemDefaultColor: 'rgb(114, 51, 17)',
-				itemHoverColor: 'rgb(161, 73, 18)',
-				itemTextColor: 'rgb(255, 255, 228)',
-				headerTextColor: 'black',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
+				backgroundColor: THEME_NOVEMBER.ghostOfOctober,
+				questionTextColor: THEME_NOVEMBER.charcoalCemetery,
+				itemDefaultColor: THEME_NOVEMBER.thanksgivingBrown,
+				itemHoverColor: THEME_NOVEMBER.thursdayOchre,
+				itemTextColor: THEME_NOVEMBER.ghostOfOctober,
+				headerTextColor: THEME_NOVEMBER.charcoalCemetery,
+				postScriptBackgroundColor: THEME_NOVEMBER.thursdayOchre,
+				postScriptTextColor: THEME_NOVEMBER.ghostOfOctober,
+				postScriptBorderColor: 'none',
+				borderColor: THEME_NOVEMBER.thanksgivingBrown,
+				questionHeaderLinkColor: THEME_NOVEMBER.thursdayOchre,
 			};
 			break;
 		case 'december-light':

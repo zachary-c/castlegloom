@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import "../styles/pollLogin.scss"
 import "../styles/theme_october.scss"
+import "../styles/theme_november.scss"
 import { useEffect, useState } from "react"
 
 export default function Login() {

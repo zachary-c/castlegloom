@@ -1,0 +1,268 @@
+.november {
+  &.poll {
+    background-color: $ghost-of-october;
+    color: black;
+    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+
+    &__body {
+      background-color: rgb(255, 236, 188);
+    }
+
+  }
+
+  .poll {
+
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $thanksgiving-brown;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+    }
+
+    &__options {
+      &__item {
+        background-color: $thanksgiving-brown;
+
+        &__text {
+          color: $ghost-of-october;
+        }
+
+        &__count {
+          color: $ghost-of-october;
+        }
+
+        &__fill-bar {
+          background-color: $thursday-ochre;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {}
+
+      &__refresh {
+        background-color: $november-tan;
+        color: $thanksgiving-brown;
+        border: 1px solid $thanksgiving-brown;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &__btn {
+      background-color: $thanksgiving-brown;
+      color: white;
+
+      &.outline {
+        background-color: $ghost-of-october;
+        border: 2px solid $thanksgiving-brown;
+        color: $thanksgiving-brown;
+      }
+
+      &.cta {
+        border-color: $thursday-ochre;
+        background-color: $thursday-ochre;
+        color: $white;
+      }
+    }
+  }
+}
+
+// POLL DASHBOARD
+.november {
+  .pd {
+
+    // UNIQUE LAYOUT
+    &__question-entries {
+      gap: .5rem;
+    }
+
+    &__title {
+      color: $charcoal-cemetery;
+    }
+
+    &__body {
+      background-color: $thursday-ochre;
+      border-color: $charcoal-cemetery;
+    }
+
+
+    &__tabmenu {
+      &__tab {
+        background-color: $thursday-ochre;
+        color: white;
+        font-weight: 500;
+        border-color: $charcoal-cemetery;
+      }
+
+      &__spacer {
+        border-color: $charcoal-cemetery;
+      }
+    }
+
+    &__preferences {
+      h3 {
+        color: $white;
+      }
+
+      &__field {
+        input {
+          border-width: 1px;
+          background-color: $november-tan;
+          color: $charcoal-cemetery;
+        }
+
+        label {
+          color: $white;
+        }
+
+        & .disabled input {
+          color: gray;
+        }
+      }
+
+      & .generate {
+        background-color: $charcoal-cemetery;
+        color: $ghost-of-october;
+        padding: .2rem .5rem;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $thanksgiving-brown;
+          color: $white;
+          border: 2px solid $white;
+        }
+
+        & .muted {
+          border: 2px solid white;
+          background-color: transparent;
+          color: white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$charcoal-cemetery};
+      --me-text-color: #{white};
+      --odd-row: #{$november-tan};
+      --even-row: #{$ghost-of-october};
+      --header-row: #{$thanksgiving-brown};
+      --header-row-text: #{white};
+      --body-row-text: #{charcoal-cemetery};
+      --surrounding-text-color: #{white};
+      --leaderboard-hover-background: #{$atomic-tangerine};
+      --leaderboard-hover-text: #{black};
+
+
+      &__refresh .pd__btn {
+        background-color: $november-tan;
+        color: $charcoal-cemetery;
+        padding: .2rem .5rem;
+        border: none;
+        font-weight: bold;
+        transition-duration: .2s;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  .pe {
+    border: 2px solid $charcoal-cemetery;
+    background-color: $november-tan;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $charcoal-cemetery;
+      }
+    }
+
+    &.responded {
+      border-color: $thanksgiving-brown;
+      background-color: $thanksgiving-brown;
+
+      .pe__header {
+
+        &__title,
+        &__text,
+        &__date {
+          color: $november-tan;
+        }
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $charcoal-cemetery;
+
+        &>.poll__options__item__fill-bar {
+          background-color: $charcoal-cemetery;
+
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $november-tan;
+        }
+
+        &:before {
+          content: ' ';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $charcoal-cemetery;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $ghost-of-october;
+        border: 2px solid $charcoal-cemetery;
+        color: $charcoal-cemetery;
+
+        &.muted {
+          background-color: $charcoal-cemetery;
+          color: $november-tan;
+          opacity: .8;
+          border: none;
+        }
+      }
+
+      .submission-message {
+        >span {
+          color: white;
+        }
+
+        border: 2px solid white;
+      }
+    }
+  }
+}

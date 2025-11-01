@@ -8,6 +8,7 @@ import { redirect, RedirectType } from 'next/navigation'
 import { PollQuestion_t } from '$/types/documents'
 import '_components/poll/styles/pollDashboard.scss'
 import '_components/poll/styles/theme_october.scss'
+import '_components/poll/styles/theme_november.scss'
 import DashTabs from '_components/poll/dash/DashTabs'
 
 export default async function Page() {

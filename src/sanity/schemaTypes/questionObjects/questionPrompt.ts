@@ -7,17 +7,6 @@ export default defineType({
 	type: 'object',
 	fields: [
 		defineField({
-			name: 'promptType',
-			title: 'Type',
-			type: 'string',
-			options: {
-				list: [
-					{ title: "Plaintext", value: "plainText" },
-					{ title: "Rich Text", value: "richText" },
-				]
-			}
-		}),
-		defineField({
 			name: 'richTextPrompt',
 			title: 'Rich Text Prompt',
 			type: 'array',
@@ -36,7 +25,20 @@ export default defineType({
 			type: 'string',
 			title: "Plaintext Question Prompt",
 			hidden: (ctx) => ctx.parent?.promptType !== "plainText",
-		})
+		}),
+		defineField({
+			hidden: true,
+			name: 'promptType',
+			title: 'Type',
+			type: 'string',
+			options: {
+				list: [
+					{ title: "Plaintext", value: "plainText" },
+					{ title: "Rich Text", value: "richText" },
+				]
+			},
+			initialValue: "richText"
+		}),
 	],
 })
 

@@ -1,11 +1,26 @@
 
 export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
 
-export const theme: Theme = 'october-dark'
+export const theme: Theme = 'november'
 
 export const STANDARDS = {
 	white: '#fff',
 	black: '#000'
+}
+export const THEME_NOVEMBER = {
+	thanksgivingBrown: "rgb(114, 51, 17)",
+	thursdayOchre: "rgb(161, 73, 18)",
+	novemberTan: "rgb(255, 236, 188)",
+	ghostOfOctober: "rgb(255, 255, 228)",
+	charcoalCemetery: "rgb(59, 59, 59)",
+}
+export const THEME_DECEMBER = {
+	snowWhite: "#f2f2f2",
+	firGreen: "#01440f",
+	treeTrimming: "#00b409",
+	nightSkies: "#404343",
+	santaRed: "#840000",
+	rudolphNose: "#c51d1d"
 }
 // January Theme Colors
 export const THEME_JAN = {
