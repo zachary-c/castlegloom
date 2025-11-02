@@ -81,32 +81,12 @@ export async function GET(request: NextRequest) {
 
 	// poll form link 
 	// [{ _id: "ceec6d4a-2807-4050-991d-eed3f5e21f29", email: "zacharyhcampbell@gmail.com" }]
-	const emails: Recipient_t[] = await client.fetch(recipient_list);
+	const emails: Recipient_t[] = await client.fetch(daily_polled);
 	const pollQuestion: PollQuestion_t = await client.fetch(latest_poll)
-
-	const todaysMeme: EmailableMeme = await client.fetch(todays_meme);
-	console.log(todaysMeme)
 
 	console.log(pollQuestion);
 	console.log("emails", emails)
 	let attachments;
-
-	if (todaysMeme.imgAsset) {
-		attachments = [
-			{
-				filename: todaysMeme.cslug + '.' + todaysMeme.imgAsset.extension,
-				path: todaysMeme.imgAsset.url
-			}
-		]
-	} else if (todaysMeme.videoAsset) {
-		attachments = [
-			{
-				filename: todaysMeme.cslug + '.' + todaysMeme.videoAsset.extension,
-				path: todaysMeme.videoAsset.url
-			}
-		]
-	}
-	// YOUTUbe URLS ARE CURRENTLY UNSUPPORTED
 
 	const nodemailer = require('nodemailer');
 	const mailer = nodemailer.createTransport({
@@ -116,7 +96,6 @@ export async function GET(request: NextRequest) {
 			pass: process.env.ORACLE_APP_PASSWORD,
 		}
 	})
-	const todaysDate = new Date(`${todaysMeme.date}T12:00:00.000Z`);
 	if (pollQuestion) {
 		if (pollQuestion.hasBeenSent) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
@@ -138,17 +117,11 @@ export async function GET(request: NextRequest) {
 				</head>
 				${pollHtml}
 			</html>
-			
 			`
-
-			let subject_note = `spooktober #32`
-			if (pollQuestion.date === "2025-10-10") {
-				subject_note = `In Memory`
-			}
 			const info = await mailer.sendMail({
 				from: emailFrom,
 				to: recipient.email,
-				subject: `${pollQuestion.title} | ${pollQuestion.date} | ${subject_note}`,
+				subject: `${pollQuestion.title} | ${pollQuestion.date}`,
 				html: html,
 				attachments: attachments
 			})

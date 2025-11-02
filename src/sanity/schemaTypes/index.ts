@@ -11,23 +11,26 @@ import bingoSquare from './bingoSquare'
 import bingoSupport from './bingoSupport'
 import rwbbRecord from './rwbbRecord'
 import questionPrompt from './questionObjects/questionPrompt'
+import edict from './edict'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [
-    page, 
-    meme,
-    recipient,
-    sound,
-    soundPreset,
+	types: [
+		page,
+		meme,
+		recipient,
+		sound,
+		soundPreset,
 
-    rwbbRecord,
+		rwbbRecord,
 
-    pollQuestion,
-    pollResponse,
-    questionPrompt,
+		pollQuestion,
+		pollResponse,
+		questionPrompt,
 
-    bingoCard,
-    bingoSquare,
-    bingoSupport
-  ],
+		edict,
+
+		bingoCard,
+		bingoSquare,
+		bingoSupport
+	],
 }

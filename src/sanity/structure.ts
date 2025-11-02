@@ -88,4 +88,7 @@ export const structure: StructureResolver = (S) =>
 								.id('soundPresets'),
 						])
 				),
+			S.documentTypeListItem('edict')
+				.title('King\'s Edicts')
+				.id('edicts'),
 		])

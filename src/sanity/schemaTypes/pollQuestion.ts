@@ -47,6 +47,12 @@ export default defineType({
 			to: [{ type: "recipient" }]
 		},
 		{
+			name: "edict",
+			title: "Edict",
+			type: "reference",
+			to: [{ type: "edict" }]
+		},
+		{
 			name: 'questionText',
 			type: 'string',
 			title: 'Question Text',
