@@ -1,4 +1,4 @@
-import { defineType } from "sanity";
+import { defineType, PortableTextBlock } from "sanity";
 
 export default defineType({
 	name: 'edict',
@@ -32,6 +32,11 @@ export default defineType({
 			},
 		},
 		{
+			title: "Number",
+			name: "edictNumber",
+			type: "number",
+		},
+		{
 			name: "edictBody",
 			type: 'array',
 			of: [{
@@ -45,5 +50,24 @@ export default defineType({
 			}],
 			title: "Edict Body",
 		},
+		{
+			title: "Colorscheme",
+			name: "colorscheme",
+			type: "string",
+			options: {
+				list: [
+					{ title: "December", value: "december-light" },
+					{ title: "Standards", value: "standards (default)" },
+				]
+			}
+		}
 	]
 });
+
+export type KingsEdict_t = {
+	edict_number: number
+	edictBody: PortableTextBlock[]
+	date: string
+	edictHeading: string
+	colorscheme: 'december-light' | 'standards (default)'
+}

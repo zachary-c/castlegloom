@@ -4,14 +4,18 @@ export const leaderboardQuery = groq`
 *[_type == 'recipient'] { 
     "joinedTitle": title.profession + " " + title.qualifier, 
     "score": count(*[_type == "pollQuestion" && length(responses[length(listOfResponders[_ref == ^.^.^._id]) > 0]) > 0]),
-    _id
+    _id,
+	color,
+	backgroundColor
 } | order(score desc)
 `
 export type LeaderboardRecord = {
-    joinedTitle? : string,
-    score : number
-    _id? : string
-    isUser : undefined | true
+	joinedTitle?: string,
+	score: number
+	_id?: string
+	isUser: undefined | true
+	color: string
+	backgroundColor: string
 }
 
 export const poll_question_list = groq`
@@ -39,12 +43,12 @@ export const user_dashboard_information = groq`
     }
 }`
 export type UserRecord = {
-    _id : string
-    email : string
-    name? : string
-    isPolledDaily? : boolean 
-    title? : {
-        profession? : string
-        qualifier? : string
-    }
+	_id: string
+	email: string
+	name?: string
+	isPolledDaily?: boolean
+	title?: {
+		profession?: string
+		qualifier?: string
+	}
 }

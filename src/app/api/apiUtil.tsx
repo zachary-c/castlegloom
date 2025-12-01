@@ -1,4 +1,4 @@
-import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT, THEME_OCTOBER_DARK, THEME_NOVEMBER } from '@/poll/pollUtil';
+import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT, THEME_OCTOBER_DARK, THEME_NOVEMBER, THEME_DECEMBER } from '@/poll/pollUtil';
 
 export type ThemeObject = {
 	backgroundColor: string
@@ -13,6 +13,12 @@ export type ThemeObject = {
 	postScriptTextColor: string
 	postScriptBorderColor?: string
 	questionHeaderLinkColor?: string
+}
+export type EdictThemeObject = {
+	h2_background: string,
+	h2_color: string,
+	a_color: string,
+	divider_color: string
 }
 
 export type Recipient_t = {
@@ -40,15 +46,15 @@ export function themeObject(theme: Theme): ThemeObject {
 			break;
 		case 'december-light':
 			obj = {
-				backgroundColor: '#fff',
-				questionTextColor: '#01440f',
-				itemDefaultColor: '#ae0000',
-				itemHoverColor: '#01440f',
-				itemTextColor: '#f2f2f2',
-				borderColor: '#01440f',
-				headerTextColor: '#01440f',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
+				backgroundColor: THEME_DECEMBER.firGreen,
+				questionTextColor: THEME_DECEMBER.snowWhite,
+				itemDefaultColor: THEME_DECEMBER.rudolphNose,
+				itemHoverColor: THEME_DECEMBER.santaRed,
+				itemTextColor: THEME_DECEMBER.snowWhite,
+				borderColor: "none",
+				headerTextColor: THEME_DECEMBER.firGreen,
+				postScriptBackgroundColor: THEME_DECEMBER.treeTrimming,
+				postScriptTextColor: THEME_DECEMBER.snowWhite
 			};
 			break;
 		case 'december-dark':
@@ -223,7 +229,29 @@ export function themeObject(theme: Theme): ThemeObject {
 	return obj;
 }
 
-export function applyStyleToHtml(html: string, aStyle: string, pStyle: string) {
-	return html.replaceAll(`<p>`, `<p style="${pStyle}">`).replaceAll(`<a `, `<a style="${aStyle}"`)
+export function applyStyleToHtml(html: string, aStyle: string, pStyle: string, h3Style?: string) {
+	return html.replaceAll(`<p>`, `<p style="${pStyle}">`).replaceAll(`<a `, `<a style="${aStyle}"`).replaceAll(`<h3>`, `<h3 style="${h3Style}">`)
 }
 
+export function edictThemeObject(theme: Theme): EdictThemeObject {
+	let obj: EdictThemeObject;
+	switch (theme) {
+		case 'december-light':
+			obj = {
+				h2_background: THEME_DECEMBER.firGreen,
+				h2_color: THEME_DECEMBER.snowWhite,
+				a_color: THEME_DECEMBER.rudolphNose,
+				divider_color: THEME_DECEMBER.firGreen
+			};
+			break;
+		default:
+			obj = {
+				h2_background: STANDARDS.black,
+				h2_color: STANDARDS.white,
+				a_color: STANDARDS.hyperlinkBlue,
+				divider_color: STANDARDS.black
+			};
+			break;
+	}
+	return obj;
+}

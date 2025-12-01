@@ -1,0 +1,361 @@
+
+.december-light {
+  a {
+    color: $fir-green;
+    font-weight: 500;
+    &:hover {
+      color: $tree-trimming;
+    }
+  }
+  &.poll {
+    background-color: $fir-green;
+    color: black;
+    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+
+    &__body {
+      background-color: $snow-white;
+    }
+
+    &__page-title {
+      color: $tree-trimming;
+    }
+
+    &__date {
+      color: $night-skies;
+    }
+  }
+
+  .poll {
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $tree-trimming;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      color: $snow-white;
+      a {
+        color: $tree-trimming;
+        transition-duration: .1s;
+        &:hover {
+          color: lighten($tree-trimming, 30%);
+        }
+      }
+    }
+
+    &__options {
+      &__item {
+        background-color: $rudolph-nose;
+
+        &__text,
+        &__count {
+          color: $snow-white;
+        }
+
+        &__fill-bar {
+          background-color: $santa-red;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {
+        color: $snow-white;
+      }
+
+      &__refresh {
+        background-color: $tree-trimming;
+        color: $snow-white;
+        border: 1px solid $snow-white;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+
+      & .loading-notice {
+        color: $snow-white;
+      }
+    }
+    &__postscript {
+      background-color: $tree-trimming;
+      color: $snow-white;
+    }
+    &__btn {
+      background-color: $fir-green;
+      color: $snow-white;
+
+      &.outline {
+        border: 2px solid none;
+        background-color: $santa-red;
+        color: $snow-white;
+      }
+    }
+  }
+
+  .login {
+    &__body {
+      &__input-section {
+        input {
+          border: 1px solid $night-skies;
+        }
+      }
+    }
+  }
+  .pd {
+
+    &__preferences {
+      h3 {
+        color: $night-skies;
+      }
+
+      &__field {
+        input {
+          border-width: 1px;
+          background-color: $santa-red;
+          color: $snow-white;
+        }
+
+        label {
+          color: $night-skies;
+        }
+
+        & input[disabled]  {
+          background-color: $rudolph-nose;
+          color: transparentize($snow, .15);
+        }
+      }
+
+      & .generate {
+        background-color: $fir-green;
+        color: $snow-white;
+        padding: .2rem .5rem;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $rudolph-nose;
+          color: $white;
+        }
+
+        & .muted {
+          border: 2px solid $fir-green;
+          background-color: transparent;
+          color: $fir-green;
+        }
+      }
+
+      &__info-bar {
+        color: $fir-green;
+      }
+
+      &__divider {
+        border-color: $fir-green;
+      }
+    }
+
+    &__leaderboard {
+      h3 {
+        color: $fir-green;
+      }
+      &__body {}
+
+      --me-background: #{$night-skies};
+      --me-text-color: #{$snow-white};
+      --odd-row: #{$tree-trimming};
+      --even-row: #{$rudolph-nose};
+      --header-row: #{$fir-green};
+      --header-row-text: #{white};
+      --body-row-text: #{$snow-white};
+      --surrounding-text-color: #{white};
+      --leaderboard-hover-background: #{$santa-red};
+      --leaderboard-hover-text: #{black};
+
+
+      &__refresh .pd__btn {
+        background-color: $fir-green;
+        color: $snow-white;
+      }
+    }
+  }
+
+  .pe {
+    border: 2px solid $night-skies;
+    background-color: $fir-green;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $snow-white;
+          a { 
+            color: $fir-green;
+            font-weight: 600;
+          }
+      }
+    }
+
+    &.responded {
+      background-color: $snow-white;
+
+      .pe__header {
+
+        &__title,
+        &__text,
+        &__date {
+          color: $night-skies;
+        }
+      }
+    }
+
+    .poll.input {
+      border: 2px solid $tree-trimming;
+      & .poll__options__item.selected {
+        background-color: $snow-white;
+
+        &>.poll__options__item__fill-bar {
+          background-color: transparentize($color: $rudolph-nose, $amount: .80);
+
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $fir-green;
+        }
+
+        &:before {
+          content: ' ';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $snow-white;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $snow-white;
+        border: 2px solid $fir-green;
+        color: $fir-green;
+
+        &.muted {
+          background-color: $santa-red;
+          color: $snow-white;
+          opacity: 1;
+          border: none;
+        }
+      }
+
+      .submission-message {
+        >span {
+          color: $fir-green;
+        }
+
+        border: 2px solid $fir-green;
+      }
+    }
+  }
+}
+
+.december-dark {
+  &.poll {
+    background-color: $white;
+    color: black;
+    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+
+    &__body {
+      background-color: $fir-green;
+    }
+
+    &__page-title {
+      color: $snow-white;
+    }
+
+    &__btn {
+      background-color: $snow-white;
+      color: $fir-green;
+
+      &.outline {
+        border: 2px solid $snow-white;
+        background-color: $santa-red;
+        color: $snow-white;
+      }
+    }
+
+    &__date {
+      color: $snow-white;
+    }
+
+    &__blurb {
+      color: $snow-white;
+
+      & a {
+        color: $tree-trimming;
+        transition-duration: .15s;
+
+        &:hover {
+          color: $santa-red;
+        }
+      }
+    }
+  }
+
+  .poll {
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $santa-red;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      color: $santa-red;
+    }
+
+    &__options {
+      &__item {
+        background-color: $tree-trimming;
+
+        &__text,
+        &__count {
+          color: $snow-white;
+        }
+
+        &__fill-bar {
+          background-color: $fir-green;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {
+        color: $santa-red;
+      }
+
+      &__refresh {
+        background-color: $santa-red;
+        color: $white;
+        border: 1px solid transparent;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+
+      & .loading-notice {
+        color: $santa-red;
+      }
+    }
+  }
+
+}

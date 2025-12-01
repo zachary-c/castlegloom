@@ -1,5 +1,6 @@
-import { QuestionPrompt_t } from "$/schemaTypes/questionObjects/questionPrompt"
 import { PortableTextBlock } from "sanity"
+import { QuestionPrompt_t } from "$/schemaTypes/questionObjects/questionPrompt"
+import { KingsEdict_t } from "$/schemaTypes/edict"
 
 export type Page_t = {
 	title: string
@@ -24,6 +25,7 @@ export type PollQuestion_t = {
 	prompt?: QuestionPrompt_t
 	hasBeenSent: boolean
 	suggestedBy: string
+	edict: KingsEdict_t
 }
 
 export type Meme_t = {
@@ -47,7 +49,14 @@ export const pollQuestionFields = `
 		...,
 		"richTextAsPlaintext": pt::text(richTextPrompt)	
 	},
-    "suggestedBy": suggestedBy->{"joinedTitle": title.profession + " " + title.qualifier}.joinedTitle
+    "suggestedBy": suggestedBy->{"joinedTitle": title.profession + " " + title.qualifier}.joinedTitle,
+	"edict": edict->{ 
+        edictNumber,
+        edictBody,
+        date,
+        edictHeading,
+		colorscheme
+	}
 `
 export const pollQuestionFragment = `question->{
         ${pollQuestionFields}

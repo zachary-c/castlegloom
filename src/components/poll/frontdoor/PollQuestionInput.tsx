@@ -18,6 +18,8 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 	const [submitting, setSubmitting] = useState<boolean>(false)
 	const [submissionMessage, setSubmissionMessage] = useState<string>('')
 
+	const userHasAnswered = useMemo(() => !!question.userResponse, [question])
+
 	const totalResponses = useMemo(() => {
 		let count = 0;
 		if (question?.responses) {
@@ -94,9 +96,11 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 			<ul className="poll__options">
 				{question.responses.map((r, i) =>
 					<li key={i} className={`poll__options__item${r.responseSlug.current === userAnswer ? ' selected' : ''}`} onClick={() => selectNewAnswer(r.responseSlug.current)}>
-						<div className="poll__options__item__fill-bar" style={{ width: `${(r.responseCount / totalResponses) * 100}%` }}></div>
+						<div className="poll__options__item__fill-bar" style={{ width: userHasAnswered ? `${(r.responseCount / totalResponses) * 100}%` : "0%" }}></div>
 						<span className="poll__options__item__text">{r.responseText}</span>
-						<span className="poll__options__item__count">{r.responseCount > 0 ? `${r.responseCount}` : ''}</span>
+						{userHasAnswered &&
+							<span className="poll__options__item__count">{r.responseCount > 0 ? `${r.responseCount}` : ''}</span>
+						}
 					</li>
 				)}
 			</ul>

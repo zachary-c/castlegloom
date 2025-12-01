@@ -106,15 +106,11 @@
     border: none;
     padding: .5rem 1rem;
     color: var(--body-row-text);
+    background-color: inherit;
 
-    //cursor: cell;
-    &:nth-child(2n + 1) {
-      background-color: var(--odd-row-odd-col);
-    }
-
-    &:nth-child(2n) {
-      background-color: var(--odd-row-even-col);
-    }
+  }
+  &:nth-child(2n + 1) {
+    background-color: var(--odd-row);
   }
 
   >.user {
@@ -134,15 +130,13 @@
     background-color: var(--me-background) !important;
     color: var(--me-text-color);
   }
+  &:nth-child(2n).unique-color>td, &.unique-color>td {
+    background-color:inherit;
+    color: inherit;
+  }
 
   &:nth-child(2n) {
-    &>td:nth-child(2n + 1) {
-      background-color: var(--even-row-odd-col);
-    }
-
-    &>td:nth-child(2n) {
-      background-color: var(--even-row-even-col);
-    }
+      background-color: var(--even-row);
   }
 
   .barcode {}

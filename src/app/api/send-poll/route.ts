@@ -1,88 +1,32 @@
 import { client, patchClient } from '$/lib/client';
-import { daily_polled, EmailableMeme, latest_poll, recipient_list, todays_meme } from '$/lib/queries';
+import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
-import { toHTML } from '@portabletext/to-html';
-import { applyStyleToHtml, Recipient_t, themeObject, ThemeObject } from '../apiUtil';
+import { Recipient_t, themeObject } from '../apiUtil';
 import { emailFrom, theme } from '@/poll/pollUtil';
-import { suffix } from 'R/util';
-import { poll_question_list } from '$/lib/dashboard_queries';
+import { generatePollHTML } from './generate_html_util';
 
 export const maxDuration = 300;
-
-function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj: ThemeObject, request: NextRequest): string {
-	const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
-	const questionTextStyle = `margin-top:0; margin-left: 1rem;color:${obj.questionTextColor}; margin-right: 1rem;font-size:1rem;`
-	const listStyles = `list-style:none; padding: 0 1rem; width: 100%;box-sizing:border-box; margin-bottom: 0;`
-	const listItemStyles = `margin: 0 0 .5rem 0; padding: 0; border-radius: 3px; background-color: ${obj.itemDefaultColor};${obj.itemAdditionalStyles ?? ''}`
-	const headerTextStyle = `color: ${obj.headerTextColor}; text-align: center;font-size: 1.25rem;`
-	const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
-	const anchorStyles = `display:block; text-decoration:none; -webkit-transition-duration:.2s; transition-duration: .2s; color: ${obj.itemTextColor}; padding: .25rem .5rem; margin: 0;`
-	const postscriptStyle = `background-color: ${obj.postScriptBackgroundColor}; color: ${obj.postScriptTextColor}; display: block; padding: .5rem 1rem; margin-bottom: 1rem; font-size: 1rem; border-top: 1px solid ${obj.postScriptBorderColor ?? 'transparent'}; border-bottom: 1px solid ${obj.postScriptBorderColor ?? 'transparent'}`;
-	const msgParagraphStyle = `font-size:1rem;`
-	const title = encodeURIComponent(question.title)
-	const responder = encodeURIComponent(recipient._id)
-	const encodedDate = encodeURIComponent(question.date)
-	let questionHTML
-	let questionDescription
-	if (question.questionText) {
-		questionHTML = question.questionText
-		questionDescription = question.questionText
-	} else if (question.prompt?.promptType == "plainText") {
-		questionHTML = question.prompt.plaintextQuestionPrompt
-		questionDescription = question.prompt.plaintextQuestionPrompt
-	} else {
-		questionHTML = toHTML(question.prompt?.richTextPrompt ?? [])
-		let aStyle = ""
-		if (obj.questionHeaderLinkColor) {
-			aStyle = `color: ${obj.questionHeaderLinkColor};`
-		}
-		questionHTML = applyStyleToHtml(questionHTML, aStyle, "margin: 0;")
-		questionDescription = question.prompt?.richTextAsPlaintext
-	}
-	let memoriam = ""
-	if (question.date === "2025-10-10") {
-		memoriam = `<p style="text-align:center;">No spooktober today; instead we pause to remember <a href="https://www.legacy.com/us/obituaries/name/christian-oswalt-obituary?id=36784490">October 10th, 2022.</p>`
-	}
-	let html = `
-    <body>
-        <div style="display:none;max-height: 0px; overflow: hidden;">${questionDescription}\n\n\n</div>
-        <div style="display: none; max-height: 0px; overflow: hidden;"> 
- ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏  ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏ ͏          
-        </div>
-        <div style="${wrapperStyle}">
-            <h3 style="${headerTextStyle}">${question.title}</h3>
-            <div style="${pollStyle}">
-            ${question.suggestedBy ? `
-                <div style="${postscriptStyle}">
-                    Today's poll question was suggested by the <b>${question.suggestedBy}</b>!
-                </div>`
-			: ''
-		}
-                <h4 style="${questionTextStyle}">${questionHTML}</h4>
-                <ul style="${listStyles}">
-                    ${question.responses.map((response) => {
-			return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
-		}).join('')}
-                </ul>
-            </div>
-			${memoriam}
-        </div>
-    </body>
-    `
-	return html;
-}
 
 export async function GET(request: NextRequest) {
 	const secret = request.nextUrl.searchParams.get("secret");
 	if (secret != process.env.SEND_MEMES_SECRET) {
 		return NextResponse.json({ status: 401, message: "Not Allowed" });
 	}
+	const is_test = request.nextUrl.searchParams.get("is_test") === "true";
+	const dry_run = request.nextUrl.searchParams.get("dry_run") === "true";
 
 	// poll form link 
-	// [{ _id: "ceec6d4a-2807-4050-991d-eed3f5e21f29", email: "zacharyhcampbell@gmail.com" }]
-	const emails: Recipient_t[] = await client.fetch(daily_polled);
+	let emails: Recipient_t[] = []
+	let test_subject_suffix = ""
+	if (is_test) {
+		test_subject_suffix = ` | TS: ${(new Date()).getTime()}`
+		emails = [{ _id: "ceec6d4a-2807-4050-991d-eed3f5e21f29", email: "zacharyhcampbell@gmail.com" }]
+	} else {
+		emails = await client.fetch(daily_polled);
+	}
 	const pollQuestion: PollQuestion_t = await client.fetch(latest_poll)
+	console.log("edict", pollQuestion.edict);
 
 	console.log(pollQuestion);
 	console.log("emails", emails)
@@ -97,14 +41,14 @@ export async function GET(request: NextRequest) {
 		}
 	})
 	if (pollQuestion) {
-		if (pollQuestion.hasBeenSent) {
+		if (!is_test && !pollQuestion.hasBeenSent) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
 			return NextResponse.json({ status: 204 })
 		}
 		const themeObj = themeObject(theme)
 		console.log('theme', themeObj)
 		for (const recipient of emails) {
-			let pollHtml = generatePollHTML(pollQuestion, recipient, themeObj, request)
+			let pollHtml = generatePollHTML(pollQuestion, recipient, themeObj)
 			const html = `
 			<html>
 				<head>
@@ -118,29 +62,37 @@ export async function GET(request: NextRequest) {
 				${pollHtml}
 			</html>
 			`
-			const info = await mailer.sendMail({
-				from: emailFrom,
-				to: recipient.email,
-				subject: `${pollQuestion.title} | ${pollQuestion.date}`,
-				html: html,
-				attachments: attachments
-			})
-			console.log(info);
-			if (!info.response.includes('250')) {
-				console.log("Errored, info: ", info)
-				return NextResponse.json("Error sending email", { status: 500 })
+			if (!dry_run) {
+				const info = await mailer.sendMail({
+					from: emailFrom,
+					to: recipient.email,
+					subject: `${pollQuestion.title} | ${pollQuestion.date}${test_subject_suffix}`,
+					html: html,
+					attachments: attachments
+				})
+				console.log(info);
+				if (!info.response.includes('250')) {
+					console.log("Errored, info: ", info)
+					return NextResponse.json("Error sending email", { status: 500 })
+				}
 			}
 		}
 	}
 
-	const hasBeenSentPatch = patchClient.patch(pollQuestion._id, {
-		"set": {
-			hasBeenSent: true
-		}
-	})
-	const res = await hasBeenSentPatch.commit();
+	if (!is_test) {
+		const hasBeenSentPatch = patchClient.patch(pollQuestion._id, {
+			"set": {
+				hasBeenSent: true
+			}
+		})
+		const res = await hasBeenSentPatch.commit();
+	}
 
-	console.log(`Email sent to ${emails.length} emails:`, emails);
-	return NextResponse.json({ status: 200, count: emails.length })
+	if (!dry_run) {
+		console.log(`Email sent to ${emails.length} emails:`, emails);
+	} else {
+		console.log(`DRY RUN: No emails sent.`);
+	}
+	return NextResponse.json({ status: 200, count: emails.length, dry_run, is_test })
 }
 
