@@ -40,3 +40,4 @@ next-env.d.ts
 
 # Don't commit the local json settings
 .vscode/settings.json
+/src/generated/prisma
