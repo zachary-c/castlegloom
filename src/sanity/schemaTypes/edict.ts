@@ -65,7 +65,7 @@ export default defineType({
 });
 
 export type KingsEdict_t = {
-	edict_number: number
+	edictNumber: number
 	edictBody: PortableTextBlock[]
 	date: string
 	edictHeading: string

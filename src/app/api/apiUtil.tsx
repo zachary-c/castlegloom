@@ -20,6 +20,7 @@ export type EdictThemeObject = {
 	a_color: string,
 	divider_color: string
 }
+export type EdictTheme = "december-light" | "standards (default)";
 
 export type Recipient_t = {
 	email: string
@@ -233,7 +234,7 @@ export function applyStyleToHtml(html: string, aStyle: string, pStyle: string, h
 	return html.replaceAll(`<p>`, `<p style="${pStyle}">`).replaceAll(`<a `, `<a style="${aStyle}"`).replaceAll(`<h3>`, `<h3 style="${h3Style}">`)
 }
 
-export function edictThemeObject(theme: Theme): EdictThemeObject {
+export function edictThemeObject(theme: EdictTheme): EdictThemeObject {
 	let obj: EdictThemeObject;
 	switch (theme) {
 		case 'december-light':
