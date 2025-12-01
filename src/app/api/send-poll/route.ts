@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
 		}
 	})
 	if (pollQuestion) {
-		if (!is_test && !pollQuestion.hasBeenSent) {
+		if (!is_test && pollQuestion.hasBeenSent) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
 			return NextResponse.json({ status: 204 })
 		}
