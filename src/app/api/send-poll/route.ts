@@ -3,7 +3,7 @@ import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { Recipient_t, themeObject } from '../apiUtil';
-import { emailFrom, theme } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, theme } from '@/poll/pollUtil';
 import { generatePollHTML } from './generate_html_util';
 
 export const maxDuration = 300;
@@ -56,6 +56,9 @@ export async function GET(request: NextRequest) {
 						.spook-response:hover {
 							background-color: ${themeObj.itemHoverColor};
 							border-radius:3px;
+						}
+						.pt-container a:hover {
+							color: ${themeObj.questionTextColor} !important;
 						}
 					</style>
 				</head>

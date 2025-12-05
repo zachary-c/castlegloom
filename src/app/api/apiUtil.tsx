@@ -55,7 +55,8 @@ export function themeObject(theme: Theme): ThemeObject {
 				borderColor: "none",
 				headerTextColor: THEME_DECEMBER.firGreen,
 				postScriptBackgroundColor: THEME_DECEMBER.treeTrimming,
-				postScriptTextColor: THEME_DECEMBER.snowWhite
+				postScriptTextColor: THEME_DECEMBER.snowWhite,
+				questionHeaderLinkColor: THEME_DECEMBER.treeTrimming,
 			};
 			break;
 		case 'december-dark':

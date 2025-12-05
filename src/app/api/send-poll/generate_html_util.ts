@@ -55,7 +55,7 @@ export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_
                 </div>`
 			: ''
 		}
-                <h4 style="${questionTextStyle}">${questionHTML}</h4>
+                <h4 style="${questionTextStyle}" class="pt-container">${questionHTML}</h4>
                 <ul style="${listStyles}">
                     ${question.responses.map((response) => {
 			return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
