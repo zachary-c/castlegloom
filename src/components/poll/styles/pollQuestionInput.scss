@@ -1,11 +1,14 @@
 .poll.input {
-    & .poll__options__item {
+    &:not(.submitting) .poll__options__item {
         cursor: pointer;
         transition-duration: .2s;
         transition-property: transform;
-        &:hover {
+        &:not(.selected):hover {
             transform: scale(1.02);
         }
+    }
+    &.submitting .poll__options__item {
+      opacity: .8;  
     }
     & .poll__options__item.selected { 
         background-color: var(--theme-background);
