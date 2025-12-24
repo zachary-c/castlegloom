@@ -13,10 +13,8 @@ import { renderPrompt } from "./util";
 export default function PollQuestionInput({ question, date, theme, setQuestion }: { question: UserQuestionInfo, date: string, theme: Theme, useProvidedData?: boolean, setQuestion: (p: UserQuestionInfo) => void }) {
 	const userId = useContext(UserContext)
 	const [userAnswer, setUserAnswer] = useState<string | undefined>(question.userResponse) // this is a responseSlug value
-	const [answerHasChanged, setAnswerHasChanged] = useState<boolean>(false)
 	const [loadingData, setLoadingData] = useState<boolean>(false)
 	const [submitting, setSubmitting] = useState<boolean>(false)
-	const [submissionMessage, setSubmissionMessage] = useState<string>('')
 
 	const userHasAnswered = useMemo(() => !!question.userResponse, [question])
 
@@ -31,48 +29,30 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 
 	async function getData() {
 		setLoadingData(true)
-		let response = await fetch(`/api/get-poll?date=${date}`)
+		let response = await fetch(`/api/get-poll?date=${date}&userId=${userId}`)
 
 		const data: PollQuestion_t = await response.json()
-		setQuestion({
-			...data,
-			userResponse: data.responses.find((r) => r.listOfResponders?.some((v) => v._ref === userId))?.responseSlug.current
-		})
-		console.log(data)
+		setQuestion(data)
+		console.log(data);
 		setLoadingData(false)
-		setAnswerHasChanged(false)
-		setSubmissionMessage('')
 	}
-	function selectNewAnswer(slug: string) {
-		if (slug !== userAnswer && slug === question.userResponse) {
-			setAnswerHasChanged(false)
-			setSubmissionMessage('')
-			setUserAnswer(slug)
-		} else if (slug !== userAnswer) {
-			setAnswerHasChanged(true);
-			setSubmissionMessage('')
-			setUserAnswer(slug)
-		}
-	}
-	function resetNewAnswer() {
-		setAnswerHasChanged(false);
-		setSubmissionMessage('')
-		setUserAnswer(question.userResponse)
-	}
-	async function submitNewAnswer() {
-		if (!userAnswer) return;
+
+	async function submitNewAnswer(newUserAnswer: string) {
+		if (submitting || newUserAnswer == userAnswer) return;
+		const oldAnswer = userAnswer;
+		setUserAnswer(newUserAnswer);
 		setSubmitting(true);
 
-		const response = await fetch(`/api/poll/${encodeURIComponent(question.title)}?responder=${encodeURIComponent(userId)}&choice=${encodeURIComponent(userAnswer)}&date=${encodeURIComponent(question.date)}`, {
+		const response = await fetch(`/api/poll/${encodeURIComponent(question.title)}?responder=${encodeURIComponent(userId)}&choice=${encodeURIComponent(newUserAnswer)}&date=${encodeURIComponent(question.date)}`, {
 			method: 'GET'
 		})
 		if (response.ok) {
 			let newResponses = []
 
 			for (let i = 0; i < question.responses.length; i++) {
-				if (question.responses[i].responseSlug.current === question.userResponse) {
+				if (question.responses[i].responseSlug.current === oldAnswer) {
 					newResponses.push({ ...question.responses[i], responseCount: question.responses[i].responseCount - 1 })
-				} else if (question.responses[i].responseSlug.current === userAnswer) {
+				} else if (question.responses[i].responseSlug.current === newUserAnswer) {
 					newResponses.push({ ...question.responses[i], responseCount: question.responses[i].responseCount + 1 })
 				} else {
 					newResponses.push({ ...question.responses[i] })
@@ -81,25 +61,25 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 			const rq = {
 				...question,
 				responses: newResponses,
-				userResponse: userAnswer
+				userResponse: newUserAnswer
 			}
 			setQuestion(rq)
-			setSubmissionMessage('New submission recorded! Thank you, have a nice day!');
 			setSubmitting(false);
-			setAnswerHasChanged(false)
+		} else {
+			setSubmitting(false);
 		}
 	}
 
 	return <>
-		<div className={`poll ${theme ?? 'november'} montserrat input`}>
+		<div className={`poll ${theme ?? 'november'} montserrat input ${submitting ? 'submitting' : ''}`}>
 			<h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>
 			<ul className="poll__options">
 				{question.responses.map((r, i) =>
-					<li key={i} className={`poll__options__item${r.responseSlug.current === userAnswer ? ' selected' : ''}`} onClick={() => selectNewAnswer(r.responseSlug.current)}>
+					<li key={i} className={`poll__options__item${r.responseSlug.current === userAnswer ? ' selected' : ''}`} onClick={() => submitNewAnswer(r.responseSlug.current)}>
 						<div className="poll__options__item__fill-bar" style={{ width: userHasAnswered ? `${(r.responseCount / totalResponses) * 100}%` : "0%" }}></div>
 						<span className="poll__options__item__text">{r.responseText}</span>
 						{userHasAnswered &&
-							<span className="poll__options__item__count">{r.responseCount > 0 ? `${r.responseCount}` : ''}</span>
+							<span className="poll__options__item__count">{r.responseCount > 0 ? r.responseCount : ''}</span>
 						}
 					</li>
 				)}
@@ -107,6 +87,7 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 			<div className="poll__footer">
 				<div>
 					<button className="poll__footer__refresh" onClick={getData}>Refresh</button>
+					{submitting && <span className="loading-notice">Saving...</span>}
 					{loadingData && <span className="loading-notice">Refreshing...</span>}
 				</div>
 				<span className="poll__footer__rc">Total Responses: {totalResponses ?? '?'}</span>
@@ -117,21 +98,6 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 					<span className="poll__postscript__suggested">This poll question was suggested by <b>{question.suggestedBy.trim()}</b>!</span>
 				</div>
 			}
-		</div>
-		{(answerHasChanged || submissionMessage.length > 0) &&
-			<div className="poll__submit-area">
-				{answerHasChanged &&
-					<button onClick={submitNewAnswer} className={`poll__submit-area__btn ${submitting ? 'muted unclickable' : ''}`}>{submitting ? "Submitting..." : "Save Response"}</button>
-				}
-				{answerHasChanged && !submitting &&
-					<button onClick={resetNewAnswer} className={`poll__submit-area__btn muted`}>Reset Selection</button>
-				}
-				{submissionMessage.length > 0 &&
-					<div className="submission-message">
-						<span>{submissionMessage}</span>
-					</div>
-				}
-			</div>
-		}
+		</div >
 	</>
 }

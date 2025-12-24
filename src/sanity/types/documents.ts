@@ -26,6 +26,7 @@ export type PollQuestion_t = {
 	hasBeenSent: boolean
 	suggestedBy: string
 	edict: KingsEdict_t
+	userResponse?: string
 }
 
 export type Meme_t = {
