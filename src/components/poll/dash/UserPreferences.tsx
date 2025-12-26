@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import "../styles/pollPreferences.scss"
 import { Concrete } from "$/lib/queries";
 import { UserRecord } from "$/lib/dashboard_queries"
@@ -9,6 +9,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 	const [madeChanges, setMadeChanges] = useState(false)
 	const [submitting, setSubmitting] = useState(false);
 	const [message, setMessage] = useState("")
+	const title = useMemo(() => userRecord.title ? (userRecord.title.profession + " " + userRecord.title.qualifier).trim() : undefined, [userRecord.title])
 	useEffect(() => {
 		if (userRecord.email !== originalRecord.email
 			|| userRecord.isPolledDaily !== originalRecord.isPolledDaily
@@ -54,17 +55,15 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 	return (
 		<div className="pd__preferences">
 			<h3>Personal Information</h3>
-			<div className="pd__preferences__personal">
+			<div className="pd__preferences__fieldset">
+				<div className="pd__preferences__field centered">
+					<p className="title__pre">{title ? `In the court of Castle Gloom, you are known as${userRecord.title.qualifier ? " the" : ""}...` : "No one knows who you are in the court of Castle Gloom. Generate a title using the button below."}</p>
+					<span className="title__display">{title}</span>
+					<button className="poll__btn generate" onClick={generateTitle}>Generate New Title</button>
+				</div>
 				<div className="pd__preferences__field">
 					<label>Name:</label>
 					<input value={userRecord.name} onChange={(e) => setUserRecord({ ...userRecord, name: e.target.value })} placeholder="Name" />
-				</div>
-				<div className="pd__preferences__field">
-					<label>Title:</label>
-					<div className="pd__preferences__field--grouped full disable">
-						<input value={userRecord.title.profession + " " + userRecord.title.qualifier} disabled />
-						<button className="poll__btn generate" onClick={generateTitle}>Generate Title</button>
-					</div>
 				</div>
 				<div className="pd__preferences__field">
 					<label>Email:</label>
@@ -74,6 +73,14 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 					<input type='checkbox' checked={userRecord.isPolledDaily} onChange={(e) => setUserRecord({ ...userRecord, isPolledDaily: e.target.checked })} id='daily-poll-checkbox' />
 					<label htmlFor='daily-poll-checkbox'>I would like to receive daily polls at the above email address.</label>
 				</div>
+			</div>
+			<h3>Website Preferences</h3>
+			<div className="pd__preferences__fieldset">
+				<div className="pd__preferences__field">
+					<label>Website Theme:</label>
+					<input value={userRecord.email} onChange={(e) => setUserRecord({ ...userRecord, email: e.target.value })} placeholder="smith@castlegloom.com" />
+				</div>
+
 			</div>
 			{(madeChanges || message.length > 0) &&
 				<div className="pd__preferences__divider" />
