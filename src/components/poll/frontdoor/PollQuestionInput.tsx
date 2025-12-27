@@ -5,12 +5,12 @@ import "_components/poll/styles/pollQuestionInput.scss"
 import { useContext, useMemo, useState } from "react";
 import { UserContext } from "../dash/DashTabs";
 import { UserQuestionInfo } from "../dash/types";
-import { Theme } from "@/poll/pollUtil";
+import { PreferenceTheme, Theme } from "@/poll/pollUtil";
 import Image from "next/image";
 import pfp from "%/default.png"
 import { renderPrompt } from "./util";
 
-export default function PollQuestionInput({ question, date, theme, setQuestion }: { question: UserQuestionInfo, date: string, theme: Theme, useProvidedData?: boolean, setQuestion: (p: UserQuestionInfo) => void }) {
+export default function PollQuestionInput({ question, date, theme, setQuestion }: { question: UserQuestionInfo, date: string, theme: PreferenceTheme, useProvidedData?: boolean, setQuestion: (p: UserQuestionInfo) => void }) {
 	const userId = useContext(UserContext)
 	const [userAnswer, setUserAnswer] = useState<string | undefined>(question.userResponse) // this is a responseSlug value
 	const [loadingData, setLoadingData] = useState<boolean>(false)

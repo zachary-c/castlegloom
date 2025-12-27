@@ -3,7 +3,7 @@ import "../styles/pollPreferences.scss"
 import { Concrete } from "$/lib/queries";
 import { UserRecord } from "$/lib/dashboard_queries"
 import { professionList, qualifierList } from "./types";
-import { randomInRange } from "@/poll/pollUtil";
+import { PreferenceTheme, randomInRange, Theme, theme_list } from "@/poll/pollUtil";
 
 export function UserPreferences({ userRecord, setUserRecord, originalRecord, setOriginalRecord }: { userRecord: Concrete<UserRecord>, setUserRecord: (val: Concrete<UserRecord>) => void, originalRecord: Concrete<UserRecord>, setOriginalRecord: (val: Concrete<UserRecord>) => void }) {
 	const [madeChanges, setMadeChanges] = useState(false)
@@ -14,6 +14,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 		if (userRecord.email !== originalRecord.email
 			|| userRecord.isPolledDaily !== originalRecord.isPolledDaily
 			|| userRecord.name !== originalRecord.name
+			|| userRecord.theme !== originalRecord.theme
 			|| userRecord.title?.profession !== originalRecord.title?.profession
 			|| userRecord.title?.qualifier !== originalRecord.title?.qualifier) {
 			setMessage("")
@@ -30,6 +31,13 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 			randomQualifier = qualifierList[randomInRange(0, qualifierList.length)]
 		} while (randomProfession === userRecord.title.profession || randomQualifier === userRecord.title.qualifier)
 		setUserRecord({ ...userRecord, title: { qualifier: randomQualifier, profession: randomProfession } })
+	}
+	function updateTheme(value: string) {
+		if (!theme_list.includes(value)) {
+			setMessage("Theme not recognized, please refresh and try again.")
+			return;
+		}
+		setUserRecord({ ...userRecord, theme: value as PreferenceTheme })
 	}
 	function resetData() {
 		setUserRecord(originalRecord)
@@ -69,16 +77,20 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 					<label>Email:</label>
 					<input value={userRecord.email} onChange={(e) => setUserRecord({ ...userRecord, email: e.target.value })} placeholder="smith@castlegloom.com" />
 				</div>
-				<div className="pd__preferences__field pd__preferences__field--checkbox">
+				<div className="pd__preferences__field checkbox">
 					<input type='checkbox' checked={userRecord.isPolledDaily} onChange={(e) => setUserRecord({ ...userRecord, isPolledDaily: e.target.checked })} id='daily-poll-checkbox' />
 					<label htmlFor='daily-poll-checkbox'>I would like to receive daily polls at the above email address.</label>
 				</div>
 			</div>
 			<h3>Website Preferences</h3>
 			<div className="pd__preferences__fieldset">
-				<div className="pd__preferences__field">
+				<div className="pd__preferences__field select">
 					<label>Website Theme:</label>
-					<input value={userRecord.email} onChange={(e) => setUserRecord({ ...userRecord, email: e.target.value })} placeholder="smith@castlegloom.com" />
+					<select value={userRecord.theme} onChange={(e) => updateTheme(e.target.value)}>
+						<option value="monthly">Monthly</option>
+						<option value="november-light">November</option>
+						<option value="december-light">December</option>
+					</select>
 				</div>
 
 			</div>

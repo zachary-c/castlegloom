@@ -7,7 +7,7 @@ import PollQuestion from 'R/src/components/poll/frontdoor/PollQuestion'
 import '../../components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo } from 'R/util'
-import { theme } from './pollUtil'
+import { monthly_theme } from './pollUtil'
 import { Metadata } from 'next'
 
 export const dynamic = "force-dynamic";
@@ -37,12 +37,12 @@ export default async function Page() {
 	}
 
 	return <>
-		<h1 className={`poll__page-title ${theme}`}>{data.today.title}</h1>
-		<PollQuestion question={data.today} date={data.today.date} theme={theme} />
-		<span className={`poll__date ${theme}`}>{data.today.date}</span>
+		<h1 className={`poll__page-title ${monthly_theme}`}>{data.today.title}</h1>
+		<PollQuestion question={data.today} date={data.today.date} theme={monthly_theme} />
+		<span className={`poll__date ${monthly_theme}`}>{data.today.date}</span>
 		<div className='daynav__container'>
 		</div>
-		<div className={`poll__page-footer ${theme}`}>
+		<div className={`poll__page-footer ${monthly_theme}`}>
 			{data.previous &&
 				<div className='daynav__button'>
 					<Link className={`button poll__btn`} href={`/poll/${yString}`}>Previous</Link>

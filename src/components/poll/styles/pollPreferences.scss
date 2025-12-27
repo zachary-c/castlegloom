@@ -18,7 +18,7 @@
             display:flex;
             flex-direction: column;
             justify-content: space-between;
-            &--checkbox {
+            &.checkbox {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -26,10 +26,19 @@
                     cursor: pointer;
                 }
                 > input {
-                    margin-right: 1rem;
+                    margin-right: .5rem;
                 }
                 > label {
                     margin-left: .25rem;
+                }
+            }
+            &.select {
+                > select {
+                    cursor: pointer;
+                    font-size: 1rem;
+                }
+                > label {
+                    margin-bottom: .25rem;
                 }
             }
             label {

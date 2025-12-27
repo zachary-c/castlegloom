@@ -1,7 +1,29 @@
 
+export const theme_list = [
+	'monthly',
+	'december-light',
+	'november-light',
+	/*'october-dark',
+	'october-light',
+	'wireframe',
+	'january',
+	'december-dark',
+	'february-light',
+	'march-light',
+	'march-dark',
+	'april-light',
+	'may-dark',
+	'june-light',
+	'july-light',
+	'august-dark',
+	'september-light'*/
+]
+
+export type PreferenceTheme = 'monthly' | 'december-light' | 'november-light'
+
 export type Theme = 'november' | 'october-dark' | 'october-light' | 'wireframe' | 'january' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
 
-export const theme: Theme = 'december-light'
+export const monthly_theme: Theme = 'december-light'
 
 export const STANDARDS = {
 	white: '#fff',

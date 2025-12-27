@@ -3,7 +3,7 @@ import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { Recipient_t, themeObject } from '../apiUtil';
-import { emailFrom, STANDARDS, theme } from '@/poll/pollUtil';
+import { emailFrom, STANDARDS, monthly_theme } from '@/poll/pollUtil';
 import { generatePollHTML } from './generate_html_util';
 
 export const maxDuration = 300;
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
 			return NextResponse.json({ status: 204 })
 		}
-		const themeObj = themeObject(theme)
+		const themeObj = themeObject(monthly_theme)
 		console.log('theme', themeObj)
 		for (const recipient of emails) {
 			let pollHtml = generatePollHTML(pollQuestion, recipient, themeObj)

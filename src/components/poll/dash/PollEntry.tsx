@@ -1,14 +1,16 @@
 'use client'
 import { useState } from "react";
 import { UserQuestionInfo } from "./types";
-import { theme } from "@/poll/pollUtil";
+import { monthly_theme, PreferenceTheme, Theme } from "@/poll/pollUtil";
 import "../styles/pollentry.scss"
 import PollQuestionInput from "../frontdoor/PollQuestionInput";
 import { renderPrompt } from "../frontdoor/util";
+import { poll_cookie_theme_preference } from "@/api/poll/login/cookie";
 
-export default function PollEntry({ preloadInfo }: { preloadInfo: UserQuestionInfo }) {
+export default function PollEntry({ preloadInfo, theme }: { preloadInfo: UserQuestionInfo, theme: PreferenceTheme }) {
 	const [open, setOpen] = useState<boolean>(false);
 	const [info, setInfo] = useState<UserQuestionInfo>(preloadInfo)
+
 	return (
 		<div className={`pe ${info.userResponse ? 'responded' : ''} ${open ? 'open' : ''}`}>
 			<div className={`pe__header`} onClick={() => setOpen(!open)}>
