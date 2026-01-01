@@ -110,7 +110,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
 			body: <div className='pd__question-entries'>
 				{
 					userQuestionData.map((q: UserQuestionInfo, i: number) =>
-						<PollEntry preloadInfo={q} key={i} theme={userRecord.theme} />
+						<PollEntry preloadInfo={q} key={i} />
 					)
 				}
 			</div>
@@ -120,8 +120,8 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
 			title: <>Unanswered <span>{countUnanswered}</span></>,
 			body: <div className='pd__question-entries'>
 				{
-					userQuestionData.filter((q) => !q.userResponse).map((q: UserQuestionInfo, i: number) =>
-						<PollEntry preloadInfo={q} key={'filtered' + q.title} theme={userRecord.theme} />
+					userQuestionData.filter((q) => !q.userResponse).map((q: UserQuestionInfo) =>
+						<PollEntry preloadInfo={q} key={'filtered' + q.title} />
 					)
 				}
 			</div>

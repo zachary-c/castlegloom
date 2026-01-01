@@ -45,7 +45,7 @@ export default async function Day2022({ params }: { params: { day: string, cslug
 			<DayNavigation currentDay={dayOfMonth} currentYear={year} />
 			{data.pollQuestion &&
 				<>
-					<PollQuestion question={data.pollQuestion} date={dateString} theme={'october-dark'} embedded={true} />
+					<PollQuestion question={data.pollQuestion} date={dateString} embedded={true} />
 					<Link className="button cta wide" href="/poll">More Poll Questions</Link>
 				</>
 			}

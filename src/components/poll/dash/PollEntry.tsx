@@ -1,13 +1,11 @@
 'use client'
 import { useState } from "react";
 import { UserQuestionInfo } from "./types";
-import { monthly_theme, PreferenceTheme, Theme } from "@/poll/pollUtil";
 import "../styles/pollentry.scss"
 import PollQuestionInput from "../frontdoor/PollQuestionInput";
 import { renderPrompt } from "../frontdoor/util";
-import { poll_cookie_theme_preference } from "@/api/poll/login/cookie";
 
-export default function PollEntry({ preloadInfo, theme }: { preloadInfo: UserQuestionInfo, theme: PreferenceTheme }) {
+export default function PollEntry({ preloadInfo }: { preloadInfo: UserQuestionInfo }) {
 	const [open, setOpen] = useState<boolean>(false);
 	const [info, setInfo] = useState<UserQuestionInfo>(preloadInfo)
 
@@ -20,7 +18,7 @@ export default function PollEntry({ preloadInfo, theme }: { preloadInfo: UserQue
 			</div>
 			{open ?
 				<div className="pe__body">
-					<PollQuestionInput question={info} setQuestion={setInfo} date={info.date} theme={theme} />
+					<PollQuestionInput question={info} setQuestion={setInfo} date={info.date} />
 				</div>
 				: <></>}
 		</div>
