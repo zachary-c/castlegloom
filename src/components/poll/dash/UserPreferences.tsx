@@ -3,7 +3,7 @@ import "../styles/pollPreferences.scss"
 import { Concrete } from "$/lib/queries";
 import { UserRecord } from "$/lib/dashboard_queries"
 import { professionList, qualifierList } from "./types";
-import { PreferenceTheme, randomInRange, Theme, theme_list } from "@/poll/pollUtil";
+import { PreferenceTheme, randomInRange, theme_list } from "@/poll/pollUtil";
 
 export function UserPreferences({ userRecord, setUserRecord, originalRecord, setOriginalRecord }: { userRecord: Concrete<UserRecord>, setUserRecord: (val: Concrete<UserRecord>) => void, originalRecord: Concrete<UserRecord>, setOriginalRecord: (val: Concrete<UserRecord>) => void }) {
 	const [madeChanges, setMadeChanges] = useState(false)
@@ -85,11 +85,12 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 			<h3>Website Preferences</h3>
 			<div className="pd__preferences__fieldset">
 				<div className="pd__preferences__field select">
-					<label>Website Theme:</label>
+					<label>Website Theme:{madeChanges ? <span className="warning"> YOU HAVE UNSAVED CHANGES</span> : ""}</label>
 					<select value={userRecord.theme} onChange={(e) => updateTheme(e.target.value)}>
 						<option value="monthly">Monthly</option>
 						<option value="november-light">November</option>
 						<option value="december-light">December</option>
+						<option value="january-light">January</option>
 					</select>
 				</div>
 

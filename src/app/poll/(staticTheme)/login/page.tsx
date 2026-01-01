@@ -1,16 +1,15 @@
 import React from 'react'
 
-import { theme } from '../pollUtil'
 import Login from '_components/poll/dash/Login'
 
 export default async function Page() {
 
-    return <>
-        <h1 className={`poll__page-title ${theme}`}>Polling Dashboard Login</h1>
-        <div className='login__page'>
-            <Login />
-        </div>
-    </>
+	return <>
+		<h1 className={`poll__page-title`}>Polling Dashboard Login</h1>
+		<div className='login__page'>
+			<Login />
+		</div>
+	</>
 
 }
 

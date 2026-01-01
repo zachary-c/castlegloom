@@ -74,10 +74,18 @@ export const recipient_list = groq`
 		isPolledDaily
     }
 `
+export const test_recipient_list = groq`
+    *[_id == 'ceec6d4a-2807-4050-991d-eed3f5e21f29' && isPolledDaily] {
+        _id,
+        email,
+		theme
+    }
+`
 export const daily_polled = groq`
     *[_type == 'recipient' && isPolledDaily] {
         _id,
-        email
+        email,
+		theme
     }
 `
 export const todays_meme = groq`

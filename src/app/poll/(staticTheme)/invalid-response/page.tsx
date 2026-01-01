@@ -1,6 +1,4 @@
 import React from 'react'
-
-import { theme } from '../pollUtil'
 import "_components/poll/styles/pollLogin.scss"
 
 export default async function Page() {

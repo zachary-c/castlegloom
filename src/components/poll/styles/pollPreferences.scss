@@ -66,6 +66,10 @@
             input[disabled] {
                 cursor: not-allowed;
             }
+            .warning {
+              font-style:italic;
+              font-weight:bold;
+            }
         }
         &__submission {
             display: flex;

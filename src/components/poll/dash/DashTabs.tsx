@@ -1,12 +1,14 @@
 'use client'
 import { Concrete } from "$/lib/queries";
 import { LeaderboardRecord, UserRecord } from "$/lib/dashboard_queries"
-import React, { createContext, useMemo, useState } from "react"
+import React, { createContext, useEffect, useMemo, useState } from "react"
 import { UserQuestionInfo } from "./types";
 import PollEntry from "./PollEntry";
 import { UserPreferences } from "./UserPreferences";
-import { PreferenceTheme } from "@/poll/pollUtil";
 import { Leaderboard } from "./Leaderboard";
+import jsCookie from "js-cookie"
+import { poll_cookie_theme_preference } from "@/api/poll/login/cookie";
+import { concreteTheme } from 'R/src/app/poll/pollUtil'
 
 export const UserContext = createContext<string>('')
 
@@ -89,13 +91,18 @@ export function getTitle(userData: Concrete<UserRecord>) {
 	return str;
 }
 
-export default function DashTabs({ userData, userQuestionData, staticLeaderboardData, theme }: { userData: Concrete<UserRecord>, userQuestionData: UserQuestionInfo[], staticLeaderboardData: LeaderboardRecord[], theme: PreferenceTheme }) {
+export default function DashTabs({ userData, userQuestionData, staticLeaderboardData }: { userData: Concrete<UserRecord>, userQuestionData: UserQuestionInfo[], staticLeaderboardData: LeaderboardRecord[] }) {
 	const [currentTab, setCurrentTab] = useState(0);
 	const [userRecord, setUserRecord] = useState<Concrete<UserRecord>>(userData)
 	const [originalUserData, setOriginalUserData] = useState<Concrete<UserRecord>>(userData)
 	const [leaderboardData, setLeaderboardData] = useState<LeaderboardRecord[]>(staticLeaderboardData)
 	const greeting = useMemo(() => greetings[Math.floor((Date.now() / (1000 * 60)) % greetings.length)] + getTitle(userRecord), [userRecord])
 	const countUnanswered = useMemo(() => userQuestionData.filter((q) => !q.userResponse).length, [userQuestionData]);
+
+	useEffect(() => {
+		jsCookie.set(poll_cookie_theme_preference, originalUserData.theme)
+	}, [originalUserData])
+
 	const tabs = [
 		{
 			index: 0,
@@ -103,7 +110,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
 			body: <div className='pd__question-entries'>
 				{
 					userQuestionData.map((q: UserQuestionInfo, i: number) =>
-						<PollEntry preloadInfo={q} key={i} theme={theme} />
+						<PollEntry preloadInfo={q} key={i} theme={userRecord.theme} />
 					)
 				}
 			</div>
@@ -114,7 +121,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
 			body: <div className='pd__question-entries'>
 				{
 					userQuestionData.filter((q) => !q.userResponse).map((q: UserQuestionInfo, i: number) =>
-						<PollEntry preloadInfo={q} key={'filtered' + q.title} theme={theme} />
+						<PollEntry preloadInfo={q} key={'filtered' + q.title} theme={userRecord.theme} />
 					)
 				}
 			</div>
@@ -136,19 +143,21 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
 	]
 
 	return (
-		<>
-			<h1 className={`pd__title ${theme}`}>{greeting}</h1>
-			<UserContext.Provider value={userRecord._id}>
-				<menu className="pd__tabmenu">
-					{tabs.map((t, i) =>
-						t.listitem ? <React.Fragment key={i}>{t.listitem}</React.Fragment> :
-							<li key={i} className={`pd__tabmenu__tab ${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>
-					)}
-				</menu>
-				<div className="pd__body">
-					{tabs[currentTab].body}
-				</div>
-			</UserContext.Provider>
-		</>
+		<body className={`poll__body ${concreteTheme(userRecord.theme)}`}>
+			<main className="page--vflex">
+				<h1 className={`pd__title ${concreteTheme(userRecord.theme)}`}>{greeting}</h1>
+				<UserContext.Provider value={userRecord._id}>
+					<menu className="pd__tabmenu">
+						{tabs.map((t, i) =>
+							t.listitem ? <React.Fragment key={i}>{t.listitem}</React.Fragment> :
+								<li key={i} className={`pd__tabmenu__tab ${currentTab === t.index ? 'current' : ''}`} onClick={() => setCurrentTab(t.index)}>{t.title}</li>
+						)}
+					</menu>
+					<div className="pd__body">
+						{tabs[currentTab].body}
+					</div>
+				</UserContext.Provider>
+			</main>
+		</body>
 	)
 }

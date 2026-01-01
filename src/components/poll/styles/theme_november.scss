@@ -1,16 +1,12 @@
-.november {
-  &.poll {
-    background-color: $ghost-of-october;
-    color: black;
-    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
-
-    &__body {
+.november-light {
+  &.poll__body {
       background-color: rgb(255, 236, 188);
-    }
-
   }
 
   .poll {
+    background-color: $ghost-of-october;
+    color: black;
+    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
 
     &__header {
       &:before {
@@ -70,11 +66,15 @@
         color: $white;
       }
     }
+    &__postscript {
+      background-color: $thursday-ochre;
+      color: $ghost-of-october;
+    }
   }
 }
 
 // POLL DASHBOARD
-.november {
+.november-light {
   .pd {
 
     // UNIQUE LAYOUT
@@ -117,7 +117,7 @@
           color: $charcoal-cemetery;
         }
 
-        label {
+        label, p, span {
           color: $white;
         }
 
