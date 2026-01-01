@@ -5,12 +5,11 @@ import "_components/poll/styles/pollQuestionInput.scss"
 import { useContext, useMemo, useState } from "react";
 import { UserContext } from "../dash/DashTabs";
 import { UserQuestionInfo } from "../dash/types";
-import { Theme } from "@/poll/pollUtil";
 import Image from "next/image";
 import pfp from "%/default.png"
 import { renderPrompt } from "./util";
 
-export default function PollQuestionInput({ question, date, theme, setQuestion }: { question: UserQuestionInfo, date: string, theme: Theme, useProvidedData?: boolean, setQuestion: (p: UserQuestionInfo) => void }) {
+export default function PollQuestionInput({ question, date, setQuestion }: { question: UserQuestionInfo, date: string, useProvidedData?: boolean, setQuestion: (p: UserQuestionInfo) => void }) {
 	const userId = useContext(UserContext)
 	const [userAnswer, setUserAnswer] = useState<string | undefined>(question.userResponse) // this is a responseSlug value
 	const [loadingData, setLoadingData] = useState<boolean>(false)
@@ -71,7 +70,7 @@ export default function PollQuestionInput({ question, date, theme, setQuestion }
 	}
 
 	return <>
-		<div className={`poll ${theme ?? 'november'} montserrat input ${submitting ? 'submitting' : ''}`}>
+		<div className={`poll montserrat input ${submitting ? 'submitting' : ''}`}>
 			<h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>
 			<ul className="poll__options">
 				{question.responses.map((r, i) =>

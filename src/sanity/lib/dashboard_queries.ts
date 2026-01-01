@@ -1,4 +1,5 @@
 import { groq } from "next-sanity"
+import { PreferenceTheme } from '@/poll/pollUtil'
 
 export const leaderboardQuery = groq`
 *[_type == 'recipient'] { 
@@ -37,6 +38,7 @@ export const user_dashboard_information = groq`
     email,
     name,
     isPolledDaily,
+    theme,
     title {
         profession,
         qualifier
@@ -51,4 +53,5 @@ export type UserRecord = {
 		profession?: string
 		qualifier?: string
 	}
+	theme?: PreferenceTheme
 }

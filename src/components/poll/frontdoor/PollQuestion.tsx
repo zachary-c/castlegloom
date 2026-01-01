@@ -1,6 +1,5 @@
 'use client'
 import { PollQuestion_t } from "$/types/documents";
-import { Theme } from "@/poll/pollUtil";
 import Image from "next/image";
 import "../styles/pollQuestion.scss"
 
@@ -16,7 +15,7 @@ import { renderPrompt } from "./util";
 // vertically aligning the refresh and the total responses
 // very light dropshadow to light white box
 // 
-export default function PollQuestion({ question, date, theme, embedded }: { question: PollQuestion_t, date: string, theme: Theme, embedded?: boolean }) {
+export default function PollQuestion({ question, date, embedded }: { question: PollQuestion_t, date: string, embedded?: boolean }) {
 	const [questionData, setQuestionData] = useState<PollQuestion_t | undefined>(undefined)
 	const [loadingData, setLoadingData] = useState<boolean>(true)
 
@@ -42,7 +41,7 @@ export default function PollQuestion({ question, date, theme, embedded }: { ques
 		getData()
 	}, [])
 
-	return <div className={`poll ${theme ?? 'november'} montserrat${embedded ? " embedded" : ""}`}>
+	return <div className={`poll montserrat${embedded ? " embedded" : ""}`}>
 		<h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>
 		<ul className="poll__options">
 			{questionData ? questionData.responses.map((r, i) =>

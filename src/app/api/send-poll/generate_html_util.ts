@@ -62,6 +62,9 @@ export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_
 		}).join('')}
                 </ul>
             </div>
+			<p style="text-align:center;">
+				<a style="color:white;" href="https://castlegloom.com/poll/${encodedDate}">Click here to see the poll results without voting, like a coward.</a>
+			</p>
 			${memoriam}
         </div>
     </body>

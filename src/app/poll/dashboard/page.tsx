@@ -3,20 +3,24 @@ import { apiClient } from '$/lib/client'
 import { Concrete } from '$/lib/queries'
 import { LeaderboardRecord, UserRecord, leaderboardQuery, poll_question_list, user_dashboard_information } from "$/lib/dashboard_queries"
 import { cookies } from 'next/headers'
-import { pollCookieName } from '@/api/poll/login/cookie'
+import { poll_cookie_theme_preference, poll_cookie_user_id } from '@/api/poll/login/cookie'
 import { redirect, RedirectType } from 'next/navigation'
 import { PollQuestion_t } from '$/types/documents'
 import '_components/poll/styles/pollDashboard.scss'
-import '_components/poll/styles/theme_october.scss'
-import '_components/poll/styles/theme_november.scss'
-import '_components/poll/styles/theme_december.scss'
 import DashTabs from '_components/poll/dash/DashTabs'
+import { monthly_theme, PreferenceTheme, Theme } from '../pollUtil'
+
 
 export default async function Page() {
 	//console.log('data', datetime)
 	const cookieJar = cookies()
 
-	const userid = cookieJar.get(pollCookieName)
+	const theme_preference_cookie = cookieJar.get(poll_cookie_theme_preference)
+	let theme = monthly_theme;
+	if (theme_preference_cookie && theme_preference_cookie.value !== 'monthly') {
+		theme = theme_preference_cookie.value as Theme
+	}
+	const userid = cookieJar.get(poll_cookie_user_id)
 	if (!userid) {
 		redirect('/poll/login', RedirectType.replace)
 	}
@@ -37,6 +41,7 @@ export default async function Page() {
 			qualifier: info.title?.qualifier ?? ''
 		},
 		email: info.email ?? '',
+		theme: info.theme ?? 'monthly'
 	}
 	const cleanedLeaderboardData: LeaderboardRecord[] = []
 	leaderboardData.forEach((d) => {

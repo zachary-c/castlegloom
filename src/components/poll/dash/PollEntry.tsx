@@ -1,7 +1,6 @@
 'use client'
 import { useState } from "react";
 import { UserQuestionInfo } from "./types";
-import { theme } from "@/poll/pollUtil";
 import "../styles/pollentry.scss"
 import PollQuestionInput from "../frontdoor/PollQuestionInput";
 import { renderPrompt } from "../frontdoor/util";
@@ -9,6 +8,7 @@ import { renderPrompt } from "../frontdoor/util";
 export default function PollEntry({ preloadInfo }: { preloadInfo: UserQuestionInfo }) {
 	const [open, setOpen] = useState<boolean>(false);
 	const [info, setInfo] = useState<UserQuestionInfo>(preloadInfo)
+
 	return (
 		<div className={`pe ${info.userResponse ? 'responded' : ''} ${open ? 'open' : ''}`}>
 			<div className={`pe__header`} onClick={() => setOpen(!open)}>
@@ -18,7 +18,7 @@ export default function PollEntry({ preloadInfo }: { preloadInfo: UserQuestionIn
 			</div>
 			{open ?
 				<div className="pe__body">
-					<PollQuestionInput question={info} setQuestion={setInfo} date={info.date} theme={theme} />
+					<PollQuestionInput question={info} setQuestion={setInfo} date={info.date} />
 				</div>
 				: <></>}
 		</div>

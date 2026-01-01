@@ -22,6 +22,7 @@
 
   &__body {
     margin: 0;
+    padding-bottom:2rem;
   }
 
   &__page-title {
@@ -384,88 +385,6 @@
     font-weight: bold;
   }
 
-}
-
-
-.january {
-  &.pd {}
-
-  &.poll {
-    background-color: $bone;
-    color: black;
-    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
-
-    &__body {
-      background-color: $platinum;
-    }
-
-    &__page-title {
-      color: $jasper;
-    }
-
-    &__btn {
-      background-color: $jasper;
-      color: $platinum;
-
-      &.outline {
-        border: 2px solid $jasper;
-        background-color: $bone;
-        color: $jasper;
-      }
-    }
-
-    &__date {
-      color: $black-olive;
-    }
-  }
-
-  .poll {
-    &__header {
-      &:before {
-        content: 'POLL';
-        color: $jasper;
-        transform: rotate(10deg);
-        font-family: 'Courier New', Courier, monospace;
-      }
-
-      color: $black-olive;
-    }
-
-    &__options {
-      &__item {
-        background-color: $walnut-brown;
-
-        &__text {
-          color: $platinum;
-        }
-
-        &__count {
-          color: $platinum;
-        }
-
-        &__fill-bar {
-          background-color: $black-olive;
-        }
-      }
-    }
-
-    &__footer {
-      &__rc {
-        color: $walnut-brown;
-      }
-
-      &__refresh {
-        background-color: $platinum;
-        color: $black-olive;
-        border: 1px solid $black-olive;
-
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.05);
-        }
-      }
-    }
-  }
 }
 
 .february-light {

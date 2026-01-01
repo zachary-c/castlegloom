@@ -1,5 +1,7 @@
 import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_MARCH_LIGHT, THEME_MAY_DARK, THEME_JUNE_LIGHT, THEME_JULY_LIGHT, THEME_AUGUST_DARK, THEME_SEPTEMBER_LIGHT, THEME_OCTOBER_DARK, THEME_NOVEMBER, THEME_DECEMBER } from '@/poll/pollUtil';
 
+import { PreferenceTheme } from "@/poll/pollUtil";
+
 export type ThemeObject = {
 	backgroundColor: string
 	headerTextColor: string
@@ -25,12 +27,13 @@ export type EdictTheme = "december-light" | "standards (default)";
 export type Recipient_t = {
 	email: string
 	_id: string
+	theme: PreferenceTheme
 }
 
 export function themeObject(theme: Theme): ThemeObject {
 	let obj: ThemeObject;
 	switch (theme) {
-		case 'november':
+		case 'november-light':
 			obj = {
 				backgroundColor: THEME_NOVEMBER.ghostOfOctober,
 				questionTextColor: THEME_NOVEMBER.charcoalCemetery,
@@ -73,7 +76,7 @@ export function themeObject(theme: Theme): ThemeObject {
 
 			};
 			break;
-		case 'january':
+		case 'january-light':
 			obj = {
 				backgroundColor: THEME_JAN.walnutBrown,
 				headerTextColor: THEME_JAN.jasper,
