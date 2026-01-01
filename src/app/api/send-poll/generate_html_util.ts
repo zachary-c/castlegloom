@@ -77,8 +77,7 @@ export function generateEdictInnerHtml(edict: KingsEdict_t, themeObj: EdictTheme
 	let edict_content = toHTML(edict.edictBody ?? [])
 	edict_content = applyStyleToHtml(edict_content, `color:${themeObj.a_color};`, "", "font-size: 1.15rem")
 	const edict_dt = new Date(edict.date + "T00:00:00.000")
-	const kings_decree = `On this ${edict_dt.getUTCDay()}${suffix(edict_dt.getUTCDay())} day of ${edict_dt.toLocaleDateString("utc", { month: "long" })}, A.D. ${edict_dt.getUTCFullYear()}, the ${english_th(edict.edictNumber)} decree and order of the king:`
-	console.log("themeobj", themeObj)
+	const kings_decree = `On this ${edict_dt.getUTCDate()}${suffix(edict_dt.getUTCDate())} day of ${edict_dt.toLocaleDateString("utc", { month: "long" })}, A.D. ${edict_dt.getUTCFullYear()}, the ${english_th(edict.edictNumber)} decree and order of the king:`
 	let html = `
 		<section style="max-width:800px; margin: 0 auto;font-size: .95rem;font-family: sans-serif;border-bottom: 2px solid ${themeObj.divider_color};">
 			<p style="font-family: cursive;font-size: 1.1rem;font-style: italic;font-weight: bold;text-align: center;">

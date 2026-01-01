@@ -2,7 +2,7 @@
 export const caption_25 = `Every day it's a-gettin' closer
 Goin' faster than a rollercoaster
 
-Leading a Salt C Group resulted in bonfire time -- perhaps the most important thing this year. Adjacent that, from Dallas to frisbee to work to Chicogo, what a summer it was!. I also acquired my second degree black belt for TKD (see the two stripes), and walked past MBB at sunset in my last semester.
+Leading a Salt C Group resulted in bonfire time -- perhaps the most important thing this year. Adjacent that, from Dallas to frisbee to work to Chicago, what a summer it was!. I also acquired my second degree black belt for TKD (see the two stripes), and walked past MBB at sunset in my last semester.
 
 This is the last Instagram/Snapchat post; see https://castlegloom.com/annual for more of these in the future. The polls (https://castlegloom.com/poll) are still going on, somehow.
 
