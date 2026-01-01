@@ -36,11 +36,12 @@ export default function AnnualPage() {
 			<section className="year" id="2025">
 				<div className="img-wrapper">
 					<img src={eoy_25.src} />
-					<span className={`date ${montserrat.className}`}>January 1st, 2025</span>
+					<span className={`date ${montserrat.className}`}>January 1st, 2026</span>
 				</div>
 				<span className={`caption ${montserrat.className}`}>{caption_25}
 				</span>
 			</section>
+			<section className="spacer"></section>
 			<section className="year" id="2024">
 				<div className="img-wrapper">
 					<img src={eoy_24.src} />

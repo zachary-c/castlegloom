@@ -22,7 +22,7 @@ export type EdictThemeObject = {
 	a_color: string,
 	divider_color: string
 }
-export type EdictTheme = "december-light" | "standards (default)";
+export type EdictTheme = "january-light" | "november-light" | "december-light" | "standards (default)";
 
 export type Recipient_t = {
 	email: string
@@ -241,6 +241,22 @@ export function applyStyleToHtml(html: string, aStyle: string, pStyle: string, h
 export function edictThemeObject(theme: EdictTheme): EdictThemeObject {
 	let obj: EdictThemeObject;
 	switch (theme) {
+		case 'november-light':
+			obj = {
+				h2_background: THEME_NOVEMBER.thanksgivingBrown,
+				h2_color: THEME_NOVEMBER.ghostOfOctober,
+				a_color: THEME_NOVEMBER.thursdayOchre,
+				divider_color: THEME_NOVEMBER.charcoalCemetery
+			};
+			break;
+		case 'january-light':
+			obj = {
+				h2_background: THEME_JAN.jasper,
+				h2_color: STANDARDS.white,
+				a_color: THEME_JAN.jasper,
+				divider_color: THEME_JAN.bone
+			};
+			break;
 		case 'december-light':
 			obj = {
 				h2_background: THEME_DECEMBER.firGreen,

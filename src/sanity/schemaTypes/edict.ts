@@ -56,6 +56,8 @@ export default defineType({
 			type: "string",
 			options: {
 				list: [
+					{ title: "January", value: "january-light" },
+					{ title: "November", value: "november-light" },
 					{ title: "December", value: "december-light" },
 					{ title: "Standards", value: "standards (default)" },
 				]
