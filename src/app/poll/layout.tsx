@@ -3,7 +3,8 @@ import '_components/spooktober/styles/global.scss'
 import '_components/poll/styles/pollQuestion.scss'
 import '_components/poll/styles/theme_november.scss'
 import '_components/poll/styles/theme_december.scss'
-import { theme } from './pollUtil'
+import "_components/poll/styles/theme_january.scss"
+import "_components/poll/styles/theme_october.scss"
 import { Montserrat } from 'next/font/google'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -14,11 +15,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: any }) {
 
-	return <html>
-		<body className={`poll__body ${theme} ${montserrat.className}`}>
-			<main className="page--vflex">
-				{children}
-			</main>
-		</body>
+	return <html className={`${montserrat.className}`}>
+		{children}
 	</html>
 }

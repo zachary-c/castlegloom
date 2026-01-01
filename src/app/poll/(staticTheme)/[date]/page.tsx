@@ -1,13 +1,12 @@
 import React from 'react'
-import { apiClient, client } from '../../../sanity/lib/client'
-import { poll_date_surrounding, poll_dates } from '../../../sanity/lib/queries'
-import { PollQuestion_t } from '../../../sanity/types/documents'
+import { apiClient } from '$/lib/client'
+import { poll_date_surrounding } from '$/lib/queries'
+import { PollQuestion_t } from '$/types/documents'
 import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/poll/frontdoor/PollQuestion'
-import '../../../components/spooktober/styles/daynav.scss'
+import '_components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
-import { theme } from '../pollUtil'
 
 export const revalidate = 60;
 /* 
@@ -47,23 +46,22 @@ export default async function Page({ params }: { params: { date: string } }) {
 	}
 
 	return <>
-		<h1 className={`poll__page-title ${theme}`}>{data.today.title}</h1>
-		<PollQuestion question={data.today} date={params.date} theme={theme} />
-		<span className={`poll__date ${theme}`}>{params.date}</span>
+		<h1 className={`poll__page-title`}>{data.today.title}</h1>
+		<PollQuestion question={data.today} date={params.date} />
+		<span className={`poll__date`}>{params.date}</span>
 		<div className='daynav__container'>
 			{data.yesterday &&
 				<div className='daynav__button'>
-					<Link className={`button poll__btn ${theme}`} href={`/poll/${yString}`}>Previous</Link>
+					<Link className={`button poll__btn`} href={`/poll/${yString}`}>Previous</Link>
 				</div>
 			}
 			{data.tomorrow && t.getTime() < Date.now() - SIX_HOURS_OF_MILLISECONDS &&
 				<div className='daynav__button'>
-					<Link className={`button poll__btn ${theme}`} href={`/poll/${tString}`}>Next</Link>
+					<Link className={`button poll__btn`} href={`/poll/${tString}`}>Next</Link>
 				</div>
 			}
 		</div>
-		<Link className={`button poll__btn ${theme}`} href={`/poll`}>Home</Link>
-
+		<Link className={`button poll__btn`} href={`/poll`}>Home</Link>
 	</>
 
 }

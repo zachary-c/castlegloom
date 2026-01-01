@@ -1,11 +1,15 @@
 .pd {
-    
     &__preferences {
         padding: .5rem;
+        max-width: 600px;
+        margin: 0 auto;
         h3 {
-            margin-top: 0;
+            margin-top: 2rem;
+            &:first-child {
+              margin-top: 0;
+            }
         }
-        &__personal {
+        &__fieldset {
             display: flex;
             flex-direction: column;
             gap: .5rem;
@@ -14,19 +18,7 @@
             display:flex;
             flex-direction: column;
             justify-content: space-between;
-            &--grouped {
-                display:flex;
-                @media screen and (max-width: 28rem) {
-                    flex-direction: column;
-                }
-                gap: .5rem;
-                &.full {
-                    > input {
-                        flex-grow:1;
-                    }
-                }
-            }
-            &--checkbox {
+            &.checkbox {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -34,10 +26,19 @@
                     cursor: pointer;
                 }
                 > input {
-                    margin-right: 1rem;
+                    margin-right: .5rem;
                 }
                 > label {
                     margin-left: .25rem;
+                }
+            }
+            &.select {
+                > select {
+                    cursor: pointer;
+                    font-size: 1rem;
+                }
+                > label {
+                    margin-bottom: .25rem;
                 }
             }
             label {
@@ -64,6 +65,10 @@
             }
             input[disabled] {
                 cursor: not-allowed;
+            }
+            .warning {
+              font-style:italic;
+              font-weight:bold;
             }
         }
         &__submission {
@@ -106,7 +111,7 @@
         &__divider {
             width: 100%;
             height: 0;
-            border-bottom: 2px solid var(--theme-primary);
+            border-bottom: 2px solid #ff4b6b;
             margin: 0 auto;
             margin-top:1rem;
             margin-bottom: 1rem;
@@ -122,12 +127,23 @@
                 font-size: .9rem;
             }
         }
+      .title {
+        &__display {
+          text-align: center;
+          font-size: 1.2rem;
+          margin: .5rem 0;
+        }
+        &__pre {
+          margin: 0;
+          font-style: italic;
+        }
+      }
     }
 }
 .poll__btn {
     &.generate {
         font-size: 1rem;
-        margin: .4rem 0;
+        margin: .4rem auto;
         @media screen and (max-width: 32rem) {
             font-size: .9rem;
         }

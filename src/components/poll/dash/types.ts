@@ -17,6 +17,7 @@ export const professionList = [
 	"Aerospace Engineer",
 	"Arbiter",
 	"Actor",
+	"Archaeologist",
 	"Advocate",
 	"Antique Collector",
 
@@ -110,6 +111,7 @@ export const professionList = [
 	"Historian",
 	"Hero",
 	"Hostage Negotiator",
+	"Highschooler",
 
 	"Investigative Journalist",
 	"Intern",

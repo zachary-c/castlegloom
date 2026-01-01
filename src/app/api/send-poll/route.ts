@@ -1,9 +1,9 @@
 import { client, patchClient } from '$/lib/client';
-import { daily_polled, latest_poll } from '$/lib/queries';
+import { daily_polled, latest_poll, test_recipient_list } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { Recipient_t, themeObject } from '../apiUtil';
-import { emailFrom, STANDARDS, theme } from '@/poll/pollUtil';
+import { concreteTheme, emailFrom } from '@/poll/pollUtil';
 import { generatePollHTML } from './generate_html_util';
 
 export const maxDuration = 300;
@@ -20,8 +20,9 @@ export async function GET(request: NextRequest) {
 	let emails: Recipient_t[] = []
 	let test_subject_suffix = ""
 	if (is_test) {
+		emails = await client.fetch(test_recipient_list);
+		console.log("email test", emails)
 		test_subject_suffix = ` | TS: ${(new Date()).getTime()}`
-		emails = [{ _id: "ceec6d4a-2807-4050-991d-eed3f5e21f29", email: "zacharyhcampbell@gmail.com" }]
 	} else {
 		emails = await client.fetch(daily_polled);
 	}
@@ -45,9 +46,9 @@ export async function GET(request: NextRequest) {
 			console.error("Tried to send poll", pollQuestion.title, "but it was already sent")
 			return NextResponse.json({ status: 204 })
 		}
-		const themeObj = themeObject(theme)
-		console.log('theme', themeObj)
 		for (const recipient of emails) {
+			const themeObj = themeObject(concreteTheme(recipient.theme))
+			console.log('theme', themeObj)
 			let pollHtml = generatePollHTML(pollQuestion, recipient, themeObj)
 			const html = `
 			<html>
