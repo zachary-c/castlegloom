@@ -34,9 +34,12 @@
       display:block;
       white-space:pre-wrap;
       width: 100%;
-      font-size:1.2rem;
       margin: .6rem auto 0;
       max-width:800px;
+      font-size: .95rem;
+      @media screen and (min-width:640px) {
+        font-size:1.2rem;
+      }
     }
     
     .img-wrapper {
