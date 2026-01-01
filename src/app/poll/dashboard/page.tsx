@@ -57,7 +57,7 @@ export default async function Page() {
 	})
 
 	return <>
-		<DashTabs theme={theme} userQuestionData={questionData} userData={defined_info} staticLeaderboardData={cleanedLeaderboardData} />
+		<DashTabs theme={defined_info.theme} userQuestionData={questionData} userData={defined_info} staticLeaderboardData={cleanedLeaderboardData} />
 	</>
 
 }

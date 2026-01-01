@@ -5,7 +5,7 @@ import React, { createContext, useMemo, useState } from "react"
 import { UserQuestionInfo } from "./types";
 import PollEntry from "./PollEntry";
 import { UserPreferences } from "./UserPreferences";
-import { PreferenceTheme, theme } from "@/poll/pollUtil";
+import { PreferenceTheme } from "@/poll/pollUtil";
 import { Leaderboard } from "./Leaderboard";
 
 export const UserContext = createContext<string>('')
