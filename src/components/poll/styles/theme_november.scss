@@ -112,9 +112,9 @@
 
       &__field {
         input {
-          border-width: 1px;
           background-color: $november-tan;
           color: $charcoal-cemetery;
+          border: 2px solid transparent;
         }
 
         label, p, span {

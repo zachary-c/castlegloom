@@ -1,16 +1,17 @@
 .january-light {
-  &.poll {
+  &.poll__body {
+    background-color: $platinum;
+  }
+  .poll {
     background-color: $bone;
     color: black;
     box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
 
-    &__body {
-      background-color: $platinum;
-    }
 
     &__page-title {
       color: $jasper;
     }
+
 
     &__btn {
       background-color: $jasper;
@@ -26,9 +27,8 @@
     &__date {
       color: $black-olive;
     }
-  }
 
-  .poll {
+
     &__header {
       &:before {
         content: 'POLL';
@@ -74,13 +74,119 @@
         }
       }
     }
+
+    &__postscript {
+      background-color: $jasper;
+      color: $platinum;
+    }
   }
 }
 
 .january-light {
+  .login {
+    &__body {
+      &__input-section {
+        input {
+          border: 2px solid $bone;
+        }
+        .submit {
+          background-color: $white;
+        }
+      }
+    }
+  }
+  .pd {
+    &__title {
+      color: $black-olive;
+    }
+    &__preferences {
+      h3 {
+        color: $black-olive;
+      }
+
+      &__field {
+        input {
+          background-color: $white;
+          color: $black;
+          border: 2px solid $bone;
+        }
+
+        label {
+          color: $black-olive;
+        }
+
+        & input[disabled]  {
+          background-color: $rudolph-nose;
+          color: transparentize($snow, .15);
+        }
+      }
+
+      & .generate {
+        background-color: $jasper;
+        color: $white;
+        padding: .2rem .5rem;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $jasper;
+          color: $white;
+        }
+
+        & .muted {
+          border: 2px solid $walnut-brown;
+          background-color: transparent;
+          color: $walnut-brown;
+        }
+      }
+
+      &__info-bar {
+        color: $black-olive;
+      }
+
+      &__divider {
+        border-color: $black-olive;
+      }
+    }
+
+    &__leaderboard {
+      h3 {
+        color: $black-olive;
+      }
+      &__body {}
+
+      --me-background: #{$jasper};
+      --me-text-color: #{$platinum};
+      --odd-row: #{$bone};
+      --even-row: #{$platinum};
+      --header-row: #{$black-olive};
+      --header-row-text: #{white};
+      --body-row-text: #{$black-olive};
+      --surrounding-text-color: #{$black-olive};
+      --leaderboard-hover-background: #{$santa-red};
+      --leaderboard-hover-text: #{black};
+
+
+      &__refresh .pd__btn {
+        background-color: $jasper;
+        color: $white;
+      }
+    }
+  }
 
   // january is the default; as long as nothing changes in terms of what is assigned where, this is safely empty
   .pe {
     background-color: rgb(244, 243, 243);
+    border: 3px solid $jasper;
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $platinum;
+        &>.poll__options__item__fill-bar {}
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {}
+      }
+    }
+  
   }
 }

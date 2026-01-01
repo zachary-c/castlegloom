@@ -1,9 +1,9 @@
 import { client, patchClient } from '$/lib/client';
-import { daily_polled, latest_poll, recipient_list, test_recipient_list } from '$/lib/queries';
+import { daily_polled, latest_poll, test_recipient_list } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { Recipient_t, themeObject } from '../apiUtil';
-import { concreteTheme, emailFrom, monthly_theme } from '@/poll/pollUtil';
+import { concreteTheme, emailFrom } from '@/poll/pollUtil';
 import { generatePollHTML } from './generate_html_util';
 
 export const maxDuration = 300;

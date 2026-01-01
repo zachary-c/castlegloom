@@ -76,7 +76,7 @@ export function themeObject(theme: Theme): ThemeObject {
 
 			};
 			break;
-		case 'january':
+		case 'january-light':
 			obj = {
 				backgroundColor: THEME_JAN.walnutBrown,
 				headerTextColor: THEME_JAN.jasper,

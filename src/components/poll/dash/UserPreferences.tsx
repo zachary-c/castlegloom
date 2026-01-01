@@ -85,7 +85,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 			<h3>Website Preferences</h3>
 			<div className="pd__preferences__fieldset">
 				<div className="pd__preferences__field select">
-					<label>Website Theme:{madeChanges ? <span className="warning"> YOU HAVE UNSAVED CHANGES</span> : ""}</label>
+					<label>Website Theme:{userRecord.theme !== originalRecord.theme ? <span className="warning"> YOU HAVE UNSAVED CHANGES</span> : ""}</label>
 					<select value={userRecord.theme} onChange={(e) => updateTheme(e.target.value)}>
 						<option value="monthly">Monthly</option>
 						<option value="november-light">November</option>
