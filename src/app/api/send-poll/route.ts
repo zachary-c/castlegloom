@@ -56,6 +56,7 @@ export async function GET(request: NextRequest) {
 					<style>
 						.spook-response:hover {
 							background-color: ${themeObj.itemHoverColor};
+							${themeObj.itemHoverTextColor ? `color: ${themeObj.itemHoverTextColor} !important;` : ""}
 							border-radius:3px;
 						}
 						.pt-container a:hover {

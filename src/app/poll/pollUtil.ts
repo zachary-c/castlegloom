@@ -4,6 +4,7 @@ export const theme_list = [
 	'december-light',
 	'november-light',
 	'january-light',
+	'wireframe-dark',
 	/*'october-dark',
 	'october-light',
 	'wireframe',
@@ -21,7 +22,7 @@ export const theme_list = [
 
 export type PreferenceTheme = 'monthly' | 'december-light' | 'november-light' | 'january-light'
 
-export type Theme = 'november-light' | 'october-dark' | 'october-light' | 'wireframe' | 'january-light' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
+export type Theme = 'november-light' | 'october-dark' | 'october-light' | 'wireframe-dark' | 'january-light' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
 
 export const monthly_theme: Theme = 'january-light'
 
@@ -36,6 +37,7 @@ export function concreteTheme(theme: PreferenceTheme | undefined): Theme {
 export const STANDARDS = {
 	white: '#fff',
 	black: '#000',
+	darkgray: '#555',
 	hyperlinkBlue: "#0000EE"
 }
 export const THEME_NOVEMBER = {

@@ -7,14 +7,13 @@
       color: $tree-trimming;
     }
   }
+  &.poll__body {
+    background-color: $snow-white;
+  }
   & .poll {
     background-color: $fir-green;
     color: black;
     box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
-
-    &__body {
-      background-color: $snow-white;
-    }
 
     &__page-title {
       color: $tree-trimming;

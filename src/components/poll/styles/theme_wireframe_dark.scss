@@ -1,0 +1,275 @@
+.wireframe-dark {
+  a {
+    color: $lightblue;
+    font-weight: 500;
+    &:hover {
+      color: $lightblue;
+    }
+  }
+  &.poll__body {
+    background-color: $black;
+  }
+  & .poll {
+    background-color: $black;
+    color: $white;
+    border: 2px solid $white;
+
+    &__page-title {
+      color: $white;
+    }
+
+    &__date {
+      color: $white;
+    }
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: white;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+    }
+
+    &__options {
+      &__item {
+        border: 2px solid $white;
+        background-color: $black;
+
+        &__text {
+          color: $white;
+        }
+
+        &__count {
+          color: $white;
+        }
+
+        &__fill-bar {
+          background-color: $darkgray;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {}
+
+      &__refresh {
+        border: 2px solid $white;
+        background-color: $black;
+        color: $white;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &__btn {
+      background-color: $black;
+      color: $white;
+      border: 2px solid $white;
+
+      &.outline { }
+
+      &.cta {
+        border-color: $white;
+        background-color: $white;
+        color: $black;
+      }
+    }
+    &__postscript {
+      background-color: $black;
+      border: 2px solid $white;
+      color: $white;
+    }
+  }
+  .pd {
+    &__title {
+      color: $white;
+    }
+
+    &__body {
+      background-color: $black;
+      border-color: $white;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $black;
+        color: $white;
+        font-weight: 500;
+      }
+
+      &__spacer,
+      &__tab {
+        border-color: $white;
+      }
+    }
+
+    &__preferences {
+      h3 {
+        color: $white;
+      }
+
+      &__field {
+        input {
+          background-color: $black;
+          color: $white;
+          border: 2px solid white;
+
+          &[disabled] {
+            background-color: transparentize($charcoal-mining, .25);
+            color: $lightgray;
+          }
+        }
+
+        label, p, span {
+          color: $white;
+        }
+      }
+
+      & .generate {
+        background-color: $black;
+        color: $white;
+        padding: .2rem .5rem;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $white;
+          color: $black;
+        }
+
+        & .muted {
+          border: 2px solid $white;
+          background-color: transparent;
+          color: $white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$white};
+      --me-text-color: #{$black};
+      --odd-row: #{$lightgray};
+      --even-row: #{$darkgray};
+      --header-row: #{$white};
+      --header-row-text: #{$black};
+      --body-row-text: #{$white};
+      --surrounding-text-color: #{white};
+      --leaderboard-hover-background: #{$transparent-1};
+      --leaderboard-hover-text: #{black};
+    }
+
+    &__btn {
+      background-color: $black;
+      color: $white;
+      padding: .2rem .5rem;
+      font-weight: bold;
+      transition-duration: .2s;
+      cursor: pointer;
+      border: 2px solid $white;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .pe {
+    background-color: $white;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $black;
+      }
+    }
+
+    &.responded {
+      background-color: $black;
+      border: 2px solid $white;
+
+      .pe__header {
+
+        &__title,
+        &__text,
+        &__date {
+          color: $white;
+
+          a {
+            color: $lightblue;
+            font-weight: 700;
+          }
+        }
+      }
+
+      .poll.input {
+      }
+    }
+
+    .poll.input {
+      border: 2px solid $darkgray;
+
+      & .poll__options__item.selected {
+
+        &>.poll__options__item__fill-bar {
+          background-color: $darkgray;
+
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: white;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $white;
+        }
+      }
+    }
+
+  }
+
+  .login__page {
+
+    h2,
+    p,
+    label {
+      color: $white;
+    }
+  }
+
+  .login__confirm {
+
+    h1,
+    p {
+      color: $white;
+    }
+  }
+
+  .login__body__input-section__message {
+    color: $white;
+  }
+}

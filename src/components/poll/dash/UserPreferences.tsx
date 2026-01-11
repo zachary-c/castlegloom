@@ -88,6 +88,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 					<label>Website Theme:{userRecord.theme !== originalRecord.theme ? <span className="warning"> YOU HAVE UNSAVED CHANGES</span> : ""}</label>
 					<select value={userRecord.theme} onChange={(e) => updateTheme(e.target.value)}>
 						<option value="monthly">Monthly</option>
+						<option value="wireframe-dark">Wireframe (Dark)</option>
 						<option value="november-light">November</option>
 						<option value="december-light">December</option>
 						<option value="january-light">January</option>

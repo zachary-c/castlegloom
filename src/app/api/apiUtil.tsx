@@ -9,6 +9,8 @@ export type ThemeObject = {
 	itemDefaultColor: string
 	itemHoverColor: string
 	itemTextColor: string
+	itemHoverTextColor?: string
+	itemBorder?: string
 	itemAdditionalStyles?: string
 	borderColor?: string
 	postScriptBackgroundColor: string
@@ -216,6 +218,21 @@ export function themeObject(theme: Theme): ThemeObject {
 				postScriptBorderColor: 'none',
 				borderColor: 'none',
 				questionHeaderLinkColor: THEME_OCTOBER_DARK.pumpkinOrange,
+			};
+			break;
+		case 'wireframe-dark':
+			obj = {
+				backgroundColor: STANDARDS.black,
+				questionTextColor: STANDARDS.white,
+				itemDefaultColor: STANDARDS.black,
+				itemHoverColor: STANDARDS.white,
+				itemTextColor: STANDARDS.white,
+				itemHoverTextColor: STANDARDS.black,
+				itemBorder: `2px solid ${STANDARDS.white}`,
+				headerTextColor: STANDARDS.black,
+				postScriptBackgroundColor: STANDARDS.white,
+				postScriptTextColor: STANDARDS.black,
+				borderColor: STANDARDS.white
 			};
 			break;
 		default:
