@@ -48,7 +48,7 @@ export const pollQuestionFields = `
     },
 	"prompt": prompt {
 		...,
-		"richTextAsPlaintext": pt::text(richTextPrompt)	
+		"richTextAsPlaintext": pt::text(richTextPrompt)
 	},
     "suggestedBy": suggestedBy->{"joinedTitle": title.profession + " " + title.qualifier}.joinedTitle,
 	"edict": edict->{ 
