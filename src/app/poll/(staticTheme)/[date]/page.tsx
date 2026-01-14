@@ -9,13 +9,6 @@ import Link from 'next/link'
 import { padToTwo, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
 
 export const revalidate = 60;
-/* 
-export async function generateStaticParams() {
-	const dates = await client.fetch(poll_dates);
-
-	return dates;
-} 
- */
 export default async function Page({ params }: { params: { date: string } }) {
 	//console.log('data', params.date)
 
@@ -63,8 +56,4 @@ export default async function Page({ params }: { params: { date: string } }) {
 		</div>
 		<Link className={`button poll__btn`} href={`/poll`}>Home</Link>
 	</>
-
 }
-
-// homepage has meme of the day
-// gallery page has all the memes -- links to memes or grid? unclear
