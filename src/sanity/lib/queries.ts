@@ -31,7 +31,7 @@ export const poll_by_date_with_user = groq`
 `
 // This particular query allows for you to pick hidden ones by date, none of the others should
 export const poll_by_date = groq`
-*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0 || (!defined(hidden) || !hidden))][0] {
+*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0 || hidden)][0] {
     ${pollQuestionFields}
 }
 `
