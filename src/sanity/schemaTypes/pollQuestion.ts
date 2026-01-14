@@ -5,6 +5,15 @@ export default defineType({
 	name: 'pollQuestion',
 	type: 'document',
 	title: 'Poll Question',
+	fieldsets: [
+		{
+			title: "Booleans",
+			name: "bools",
+			options: {
+				columns: 2
+			}
+		}
+	],
 	fields: [
 		{
 			type: "questionPrompt",
@@ -33,7 +42,15 @@ export default defineType({
 			type: 'boolean',
 			title: "Sent",
 			name: 'hasBeenSent',
-			initialValue: false
+			initialValue: false,
+			fieldset: 'bools'
+		},
+		{
+			type: 'boolean',
+			title: "Hidden",
+			name: "hidden",
+			initialValue: false,
+			fieldset: 'bools'
 		},
 		{
 			name: 'responses',

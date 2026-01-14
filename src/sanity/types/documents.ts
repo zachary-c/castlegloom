@@ -24,6 +24,7 @@ export type PollQuestion_t = {
 	date: string
 	prompt?: QuestionPrompt_t
 	hasBeenSent: boolean
+	hidden: boolean
 	suggestedBy: string
 	edict: KingsEdict_t
 	userResponse?: string

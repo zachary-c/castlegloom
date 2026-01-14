@@ -20,7 +20,7 @@ export type LeaderboardRecord = {
 }
 
 export const poll_question_list = groq`
-*[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc) {
+*[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc) {
     ...,
     responses[] {
         responseSlug,

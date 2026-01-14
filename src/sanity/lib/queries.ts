@@ -19,46 +19,46 @@ export const meme_by_date = groq`
     }
     `
 export const latest_poll = groq`
-    *[_type == 'pollQuestion'  && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+    *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     }
 `
 export const poll_by_date_with_user = groq`
-*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)][0] {
+*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0) && (!defined(hidden) || !hidden)][0] {
     ${pollQuestionFields},
 	"userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
 }
 `
+// This particular query allows for you to pick hidden ones by date, none of the others should
 export const poll_by_date = groq`
-*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)][0] {
+*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0 || (!defined(hidden) || !hidden))][0] {
+    ${pollQuestionFields}
+}
+`
+export const poll_404 = groq`
+*[_type == 'pollQuestion' && title == "404-not-found"][0] {
     ${pollQuestionFields}
 }
 `
 export const poll_date_surrounding = groq`{
     "today": ${poll_by_date},
-    "yesterday": *[_type == 'pollQuestion' && date == $previous][0] {
+    "yesterday": *[_type == 'pollQuestion' && date == $previous && (!defined(hidden) || !hidden)][0] {
         _id
     },
-    "tomorrow": *[_type == 'pollQuestion' && date == $nextPoll][0] {
+    "tomorrow": *[_type == 'pollQuestion' && date == $nextPoll && (!defined(hidden) || !hidden)][0] {
         _id
     }
 }
 `
 export const poll_latest_surrounding = groq`{
-    "today": *[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+    "today": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     },
-    "previous": *[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[1] {
+    "previous": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[1] {
         _id
     }
 }
 `
-export const poll_dates = groq`
-*[_type == 'pollQuestion' && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] { 
-    date
-} | order(date desc)
-`
-
 export type Concrete<Type> = {
 	[Key in keyof Type]-?: NonNullable<Type[Key]>;
 };
