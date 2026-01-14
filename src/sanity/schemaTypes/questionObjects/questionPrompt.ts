@@ -17,7 +17,9 @@ export default defineType({
 				styles: [],
 				// don't need lists 
 				lists: [],
-			}],
+			},
+			{ type: "qpImage" },
+			],
 			hidden: (ctx) => ctx.parent?.promptType !== "richText",
 		}),
 		defineField({

@@ -2,8 +2,15 @@ import { PollQuestion_t } from "$/types/documents"
 import { KingsEdict_t } from "$/schemaTypes/edict"
 import { applyStyleToHtml, edictThemeObject, EdictThemeObject, Recipient_t, ThemeObject } from "../apiUtil"
 import { toHTML } from "@portabletext/to-html"
-import { THEME_DECEMBER } from "@/poll/pollUtil"
 import { english_th, suffix } from "R/util"
+import { PortableTextComponents } from "@portabletext/to-html"
+import { urlFor } from "$/lib/image"
+
+export const additionalBlocks: PortableTextComponents = {
+	types: {
+		qpImage: ({ value }) => `<img style="width:100%;" src="${urlFor(value.image.image.asset._ref).url()}" alt="${value.image.alt}" />`
+	},
+}
 
 export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_t, obj: ThemeObject): string {
 	const pollStyle = `background-color: ${obj.backgroundColor};padding: 1rem 0; border-radius: 8px;max-width: 600px; border: 2px solid ${obj.borderColor ?? obj.itemDefaultColor}`
@@ -27,7 +34,7 @@ export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_
 		questionHTML = question.prompt.plaintextQuestionPrompt
 		questionDescription = question.prompt.plaintextQuestionPrompt
 	} else {
-		questionHTML = toHTML(question.prompt?.richTextPrompt ?? [])
+		questionHTML = toHTML(question.prompt?.richTextPrompt ?? [], { components: additionalBlocks })
 		let aStyle = ""
 		if (obj.questionHeaderLinkColor) {
 			aStyle = `color: ${obj.questionHeaderLinkColor};`

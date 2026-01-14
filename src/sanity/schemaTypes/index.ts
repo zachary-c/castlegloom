@@ -12,6 +12,8 @@ import bingoSupport from './bingoSupport'
 import rwbbRecord from './rwbbRecord'
 import questionPrompt from './questionObjects/questionPrompt'
 import edict from './edict'
+import qpImage from './questionObjects/qpImage'
+import imageAlt from './imageAlt'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -20,12 +22,14 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		recipient,
 		sound,
 		soundPreset,
+		imageAlt,
 
 		rwbbRecord,
 
 		pollQuestion,
 		pollResponse,
 		questionPrompt,
+		qpImage,
 
 		edict,
 

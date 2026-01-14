@@ -33,6 +33,9 @@
       flex-grow: 1;
       flex-shrink: 1;
       display: block;
+      img {
+        display: none;
+      }
 
       p {
         margin: 0;
