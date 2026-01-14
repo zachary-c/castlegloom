@@ -24,7 +24,7 @@ export const latest_poll = groq`
     }
 `
 export const poll_by_date_with_user = groq`
-*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0) && (!defined(hidden) || !hidden)][0] {
+*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0 || hidden)][0] {
     ${pollQuestionFields},
 	"userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
 }
@@ -38,6 +38,12 @@ export const poll_by_date = groq`
 export const poll_404 = groq`
 *[_type == 'pollQuestion' && title == "404-not-found"][0] {
     ${pollQuestionFields}
+}
+`
+export const poll_404_user_response = groq`
+*[_type == 'pollQuestion' && title == "404-not-found"][0] {
+    ${pollQuestionFields},
+	"userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
 }
 `
 export const poll_date_surrounding = groq`{

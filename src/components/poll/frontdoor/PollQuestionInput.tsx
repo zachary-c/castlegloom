@@ -9,7 +9,7 @@ import Image from "next/image";
 import pfp from "%/default.png"
 import { renderPrompt } from "./util";
 
-export default function PollQuestionInput({ question, date, setQuestion }: { question: UserQuestionInfo, date: string, useProvidedData?: boolean, setQuestion: (p: UserQuestionInfo) => void }) {
+export default function PollQuestionInput({ question, setQuestion }: { question: UserQuestionInfo, setQuestion: (p: UserQuestionInfo) => void }) {
 	const userId = useContext(UserContext)
 	const [userAnswer, setUserAnswer] = useState<string | undefined>(question.userResponse) // this is a responseSlug value
 	const [loadingData, setLoadingData] = useState<boolean>(false)
@@ -28,7 +28,7 @@ export default function PollQuestionInput({ question, date, setQuestion }: { que
 
 	async function getData() {
 		setLoadingData(true)
-		let response = await fetch(`/api/get-poll?date=${date}&userId=${userId}`)
+		let response = await fetch(`/api/get-poll?date=${question.date}&userId=${userId}`)
 
 		const data: PollQuestion_t = await response.json()
 		setQuestion(data)

@@ -11,14 +11,11 @@
       opacity: .8;  
     }
     & .poll__options__item.selected { 
-        background-color: var(--theme-background);
         //margin-left: 2rem;
 
         & > .poll__options__item__fill-bar {
-            background-color: var(--theme-background);
         }
         & > .poll__options__item__text, & > .poll__options__item__count {
-            color: var(--theme-primary);
 
         }
     }   

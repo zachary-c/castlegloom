@@ -38,6 +38,9 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 	console.log("Already Voted found ", alreadyVoted)
 	if (alreadyVoted?._key === data.responses[chosenIndex]._key) {
 		console.log("VOTING FOR SAME ONE ALREADY VOTED FOR, SHORT CIRCUIT")
+		if (data.hidden) {
+			return NextResponse.json({ message: "Stay sneaky 😎" }, { status: 200, statusText: 'OK' })
+		}
 		return redirect(`/poll/${date}`)
 	}
 	//const alreadyVotedIndex = data.responses.find((res) => res.listOfResponders.some((responded) => responded._ref === responder))
@@ -75,6 +78,10 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 	}
 
 	console.log("Patch .commit()", (await patch.commit()))
+
+	if (data.hidden) {
+		return NextResponse.json({ message: "Stay sneaky 😎" }, { status: 200, statusText: 'OK' })
+	}
 
 	return redirect(`/poll/${date}`)
 }
