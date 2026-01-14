@@ -2,7 +2,7 @@ import { QuestionPrompt_t } from "$/schemaTypes/questionObjects/questionPrompt"
 import { PortableText, PortableTextComponents } from "next-sanity"
 import PromptImage from "./PromptImage"
 
-const additionalBlocks: PortableTextComponents = {
+export const additionalBlocks: PortableTextComponents = {
 	types: {
 		qpImage: PromptImage
 	},
