@@ -18,7 +18,7 @@ export default function PollEntry({ preloadInfo }: { preloadInfo: UserQuestionIn
 			</div>
 			{open ?
 				<div className="pe__body">
-					<PollQuestionInput question={info} setQuestion={setInfo} date={info.date} />
+					<PollQuestionInput question={info} setQuestion={setInfo} />
 				</div>
 				: <></>}
 		</div>
