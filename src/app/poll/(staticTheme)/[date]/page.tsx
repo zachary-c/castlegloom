@@ -1,12 +1,25 @@
 import React from 'react'
 import { apiClient } from '$/lib/client'
-import { poll_date_surrounding } from '$/lib/queries'
+import { poll_by_date, poll_date_surrounding } from '$/lib/queries'
 import { PollQuestion_t } from '$/types/documents'
 import { notFound } from 'next/navigation'
 import PollQuestion from 'R/src/components/poll/frontdoor/PollQuestion'
 import '_components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo, SIX_HOURS_OF_MILLISECONDS } from 'R/util'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: { date: string } }): Promise<Metadata> {
+	const data: PollQuestion_t = await apiClient.fetch(
+		poll_by_date, { date: params.date }, { cache: 'no-store' })
+	if (!data) notFound()
+
+	const desc = data.questionText ?? (data.prompt?.promptType === "plainText" ? data.prompt.plaintextQuestionPrompt : data.prompt?.richTextAsPlaintext)
+	return {
+		title: `${data.title} | Castle Gloom`,
+		description: desc,
+	}
+}
 
 export const revalidate = 60;
 export default async function Page({ params }: { params: { date: string } }) {

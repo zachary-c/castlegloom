@@ -1,6 +1,10 @@
 import React from 'react'
 
 import Signup from '_components/poll/dash/Signup';
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+	title: "Signup | Castle Gloom"
+};
 
 export default async function Page() {
 

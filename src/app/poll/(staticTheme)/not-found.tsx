@@ -7,7 +7,11 @@ import PollQuestion from 'R/src/components/poll/frontdoor/PollQuestion';
 import { cookies } from 'next/headers';
 import { poll_cookie_user_id } from '@/api/poll/login/cookie';
 import StandaloneInput from 'R/src/components/poll/frontdoor/StandaloneInput';
-import { UserContext } from 'R/src/components/poll/dash/DashTabs';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: "404 Poll Not Found | Castle Gloom"
+};
 
 export default async function Page() {
 	const cookieJar = cookies()

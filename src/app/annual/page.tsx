@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 		images: [
 			{
 				alt: "2025 End of Year Photo",
-				url: "/eoy/2024.png"
+				url: "/eoy/2025.png"
 			}
 		]
 	}

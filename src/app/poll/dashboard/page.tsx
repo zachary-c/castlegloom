@@ -9,7 +9,11 @@ import { PollQuestion_t } from '$/types/documents'
 import '_components/poll/styles/pollDashboard.scss'
 import DashTabs from '_components/poll/dash/DashTabs'
 import { monthly_theme, PreferenceTheme, Theme } from '../pollUtil'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+	title: "Poll Dashboard | Castle Gloom"
+};
 
 export default async function Page() {
 	//console.log('data', datetime)

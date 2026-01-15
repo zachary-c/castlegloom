@@ -11,7 +11,9 @@ import { Montserrat } from 'next/font/google'
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-	title: "Polling | Castle Gloom"
+	title: "Polling | Castle Gloom",
+	authors: { name: "Castle Gloom Smithing" },
+	applicationName: "Castle Gloom Census"
 };
 
 export default function Layout({ children }: { children: any }) {

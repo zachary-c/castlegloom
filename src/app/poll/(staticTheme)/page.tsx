@@ -1,6 +1,6 @@
 import React from 'react'
 import { apiClient } from '$/lib/client'
-import { poll_latest_surrounding } from '$/lib/queries'
+import { poll_latest, poll_latest_surrounding } from '$/lib/queries'
 import { PollQuestion_t } from '$/types/documents'
 import { notFound } from 'next/navigation'
 import PollQuestion from '_components/poll/frontdoor/PollQuestion'
@@ -11,10 +11,20 @@ import { Metadata } from 'next'
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-	title: "Polling | Castle Gloom",
-	description: 'Daily poll questions, asked and answered for the good of the land.',
+export async function generateMetadata(): Promise<Metadata> {
+	const data: PollQuestion_t = await apiClient.fetch(
+		poll_latest, {}, { cache: 'no-store' })
+
+	const desc = data.questionText ?? (data.prompt?.promptType === "plainText" ? data.prompt.plaintextQuestionPrompt : data.prompt?.richTextAsPlaintext)
+	return {
+		title: `${data.title} | Castle Gloom`,
+		description: desc,
+		authors: { name: "Castle Gloom Smithing" },
+		applicationName: "Castle Gloom Census"
+
+	}
 }
+
 
 export default async function Page() {
 

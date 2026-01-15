@@ -1,6 +1,12 @@
 import { avenir } from "_styles/fonts";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+	title: "Home | Castle Gloom",
+	description: "Answer polls, play games, and reclaim your ancestral Scottish home."
+};
 
 export default function Home() {
 	return (
