@@ -125,6 +125,7 @@ export const professionList = [
 	"Ice Sculptor",
 	"Igloo Architect",
 	"Indigo Bunting",
+	"Italian",
 
 	"Jester",
 	"Jimbob",
