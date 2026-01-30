@@ -20,7 +20,7 @@ export default function Home() {
 					<ul className="list-grid">
 						<li>
 							<Link href="/poll">
-								<Image src={`/january_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
+								<Image src={`/polls/february_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
 								<span>Polling</span>
 							</Link>
 

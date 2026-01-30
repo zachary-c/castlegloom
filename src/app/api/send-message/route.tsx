@@ -2,7 +2,7 @@ import { client } from '$/lib/client';
 import { daily_polled, latest_poll } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
-import { emailFrom, monthly_theme, emailToForBCC } from '@/poll/pollUtil';
+import { emailFrom, get_monthly_theme, emailToForBCC } from '@/poll/pollUtil';
 import { Recipient_t, themeObject } from '../apiUtil';
 
 export async function GET(request: NextRequest) {
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
 			pass: process.env.ORACLE_APP_PASSWORD,
 		}
 	})
-	const obj = themeObject(monthly_theme)
+	const obj = themeObject(get_monthly_theme())
 	const wrapperStyle = `display: block; margin: 0 auto;max-width:600px;`
 	const buttonStyle = `background-color: ${obj.itemDefaultColor};border-radius:10px;padding: 8px 16px; text-align:center; font-weight:bold; color:${obj.itemTextColor} !important;transition-duration: .3s;display: block; font-size: 1.25rem;text-decoration:none;`
 	const paragraphStyle = `font-size: .95rem; text-align: left;`

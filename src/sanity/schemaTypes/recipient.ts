@@ -36,6 +36,8 @@ export default {
 					{ title: "Monthly", value: "monthly" },
 					{ title: "December Light", value: "december-light" },
 					{ title: "November Light", value: "november-light" },
+					{ title: "January Light", value: "january-light" },
+					{ title: "February Light", value: "february-light" },
 					{ title: "Wireframe (Dark)", value: "wireframe-dark" },
 				]
 			}

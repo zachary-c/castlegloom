@@ -92,6 +92,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 						<option value="november-light">November</option>
 						<option value="december-light">December</option>
 						<option value="january-light">January</option>
+						<option value="february-light">February</option>
 					</select>
 				</div>
 

@@ -1,0 +1,216 @@
+.february-light {
+  &.poll__body {
+    background-color: $uranianBlue;
+  }
+
+  & .poll {
+    background-color: $electricBlue;
+    color: black;
+    box-shadow: 3px 3px rgba(200, 200, 200, 0.15);
+
+    &__page-title {
+      color: $chefchaouenBlue;
+      font-weight: 500;
+    }
+
+    &__btn {
+      background-color: $chefchaouenBlue;
+      color: $snow;
+
+      &.outline {
+        border: 2px solid $chefchaouenBlue;
+        background-color: $snow;
+        color: $chefchaouenBlue;
+
+        &.submit:not(.submitting):hover {
+          transform: none;
+          background-color: $chefchaouenBlue;
+          color: $snow;
+        }
+      }
+
+      &.muted {
+        border: 2px solid $prussianBlue;
+        background-color: transparent;
+        color: $prussianBlue;
+      }
+
+      &.cta {
+        background-color: $blush;
+        color: $snow;
+        border: none;
+        text-decoration: underline;
+      }
+    }
+
+    &__date {
+      color: $prussianBlue;
+    }
+  }
+
+  .poll {
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $blush;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      a {
+        color: $chefchaouenBlue;
+        transition-duration: .1s;
+        &:hover {
+          opacity: .7;
+        }
+      }
+      color: $prussianBlue;
+    }
+
+    &__options {
+      &__item {
+        background-color: $chefchaouenBlue;
+
+        &__text,
+        &__count {
+          color: $snow;
+          font-weight: 500;
+        }
+
+        &__fill-bar {
+          background-color: $blush;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {
+        color: $prussianBlue;
+      }
+
+      &__refresh {
+        background-color: $snow;
+        color: $prussianBlue;
+        border: 1px solid $prussianBlue;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &__postscript {
+      background-color: $blush;
+      color: white;
+    }
+  }
+  .pd {
+    &__title {
+      color: var(--theme-text);
+    }
+
+    &__body {
+      background-color: $electricBlue;
+      border-color: $prussianBlue;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $electricBlue;
+      }
+
+      & .spacer {}
+    }
+
+    &__preferences {
+      &__submission {
+        & .primary {}
+
+        //  background-color: var(--theme-);
+
+      }
+
+      &__divider {
+        border-color: $prussianBlue;
+      }
+    }
+
+    &__leaderboard {
+      &__body {
+        border-color: $prussianBlue;
+        color: $prussianBlue;
+      }
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --body-row-text: #{$black-olive};
+      --surrounding-text-color: #{$prussianBlue};
+      --leaderboard-hover-text: #{black};
+      --leaderboard-hover-background: #{$blush};
+      &__refresh .pd__btn {
+        background-color: $chefchaouenBlue;
+        color: $white;
+        border: none;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .pe {
+    border-color: $chefchaouenBlue;
+    background-color: $snow;
+
+    &__header {
+      &__title {
+        color: $chefchaouenBlue;
+      }
+      &__text {
+        a {
+          transition-duration: .1s;
+          &:hover {
+            opacity: .7;
+          }
+        }
+      }
+    }
+
+    &.responded {
+      background-color: $uranianBlue;
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $prussianBlue;
+
+        &>.poll__options__item__fill-bar {
+          background-color: $blush;
+          filter: brightness(.5);
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $snow;
+
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $blush;
+        color: $snow;
+
+        &.muted {
+          color: $snow;
+          background-color: $blush;
+        }
+      }
+    }
+  }
+}
+

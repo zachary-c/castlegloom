@@ -8,7 +8,7 @@ import { redirect, RedirectType } from 'next/navigation'
 import { PollQuestion_t } from '$/types/documents'
 import '_components/poll/styles/pollDashboard.scss'
 import DashTabs from '_components/poll/dash/DashTabs'
-import { monthly_theme, PreferenceTheme, Theme } from '../pollUtil'
+import { get_monthly_theme, Theme } from '../pollUtil'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default async function Page() {
 	const cookieJar = cookies()
 
 	const theme_preference_cookie = cookieJar.get(poll_cookie_theme_preference)
-	let theme = monthly_theme;
+	let theme = get_monthly_theme();
 	if (theme_preference_cookie && theme_preference_cookie.value !== 'monthly') {
 		theme = theme_preference_cookie.value as Theme
 	}
