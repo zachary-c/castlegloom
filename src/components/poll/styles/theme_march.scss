@@ -1,0 +1,217 @@
+.march-light {
+  &.poll__body {
+    background-color: $columbia-blue;
+  }
+
+  .poll {
+    background-color: $office-green;
+    color: inherit;
+    box-shadow: inherit;
+
+    &__page-title {
+      color: $lapis-lazuli;
+      font-weight: 500;
+    }
+
+    &__date {
+      color: $lapis-lazuli;
+    }
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $baker-miller;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      color: white;
+      a {
+        color: $spring-green;
+      }
+    }
+
+    &__options {
+      &__item {
+        background-color: $spring-green;
+
+        &__text,
+        &__count {
+          color: $office-green;
+          font-weight: 500;
+        }
+
+        &__fill-bar {
+          background-color: $baker-miller;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {
+        color: white;
+      }
+
+      &__refresh {
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &__postscript {
+      background-color: $baker-miller;
+      color: inherit;
+    }
+
+    .loading-notice {
+      color: white;
+    }
+    &__btn {
+      background-color: $lapis-lazuli;
+      color: white;
+
+      &.outline {
+        border: 2px solid $lapis-lazuli;
+        background-color: initial;
+        color: $lapis-lazuli;
+
+        &.submit:not(.submitting):hover {
+          transform: none;
+          background-color: $office-green;
+          color: $spring-green;
+        }
+
+        &.submit {
+          border-color: $office-green;
+          background-color: $spring-green;
+          color: $office-green;
+        }
+      }
+
+      &.muted {
+        border: 2px solid $lapis-lazuli;
+        background-color: transparent;
+        color: $lapis-lazuli;
+      }
+
+      &.cta {
+        background-color: $baker-miller;
+        color: white;
+        border: none;
+        text-decoration: underline;
+      }
+    }
+
+  }
+
+  a {
+    color: $office-green;
+  }
+
+  .pd {
+    &__body {
+      background-color: $columbia-blue;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $lapis-lazuli;
+        color: white;
+        font-weight: 500;
+
+        &.current {
+          background: linear-gradient($lapis-lazuli 0%, $lapis-lazuli 80%, transparent 100%);
+        }
+      }
+    }
+
+    &__preferences {
+      &__field {
+        input {
+          border-color: transparent;
+        }
+      }
+
+      &__submission {
+        & .primary {}
+
+        //  background-color: var(--theme-);
+
+      }
+
+      &__divider {}
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$blush};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$uranianBlue};
+      --even-row: white;
+      --header-row: #{$chefchaouenBlue};
+      --header-row-text: #{$snow};
+      --leaderboard-hover-background: #{$blush};
+    }
+  }
+
+  .pe {
+    border-color: $office-green;
+    background-color: $spring-green;
+
+    &__header {
+      &__title {}
+    }
+
+    &.responded {
+      background-color: $columbia-blue;
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        &>.poll__options__item__fill-bar {
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: white;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $white;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $kelly-green;
+        color: white;
+
+        &.muted {
+          background-color: $baker-miller;
+          color: $lapis-lazuli;
+          opacity: .8;
+        }
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
+}

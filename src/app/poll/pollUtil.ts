@@ -1,17 +1,17 @@
 
-export const theme_list = [
-	'monthly',
-	'december-light',
-	'november-light',
-	'january-light',
-	'february-light',
-	'wireframe-dark',
+
+export const theme_list: { display: string, value: string }[] = [
+	{ value: 'monthly', display: "Monthly" },
+	{ value: 'wireframe-dark', display: "Wireframe (Dark)" },
+	{ value: 'november-light', display: "November" },
+	{ value: 'december-light', display: "December" },
+	{ value: 'january-light', display: "January" },
+	{ value: 'february-light', display: "February" },
+	{ value: 'march-light', display: "March" },
 	/*'october-dark',
 	'october-light',
 	'wireframe',
 	'december-dark',
-	'march-light',
-	'march-dark',
 	'april-light',
 	'may-dark',
 	'june-light',
@@ -22,7 +22,22 @@ export const theme_list = [
 
 export type PreferenceTheme = 'monthly' | 'december-light' | 'november-light' | 'january-light' | 'february-light'
 
-export type Theme = 'november-light' | 'october-dark' | 'october-light' | 'wireframe-dark' | 'january-light' | 'december-light' | 'december-dark' | 'february-light' | 'march-light' | 'march-dark' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
+export type Theme =
+	'november-light' |
+	'october-dark' |
+	'october-light' |
+	'wireframe-dark' |
+	'january-light' |
+	'december-light' |
+	'december-dark' |
+	'february-light' |
+	'march-light' |
+	'april-light' |
+	'may-dark' |
+	'june-light' |
+	'july-light' |
+	'august-dark' |
+	'september-light'
 
 export const monthly_theme: Theme = 'february-light'
 export function get_monthly_theme() {
@@ -30,6 +45,7 @@ export function get_monthly_theme() {
 	switch (ts.getMonth()) {
 		case 0: return 'january-light'
 		case 1: return 'february-light'
+		case 1: return 'march-light'
 		case 10: return 'november-light'
 		case 11: return 'december-light'
 		default: return 'wireframe-dark'

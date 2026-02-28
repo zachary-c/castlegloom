@@ -8,6 +8,8 @@ import '_components/spooktober/styles/daynav.scss'
 import Link from 'next/link'
 import { padToTwo } from 'R/util'
 import { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import { poll_cookie_user_id } from '@/api/poll/login/cookie'
 
 export const dynamic = "force-dynamic";
 
@@ -21,10 +23,8 @@ export async function generateMetadata(): Promise<Metadata> {
 		description: desc,
 		authors: { name: "Castle Gloom Smithing" },
 		applicationName: "Castle Gloom Census"
-
 	}
 }
-
 
 export default async function Page() {
 
@@ -35,6 +35,10 @@ export default async function Page() {
 			{ cache: 'no-store' }
 		)
 	const datetime = new Date(data.today.date)
+
+	// get these so we can check if the user is signed in and show them the dashboard button if so
+	const cookieJar = cookies()
+	const userid = cookieJar.get(poll_cookie_user_id)
 
 	const y = new Date(datetime.getTime() - (1000 * 60 * 60 * 24) + (1000 * 60 * 60 * 3));
 	const yString = `${y.getUTCFullYear()}-${padToTwo(y.getUTCMonth() + 1)}-${padToTwo(y.getUTCDate())}`
@@ -58,16 +62,25 @@ export default async function Page() {
 				</div>
 			}
 			<a className={`button poll__btn outline`} href='https://forms.gle/XJCmS9HtPZ3yTeUD6'>Suggest a Question</a>
-			<Link className={`button poll__btn outline`} href='/poll/login'>
-				<span>
-					Log In
-				</span>
-			</Link>
-			<Link className={`button poll__btn outline cta`} href='/poll/signup'>
-				<span>
-					Sign Up!
-				</span>
-			</Link>
+			{!userid ?
+				<>
+					<Link className={`button poll__btn outline`} href='/poll/login'>
+						<span>
+							Log In
+						</span>
+					</Link>
+					<Link className={`button poll__btn outline cta`} href='/poll/signup'>
+						<span>
+							Sign Up!
+						</span>
+					</Link>
+				</> :
+				<Link className='button poll__btn cta' href="/poll/dashboard">
+					<span>
+						Dashboard
+					</span>
+				</Link>
+			}
 		</div>
 	</>
 

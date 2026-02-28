@@ -1,6 +1,6 @@
 'use client'
 import "../styles/pollLeaderboard.scss"
-import { LeaderboardRecord, UserRecord } from "$/lib/dashboard_queries"
+import { LeaderboardRecord } from "$/lib/dashboard_queries"
 import { Tooltip } from "react-tooltip"
 import { useState } from "react"
 

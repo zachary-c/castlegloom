@@ -32,7 +32,6 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
 
 		const data: PollQuestion_t = await response.json()
 		setQuestion(data)
-		console.log(data);
 		setLoadingData(false)
 	}
 

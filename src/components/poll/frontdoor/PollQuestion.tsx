@@ -40,7 +40,6 @@ export default function PollQuestion({ question, date, embedded }: { question: P
 	useEffect(() => {
 		getData()
 	}, [])
-	console.log(question)
 
 	return <div className={`poll montserrat${embedded ? " embedded" : ""}`}>
 		<h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>

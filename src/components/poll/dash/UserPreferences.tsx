@@ -33,7 +33,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 		setUserRecord({ ...userRecord, title: { qualifier: randomQualifier, profession: randomProfession } })
 	}
 	function updateTheme(value: string) {
-		if (!theme_list.includes(value)) {
+		if (!theme_list.some(entry => entry.value == value)) {
 			setMessage("Theme not recognized, please refresh and try again.")
 			return;
 		}
@@ -87,12 +87,9 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 				<div className="pd__preferences__field select">
 					<label>Website Theme:{userRecord.theme !== originalRecord.theme ? <span className="warning"> YOU HAVE UNSAVED CHANGES</span> : ""}</label>
 					<select value={userRecord.theme} onChange={(e) => updateTheme(e.target.value)}>
-						<option value="monthly">Monthly</option>
-						<option value="wireframe-dark">Wireframe (Dark)</option>
-						<option value="november-light">November</option>
-						<option value="december-light">December</option>
-						<option value="january-light">January</option>
-						<option value="february-light">February</option>
+						{theme_list.map((t) =>
+							<option key={t.value} value={t.value}>{t.display}</option>
+						)}
 					</select>
 				</div>
 
