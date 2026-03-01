@@ -111,6 +111,9 @@
   }
   &:nth-child(2n + 1) {
     background-color: var(--odd-row);
+    >td {
+      color: var(--odd-body-row-text);
+    }
   }
 
   >.user {

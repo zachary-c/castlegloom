@@ -151,12 +151,20 @@
       &__body {}
 
       --me-background: #{$blush};
-      --me-text-color: #{$prussianBlue};
-      --odd-row: #{$uranianBlue};
-      --even-row: white;
-      --header-row: #{$chefchaouenBlue};
-      --header-row-text: #{$snow};
+      --me-text-color: black;
+      --odd-row: #{$spring-green};
+      --even-row: #{$office-green};
+      --body-row-text: white;
+      --header-row: #{$lapis-lazuli};
+      --header-row-text: #{$white};
       --leaderboard-hover-background: #{$blush};
+      --odd-body-row-text: black; 
+      &__refresh .pd__btn {
+        background-color: $blush;
+        color: $white;
+        border: none;
+        border-radius: 4px;
+      }
     }
   }
 
