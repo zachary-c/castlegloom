@@ -45,7 +45,7 @@ export function get_monthly_theme() {
 	switch (ts.getMonth()) {
 		case 0: return 'january-light'
 		case 1: return 'february-light'
-		case 1: return 'march-light'
+		case 2: return 'march-light'
 		case 10: return 'november-light'
 		case 11: return 'december-light'
 		default: return 'wireframe-dark'
