@@ -115,6 +115,7 @@ export function themeObject(theme: Theme): ThemeObject {
 				itemHoverColor: THEME_MARCH_LIGHT.bakerMiller,
 				itemTextColor: THEME_MARCH_LIGHT.lapisLazuli,
 				postScriptBackgroundColor: THEME_MARCH_LIGHT.bakerMiller,
+				questionHeaderLinkColor: THEME_MARCH_LIGHT.springGreen,
 				postScriptTextColor: STANDARDS.black,
 				borderColor: 'none',
 			};
