@@ -23,6 +23,11 @@ export const latest_poll = groq`
         ${pollQuestionFields}
     }
 `
+export const poll_by_title = groq`
+*[_type == 'pollQuestion' && title == $title ][0] {
+    ${pollQuestionFields}
+}
+`
 export const poll_by_date_with_user = groq`
 *[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0 || hidden)][0] {
     ${pollQuestionFields},

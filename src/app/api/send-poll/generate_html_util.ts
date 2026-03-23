@@ -25,6 +25,13 @@ export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_
 	const title = encodeURIComponent(question.title)
 	const responder = encodeURIComponent(recipient._id)
 	const encodedDate = encodeURIComponent(question.date)
+
+	const questionSuggestedByHTML = question.suggestedBy ? `
+                <div style="${postscriptStyle}">
+                    Today's poll question was suggested by the <b>${question.suggestedBy}</b>!
+                </div>` : ''
+
+	// Question Text Setup
 	let questionHTML
 	let questionDescription
 	if (question.questionText) {
@@ -42,6 +49,84 @@ export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_
 		questionHTML = applyStyleToHtml(questionHTML, aStyle, "margin: 0;")
 		questionDescription = question.prompt?.richTextAsPlaintext
 	}
+
+	// Responses HTML block
+	let questionResponsesHTML
+	if (question.responses && question.responses.length > 0) {
+		const itemsHTML = question.responses.map((response) => {
+			return `
+				<li style="${listItemStyles}">
+					<a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">
+						${response.responseText}
+					</a>
+				</li>`
+		}).join('')
+		questionResponsesHTML = `
+			<ul style="${listStyles}">
+				${itemsHTML}
+			</ul>`
+	} else if (question.correspondence?.correspondenceType === 'richTextResponse') {
+		const itemsHTML = question.correspondence.richTextResponses?.map((response) => {
+			let contentHTML = toHTML(response.content)
+			contentHTML = applyStyleToHtml(contentHTML, "", "margin: 0;")
+			return `
+				<li style="${listItemStyles}">
+					<a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">
+						${contentHTML}
+					</a>
+				</li>`
+		}).join('')
+		questionResponsesHTML = `
+			<ul style="${listStyles}">
+				${itemsHTML}
+			</ul>
+		`
+	} else if (question.correspondence?.correspondenceType === 'imageResponse') {
+
+		const imgListElementStyles = listStyles + `
+			display: table;
+			width: 100%;
+			table-layout: fixed;
+			list-style: none;
+			margin: 0;
+			padding: 0 auto;
+		`
+		const imgListItemStyles = listItemStyles + `
+			display: inline-block;
+			width: calc(50% - 16px); 
+			padding: 0;
+			vertical-align: top;
+			box-sizing: border-box;
+			margin: 4px;
+		`
+		const imgAnchorStyles = anchorStyles + `
+			padding: 12px;
+		`
+		const imgImgStyles = `
+			display: block;
+			border: 0; 
+			outline: none;
+			width: 100%;
+			height: 144px;
+			object-fit: contain;
+		`
+
+		const itemsHTML = question.correspondence.imageResponses?.map((response) => {
+			const imageSrc = urlFor(response.img.image.asset).maxWidth(300).maxHeight(200).fit("fillmax").url()
+			return `
+				<li style="${imgListItemStyles}">
+					<a style="${imgAnchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">
+						<img style="${imgImgStyles}" src="${imageSrc}" alt="${response.img.alt}" title="${response.hoverTitle}"/>
+					</a>
+				</li>`
+		}).join("")
+		questionResponsesHTML = `
+			<ul style="${imgListElementStyles}">
+				${itemsHTML}
+			</ul>
+		`
+	}
+
 	let memoriam = ""
 	if (question.date === "2025-10-10") {
 		memoriam = `<p style="text-align:center;">No spooktober today; instead we pause to remember <a href="https://www.legacy.com/us/obituaries/name/christian-oswalt-obituary?id=36784490">October 10th, 2022.</p>`
@@ -56,18 +141,9 @@ export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_
         <div style="${wrapperStyle}">
             <h3 style="${headerTextStyle}">${question.title}</h3>
             <div style="${pollStyle}">
-            ${question.suggestedBy ? `
-                <div style="${postscriptStyle}">
-                    Today's poll question was suggested by the <b>${question.suggestedBy}</b>!
-                </div>`
-			: ''
-		}
+				${questionSuggestedByHTML}
                 <h4 style="${questionTextStyle}" class="pt-container">${questionHTML}</h4>
-                <ul style="${listStyles}">
-                    ${question.responses.map((response) => {
-			return `<li style="${listItemStyles}"><a style="${anchorStyles}" class="spook-response" href="https://castlegloom.com/api/poll/${title}?responder=${responder}&choice=${encodeURIComponent(response.responseSlug.current)}&date=${encodedDate}">${response.responseText}</a></li>`
-		}).join('')}
-                </ul>
+				${questionResponsesHTML}
             </div>
 			<p style="text-align:center;">
 				<a style="color:white;" href="https://castlegloom.com/poll/${encodedDate}">Click here to see the poll results without voting, like a coward.</a>

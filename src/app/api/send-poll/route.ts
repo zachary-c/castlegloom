@@ -1,5 +1,5 @@
 import { client, patchClient } from '$/lib/client';
-import { daily_polled, latest_poll, test_recipient_list } from '$/lib/queries';
+import { daily_polled, latest_poll, poll_by_title, test_recipient_list } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { Recipient_t, themeObject } from '../apiUtil';
@@ -8,13 +8,29 @@ import { generatePollHTML } from './generate_html_util';
 
 export const maxDuration = 300;
 
+type Params = {
+	secret: string,
+	is_test: boolean,
+	dry_run: boolean,
+	question_title: string | null,
+}
+
+function getParams(request: NextRequest): Params {
+	return {
+		secret: request.nextUrl.searchParams.get("secret") ?? "",
+		is_test: request.nextUrl.searchParams.get("is_test") === "true",
+		question_title: request.nextUrl.searchParams.get("title"),
+		dry_run: request.nextUrl.searchParams.get("dry_run") === "true"
+	}
+}
+
 export async function GET(request: NextRequest) {
-	const secret = request.nextUrl.searchParams.get("secret");
+	const { secret, is_test, dry_run, question_title } = getParams(request)
+	console.log("params", secret, is_test, dry_run, question_title)
+
 	if (secret != process.env.SEND_MEMES_SECRET) {
 		return NextResponse.json({ status: 401, message: "Not Allowed" });
 	}
-	const is_test = request.nextUrl.searchParams.get("is_test") === "true";
-	const dry_run = request.nextUrl.searchParams.get("dry_run") === "true";
 
 	// poll form link 
 	let emails: Recipient_t[] = []
@@ -26,7 +42,12 @@ export async function GET(request: NextRequest) {
 	} else {
 		emails = await client.fetch(daily_polled);
 	}
-	const pollQuestion: PollQuestion_t = await client.fetch(latest_poll)
+	let pollQuestion: PollQuestion_t
+	if (!!question_title) {
+		pollQuestion = await client.fetch(poll_by_title, { title: question_title })
+	} else {
+		pollQuestion = await client.fetch(latest_poll)
+	}
 	console.log("edict", pollQuestion.edict);
 
 	console.log(pollQuestion);

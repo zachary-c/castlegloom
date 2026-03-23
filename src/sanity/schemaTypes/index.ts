@@ -14,6 +14,9 @@ import questionPrompt from './questionObjects/questionPrompt'
 import edict from './edict'
 import qpImage from './questionObjects/qpImage'
 import imageAlt from './imageAlt'
+import questionCorrespondence from './questionObjects/questionCorrespondence'
+import responseImage from './responseImage'
+import responseRichText from './responseRichText'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -29,6 +32,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		pollQuestion,
 		pollResponse,
 		questionPrompt,
+		questionCorrespondence,
+		responseImage,
+		responseRichText,
+
 		qpImage,
 
 		edict,

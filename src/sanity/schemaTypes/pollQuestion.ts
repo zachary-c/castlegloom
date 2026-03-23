@@ -53,9 +53,17 @@ export default defineType({
 			fieldset: 'bools'
 		},
 		{
+			type: "questionCorrespondence",
+			name: "correspondence",
+			title: "Poll Correspondence"
+		},
+		{
 			name: 'responses',
 			type: 'array',
-			of: [{ type: 'pollResponse' }]
+			of: [{ type: 'pollResponse' }],
+			deprecated: {
+				reason: "Please use the poll correspondence system"
+			}
 		},
 		{
 			name: "suggestedBy",

@@ -1,33 +1,46 @@
 import { PortableTextBlock } from "sanity"
 import { QuestionPrompt_t } from "$/schemaTypes/questionObjects/questionPrompt"
 import { KingsEdict_t } from "$/schemaTypes/edict"
+import { ImageAlt } from "$/schemaTypes/imageAlt"
+import { QuestionCorrespondence_t } from "$/schemaTypes/questionObjects/questionCorrespondence"
 
 export type Page_t = {
 	title: string
 	cslug: string
 	content: PortableTextBlock[]
 }
-
-export type PollResponse_t = {
+export interface ResponseMechanism {
 	_key: string
 	responseSlug: { current: string }
-	responseText: string
 	responseCount: number
 	listOfResponders?: ({ _key: string, _ref: string })[]
+}
+export type PollResponse_t = ResponseMechanism & {
+	responseText: string
+}
+export type ResponseRichText_t = ResponseMechanism & {
+	content: PortableTextBlock[]
+}
+export type ResponseImage_t = ResponseMechanism & {
+	hoverTitle: string
+	img: ImageAlt
 }
 
 export type PollQuestion_t = {
 	_id: string
-	questionText: string
 	title: string
-	responses: PollResponse_t[]
 	date: string
 	prompt?: QuestionPrompt_t
+	correspondence?: QuestionCorrespondence_t
 	hasBeenSent: boolean
 	hidden: boolean
 	suggestedBy: string
 	edict: KingsEdict_t
 	userResponse?: string
+
+	// deprecated: shouldn't be used for new code
+	questionText: string
+	responses?: PollResponse_t[]
 }
 
 export type Meme_t = {
@@ -47,6 +60,9 @@ export const pollQuestionFields = `
         responseSlug,
         responseText
     },
+	"correspondence": correspondence {
+		...,
+	},
 	"prompt": prompt {
 		...,
 		"richTextAsPlaintext": pt::text(richTextPrompt)
