@@ -7,6 +7,7 @@ import '_components/poll/styles/theme_december.scss'
 import "_components/poll/styles/theme_january.scss"
 import "_components/poll/styles/theme_february.scss"
 import "_components/poll/styles/theme_march.scss"
+import "_components/poll/styles/theme_april.scss"
 import "_components/poll/styles/theme_wireframe_dark.scss"
 import { Montserrat } from 'next/font/google'
 

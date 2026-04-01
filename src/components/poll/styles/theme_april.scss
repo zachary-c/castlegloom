@@ -1,0 +1,251 @@
+.april-light {
+  &.poll__body {
+    background-color: $periwinkle;
+  }
+
+  .poll {
+    background-color: $pale-dogwood;
+    color: inherit;
+    box-shadow: inherit;
+
+    &__page-title {
+      color: $light-green;
+      font-weight: 500;
+    }
+
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $robins-egg;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      color: $paynes-gray;
+      a {
+        color: $periwinkle;
+        &:hover {
+          color: $paynes-gray;
+        }
+      }
+    }
+
+    &__options {
+      &__item {
+        background-color: $lavender-pink;
+
+        &__text,
+        &__count {
+          color: $paynes-gray;
+          font-weight: 500;
+        }
+
+        &__fill-bar {
+          background-color: $vanilla-ice;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {
+        color: $paynes-gray;
+      }
+
+      &__refresh {
+        background-color: transparent;
+        color: $paynes-gray;
+        border: 1px solid $paynes-gray;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &__postscript {
+      background-color: $robins-egg;
+      color: inherit;
+    }
+
+    .loading-notice {
+      color: $paynes-gray;
+    }
+    &__btn {
+      background-color: $vanilla-ice;
+      color: $paynes-gray;
+
+      &.outline {
+        border: 2px solid $vanilla-ice;
+        background-color: rgba(0, 0, 0, .15);
+        color: $vanilla-ice;
+
+        &.submit:not(.submitting):hover {
+          transform: none;
+          background-color: $paynes-gray;
+          color: $lavender-pink;
+        }
+
+        &.submit {
+          border-color: $paynes-gray;
+          background-color: $pale-dogwood;
+          color: $paynes-gray;
+        }
+      }
+
+      &.muted {
+        border: 2px solid $lapis-lazuli;
+        background-color: transparent;
+        color: $lapis-lazuli;
+      }
+
+      &.cta {
+        background-color: $lavender-pink;
+        color: $paynes-gray;
+        border: none;
+        text-decoration: underline;
+      }
+    }
+
+    &__date {
+      background-color: $paynes-gray;
+      padding: 0.25rem .5rem;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      margin-top: -3rem;
+      color: $light-green;
+    }
+  }
+
+  a {
+    color: $vanilla-ice;
+    font-weight: bold;
+  }
+  .pd {
+    &__title {
+      color: $light-green
+    }
+
+    &__body {
+      background-color: $pale-dogwood;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $pale-dogwood;
+        color: $paynes-gray;
+        font-weight: 500;
+
+        &.current {
+          background: $pale-dogwood;
+        }
+      }
+
+      & .spacer {}
+    }
+
+    &__preferences {
+      &__field {
+        input {
+          border-color: $paynes-gray;
+        }
+      }
+
+      & .generate {
+        background-color: $lavender-pink;
+        color: $paynes-gray;
+        border: $paynes-gray 2px solid;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $lavender-pink;
+          color: $paynes-gray;
+          border: $paynes-gray 2px solid;
+        }
+      }
+
+      &__divider {}
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$vanilla-ice};
+      --me-text-color: #{$prussianBlue};
+      --odd-row: #{$lavender-pink};
+      --even-row: #{$light-green};
+      --header-row: #{$periwinkle};
+      --header-row-text: #{$paynes-gray};
+      --leaderboard-hover-background: #{$blush};
+      &__refresh .pd__btn {
+        background-color: $light-green;
+        color: $paynes-gray;
+        border: 2px $paynes-gray solid;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .pe {
+    border-color: $periwinkle;
+    background-color: $light-green;
+
+    &__header {
+      &__title {
+        color: $paynes-gray;
+      }
+
+      &__text {
+        color: $paynes-gray;
+        a {
+          color: $periwinkle;
+          &:hover {
+            color: $paynes-gray;
+          }
+        }
+      }
+    }
+
+    &.responded {
+      background-color: $vanilla-ice;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color:$vanilla-ice;
+        
+        &>.poll__options__item__fill-bar {
+          background-color: $light-green
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $lavender-pink;
+        color: $paynes-gray;
+
+        &.muted {
+          background-color: $periwinkle;
+          color: $light-green;
+          opacity: .8;
+        }
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
+}
+

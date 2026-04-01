@@ -110,7 +110,7 @@ export default function DashTabs({ userData, userQuestionData, staticLeaderboard
 			body: <div className='pd__question-entries'>
 				{
 					userQuestionData.map((q: UserQuestionInfo, i: number) =>
-						<PollEntry preloadInfo={q} key={i} />
+						<PollEntry preloadInfo={q} key={q.title} />
 					)
 				}
 			</div>
