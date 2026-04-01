@@ -56,7 +56,7 @@ export const poll_date_surrounding = groq`{
     }
 }
 `
-export const poll_latest_surrounding = groq`{ "today": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+export const poll_latest_surrounding = groq`{ "today": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-05:00") - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     },
     "previous": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[1] {
