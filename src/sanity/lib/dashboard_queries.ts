@@ -1,5 +1,6 @@
 import { groq } from "next-sanity"
 import { PreferenceTheme } from '@/poll/pollUtil'
+import { DATE_DST_OFFSET } from "./queries"
 
 export const leaderboardQuery = groq`
 *[_type == 'recipient'] { 
@@ -20,7 +21,7 @@ export type LeaderboardRecord = {
 }
 
 export const poll_question_list = groq`
-*[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc) {
+*[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0)] | order(date desc) {
     ...,
     responses[] {
         responseSlug,

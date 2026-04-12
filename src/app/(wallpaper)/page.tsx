@@ -20,7 +20,7 @@ export default function Home() {
 					<ul className="list-grid">
 						<li>
 							<Link href="/poll">
-								<Image src={`/polls/march_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
+								<Image src={`/polls/april_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
 								<span>Polling</span>
 							</Link>
 
@@ -45,7 +45,7 @@ export default function Home() {
 						</li>
 					</ul>
 					<p>
-						The polling project has now been providing a daily poll question for over 14 months! The Steamhash and CS2 Strats projects simply happened of their own accord, and live here as well.
+						The polling project has now been providing a daily poll question for over 17 months! The Steamhash and CS2 Strats projects simply happened of their own accord, and live here as well.
 					</p>
 				</section>
 				<section>
@@ -67,6 +67,12 @@ export default function Home() {
 							<Link href="https://www.rwbb.org" title={"Red-winged Black Birds"}>
 								<Image src={`/rwbb_shaded.png`} className="full-width infront" width={512} height={341} alt={'Red-winged Black Birds'} />
 								<Image src={`/rwbb_look.png`} className="full-width" width={512} height={341} alt={'Red-winged Black Birds'} />
+							</Link>
+						</li>
+						<li className="background--white">
+							<Link href="https://www.iatkd.com" title={"Iowa Taekwondo Alliance"}>
+								<Image src={`/ita_blacked_out.webp`} className="squareish--plus center infront" width={225} height={225} alt={'Iowa Taekwondo Alliance'} />
+								<Image src={`/ita_main.webp`} className="squareish--plus center" width={225} height={225} alt={'Iowa Taekwondo Alliance'} />
 							</Link>
 						</li>
 					</ul>

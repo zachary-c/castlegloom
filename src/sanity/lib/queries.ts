@@ -1,6 +1,8 @@
 import { groq } from "next-sanity";
 import { meme_fields, PollQuestion_t, pollQuestionFields, pollQuestionFragment } from '../types/documents'
 
+export const DATE_DST_OFFSET = `date + "T00:00:00-05:00"`
+
 export const page_by_slug = groq`
     *[_type == 'page' && slug.current == $cslug][0]
 `
@@ -19,19 +21,19 @@ export const meme_by_date = groq`
     }
     `
 export const latest_poll = groq`
-    *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+    *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     }
 `
 export const poll_by_date_with_user = groq`
-*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0 || hidden)][0] {
+*[_type == 'pollQuestion' && date == $date && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0 || hidden)][0] {
     ${pollQuestionFields},
 	"userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
 }
 `
 // This particular query allows for you to pick hidden ones by date, none of the others should
 export const poll_by_date = groq`
-*[_type == 'pollQuestion' && date == $date && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0 || hidden)][0] {
+*[_type == 'pollQuestion' && date == $date && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0 || hidden)][0] {
     ${pollQuestionFields}
 }
 `
@@ -56,7 +58,7 @@ export const poll_date_surrounding = groq`{
     }
 }
 `
-export const poll_latest_surrounding = groq`{ "today": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-05:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+export const poll_latest_surrounding = groq`{ "today": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
     },
     "previous": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[1] {
@@ -65,7 +67,7 @@ export const poll_latest_surrounding = groq`{ "today": *[_type == 'pollQuestion'
 }
 `
 export const poll_latest = groq`
-*[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[0] {
+*[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
 }`
 export type Concrete<Type> = {
