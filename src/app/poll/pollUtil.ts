@@ -174,3 +174,13 @@ export function randomInRange(min: number, max: number) {
 	return Math.floor(Math.random() * max) + min;
 }
 export const emailRegex = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)
+
+export function cleanSuggestedByPlaintext(name: string) {
+	const trimmed = name.trim()
+	const upperd = trimmed.toUpperCase()
+	if (upperd.startsWith("THE") || upperd === "FORD") {
+		return "<b>" + trimmed + "</b>"
+	} else {
+		return "the <b>" + trimmed + "</b>"
+	}
+}

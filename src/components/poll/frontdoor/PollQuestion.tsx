@@ -6,6 +6,7 @@ import "../styles/pollQuestion.scss"
 import { useEffect, useMemo, useState } from "react";
 import pfp from "%/default.png"
 import { renderPrompt } from "./util";
+import { cleanSuggestedByComponent } from "@/poll/pollUtilComponents";
 
 // alignment fixes on the left
 // poll response with header text with refresh button
@@ -68,7 +69,7 @@ export default function PollQuestion({ question, date, embedded }: { question: P
 		{question.suggestedBy &&
 			<div className="poll__postscript">
 				<span className="poll__postscript__suggested-pfp"><Image width={25} height={25} src={pfp.src} alt={"User-suggested poll question!"} /></span>
-				<span className="poll__postscript__suggested">Today&apos;s poll question was suggested by {question.suggestedBy.toUpperCase().startsWith("THE") || question.suggestedBy.trim() === "Ford" ? "" : "the "}<b>{question.suggestedBy.trim()}</b>!</span>
+				<span className="poll__postscript__suggested">Today&apos;s poll question was suggested by {cleanSuggestedByComponent(question.suggestedBy)}!</span>
 			</div>
 		}
 	</div>

@@ -5,6 +5,7 @@ import { toHTML } from "@portabletext/to-html"
 import { english_th, suffix } from "R/util"
 import { PortableTextComponents } from "@portabletext/to-html"
 import { urlFor } from "$/lib/image"
+import { cleanSuggestedByPlaintext } from "@/poll/pollUtil"
 
 export const additionalBlocks: PortableTextComponents = {
 	types: {
@@ -58,7 +59,7 @@ export function generatePollHTML(question: PollQuestion_t, recipient: Recipient_
             <div style="${pollStyle}">
             ${question.suggestedBy ? `
                 <div style="${postscriptStyle}">
-                    Today's poll question was suggested by the <b>${question.suggestedBy}</b>!
+                    Today's poll question was suggested by ${cleanSuggestedByPlaintext(question.suggestedBy)}!
                 </div>`
 			: ''
 		}
