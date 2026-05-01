@@ -1,0 +1,279 @@
+.may-dark {
+  &.poll__body {
+    background-color: $claret;
+  }
+
+  .poll {
+    background-color: $bittersweet;
+    color: inherit;
+    box-shadow: inherit;
+
+    &__page-title {
+      color: $saffron;
+      font-weight: 500;
+    }
+
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $saffron;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      color: $mistyRose;
+      a {
+        color: $saffron;
+        &:hover {
+          color: $claret;
+        }
+      }
+    }
+
+    &__options {
+      &__item {
+        background-color: $mistyRose;
+
+        &__text,
+        &__count {
+          color: $charcoal;
+          font-weight: 500;
+        }
+
+        &__fill-bar {
+          background-color: $saffron;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {
+        color: $mistyRose;
+      }
+
+      &__refresh {
+        background-color: $mistyRose;
+        color: $charcoal;
+        border: none;
+
+        //                border: 1px solid $mistyRose;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &__postscript {
+      background-color: $charcoal;
+      color: $mistyRose;
+    }
+
+    .loading-notice {
+      color: $mistyRose;
+    }
+    &__btn {
+      background-color: $bittersweet;
+      color: $mistyRose;
+
+      &.outline {
+        border: 2px solid $mistyRose;
+        background-color: transparent;
+        ;
+        //background-color: rgba(0,0,0,.15);
+        color: $mistyRose;
+
+        &.submit:not(.submitting):hover {
+          transform: none;
+          background-color: $mistyRose;
+          color: $bittersweet;
+        }
+
+        &.submit {
+          border-color: $mistyRose;
+          background-color: $bittersweet;
+          color: $mistyRose;
+        }
+      }
+
+      &.cta {
+        background-color: $bittersweet;
+        color: $mistyRose;
+        border: none;
+        text-decoration: underline;
+      }
+    }
+
+    &__date {
+      //background-color: $paynes-gray;
+      //padding: 0.25rem .5rem;
+      //border-bottom-right-radius: 5px;
+      //border-bottom-left-radius: 5px;
+      //margin-top: -3rem;
+      color: $saffron;
+    }
+  }
+
+  a {
+    color: $saffron;
+    font-weight: bold;
+  }
+  .pd {
+    &__title {
+      color: $saffron
+    }
+
+    &__body {
+      background-color: $charcoal;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $charcoal;
+        color: $mistyRose;
+        font-weight: 500;
+
+        &.current {
+          //background: $charcoal;
+        }
+      }
+
+      & .spacer {}
+    }
+
+    &__preferences {
+      h3 {
+        color: $mistyRose;
+      }
+
+      &__field {
+        input {
+          background-color: $claret;
+          color: $mistyRose;
+          border: 1px solid $mistyRose;
+        }
+
+        label {
+          color: $mistyRose;
+        }
+      }
+      .title {
+        &__pre, &__display {
+          color: $mistyRose;
+        }
+      }
+
+      .generate {
+        background-color: $saffron;
+        color: $charcoal;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $saffron;
+          color: $charcoal;
+        }
+
+        & .muted {
+          border: 2px solid $mistyRose;
+          background-color: transparent;
+          color: $mistyRose;
+        }
+      }
+
+      &__divider {
+        border-color: $mistyRose;
+      }
+    }
+
+    &__leaderboard {
+      h3 {
+        color: $mistyRose;
+      }
+      &__body {
+      }
+      &__note {
+        color: $mistyRose;
+      }
+
+      --header-row: #{$saffron};
+      --header-row-text: #{$charcoal};
+      --body-row-text: #{$mistyRose};
+      --odd-body-row-text: #{$mistyRose};
+      --odd-row: #{$claret};
+      --even-row: #{$charcoal};
+      --me-background: #{$saffron};
+      --me-text-color: #{$charcoal};
+
+      &__refresh .pd__btn {
+        background-color: $claret;
+        color: $saffron;
+        border: 1px solid $saffron;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .pe {
+    border: none;
+    background-color: $saffron;
+
+    &__header {
+      &__title {
+        color: $charcoal;
+      }
+
+      &__text {
+        color: $charcoal;
+      }
+      a {
+        color: $claret;
+      }
+    }
+
+    &.responded {
+      background-color: $mistyRose;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $charcoal;
+
+        &>.poll__options__item__fill-bar {
+          background-color: $claret;
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: $mistyRose;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $bittersweet;
+        color: $mistyRose;
+
+        &.muted {
+          background-color: $charcoal;
+          color: $mistyRose;
+          opacity: .8;
+        }
+      }
+
+      .submission-message {
+        border-color: $charcoal;
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
+}
+

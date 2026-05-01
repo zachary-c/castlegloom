@@ -13,11 +13,12 @@ export default function Layout({ children }: { children: ReactElement[] }) {
 					<Image src={"/castle_16-9.webp"} alt="Landscape view of castles," width={1696} height={954} />
 				</div>
 				<main className='page--global-notfound'>
-					<h1>404: Not Found</h1>
-					<div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
-						<Link className="button" href='/poll'>Polling</Link>
-						<Link className="button" href='/'>Homepage</Link>
-					</div>
+					<section>
+						<h1>404: Not Found</h1>
+						<div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
+							<Link className="button" href='/'>Back to the Castle Gate</Link>
+						</div>
+					</section>
 				</main>
 			</body>
 		</html>

@@ -20,7 +20,7 @@ export default function Home() {
 					<ul className="list-grid">
 						<li>
 							<Link href="/poll">
-								<Image src={`/polls/april_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
+								<Image src={`/polls/may_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
 								<span>Polling</span>
 							</Link>
 
@@ -45,7 +45,7 @@ export default function Home() {
 						</li>
 					</ul>
 					<p>
-						The polling project has now been providing a daily poll question for over 17 months! The Steamhash and CS2 Strats projects simply happened of their own accord, and live here as well.
+						The polling project has now been providing a daily poll question for over 18 months! The Steamhash and CS2 Strats projects simply happened of their own accord, and live here as well.
 					</p>
 				</section>
 				<section>
