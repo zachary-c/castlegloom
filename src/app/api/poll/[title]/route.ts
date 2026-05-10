@@ -28,6 +28,42 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 		token: process.env.PROJECT_API_TOKEN
 	})
 
+	if (request.headers.get("sec-ch-ua-platform") !== "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined) {
+		console.warn("Headers would indicate you might be an outlook bot", request.headers)
+
+		const person = await client.fetch(`*[_type == 'recipient' && _id == $id][0]`, { id: responder })
+		let personDeets = ""
+		if (person) {
+			Object.keys(person).forEach((k) => {
+				personDeets += `\t${k}: ${person[k]}\n`
+			})
+		}
+		let headerSet = ""
+		request.headers.forEach((v, k) => {
+			headerSet = headerSet + `\t${k}: ${v}\n`
+		})
+
+		const mailer = require('nodemailer').createTransport({
+			service: "Gmail",
+			auth: {
+				user: process.env.ORACLE_LOGIN,
+				pass: process.env.ORACLE_APP_PASSWORD,
+			}
+		})
+		const info = await mailer.sendMail({
+			from: emailFrom,
+			to: "zacharyhcampbell@gmail.com",
+			subject: `Response Report for ${title} | TS: ${(new Date()).getTime()}`,
+			text: `
+Responder: ${responder}
+Headers:\n${headerSet}
+Profile:\n${personDeets}
+	`
+		})
+
+		return NextResponse.json({}, { status: 200, statusText: "OK" })
+	}
+
 	const data: PollQuestion_t = await client.fetch(`*[_type == 'pollQuestion' && title == $paramTitle][0]`, { paramTitle: title })
 	console.log('data', data.responses)
 	const alreadyVoted = data.responses.find((res) => res.listOfResponders?.some((responded) => responded._ref === responder))
@@ -77,27 +113,6 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 			set: setpatch
 		})
 	}
-	const mailer = require('nodemailer').createTransport({
-		service: "Gmail",
-		auth: {
-			user: process.env.ORACLE_LOGIN,
-			pass: process.env.ORACLE_APP_PASSWORD,
-		}
-	})
-	let headerSet = ""
-	request.headers.forEach((v, k) => {
-		headerSet = headerSet + `${k}: ${v}\n`
-	})
-	const info = await mailer.sendMail({
-		from: emailFrom,
-		to: "zacharyhcampbell@gmail.com",
-		subject: `Response Report for ${data.title} | TS: ${(new Date()).getTime()}`,
-		text: `
-Responder: ${responder}
-headers:\n${headerSet}
-`
-	})
-
 	console.log("Patch .commit()", (await patch.commit()))
 
 	if (data.hidden) {
