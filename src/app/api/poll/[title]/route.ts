@@ -27,6 +27,7 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 		useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
 		token: process.env.PROJECT_API_TOKEN
 	})
+	const blocked = request.headers.get("sec-ch-ua-platform") === "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined
 	const person = await client.fetch(`*[_type == 'recipient' && _id == $id][0]`, { id: responder })
 	let personDeets = ""
 	if (person) {
@@ -49,7 +50,7 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 	const info = await mailer.sendMail({
 		from: emailFrom,
 		to: "zacharyhcampbell@gmail.com",
-		subject: `Scraper blocked for ${title} | TS: ${(new Date()).getTime()}`,
+		subject: `Response for ${title} | TS: ${(new Date()).getTime()}`,
 		text: `
 Responder: ${responder}
 Headers:\n${headerSet}
@@ -57,9 +58,8 @@ Profile:\n${personDeets}
 	`
 	})
 
-	if (request.headers.get("sec-ch-ua-platform") === "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined) {
+	if (blocked) {
 		console.warn("Headers would indicate you might be an outlook bot", request.headers)
-
 
 		return NextResponse.json({}, { status: 200, statusText: "OK" })
 	}
