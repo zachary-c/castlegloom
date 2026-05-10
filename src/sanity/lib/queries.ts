@@ -86,7 +86,7 @@ export const recipient_list = groq`
     }
 `
 export const test_recipient_list = groq`
-    *[(_id == 'ceec6d4a-2807-4050-991d-eed3f5e21f29') && isPolledDaily] {
+    *[(_id == 'ceec6d4a-2807-4050-991d-eed3f5e21f29' || _id == '27d16f9c-eaad-4733-9522-0d35a72602a6') && isPolledDaily] {
         _id,
         email,
 		theme
