@@ -27,39 +27,39 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 		useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
 		token: process.env.PROJECT_API_TOKEN
 	})
+	const person = await client.fetch(`*[_type == 'recipient' && _id == $id][0]`, { id: responder })
+	let personDeets = ""
+	if (person) {
+		Object.keys(person).forEach((k) => {
+			personDeets += `\t${k}: ${person[k]}\n`
+		})
+	}
+	let headerSet = ""
+	request.headers.forEach((v, k) => {
+		headerSet = headerSet + `\t${k}: ${v}\n`
+	})
 
-	if (request.headers.get("sec-ch-ua-platform") === "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined) {
-		console.warn("Headers would indicate you might be an outlook bot", request.headers)
-
-		const person = await client.fetch(`*[_type == 'recipient' && _id == $id][0]`, { id: responder })
-		let personDeets = ""
-		if (person) {
-			Object.keys(person).forEach((k) => {
-				personDeets += `\t${k}: ${person[k]}\n`
-			})
+	const mailer = require('nodemailer').createTransport({
+		service: "Gmail",
+		auth: {
+			user: process.env.ORACLE_LOGIN,
+			pass: process.env.ORACLE_APP_PASSWORD,
 		}
-		let headerSet = ""
-		request.headers.forEach((v, k) => {
-			headerSet = headerSet + `\t${k}: ${v}\n`
-		})
-
-		const mailer = require('nodemailer').createTransport({
-			service: "Gmail",
-			auth: {
-				user: process.env.ORACLE_LOGIN,
-				pass: process.env.ORACLE_APP_PASSWORD,
-			}
-		})
-		const info = await mailer.sendMail({
-			from: emailFrom,
-			to: "zacharyhcampbell@gmail.com",
-			subject: `Scraper blocked for ${title} | TS: ${(new Date()).getTime()}`,
-			text: `
+	})
+	const info = await mailer.sendMail({
+		from: emailFrom,
+		to: "zacharyhcampbell@gmail.com",
+		subject: `Scraper blocked for ${title} | TS: ${(new Date()).getTime()}`,
+		text: `
 Responder: ${responder}
 Headers:\n${headerSet}
 Profile:\n${personDeets}
 	`
-		})
+	})
+
+	if (request.headers.get("sec-ch-ua-platform") === "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined) {
+		console.warn("Headers would indicate you might be an outlook bot", request.headers)
+
 
 		return NextResponse.json({}, { status: 200, statusText: "OK" })
 	}
