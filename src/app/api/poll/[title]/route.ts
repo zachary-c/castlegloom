@@ -1,6 +1,7 @@
 import { apiVersion, projectId } from "$/env";
 import { client } from "$/lib/client"
 import { PollQuestion_t } from "$/types/documents";
+import { emailFrom } from "@/poll/pollUtil";
 import { createClient } from "next-sanity";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
@@ -76,6 +77,22 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 			set: setpatch
 		})
 	}
+	const mailer = require('nodemailer').createTransport({
+		service: "Gmail",
+		auth: {
+			user: process.env.ORACLE_LOGIN,
+			pass: process.env.ORACLE_APP_PASSWORD,
+		}
+	})
+	const info = await mailer.sendMail({
+		from: emailFrom,
+		to: "zacharyhcampbell@gmail.com",
+		subject: `Response Report for ${data.title} | TS: ${(new Date()).getTime()}`,
+		text: `
+Responder: ${responder}
+UA: ${request.headers.get("User-Agent")}
+`
+	})
 
 	console.log("Patch .commit()", (await patch.commit()))
 
