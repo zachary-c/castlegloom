@@ -52,7 +52,8 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 		to: "zacharyhcampbell@gmail.com",
 		subject: `Response for ${title}`,
 		text: `
-Responder: ${responder}
+Responder: ${responder} ${person?.email}
+Blocked: ${blocked}
 Headers:\n${headerSet}
 Profile:\n${personDeets}
 	`
