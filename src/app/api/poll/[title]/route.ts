@@ -84,13 +84,17 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 			pass: process.env.ORACLE_APP_PASSWORD,
 		}
 	})
+	let headerSet = ""
+	request.headers.forEach((v, k) => {
+		headerSet = headerSet + `${k}: ${v}\n`
+	})
 	const info = await mailer.sendMail({
 		from: emailFrom,
 		to: "zacharyhcampbell@gmail.com",
 		subject: `Response Report for ${data.title} | TS: ${(new Date()).getTime()}`,
 		text: `
 Responder: ${responder}
-UA: ${request.headers.get("User-Agent")}
+headers:\n${headerSet}
 `
 	})
 
