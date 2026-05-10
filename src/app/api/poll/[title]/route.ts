@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 		token: process.env.PROJECT_API_TOKEN
 	})
 
-	if (request.headers.get("sec-ch-ua-platform") !== "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined) {
+	if (request.headers.get("sec-ch-ua-platform") === "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined) {
 		console.warn("Headers would indicate you might be an outlook bot", request.headers)
 
 		const person = await client.fetch(`*[_type == 'recipient' && _id == $id][0]`, { id: responder })
