@@ -50,7 +50,7 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 	const info = await mailer.sendMail({
 		from: emailFrom,
 		to: "zacharyhcampbell@gmail.com",
-		subject: `Response for ${title} | TS: ${(new Date()).getTime()}`,
+		subject: `Response for ${title}`,
 		text: `
 Responder: ${responder}
 Headers:\n${headerSet}
