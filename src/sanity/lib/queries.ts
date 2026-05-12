@@ -37,6 +37,11 @@ export const poll_by_date = groq`
     ${pollQuestionFields}
 }
 `
+export const poll_by_title = groq`
+*[_type == 'pollQuestion' && title == $title][0] {
+    ${pollQuestionFields}
+}
+`
 export const poll_404 = groq`
 *[_type == 'pollQuestion' && title == "404-not-found"][0] {
     ${pollQuestionFields}

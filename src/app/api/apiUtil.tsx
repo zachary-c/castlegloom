@@ -159,6 +159,7 @@ export function themeObject(theme: Theme): ThemeObject {
 				itemAdditionalStyles: `border: 2px solid ${THEME_JUNE_LIGHT.icterine}; border-radius: 5px;`,
 				postScriptTextColor: STANDARDS.white,
 				postScriptBorderColor: STANDARDS.white,
+				questionHeaderLinkColor: THEME_JUNE_LIGHT.icterine,
 				borderColor: 'none',
 			};
 			break;
@@ -174,6 +175,7 @@ export function themeObject(theme: Theme): ThemeObject {
 				//itemAdditionalStyles: `border: 2px solid ${THEME_JULY_LIGHT.icterine}; border-radius: 5px;`,
 				postScriptTextColor: STANDARDS.white,
 				postScriptBorderColor: STANDARDS.white,
+				questionHeaderLinkColor: THEME_APRIL_LIGHT.vanillaIce,
 				borderColor: 'none',
 			};
 			break;
