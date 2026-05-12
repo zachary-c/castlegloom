@@ -64,7 +64,7 @@ export function UserPreferences({ userRecord, setUserRecord, originalRecord, set
 		<div className="pd__preferences">
 			<h3>Personal Information</h3>
 			<div className="pd__preferences__fieldset">
-				<div className="pd__preferences__field centered">
+				<div className="pd__preferences__field centered title">
 					<p className="title__pre">{title ? `In the court of Castle Gloom, you are known as${userRecord.title.qualifier ? " the" : ""}...` : "No one knows who you are in the court of Castle Gloom. Generate a title using the button below."}</p>
 					<span className="title__display">{title}</span>
 					<button className="poll__btn generate" onClick={generateTitle}>Generate New Title</button>

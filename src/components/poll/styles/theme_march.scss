@@ -155,10 +155,10 @@
       --odd-row: #{$spring-green};
       --even-row: #{$office-green};
       --body-row-text: white;
+      --odd-body-row-text: black; 
       --header-row: #{$lapis-lazuli};
       --header-row-text: #{$white};
       --leaderboard-hover-background: #{$blush};
-      --odd-body-row-text: black; 
       &__refresh .pd__btn {
         background-color: $blush;
         color: $white;

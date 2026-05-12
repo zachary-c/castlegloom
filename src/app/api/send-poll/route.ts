@@ -1,5 +1,5 @@
 import { client, patchClient } from '$/lib/client';
-import { daily_polled, latest_poll, test_recipient_list } from '$/lib/queries';
+import { daily_polled, latest_poll, poll_by_title, test_recipient_list } from '$/lib/queries';
 import { PollQuestion_t } from '$/types/documents';
 import { NextRequest, NextResponse } from 'next/server';
 import { Recipient_t, themeObject } from '../apiUtil';
@@ -15,18 +15,27 @@ export async function GET(request: NextRequest) {
 	}
 	const is_test = request.nextUrl.searchParams.get("is_test") === "true";
 	const dry_run = request.nextUrl.searchParams.get("dry_run") === "true";
+	const title = request.nextUrl.searchParams.get("test_title");
 
 	// poll form link 
 	let emails: Recipient_t[] = []
 	let test_subject_suffix = ""
+	let pollQuestion: PollQuestion_t
 	if (is_test) {
 		emails = await client.fetch(test_recipient_list);
 		console.log("email test", emails)
 		test_subject_suffix = ` | TS: ${(new Date()).getTime()}`
+		if (title) {
+			pollQuestion = await client.fetch(poll_by_title, {
+				title: title,
+			})
+		} else {
+			pollQuestion = await client.fetch(latest_poll)
+		}
 	} else {
 		emails = await client.fetch(daily_polled);
+		pollQuestion = await client.fetch(latest_poll)
 	}
-	const pollQuestion: PollQuestion_t = await client.fetch(latest_poll)
 	console.log("edict", pollQuestion.edict);
 
 	console.log(pollQuestion);
