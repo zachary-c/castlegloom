@@ -35,35 +35,35 @@ export async function GET(request: NextRequest, { params }: { params: { title: s
 			personDeets += `\t${k}: ${person[k]}\n`
 		})
 	}
-	let headerSet = ""
-	request.headers.forEach((v, k) => {
-		headerSet = headerSet + `\t${k}: ${v}\n`
-	})
+	//	let headerSet = ""
+	//	request.headers.forEach((v, k) => {
+	//		headerSet = headerSet + `\t${k}: ${v}\n`
+	//	})
 
-	const mailer = require('nodemailer').createTransport({
-		service: "Gmail",
-		auth: {
-			user: process.env.ORACLE_LOGIN,
-			pass: process.env.ORACLE_APP_PASSWORD,
-		}
-	})
-	const info = await mailer.sendMail({
-		from: emailFrom,
-		to: "zacharyhcampbell@gmail.com",
-		subject: `Response for ${title}`,
-		text: `
-Responder: ${responder} ${person?.email}
-Blocked: ${blocked}
-Headers:\n${headerSet}
-Profile:\n${personDeets}
-	`
-	})
-
-	if (blocked) {
-		console.warn("Headers would indicate you might be an outlook bot", request.headers)
-
-		return NextResponse.json({}, { status: 200, statusText: "OK" })
-	}
+	//	const mailer = require('nodemailer').createTransport({
+	//		service: "Gmail",
+	//		auth: {
+	//			user: process.env.ORACLE_LOGIN,
+	//			pass: process.env.ORACLE_APP_PASSWORD,
+	//		}
+	//	})
+	//	const info = await mailer.sendMail({
+	//		from: emailFrom,
+	//		to: "zacharyhcampbell@gmail.com",
+	//		subject: `Response for ${title}`,
+	//		text: `
+	//Responder: ${responder} ${person?.email}
+	//Blocked: ${blocked}
+	//Headers:\n${headerSet}
+	//Profile:\n${personDeets}
+	//	`
+	//	})
+	//
+	//	if (blocked) {
+	//		console.warn("Headers would indicate you might be an outlook bot", request.headers)
+	//
+	//		return NextResponse.json({}, { status: 200, statusText: "OK" })
+	//	}
 
 	const data: PollQuestion_t = await client.fetch(`*[_type == 'pollQuestion' && title == $paramTitle][0]`, { paramTitle: title })
 	console.log('data', data.responses)
