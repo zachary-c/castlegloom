@@ -11,20 +11,21 @@ import "_components/poll/styles/theme_april.scss"
 import "_components/poll/styles/theme_may.scss"
 import "_components/poll/styles/theme_june.scss"
 import "_components/poll/styles/theme_july.scss"
+import "_components/poll/styles/theme_august.scss"
 import "_components/poll/styles/theme_wireframe_dark.scss"
 import { Montserrat } from 'next/font/google'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-	title: "Polling | Castle Gloom",
-	authors: { name: "Castle Gloom Smithing" },
-	applicationName: "Castle Gloom Census"
+  title: "Polling | Castle Gloom",
+  authors: { name: "Castle Gloom Smithing" },
+  applicationName: "Castle Gloom Census"
 };
 
 export default function Layout({ children }: { children: any }) {
 
-	return <html className={`${montserrat.className}`}>
-		{children}
-	</html>
+  return <html className={`${montserrat.className}`}>
+    {children}
+  </html>
 }

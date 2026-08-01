@@ -1,0 +1,298 @@
+
+.august-dark {
+
+  // page body
+  &.poll__body {
+    background-color: $august_body;
+  }
+
+  .poll {
+    background-color: $august_pollBackground;
+    color: inherit;
+    box-shadow: inherit;
+
+    &__page-title {
+      color: $white;
+      font-weight: 500;
+    }
+
+    &__header {
+      &:before {
+        content: 'POLL';
+        color: $white;
+        transform: rotate(10deg);
+        font-family: 'Courier New', Courier, monospace;
+      }
+
+      color: white;
+    }
+
+    &__options {
+      &__item {
+        background-color: $august_optionsItem;
+        padding: 0.3rem;
+
+        &__text,
+        &__count {
+          
+          color: $august_header;
+          font-weight: 600;
+        }
+
+        &__fill-bar {
+          background-color: $august_optionsItemFillBar;
+        }
+      }
+    }
+
+    &__footer {
+      &__rc {
+        color: $white;
+      }
+
+      &__refresh {
+        background-color: $white;
+        color: $august_header;
+        border: 0 solid $white;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    &__postscript {
+      background-color: $august_header;
+      border-top: 2px solid white;
+      border-bottom: 2px solid white;
+      color: $white;
+    }
+
+    .loading-notice {
+      color: $white;
+    }
+
+    &__btn {
+      background-color: $white;
+      color: $americanBlue;
+
+      &.outline {
+        border: 3px solid $white;
+        background-color: transparent;
+        color: $white;
+
+        &.submit:not(.submitting):hover {
+          transform: scale(1.05);
+        }
+
+        &.submit {
+          border-color: $august_header;
+          background-color: $august_header;
+          color: white;
+        }
+      }
+
+      &.cta {
+        background-color: $august_buttonSignup;
+        color: white;
+        border: none;
+        text-decoration: underline;
+      }
+    }
+
+    &__date {
+      color: $white;
+      font-weight: bold;
+    }
+  }
+
+
+  a {
+    color: $august_optionsItem;
+    font-weight: bold;
+  }
+
+
+  .pd {
+    &__title {
+      color: $white;
+    }
+
+    &__body {
+      background-color: $august_buttonSignup;
+      border-color: $august_optionsItem;
+    }
+
+    &__tabmenu {
+      &__tab {
+        background-color: $august_buttonSignup;
+        color: white;
+        font-weight: 500;
+        border-color: $august_optionsItem;
+      }
+
+      &__spacer {
+        border-color: $august_optionsItem
+      }
+    }
+
+    &__preferences {
+      h3 {
+        color: $white;
+      }
+
+      &__field {
+        input {
+          border-color: $white;
+          border-width: 1px;
+          background-color: $august_header;
+          color: $white;
+        }
+
+        &.title, label {
+          color: $white;
+        }
+      }
+
+      & .generate {
+        background-color: $august_optionsItemFillBar;
+        color: $august_header;
+        padding: .2rem .5rem;
+        border: 2px solid $white;
+      }
+
+      &__submission {
+        & .primary {
+          background-color: $august_pollBackground;
+          color: $white;
+          border: 2px solid $white;
+        }
+
+        & .muted {
+          border: 2px solid white;
+          background-color: transparent;
+          color: white;
+        }
+      }
+
+      &__info-bar {
+        color: white;
+      }
+
+      &__divider {
+        border-color: white;
+      }
+    }
+
+    &__btn {
+      background-color: $august_optionsItemFillBar;
+      color: $august_header;
+      padding: .2rem .5rem;
+      border: 2px solid $white;
+      font-weight: bold;
+      transition-duration: .2s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    &__leaderboard {
+      &__body {}
+
+      --me-background: #{$august_optionsItem};
+      --me-text-color: #{black};
+      --odd-row: #{$august_header};
+      --even-row: #{$august_body};
+      --header-row: #{$august_optionsItem};
+      --header-row-text: #{black};
+      --body-row-text: #{white};
+      --odd-body-row-text: #{white};
+      --surrounding-text-color: #{white};
+      --leaderboard-hover-background: #{$august_optionsItemFillBar};
+      --leaderboard-hover-text: #{black};
+    }
+  }
+
+  .pe {
+    border: 1px solid white;
+    background-color: $august_body;
+
+    &__header {
+
+      &__title,
+      &__text,
+      &__date {
+        color: $white;
+      }
+    }
+
+    &.responded {
+      background-color: $august_header;
+      border: 2px solid $white;
+
+      .pe__header {
+        &__title {}
+      }
+    }
+
+    .poll.input {
+      & .poll__options__item.selected {
+        background-color: $august_body;
+
+        &>.poll__options__item__fill-bar {
+          background-color: $august_body;
+
+        }
+
+        &>.poll__options__item__text,
+        &>.poll__options__item__count {
+          color: white;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 4px;
+          // the border is 2px and 2px, so we add 4px here to account for it
+          height: calc(100% + 4px);
+          // shift upwards by the 2px on top so aligned correctly
+          top: -2px;
+          left: -12px;
+          display: block;
+          background-color: $white;
+        }
+      }
+    }
+
+    .poll__submit-area {
+      &__btn {
+        background-color: $august_optionsItemFillBar;
+        color: $white;
+        border: 2px solid white;
+
+        &.muted {
+          background-color: $august_header;
+          color: $white;
+          opacity: .8;
+          border: none;
+        }
+      }
+
+      .submission-message {
+        >span {
+          color: white;
+        }
+
+        border-color: white;
+      }
+    }
+  }
+
+  input {
+    border-color: transparent;
+  }
+}
+
