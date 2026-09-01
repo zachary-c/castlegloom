@@ -1,13 +1,12 @@
-
-.august-dark {
-
+.september-light {
+  
   // page body
   &.poll__body {
-    background-color: $august_body;
+    background-color: $munsell-blue;
   }
 
   .poll {
-    background-color: $august_pollBackground;
+    background-color: $atomic-tangerine;
     color: inherit;
     box-shadow: inherit;
 
@@ -24,23 +23,22 @@
         font-family: 'Courier New', Courier, monospace;
       }
 
-      color: white;
+      color: $white;
     }
 
     &__options {
       &__item {
-        background-color: $august_optionsItem;
+        background-color: $munsell-blue;
         padding: 0.3rem;
 
         &__text,
         &__count {
-          
-          color: $august_header;
-          font-weight: 600;
+          color: $white;
+          font-weight: 500;
         }
 
         &__fill-bar {
-          background-color: $august_optionsItemFillBar;
+          background-color: $cerulean;
         }
       }
     }
@@ -51,9 +49,9 @@
       }
 
       &__refresh {
-        background-color: $white;
-        color: $august_header;
-        border: 0 solid $white;
+        background-color: $munsell-blue;
+        color: $celadon;
+        border: none;
 
         &:hover {
           cursor: pointer;
@@ -61,11 +59,9 @@
         }
       }
     }
-
+    
     &__postscript {
-      background-color: $august_header;
-      border-top: 2px solid white;
-      border-bottom: 2px solid white;
+      background-color: $burgundy;
       color: $white;
     }
 
@@ -74,27 +70,22 @@
     }
 
     &__btn {
-      background-color: $white;
-      color: $americanBlue;
+      background-color: $celadon;
+      color: $munsell-blue;
 
       &.outline {
-        border: 3px solid $white;
-        background-color: transparent;
-        color: $white;
+        border: 2px solid $celadon;
+        background-color: $munsell-blue;
+        color: $celadon;
 
         &.submit:not(.submitting):hover {
           transform: scale(1.05);
         }
 
-        &.submit {
-          border-color: $august_header;
-          background-color: $august_header;
-          color: white;
-        }
       }
 
       &.cta {
-        background-color: $august_buttonSignup;
+        background-color: $atomic-tangerine;
         color: white;
         border: none;
         text-decoration: underline;
@@ -107,33 +98,30 @@
     }
   }
 
-
   a {
-    color: $august_optionsItem;
+    color: $celadon;
     font-weight: bold;
   }
-
-
   .pd {
     &__title {
       color: $white;
     }
 
     &__body {
-      background-color: $august_buttonSignup;
-      border-color: $august_optionsItem;
+      background-color: $cerulean;
+      border-color: $pakistan-green;
     }
 
     &__tabmenu {
       &__tab {
-        background-color: $august_buttonSignup;
+        background-color: $cerulean;
         color: white;
         font-weight: 500;
-        border-color: $august_optionsItem;
+        border-color: $pakistan-green;
       }
 
       &__spacer {
-        border-color: $august_optionsItem
+        border-color: $pakistan-green;
       }
     }
 
@@ -144,27 +132,38 @@
 
       &__field {
         input {
-          border-color: $white;
           border-width: 1px;
-          background-color: $august_header;
+          background-color: $munsell-blue;
           color: $white;
         }
 
-        &.title, label {
+        label {
           color: $white;
+        }
+
+        & .disabled input {
+          color: gray;
+        }
+
+        .title {
+          &__pre {
+            color: $celadon;
+          }
+          &__display {
+            color: $white;
+          }
         }
       }
 
       & .generate {
-        background-color: $august_optionsItemFillBar;
-        color: $august_header;
+        background-color: $atomic-tangerine;
+        color: $pakistan-green;
         padding: .2rem .5rem;
-        border: 2px solid $white;
       }
 
       &__submission {
         & .primary {
-          background-color: $august_pollBackground;
+          background-color: $burgundy;
           color: $white;
           border: 2px solid $white;
         }
@@ -186,10 +185,10 @@
     }
 
     &__btn {
-      background-color: $august_optionsItemFillBar;
-      color: $august_header;
+      background-color: $celadon;
+      color: $pakistan-green;
       padding: .2rem .5rem;
-      border: 2px solid $white;
+      border: none;
       font-weight: bold;
       transition-duration: .2s;
       cursor: pointer;
@@ -202,47 +201,54 @@
     &__leaderboard {
       &__body {}
 
-      --me-background: #{$august_optionsItem};
+      --me-background: #{$celadon};
       --me-text-color: #{black};
-      --odd-row: #{$august_header};
-      --even-row: #{$august_body};
-      --header-row: #{$august_optionsItem};
-      --header-row-text: #{black};
+      --odd-row: #{$cerulean};
+      --even-row: #{$munsell-blue};
+      --header-row: #{$pakistan-green};
+      --header-row-text: #{white};
       --body-row-text: #{white};
       --odd-body-row-text: #{white};
       --surrounding-text-color: #{white};
-      --leaderboard-hover-background: #{$august_optionsItemFillBar};
+      --leaderboard-hover-background: #{$atomic-tangerine};
       --leaderboard-hover-text: #{black};
     }
   }
 
   .pe {
-    border: 1px solid white;
-    background-color: $august_body;
+    border: none;
+    background-color: $celadon;
 
     &__header {
       &__title,
       &__text,
       &__date {
-        color: $white;
+        color: $pakistan-green;
+        a {
+          color: $cerulean;
+        }
       }
     }
 
     &.responded {
-      background-color: $august_header;
-      border: 2px solid $white;
+      background-color: $pakistan-green;
 
       .pe__header {
-        &__title {}
+
+        &__title,
+        &__text,
+        &__date {
+          color: $celadon;
+        }
       }
     }
 
     .poll.input {
       & .poll__options__item.selected {
-        background-color: $august_body;
+        background-color: $cerulean;
 
         &>.poll__options__item__fill-bar {
-          background-color: $august_body;
+          background-color: $pakistan-green;
 
         }
 
@@ -268,12 +274,12 @@
 
     .poll__submit-area {
       &__btn {
-        background-color: $august_optionsItemFillBar;
-        color: $white;
-        border: 2px solid white;
+        background-color: $celadon;
+        color: $pakistan-green;
+        border: 2px solid $cerulean;
 
         &.muted {
-          background-color: $august_header;
+          background-color: $munsell-blue;
           color: $white;
           opacity: .8;
           border: none;
@@ -294,4 +300,3 @@
     border-color: transparent;
   }
 }
-
