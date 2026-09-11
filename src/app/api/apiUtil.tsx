@@ -3,296 +3,304 @@ import { STANDARDS, Theme, THEME_APRIL_LIGHT, THEME_FEB_LIGHT, THEME_JAN, THEME_
 import { PreferenceTheme } from "@/poll/pollUtil";
 
 export type ThemeObject = {
-	backgroundColor: string
-	headerTextColor: string
-	questionTextColor: string
-	itemDefaultColor: string
-	itemHoverColor: string
-	itemTextColor: string
-	itemHoverTextColor?: string
-	itemBorder?: string
-	itemAdditionalStyles?: string
-	borderColor?: string
-	postScriptBackgroundColor: string
-	postScriptTextColor: string
-	postScriptBorderColor?: string
-	questionHeaderLinkColor?: string
+  backgroundColor: string
+  headerTextColor: string
+  questionTextColor: string
+  itemDefaultColor: string
+  itemHoverColor: string
+  itemTextColor: string
+  itemHoverTextColor?: string
+  itemBorder?: string
+  itemAdditionalStyles?: string
+  borderColor?: string
+  postScriptBackgroundColor: string
+  postScriptTextColor: string
+  postScriptBorderColor?: string
+  questionHeaderLinkColor?: string
 }
 export type EdictThemeObject = {
-	h2_background: string,
-	h2_color: string,
-	a_color: string,
-	divider_color: string
+  h2_background: string,
+  h2_color: string,
+  a_color: string,
+  divider_color: string
 }
-export type EdictTheme = "january-light" | "november-light" | "december-light" | "standards (default)";
+export type EdictTheme = "january-light" | "september-light" | "november-light" | "december-light" | "standards (default)";
 
 export type Recipient_t = {
-	email: string
-	_id: string
-	theme: PreferenceTheme
+  email: string
+  _id: string
+  theme: PreferenceTheme
 }
 
 export function themeObject(theme: Theme): ThemeObject {
-	let obj: ThemeObject;
-	switch (theme) {
-		case 'november-light':
-			obj = {
-				backgroundColor: THEME_NOVEMBER.ghostOfOctober,
-				questionTextColor: THEME_NOVEMBER.charcoalCemetery,
-				itemDefaultColor: THEME_NOVEMBER.thanksgivingBrown,
-				itemHoverColor: THEME_NOVEMBER.thursdayOchre,
-				itemTextColor: THEME_NOVEMBER.ghostOfOctober,
-				headerTextColor: THEME_NOVEMBER.charcoalCemetery,
-				postScriptBackgroundColor: THEME_NOVEMBER.thursdayOchre,
-				postScriptTextColor: THEME_NOVEMBER.ghostOfOctober,
-				postScriptBorderColor: 'none',
-				borderColor: THEME_NOVEMBER.thanksgivingBrown,
-				questionHeaderLinkColor: THEME_NOVEMBER.thursdayOchre,
-			};
-			break;
-		case 'december-light':
-			obj = {
-				backgroundColor: THEME_DECEMBER.firGreen,
-				questionTextColor: THEME_DECEMBER.snowWhite,
-				itemDefaultColor: THEME_DECEMBER.rudolphNose,
-				itemHoverColor: THEME_DECEMBER.santaRed,
-				itemTextColor: THEME_DECEMBER.snowWhite,
-				borderColor: "none",
-				headerTextColor: THEME_DECEMBER.firGreen,
-				postScriptBackgroundColor: THEME_DECEMBER.treeTrimming,
-				postScriptTextColor: THEME_DECEMBER.snowWhite,
-				questionHeaderLinkColor: THEME_DECEMBER.treeTrimming,
-			};
-			break;
-		case 'december-dark':
-			obj = {
-				backgroundColor: '#01440f',
-				questionTextColor: '#f2f2f2',
-				itemDefaultColor: '#ae0000',
-				itemHoverColor: '#00b409',
-				itemTextColor: '#f2f2f2',
-				borderColor: 'none',
-				headerTextColor: '#01440f',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
+  let obj: ThemeObject;
+  switch (theme) {
+    case 'november-light':
+      obj = {
+        backgroundColor: THEME_NOVEMBER.ghostOfOctober,
+        questionTextColor: THEME_NOVEMBER.charcoalCemetery,
+        itemDefaultColor: THEME_NOVEMBER.thanksgivingBrown,
+        itemHoverColor: THEME_NOVEMBER.thursdayOchre,
+        itemTextColor: THEME_NOVEMBER.ghostOfOctober,
+        headerTextColor: THEME_NOVEMBER.charcoalCemetery,
+        postScriptBackgroundColor: THEME_NOVEMBER.thursdayOchre,
+        postScriptTextColor: THEME_NOVEMBER.ghostOfOctober,
+        postScriptBorderColor: 'none',
+        borderColor: THEME_NOVEMBER.thanksgivingBrown,
+        questionHeaderLinkColor: THEME_NOVEMBER.thursdayOchre,
+      };
+      break;
+    case 'december-light':
+      obj = {
+        backgroundColor: THEME_DECEMBER.firGreen,
+        questionTextColor: THEME_DECEMBER.snowWhite,
+        itemDefaultColor: THEME_DECEMBER.rudolphNose,
+        itemHoverColor: THEME_DECEMBER.santaRed,
+        itemTextColor: THEME_DECEMBER.snowWhite,
+        borderColor: "none",
+        headerTextColor: THEME_DECEMBER.firGreen,
+        postScriptBackgroundColor: THEME_DECEMBER.treeTrimming,
+        postScriptTextColor: THEME_DECEMBER.snowWhite,
+        questionHeaderLinkColor: THEME_DECEMBER.treeTrimming,
+      };
+      break;
+    case 'december-dark':
+      obj = {
+        backgroundColor: '#01440f',
+        questionTextColor: '#f2f2f2',
+        itemDefaultColor: '#ae0000',
+        itemHoverColor: '#00b409',
+        itemTextColor: '#f2f2f2',
+        borderColor: 'none',
+        headerTextColor: '#01440f',
+        postScriptBackgroundColor: STANDARDS.white,
+        postScriptTextColor: STANDARDS.black
 
-			};
-			break;
-		case 'january-light':
-			obj = {
-				backgroundColor: THEME_JAN.walnutBrown,
-				headerTextColor: THEME_JAN.jasper,
-				itemDefaultColor: THEME_JAN.bone,
-				itemHoverColor: THEME_JAN.platinum,
-				itemTextColor: THEME_JAN.blackOlive,
-				questionTextColor: THEME_JAN.platinum,
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none',
+      };
+      break;
+    case 'january-light':
+      obj = {
+        backgroundColor: THEME_JAN.walnutBrown,
+        headerTextColor: THEME_JAN.jasper,
+        itemDefaultColor: THEME_JAN.bone,
+        itemHoverColor: THEME_JAN.platinum,
+        itemTextColor: THEME_JAN.blackOlive,
+        questionTextColor: THEME_JAN.platinum,
+        postScriptBackgroundColor: STANDARDS.white,
+        postScriptTextColor: STANDARDS.black,
+        borderColor: 'none',
 
-			};
-			break;
-		case 'february-light':
-			obj = {
-				backgroundColor: THEME_FEB_LIGHT.electricBlue,
-				headerTextColor: THEME_FEB_LIGHT.chefchaouenBlue,
-				itemDefaultColor: THEME_FEB_LIGHT.chefchaouenBlue,
-				itemHoverColor: THEME_FEB_LIGHT.blush,
-				itemTextColor: THEME_FEB_LIGHT.snow,
-				questionTextColor: THEME_FEB_LIGHT.prussianBlue,
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none'
+      };
+      break;
+    case 'february-light':
+      obj = {
+        backgroundColor: THEME_FEB_LIGHT.electricBlue,
+        headerTextColor: THEME_FEB_LIGHT.chefchaouenBlue,
+        itemDefaultColor: THEME_FEB_LIGHT.chefchaouenBlue,
+        itemHoverColor: THEME_FEB_LIGHT.blush,
+        itemTextColor: THEME_FEB_LIGHT.snow,
+        questionTextColor: THEME_FEB_LIGHT.prussianBlue,
+        postScriptBackgroundColor: STANDARDS.white,
+        postScriptTextColor: STANDARDS.black,
+        borderColor: 'none'
 
-			};
-			break;
-		case 'march-light':
-			obj = {
-				headerTextColor: THEME_MARCH_LIGHT.lapisLazuli,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_MARCH_LIGHT.officeGreen,
-				itemDefaultColor: THEME_MARCH_LIGHT.springGreen,
-				itemHoverColor: THEME_MARCH_LIGHT.bakerMiller,
-				itemTextColor: THEME_MARCH_LIGHT.lapisLazuli,
-				postScriptBackgroundColor: THEME_MARCH_LIGHT.bakerMiller,
-				questionHeaderLinkColor: THEME_MARCH_LIGHT.springGreen,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none',
-			};
-			break;
-		case 'april-light':
-			obj = {
-				headerTextColor: THEME_APRIL_LIGHT.robinsEgg,
-				questionTextColor: THEME_APRIL_LIGHT.paynesGray,
-				backgroundColor: THEME_APRIL_LIGHT.paleDogwood,
-				itemDefaultColor: THEME_APRIL_LIGHT.lavenderPink,
-				itemHoverColor: THEME_APRIL_LIGHT.vanillaIce,
-				itemTextColor: THEME_APRIL_LIGHT.paynesGray,
-				postScriptBackgroundColor: THEME_APRIL_LIGHT.lightGreen,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: 'none',
-			};
-			break;
-		case 'may-dark':
-			obj = {
-				headerTextColor: THEME_MAY_DARK.claret,
-				questionTextColor: THEME_MAY_DARK.mistyRose,
-				backgroundColor: THEME_MAY_DARK.claret,
-				itemDefaultColor: THEME_MAY_DARK.saffron,
-				itemHoverColor: THEME_MAY_DARK.mistyRose,
-				itemTextColor: THEME_MAY_DARK.charcoal,
-				postScriptBackgroundColor: THEME_MAY_DARK.mistyRose,
-				itemAdditionalStyles: 'font-weight: bold;',
-				postScriptTextColor: THEME_MAY_DARK.charcoal,
-				borderColor: 'none',
-			};
-			break;
-		case 'june-light':
-			obj = {
-				headerTextColor: THEME_JUNE_LIGHT.flame,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_JUNE_LIGHT.flame,
-				itemDefaultColor: THEME_JUNE_LIGHT.earthYellow,
-				itemHoverColor: THEME_JUNE_LIGHT.icterine,
-				itemTextColor: THEME_JUNE_LIGHT.blackOlive2,
-				postScriptBackgroundColor: THEME_JUNE_LIGHT.airSuperiority,
-				itemAdditionalStyles: `border: 2px solid ${THEME_JUNE_LIGHT.icterine}; border-radius: 5px;`,
-				postScriptTextColor: STANDARDS.white,
-				postScriptBorderColor: STANDARDS.white,
-				questionHeaderLinkColor: THEME_JUNE_LIGHT.icterine,
-				borderColor: 'none',
-			};
-			break;
-		case 'july-light':
-			obj = {
-				headerTextColor: THEME_JULY_LIGHT.americanBlue,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_JULY_LIGHT.fireEngineRed,
-				itemDefaultColor: THEME_JULY_LIGHT.americanBlue,
-				itemHoverColor: THEME_JULY_LIGHT.strawberryRed,
-				itemTextColor: THEME_JULY_LIGHT.white,
-				postScriptBackgroundColor: THEME_JULY_LIGHT.americanBlue,
-				//itemAdditionalStyles: `border: 2px solid ${THEME_JULY_LIGHT.icterine}; border-radius: 5px;`,
-				postScriptTextColor: STANDARDS.white,
-				postScriptBorderColor: STANDARDS.white,
-				questionHeaderLinkColor: THEME_APRIL_LIGHT.vanillaIce,
-				borderColor: 'none',
-			};
-			break;
-		case 'august-dark':
-			obj = {
-				headerTextColor: THEME_AUGUST_DARK.header,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_AUGUST_DARK.pollBackground,
-				itemDefaultColor: THEME_AUGUST_DARK.optionsItem,
-				itemHoverColor: THEME_AUGUST_DARK.optionsItemFillBar,
-				itemTextColor: THEME_AUGUST_DARK.header,
-				postScriptBackgroundColor: THEME_AUGUST_DARK.header,
-				postScriptTextColor: THEME_AUGUST_DARK.optionsItemText,
-				postScriptBorderColor: STANDARDS.white,
-				borderColor: 'none',
-			};
-			break;
-		case 'september-light':
-			obj = {
-				headerTextColor: THEME_SEPTEMBER_LIGHT.munsellBlue,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_SEPTEMBER_LIGHT.atomicTangerine,
-				itemDefaultColor: THEME_SEPTEMBER_LIGHT.cerulean,
-				itemHoverColor: THEME_SEPTEMBER_LIGHT.munsellBlue,
-				itemTextColor: STANDARDS.white,
-				postScriptBackgroundColor: THEME_SEPTEMBER_LIGHT.pakistanGreen,
-				postScriptTextColor: STANDARDS.white,
-				postScriptBorderColor: 'none',
-				borderColor: 'none',
-				questionHeaderLinkColor: THEME_SEPTEMBER_LIGHT.celadon,
-			};
-			break;
-		case 'october-dark':
-			obj = {
-				headerTextColor: THEME_OCTOBER_DARK.grayLeiter,
-				questionTextColor: STANDARDS.white,
-				backgroundColor: THEME_OCTOBER_DARK.charcoalMining,
-				itemDefaultColor: THEME_OCTOBER_DARK.grayLeiter,
-				itemHoverColor: THEME_OCTOBER_DARK.ashenCue,
-				itemTextColor: THEME_OCTOBER_DARK.pumpkinOrange,
-				postScriptBackgroundColor: THEME_OCTOBER_DARK.grayLeiter,
-				postScriptTextColor: STANDARDS.white,
-				postScriptBorderColor: 'none',
-				borderColor: 'none',
-				questionHeaderLinkColor: THEME_OCTOBER_DARK.pumpkinOrange,
-			};
-			break;
-		case 'wireframe-dark':
-			obj = {
-				backgroundColor: STANDARDS.black,
-				questionTextColor: STANDARDS.white,
-				itemDefaultColor: STANDARDS.black,
-				itemHoverColor: STANDARDS.white,
-				itemTextColor: STANDARDS.white,
-				itemHoverTextColor: STANDARDS.black,
-				itemBorder: `2px solid ${STANDARDS.white}`,
-				headerTextColor: STANDARDS.black,
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black,
-				borderColor: STANDARDS.white
-			};
-			break;
-		default:
-			obj = {
-				backgroundColor: 'black',
-				questionTextColor: 'white',
-				itemDefaultColor: 'gray',
-				itemHoverColor: 'white',
-				itemTextColor: 'black',
-				headerTextColor: 'black',
-				postScriptBackgroundColor: STANDARDS.white,
-				postScriptTextColor: STANDARDS.black
-			};
-			break;
-	}
-	return obj;
+      };
+      break;
+    case 'march-light':
+      obj = {
+        headerTextColor: THEME_MARCH_LIGHT.lapisLazuli,
+        questionTextColor: STANDARDS.white,
+        backgroundColor: THEME_MARCH_LIGHT.officeGreen,
+        itemDefaultColor: THEME_MARCH_LIGHT.springGreen,
+        itemHoverColor: THEME_MARCH_LIGHT.bakerMiller,
+        itemTextColor: THEME_MARCH_LIGHT.lapisLazuli,
+        postScriptBackgroundColor: THEME_MARCH_LIGHT.bakerMiller,
+        questionHeaderLinkColor: THEME_MARCH_LIGHT.springGreen,
+        postScriptTextColor: STANDARDS.black,
+        borderColor: 'none',
+      };
+      break;
+    case 'april-light':
+      obj = {
+        headerTextColor: THEME_APRIL_LIGHT.robinsEgg,
+        questionTextColor: THEME_APRIL_LIGHT.paynesGray,
+        backgroundColor: THEME_APRIL_LIGHT.paleDogwood,
+        itemDefaultColor: THEME_APRIL_LIGHT.lavenderPink,
+        itemHoverColor: THEME_APRIL_LIGHT.vanillaIce,
+        itemTextColor: THEME_APRIL_LIGHT.paynesGray,
+        postScriptBackgroundColor: THEME_APRIL_LIGHT.lightGreen,
+        postScriptTextColor: STANDARDS.black,
+        borderColor: 'none',
+      };
+      break;
+    case 'may-dark':
+      obj = {
+        headerTextColor: THEME_MAY_DARK.claret,
+        questionTextColor: THEME_MAY_DARK.mistyRose,
+        backgroundColor: THEME_MAY_DARK.claret,
+        itemDefaultColor: THEME_MAY_DARK.saffron,
+        itemHoverColor: THEME_MAY_DARK.mistyRose,
+        itemTextColor: THEME_MAY_DARK.charcoal,
+        postScriptBackgroundColor: THEME_MAY_DARK.mistyRose,
+        itemAdditionalStyles: 'font-weight: bold;',
+        postScriptTextColor: THEME_MAY_DARK.charcoal,
+        borderColor: 'none',
+      };
+      break;
+    case 'june-light':
+      obj = {
+        headerTextColor: THEME_JUNE_LIGHT.flame,
+        questionTextColor: STANDARDS.white,
+        backgroundColor: THEME_JUNE_LIGHT.flame,
+        itemDefaultColor: THEME_JUNE_LIGHT.earthYellow,
+        itemHoverColor: THEME_JUNE_LIGHT.icterine,
+        itemTextColor: THEME_JUNE_LIGHT.blackOlive2,
+        postScriptBackgroundColor: THEME_JUNE_LIGHT.airSuperiority,
+        itemAdditionalStyles: `border: 2px solid ${THEME_JUNE_LIGHT.icterine}; border-radius: 5px;`,
+        postScriptTextColor: STANDARDS.white,
+        postScriptBorderColor: STANDARDS.white,
+        questionHeaderLinkColor: THEME_JUNE_LIGHT.icterine,
+        borderColor: 'none',
+      };
+      break;
+    case 'july-light':
+      obj = {
+        headerTextColor: THEME_JULY_LIGHT.americanBlue,
+        questionTextColor: STANDARDS.white,
+        backgroundColor: THEME_JULY_LIGHT.fireEngineRed,
+        itemDefaultColor: THEME_JULY_LIGHT.americanBlue,
+        itemHoverColor: THEME_JULY_LIGHT.strawberryRed,
+        itemTextColor: THEME_JULY_LIGHT.white,
+        postScriptBackgroundColor: THEME_JULY_LIGHT.americanBlue,
+        //itemAdditionalStyles: `border: 2px solid ${THEME_JULY_LIGHT.icterine}; border-radius: 5px;`,
+        postScriptTextColor: STANDARDS.white,
+        postScriptBorderColor: STANDARDS.white,
+        questionHeaderLinkColor: THEME_APRIL_LIGHT.vanillaIce,
+        borderColor: 'none',
+      };
+      break;
+    case 'august-dark':
+      obj = {
+        headerTextColor: THEME_AUGUST_DARK.header,
+        questionTextColor: STANDARDS.white,
+        backgroundColor: THEME_AUGUST_DARK.pollBackground,
+        itemDefaultColor: THEME_AUGUST_DARK.optionsItem,
+        itemHoverColor: THEME_AUGUST_DARK.optionsItemFillBar,
+        itemTextColor: THEME_AUGUST_DARK.header,
+        postScriptBackgroundColor: THEME_AUGUST_DARK.header,
+        postScriptTextColor: THEME_AUGUST_DARK.optionsItemText,
+        postScriptBorderColor: STANDARDS.white,
+        borderColor: 'none',
+      };
+      break;
+    case 'september-light':
+      obj = {
+        headerTextColor: THEME_SEPTEMBER_LIGHT.munsellBlue,
+        questionTextColor: STANDARDS.white,
+        backgroundColor: THEME_SEPTEMBER_LIGHT.atomicTangerine,
+        itemDefaultColor: THEME_SEPTEMBER_LIGHT.cerulean,
+        itemHoverColor: THEME_SEPTEMBER_LIGHT.munsellBlue,
+        itemTextColor: STANDARDS.white,
+        postScriptBackgroundColor: THEME_SEPTEMBER_LIGHT.pakistanGreen,
+        postScriptTextColor: STANDARDS.white,
+        postScriptBorderColor: 'none',
+        borderColor: 'none',
+        questionHeaderLinkColor: THEME_SEPTEMBER_LIGHT.celadon,
+      };
+      break;
+    case 'october-dark':
+      obj = {
+        headerTextColor: THEME_OCTOBER_DARK.grayLeiter,
+        questionTextColor: STANDARDS.white,
+        backgroundColor: THEME_OCTOBER_DARK.charcoalMining,
+        itemDefaultColor: THEME_OCTOBER_DARK.grayLeiter,
+        itemHoverColor: THEME_OCTOBER_DARK.ashenCue,
+        itemTextColor: THEME_OCTOBER_DARK.pumpkinOrange,
+        postScriptBackgroundColor: THEME_OCTOBER_DARK.grayLeiter,
+        postScriptTextColor: STANDARDS.white,
+        postScriptBorderColor: 'none',
+        borderColor: 'none',
+        questionHeaderLinkColor: THEME_OCTOBER_DARK.pumpkinOrange,
+      };
+      break;
+    case 'wireframe-dark':
+      obj = {
+        backgroundColor: STANDARDS.black,
+        questionTextColor: STANDARDS.white,
+        itemDefaultColor: STANDARDS.black,
+        itemHoverColor: STANDARDS.white,
+        itemTextColor: STANDARDS.white,
+        itemHoverTextColor: STANDARDS.black,
+        itemBorder: `2px solid ${STANDARDS.white}`,
+        headerTextColor: STANDARDS.black,
+        postScriptBackgroundColor: STANDARDS.white,
+        postScriptTextColor: STANDARDS.black,
+        borderColor: STANDARDS.white
+      };
+      break;
+    default:
+      obj = {
+        backgroundColor: 'black',
+        questionTextColor: 'white',
+        itemDefaultColor: 'gray',
+        itemHoverColor: 'white',
+        itemTextColor: 'black',
+        headerTextColor: 'black',
+        postScriptBackgroundColor: STANDARDS.white,
+        postScriptTextColor: STANDARDS.black
+      };
+      break;
+  }
+  return obj;
 }
 
 export function applyStyleToHtml(html: string, aStyle: string, pStyle: string, h3Style?: string) {
-	return html.replaceAll(`<p>`, `<p style="${pStyle}">`).replaceAll(`<a `, `<a style="${aStyle}"`).replaceAll(`<h3>`, `<h3 style="${h3Style}">`)
+  return html.replaceAll(`<p>`, `<p style="${pStyle}">`).replaceAll(`<a `, `<a style="${aStyle}"`).replaceAll(`<h3>`, `<h3 style="${h3Style}">`)
 }
 
 export function edictThemeObject(theme: EdictTheme): EdictThemeObject {
-	let obj: EdictThemeObject;
-	switch (theme) {
-		case 'november-light':
-			obj = {
-				h2_background: THEME_NOVEMBER.thanksgivingBrown,
-				h2_color: THEME_NOVEMBER.ghostOfOctober,
-				a_color: THEME_NOVEMBER.thursdayOchre,
-				divider_color: THEME_NOVEMBER.charcoalCemetery
-			};
-			break;
-		case 'january-light':
-			obj = {
-				h2_background: THEME_JAN.jasper,
-				h2_color: STANDARDS.white,
-				a_color: THEME_JAN.jasper,
-				divider_color: THEME_JAN.bone
-			};
-			break;
-		case 'december-light':
-			obj = {
-				h2_background: THEME_DECEMBER.firGreen,
-				h2_color: THEME_DECEMBER.snowWhite,
-				a_color: THEME_DECEMBER.rudolphNose,
-				divider_color: THEME_DECEMBER.firGreen
-			};
-			break;
-		default:
-			obj = {
-				h2_background: STANDARDS.black,
-				h2_color: STANDARDS.white,
-				a_color: STANDARDS.hyperlinkBlue,
-				divider_color: STANDARDS.black
-			};
-			break;
-	}
-	return obj;
+  let obj: EdictThemeObject;
+  switch (theme) {
+    case 'january-light':
+      obj = {
+        h2_background: THEME_JAN.jasper,
+        h2_color: STANDARDS.white,
+        a_color: THEME_JAN.jasper,
+        divider_color: THEME_JAN.bone
+      };
+      break;
+    case 'september-light':
+      obj = {
+        h2_background: THEME_SEPTEMBER_LIGHT.cerulean,
+        h2_color: THEME_SEPTEMBER_LIGHT.celadon,
+        a_color: THEME_SEPTEMBER_LIGHT.atomicTangerine,
+        divider_color: THEME_SEPTEMBER_LIGHT.pakistanGreen,
+      };
+      break;
+    case 'november-light':
+      obj = {
+        h2_background: THEME_NOVEMBER.thanksgivingBrown,
+        h2_color: THEME_NOVEMBER.ghostOfOctober,
+        a_color: THEME_NOVEMBER.thursdayOchre,
+        divider_color: THEME_NOVEMBER.charcoalCemetery
+      };
+      break;
+    case 'december-light':
+      obj = {
+        h2_background: THEME_DECEMBER.firGreen,
+        h2_color: THEME_DECEMBER.snowWhite,
+        a_color: THEME_DECEMBER.rudolphNose,
+        divider_color: THEME_DECEMBER.firGreen
+      };
+      break;
+    default:
+      obj = {
+        h2_background: STANDARDS.black,
+        h2_color: STANDARDS.white,
+        a_color: STANDARDS.hyperlinkBlue,
+        divider_color: STANDARDS.black
+      };
+      break;
+  }
+  return obj;
 }

@@ -5,120 +5,132 @@ import { emailFrom } from "@/poll/pollUtil";
 import { createClient } from "next-sanity";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
+import { poll_cookie_user_id } from "../login/cookie";
+import { cookies } from "next/headers";
 
 // {params : { title : string }, searchParams : { responder : string | undefined, choice : string | undefined }}
 export async function GET(request: NextRequest, { params }: { params: { title: string } }) {
-	const title = params.title;
-	const responder = decodeURIComponent(request.nextUrl.searchParams.get('responder') ?? '')
-	const choice = decodeURIComponent(request.nextUrl.searchParams.get('choice') ?? '')
-	const date = decodeURIComponent(request.nextUrl.searchParams.get('date') ?? '')
-	console.log("title", params.title, responder, choice, date)
+  const title = params.title;
+  const responder = decodeURIComponent(request.nextUrl.searchParams.get('responder') ?? '')
+  const choice = decodeURIComponent(request.nextUrl.searchParams.get('choice') ?? '')
+  const date = decodeURIComponent(request.nextUrl.searchParams.get('date') ?? '')
+  console.log("title", params.title, responder, choice, date)
 
-	if (!process.env.PROJECT_API_TOKEN) {
-		return NextResponse.json({
-			message: 'Sorry, something went wrong.'
-		}, { status: 500 })
-	}
+  if (!process.env.PROJECT_API_TOKEN) {
+    return NextResponse.json({
+      message: 'Sorry, something went wrong.'
+    }, { status: 500 })
+  }
 
-	const client = createClient({
-		projectId: projectId,
-		dataset: 'production',
-		apiVersion: apiVersion,
-		useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
-		token: process.env.PROJECT_API_TOKEN
-	})
-	const blocked = request.headers.get("sec-ch-ua-platform") === "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined
-	const person = await client.fetch(`*[_type == 'recipient' && _id == $id][0]`, { id: responder })
-	let personDeets = ""
-	if (person) {
-		Object.keys(person).forEach((k) => {
-			personDeets += `\t${k}: ${person[k]}\n`
-		})
-	}
-	//	let headerSet = ""
-	//	request.headers.forEach((v, k) => {
-	//		headerSet = headerSet + `\t${k}: ${v}\n`
-	//	})
+  const client = createClient({
+    projectId: projectId,
+    dataset: 'production',
+    apiVersion: apiVersion,
+    useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
+    token: process.env.PROJECT_API_TOKEN
+  })
+  const blocked = request.headers.get("sec-ch-ua-platform") === "Windows" && request.headers.get("sec-ch-ua-full-version") !== undefined
+  const person = await client.fetch(`*[_type == 'recipient' && _id == $id][0]`, { id: responder })
+  let personDeets = ""
+  if (person) {
+    Object.keys(person).forEach((k) => {
+      personDeets += `\t${k}: ${person[k]}\n`
+    })
+  }
+  //	let headerSet = ""
+  //	request.headers.forEach((v, k) => {
+  //		headerSet = headerSet + `\t${k}: ${v}\n`
+  //	})
 
-	//	const mailer = require('nodemailer').createTransport({
-	//		service: "Gmail",
-	//		auth: {
-	//			user: process.env.ORACLE_LOGIN,
-	//			pass: process.env.ORACLE_APP_PASSWORD,
-	//		}
-	//	})
-	//	const info = await mailer.sendMail({
-	//		from: emailFrom,
-	//		to: "zacharyhcampbell@gmail.com",
-	//		subject: `Response for ${title}`,
-	//		text: `
-	//Responder: ${responder} ${person?.email}
-	//Blocked: ${blocked}
-	//Headers:\n${headerSet}
-	//Profile:\n${personDeets}
-	//	`
-	//	})
-	//
-	//	if (blocked) {
-	//		console.warn("Headers would indicate you might be an outlook bot", request.headers)
-	//
-	//		return NextResponse.json({}, { status: 200, statusText: "OK" })
-	//	}
+  //	const mailer = require('nodemailer').createTransport({
+  //		service: "Gmail",
+  //		auth: {
+  //			user: process.env.ORACLE_LOGIN,
+  //			pass: process.env.ORACLE_APP_PASSWORD,
+  //		}
+  //	})
+  //	const info = await mailer.sendMail({
+  //		from: emailFrom,
+  //		to: "zacharyhcampbell@gmail.com",
+  //		subject: `Response for ${title}`,
+  //		text: `
+  //Responder: ${responder} ${person?.email}
+  //Blocked: ${blocked}
+  //Headers:\n${headerSet}
+  //Profile:\n${personDeets}
+  //	`
+  //	})
+  //
+  //	if (blocked) {
+  //		console.warn("Headers would indicate you might be an outlook bot", request.headers)
+  //
+  //		return NextResponse.json({}, { status: 200, statusText: "OK" })
+  //	}
 
-	const data: PollQuestion_t = await client.fetch(`*[_type == 'pollQuestion' && title == $paramTitle][0]`, { paramTitle: title })
-	console.log('data', data.responses)
-	const alreadyVoted = data.responses.find((res) => res.listOfResponders?.some((responded) => responded._ref === responder))
-	const chosenIndex = data.responses.findIndex((res) => res.responseSlug.current === choice)
-	if (chosenIndex < 0) {
-		redirect("/poll/invalid-response");
-	}
-	console.log("Chosen Response", chosenIndex)
-	console.log("Already Voted found ", alreadyVoted)
-	if (alreadyVoted?._key === data.responses[chosenIndex]._key) {
-		console.log("VOTING FOR SAME ONE ALREADY VOTED FOR, SHORT CIRCUIT")
-		if (data.hidden) {
-			return NextResponse.json({ message: "Stay sneaky 😎" }, { status: 200, statusText: 'OK' })
-		}
-		return redirect(`/poll/${date}`)
-	}
-	//const alreadyVotedIndex = data.responses.find((res) => res.listOfResponders.some((responded) => responded._ref === responder))
-	if (alreadyVoted) {
-		console.log("Found prior vote: ", alreadyVoted)
-		//const filtered = alreadyVoted.listOfResponders.filter((r) => r._ref !== responder)
-		let deletion
-		if (alreadyVoted.listOfResponders?.length === 1) {
-			console.log("Only one vote (us) so removing it wholesale")
-			deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders`] })
-		} else {
-			console.log("Multiple other votes, removing just us")
-			deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders[_ref == "${responder}"]`] })
-		}
-		console.log("Deletion commit response", (await deletion.commit()).responses)
-	}
+  const data: PollQuestion_t = await client.fetch(`*[_type == 'pollQuestion' && title == $paramTitle][0]`, { paramTitle: title })
+  console.log('data', data.responses)
+  const alreadyVoted = data.responses.find((res) => res.listOfResponders?.some((responded) => responded._ref === responder))
+  const chosenIndex = data.responses.findIndex((res) => res.responseSlug.current === choice)
+  if (chosenIndex < 0) {
+    redirect("/poll/invalid-response");
+  }
+  console.log("Chosen Response", chosenIndex)
+  console.log("Already Voted found ", alreadyVoted)
+  if (alreadyVoted?._key === data.responses[chosenIndex]._key) {
+    console.log("VOTING FOR SAME ONE ALREADY VOTED FOR, SHORT CIRCUIT")
+    if (data.hidden) {
+      return NextResponse.json({ message: "Stay sneaky 😎" }, { status: 200, statusText: 'OK' })
+    }
+    return redirect(`/poll/${date}`)
+  }
+  //const alreadyVotedIndex = data.responses.find((res) => res.listOfResponders.some((responded) => responded._ref === responder))
+  if (alreadyVoted) {
+    console.log("Found prior vote: ", alreadyVoted)
+    //const filtered = alreadyVoted.listOfResponders.filter((r) => r._ref !== responder)
+    let deletion
+    if (alreadyVoted.listOfResponders?.length === 1) {
+      console.log("Only one vote (us) so removing it wholesale")
+      deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders`] })
+    } else {
+      console.log("Multiple other votes, removing just us")
+      deletion = client.patch(data._id, { unset: [`responses[_key == \"${alreadyVoted._key}\"].listOfResponders[_ref == "${responder}"]`] })
+    }
+    console.log("Deletion commit response", (await deletion.commit()).responses)
+  }
 
-	let patch;
-	// if there is some responders in there at the moment/still/already
-	if (data.responses[chosenIndex].listOfResponders) {
-		console.log("Insert Patch; other people have said this")
-		patch = client.patch(data._id, {
-			insert: {
-				after: `responses[${chosenIndex}].listOfResponders[-1]`,
-				items: [{ _type: 'reference', _key: `${responder}_${choice}`, _ref: responder }]
-			}
-		})
-	} else {
-		const setpatch: any = {}
-		setpatch[`responses[${chosenIndex}].listOfResponders`] = [{ _type: 'reference', _key: `${responder}_${choice}`, _ref: responder }]
-		console.log("setpatch -- no one has responded with this yet", setpatch)
-		patch = client.patch(data._id, {
-			set: setpatch
-		})
-	}
-	console.log("Patch .commit()", (await patch.commit()))
+  let patch;
+  // if there is some responders in there at the moment/still/already
+  if (data.responses[chosenIndex].listOfResponders) {
+    console.log("Insert Patch; other people have said this")
+    patch = client.patch(data._id, {
+      insert: {
+        after: `responses[${chosenIndex}].listOfResponders[-1]`,
+        items: [{ _type: 'reference', _key: `${responder}_${choice}`, _ref: responder }]
+      }
+    })
+  } else {
+    const setpatch: any = {}
+    setpatch[`responses[${chosenIndex}].listOfResponders`] = [{ _type: 'reference', _key: `${responder}_${choice}`, _ref: responder }]
+    console.log("setpatch -- no one has responded with this yet", setpatch)
+    patch = client.patch(data._id, {
+      set: setpatch
+    })
+  }
+  console.log("Patch .commit()", (await patch.commit()))
 
-	if (data.hidden) {
-		return NextResponse.json({ message: "Stay sneaky 😎" }, { status: 200, statusText: 'OK' })
-	}
+  if (data.hidden) {
+    return NextResponse.json({ message: "Stay sneaky 😎" }, { status: 200, statusText: 'OK' })
+  }
 
-	return redirect(`/poll/${date}`)
+  const cookieJar = cookies();
+  const id = cookieJar.get(poll_cookie_user_id);
+  console.log('id', id)
+
+  cookieJar.set(poll_cookie_user_id, responder, {
+    maxAge: 60 * 60 * 24 * 30 * 6,
+    //domain: 'castlegloom.com',
+    //partitioned: true
+  })
+
+  return redirect(`/poll/${date}`)
 }
