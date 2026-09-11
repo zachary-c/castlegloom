@@ -6,10 +6,9 @@ import PollQuestionInput from "./PollQuestionInput"
 import { UserContext } from "../dash/DashTabs"
 
 export default function StandaloneInput({ question, userid }: { question: UserQuestionInfo, userid: string }) {
-	const [clientQuestion, setClientQuestion] = useState<UserQuestionInfo>(question)
-	console.log(clientQuestion)
+  const [clientQuestion, setClientQuestion] = useState<UserQuestionInfo>(question)
 
-	return <UserContext.Provider value={userid}>
-		<PollQuestionInput question={clientQuestion} setQuestion={(v) => { console.log(v); setClientQuestion(v) }} />
-	</UserContext.Provider>
+  return <UserContext.Provider value={userid}>
+    <PollQuestionInput question={clientQuestion} setQuestion={setClientQuestion} />
+  </UserContext.Provider>
 }

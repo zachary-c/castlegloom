@@ -210,36 +210,6 @@
       }
     }
 
-    .poll.input {
-      border: 2px solid $tree-trimming;
-      & .poll__options__item.selected {
-        background-color: $snow-white;
-
-        &>.poll__options__item__fill-bar {
-          background-color: transparentize($color: $rudolph-nose, $amount: .80);
-
-        }
-
-        &>.poll__options__item__text,
-        &>.poll__options__item__count {
-          color: $fir-green;
-        }
-
-        &:before {
-          content: ' ';
-          position: absolute;
-          width: 4px;
-          // the border is 2px and 2px, so we add 4px here to account for it
-          height: calc(100% + 4px);
-          // shift upwards by the 2px on top so aligned correctly
-          top: -2px;
-          left: -12px;
-          display: block;
-          background-color: $snow-white;
-        }
-      }
-    }
-
     .poll__submit-area {
       &__btn {
         background-color: $snow-white;
@@ -260,6 +230,35 @@
         }
 
         border: 2px solid $fir-green;
+      }
+    }
+  }
+  .poll.input {
+    border: 2px solid $tree-trimming;
+    & .poll__options__item.selected {
+      background-color: $snow-white;
+
+      &>.poll__options__item__fill-bar {
+        background-color: transparentize($color: $rudolph-nose, $amount: .80);
+
+      }
+
+      &>.poll__options__item__text,
+      &>.poll__options__item__count {
+        color: $fir-green;
+      }
+
+      &:before {
+        content: ' ';
+        position: absolute;
+        width: 4px;
+        // the border is 2px and 2px, so we add 4px here to account for it
+        height: calc(100% + 4px);
+        // shift upwards by the 2px on top so aligned correctly
+        top: -2px;
+        left: -12px;
+        display: block;
+        background-color: $snow-white;
       }
     }
   }

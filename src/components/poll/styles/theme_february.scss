@@ -183,23 +183,6 @@
       background-color: $uranianBlue;
     }
 
-    .poll.input {
-      & .poll__options__item.selected {
-        background-color: $prussianBlue;
-
-        &>.poll__options__item__fill-bar {
-          background-color: $blush;
-          filter: brightness(.5);
-        }
-
-        &>.poll__options__item__text,
-        &>.poll__options__item__count {
-          color: $snow;
-
-        }
-      }
-    }
-
     .poll__submit-area {
       &__btn {
         background-color: $blush;
@@ -209,6 +192,22 @@
           color: $snow;
           background-color: $blush;
         }
+      }
+    }
+  }
+  .poll.input {
+    & .poll__options__item.selected {
+      background-color: $prussianBlue;
+
+      &>.poll__options__item__fill-bar {
+        background-color: $blush;
+        filter: brightness(.5);
+      }
+
+      &>.poll__options__item__text,
+      &>.poll__options__item__count {
+        color: $snow;
+
       }
     }
   }

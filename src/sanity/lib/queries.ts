@@ -35,13 +35,21 @@ export const poll_by_date_with_user = groq`
 export const poll_by_date = groq`
 *[_type == 'pollQuestion' && date == $date && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0 || hidden)][0] {
     ${pollQuestionFields}
+}`
+
+export const poll_by_date_user_response = groq`
+*[_type == 'pollQuestion' && date == $date && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0 || hidden)][0] {
+    ${pollQuestionFields},
+	"userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
 }
 `
+
 export const poll_by_title = groq`
 *[_type == 'pollQuestion' && title == $title][0] {
     ${pollQuestionFields}
 }
 `
+
 export const poll_404 = groq`
 *[_type == 'pollQuestion' && title == "404-not-found"][0] {
     ${pollQuestionFields}
@@ -63,8 +71,29 @@ export const poll_date_surrounding = groq`{
     }
 }
 `
+
+export const poll_date_surrounding_user_response = groq`{
+    "today": ${poll_by_date_user_response},
+    "yesterday": *[_type == 'pollQuestion' && date == $previous && (!defined(hidden) || !hidden)][0] {
+        _id
+    },
+    "tomorrow": *[_type == 'pollQuestion' && date == $nextPoll && (!defined(hidden) || !hidden)][0] {
+        _id
+    }
+}
+`
+
 export const poll_latest_surrounding = groq`{ "today": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0)] | order(date desc)[0] {
         ${pollQuestionFields}
+    },
+    "previous": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[1] {
+        _id
+    }
+}
+`
+export const poll_latest_surrounding_user_response = groq`{ "today": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(${DATE_DST_OFFSET}) - dateTime(now()) < 0)] | order(date desc)[0] {
+        ${pollQuestionFields},
+        "userResponse": responses[length(listOfResponders[_ref == $userId]) > 0][0].responseSlug.current
     },
     "previous": *[_type == 'pollQuestion' && (!defined(hidden) || !hidden) && (dateTime(date + "T00:00:00-06:00") - dateTime(now()) < 0)] | order(date desc)[1] {
         _id
@@ -76,7 +105,7 @@ export const poll_latest = groq`
         ${pollQuestionFields}
 }`
 export type Concrete<Type> = {
-	[Key in keyof Type]-?: NonNullable<Type[Key]>;
+  [Key in keyof Type]-?: NonNullable<Type[Key]>;
 };
 export const latest_meme = groq`
     *[_type == 'meme' && date < $now] | order(date desc)[0] {
@@ -123,24 +152,24 @@ export const todays_meme = groq`
 }
 `
 export type EmailableMeme = {
-	imgAsset: {
-		mimeType: string,
-		url: string,
-		extension: string
-	},
-	videoAsset: {
-		mimeType: string,
-		extension: string,
-		url: string
-	},
-	cslug: string,
-	youtubeURL: string,
-	date: string,
-	pollQuestion: PollQuestion_t | undefined
+  imgAsset: {
+    mimeType: string,
+    url: string,
+    extension: string
+  },
+  videoAsset: {
+    mimeType: string,
+    extension: string,
+    url: string
+  },
+  cslug: string,
+  youtubeURL: string,
+  date: string,
+  pollQuestion: PollQuestion_t | undefined
 }
 
 function keyFragment(name: string) {
-	return groq`{
+  return groq`{
         "key": "${name}",
         "url": soundfile.asset->url,
         "filename": soundfile.asset->originalFilename

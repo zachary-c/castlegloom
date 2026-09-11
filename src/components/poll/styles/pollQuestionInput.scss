@@ -1,5 +1,5 @@
 .poll.input {
-    &:not(.submitting) .poll__options__item {
+    &:not(.submitting) .poll__options__item:not(.selected) {
         cursor: pointer;
         transition-duration: .2s;
         transition-property: transform;

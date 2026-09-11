@@ -178,15 +178,14 @@
   .pe {
     background-color: rgb(244, 243, 243);
     border: 3px solid $jasper;
-    .poll.input {
-      & .poll__options__item.selected {
-        background-color: $platinum;
-        &>.poll__options__item__fill-bar {}
+  }
+  .poll.input {
+    & .poll__options__item.selected {
+      background-color: $platinum;
+      &>.poll__options__item__fill-bar {}
 
-        &>.poll__options__item__text,
-        &>.poll__options__item__count {}
-      }
+      &>.poll__options__item__text,
+      &>.poll__options__item__count {}
     }
-  
   }
 }

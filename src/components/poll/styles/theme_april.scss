@@ -215,20 +215,6 @@
       }
     }
 
-    .poll.input {
-      & .poll__options__item.selected {
-        background-color:$vanilla-ice;
-        
-        &>.poll__options__item__fill-bar {
-          background-color: $light-green
-        }
-
-        &>.poll__options__item__text,
-        &>.poll__options__item__count {
-
-        }
-      }
-    }
 
     .poll__submit-area {
       &__btn {
@@ -240,6 +226,20 @@
           color: $light-green;
           opacity: .8;
         }
+      }
+    }
+  }
+  .poll.input {
+    & .poll__options__item.selected {
+      background-color:$vanilla-ice;
+      
+      &>.poll__options__item__fill-bar {
+        background-color: $light-green
+      }
+
+      &>.poll__options__item__text,
+      &>.poll__options__item__count {
+
       }
     }
   }
