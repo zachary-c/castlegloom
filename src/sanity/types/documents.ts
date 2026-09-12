@@ -26,7 +26,7 @@ export type PollQuestion_t = {
   hasBeenSent: boolean
   hidden: boolean
   suggestedBy: string
-  edict: KingsEdict_t
+  edict?: KingsEdict_t
   userResponse?: string
 }
 

@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
   }
   console.log("edict", pollQuestion.edict);
   let subjectLine = `${pollQuestion.title} | ${pollQuestion.date}${test_subject_suffix}`
-  if (pollQuestion.edict.replaceSubject) {
+  if (pollQuestion.edict?.replaceSubject) {
     subjectLine = `${pollQuestion.edict.edictHeading.toUpperCase()} | ` + subjectLine
   }
 
