@@ -113,7 +113,7 @@ export const test_recipient_list = groq`
     }
 `
 export const daily_polled = groq`
-    *[_type == 'recipient' && isPolledDaily] {
+    *[_type == 'recipient' && !defined(isPolledDaily) || isPolledDaily] {
         _id,
         email,
 		theme

@@ -15,6 +15,25 @@ export const meme_by_date = groq`
     ${meme_fields}
 }`
 
+export const todays_meme_by_date = groq`
+*[_type == 'meme' && date == $date] | order(date desc)[0] {
+    "imgAsset": mainImage.asset->{
+        mimeType,
+        url,
+        extension
+    },
+    "videoAsset": video.asset->{
+        mimeType,
+        extension,
+        url
+    },
+    "cslug": slug.current,
+    youtubeURL,
+    date,
+    "pollQuestion": ${pollQuestionFragment}
+}
+`
+
 export const todays_meme = groq`
 *[_type == 'meme' && date < now()] | order(date desc)[0] {
     "imgAsset": mainImage.asset->{

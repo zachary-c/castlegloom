@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Recipient_t, themeObject } from '../apiUtil';
 import { concreteTheme, emailFrom } from '@/poll/pollUtil';
 import { generatePollHTML } from './generate_html_util';
+import { EmailableMeme, meme_by_date, todays_meme_by_date } from '$/lib/spooktober_queries';
 
 export const maxDuration = 300;
 
@@ -45,6 +46,26 @@ export async function GET(request: NextRequest) {
   console.log(pollQuestion);
   console.log("emails", emails)
   let attachments;
+
+  const todaysMeme: EmailableMeme = await client.fetch(todays_meme_by_date, { date: pollQuestion.date });
+  if (todaysMeme?.imgAsset) {
+    attachments = [
+      {
+        filename: todaysMeme.cslug + '.' + todaysMeme.imgAsset.extension,
+        path: todaysMeme.imgAsset.url
+      }
+    ]
+  } else if (todaysMeme?.videoAsset) {
+    attachments = [
+      {
+        filename: todaysMeme.cslug + '.' + todaysMeme.videoAsset.extension,
+        path: todaysMeme.videoAsset.url
+      }
+    ]
+  } else if (todaysMeme?.youtubeURL) {
+  }
+  console.log("Today's meme", todaysMeme)
+
 
   const nodemailer = require('nodemailer');
   const mailer = nodemailer.createTransport({
