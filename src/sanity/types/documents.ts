@@ -73,5 +73,7 @@ export const meme_fields = `
     videoType,
     date,
     youtubeURL,
-    "pollQuestion": ${pollQuestionFragment}
+    "pollQuestion": *[_type == 'pollQuestion' && ^.date == date][0] {
+      ${pollQuestionFields}
+    }
     `

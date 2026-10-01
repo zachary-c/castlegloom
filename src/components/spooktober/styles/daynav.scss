@@ -4,4 +4,10 @@
   justify-content: center;
   column-gap: 1.5rem;
   row-gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.daynav__button a {
+  background-color: $slaight-grey;
+  color: black;
 }

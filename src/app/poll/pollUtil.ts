@@ -13,14 +13,15 @@ export const theme_list: { display: string, value: string }[] = [
   { value: 'july-light', display: "July" },
   { value: 'august-dark', display: "August" },
   { value: 'september-light', display: "September" },
-  /*'october-dark',
+  { value: 'october-dark', display: "October" },
+  /*
   'october-light',
   'wireframe',
   'december-dark',
   */
 ]
 
-export type PreferenceTheme = 'monthly' | 'december-light' | 'november-light' | 'january-light' | 'february-light' | 'march-light' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light'
+export type PreferenceTheme = 'monthly' | 'december-light' | 'november-light' | 'january-light' | 'february-light' | 'march-light' | 'april-light' | 'may-dark' | 'june-light' | 'july-light' | 'august-dark' | 'september-light' | 'october-dark'
 
 export type Theme =
   'november-light' |
@@ -51,6 +52,7 @@ export function get_monthly_theme() {
     case 6: return 'july-light'
     case 7: return 'august-dark'
     case 8: return 'september-light'
+    case 9: return 'october-dark'
     case 10: return 'november-light'
     case 11: return 'december-light'
     default: return 'wireframe-dark'
