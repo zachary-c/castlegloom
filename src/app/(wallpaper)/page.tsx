@@ -20,7 +20,7 @@ export default function Home() {
           <ul className="list-grid">
             <li>
               <Link href="/poll">
-                <Image src={`/polls/august_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
+                <Image src={`/polls/october_poll.png`} className="full-width top shaded" width={540} height={318} alt={'Poll Box'} />
                 <span>Polling</span>
               </Link>
 
@@ -30,19 +30,19 @@ export default function Home() {
                 <Image src={`/steem.png`} width={272} height={102} className="center--top shaded--light" alt={'Legally distinct Steem logo'} />
                 <span>Steamhash</span>
               </Link>
-            </li>{/* 
-                        <li>
-                            <Link href="/spooktober">
-                                <Image src={`/spookin_light_transparent.png`} className="center--top squareish" width={372} height={355} alt={'Spooky Pumpkin'} />
-                                <span>Spooktober</span>
-                            </Link>
-                        </li> */}
+            </li>
             <li>
+              <Link href="/spooktober">
+                <Image src={`/spookin_light_transparent.png`} className="center--top squareish" width={372} height={355} alt={'Spooky Pumpkin'} />
+                <span>Spooktober</span>
+              </Link>
+            </li>
+            {/*<li>
               <Link href="/strats">
                 <Image src={`/cs2.png`} className="full-width shaded" width={512} height={512} alt={'CS2 Logo'} />
                 <span>CS2 Strats</span>
               </Link>
-            </li>
+            </li>*/}
           </ul>
           <p>
             The polling project has now been providing a daily poll question for over 18 months! The Steamhash and CS2 Strats projects simply happened of their own accord, and live here as well.
