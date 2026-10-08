@@ -63,11 +63,7 @@ export default async function Page({ params }: { params: { date: string } }) {
 
   return <>
     <h1 className={`poll__page-title`}>{data.today.title}</h1>
-    {userid ?
-      <StandaloneInput question={data.today} userid={userid.value} />
-      :
-      <PollQuestion question={data.today} date={params.date} />
-    }
+    <StandaloneInput question={data.today} userid={userid} />
     <span className={`poll__date`}>{params.date}</span>
     <div className='daynav__container'>
       {data.yesterday &&

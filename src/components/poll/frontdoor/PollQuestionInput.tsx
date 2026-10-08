@@ -8,12 +8,16 @@ import { UserQuestionInfo } from "../dash/types";
 import Image from "next/image";
 import pfp from "%/default.png"
 import { renderPrompt } from "./util";
+import { useRouter } from "next/navigation";
+import AuthModal from "./AuthModal";
 
 export default function PollQuestionInput({ question, setQuestion }: { question: UserQuestionInfo, setQuestion: (p: UserQuestionInfo) => void }) {
   const userId = useContext(UserContext)
+  const [authModalOpen, setAuthModalOpen] = useState(false)
   const [userAnswer, setUserAnswer] = useState<string | undefined>(question.userResponse) // this is a responseSlug value
   const [loadingData, setLoadingData] = useState<boolean>(false)
   const [submitting, setSubmitting] = useState<boolean>(false)
+  const router = useRouter()
 
   const userHasAnswered = useMemo(() => !!question.userResponse, [question])
 
@@ -28,7 +32,8 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
 
   async function getData() {
     setLoadingData(true)
-    let response = await fetch(`/api/get-poll?date=${question.date}&userId=${userId}`)
+    const userIdParam = userId === null ? "" : `&userId=${userId}`
+    let response = await fetch(`/api/get-poll?date=${question.date}${userIdParam}`)
 
     const data: PollQuestion_t = await response.json()
     setQuestion(data)
@@ -36,6 +41,10 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
   }
 
   async function submitNewAnswer(newUserAnswer: string) {
+    if (userId == null) {
+      setAuthModalOpen(true)
+      return
+    }
     if (submitting || newUserAnswer == userAnswer) return;
     const oldAnswer = userAnswer;
     setUserAnswer(newUserAnswer);
@@ -84,7 +93,10 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
       </ul>
       <div className="poll__footer">
         <div>
-          <button className="poll__footer__refresh" onClick={getData}>Refresh</button>
+          {userId === null ?
+            <button className="poll__footer__refresh" onClick={() => setAuthModalOpen(true)}>Login</button>
+            : <button className="poll__footer__refresh" onClick={getData}>Refresh</button>
+          }
           {submitting && <span className="loading-notice">Saving...</span>}
           {loadingData && <span className="loading-notice">Refreshing...</span>}
         </div>
@@ -97,5 +109,6 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
         </div>
       }
     </div >
+    <AuthModal modalOpen={authModalOpen} setModalOpen={setAuthModalOpen} />
   </>
 }

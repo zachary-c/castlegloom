@@ -2,40 +2,50 @@ import { patchClient } from '$/lib/client';
 import { emailFrom, emailRegex } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request : NextRequest) {  
-    const email : string = request.nextUrl.searchParams.get('email') as string
-    console.log('Email Signup Received!', email)
-    if (!emailRegex.test(email)) {
-        return NextResponse.json("Invalid Email Address", {status: 400})
-    }
-    
-    let newRecipientRecord
-    try {
-        newRecipientRecord = await patchClient.create({
-            "_type": 'recipient',
-            "email": email
-        })        
-        console.log("result", newRecipientRecord)
-    } catch (err) {
-        console.error(err)
-        return Response.json({}, { status: 500, statusText: "Internal Server Error" })
-    }
+export async function POST(request: NextRequest) {
+  const email: string = request.nextUrl.searchParams.get('email') as string
+  const qualif = request.nextUrl.searchParams.get('q')
+  const prof = request.nextUrl.searchParams.get('p')
+  console.log('Email Signup Received!', email)
+  if (!emailRegex.test(email)) {
+    return NextResponse.json("Invalid Email Address", { status: 400 })
+  }
 
-    const nodemailer = require('nodemailer');
-    const mailer = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-            user: process.env.ORACLE_LOGIN,
-            pass: process.env.ORACLE_APP_PASSWORD,
-        }
+  let title
+  if (!!qualif && !!prof) {
+    title = {
+      "profession": prof,
+      "qualifier": qualif
+    }
+  }
+  let newRecipientRecord
+  try {
+    newRecipientRecord = await patchClient.create({
+      "_type": 'recipient',
+      "email": email,
+      "title": title
     })
-    
-    const info = await mailer.sendMail({
-        from: emailFrom,
-        to: email,
-        bcc: "zacharyhcampbell@gmail.com",
-        subject: `Welcome to Castle Gloom!`,
-        html: `
+    console.log("result", newRecipientRecord)
+  } catch (err) {
+    console.error(err)
+    return Response.json({}, { status: 500, statusText: "Internal Server Error" })
+  }
+
+  const nodemailer = require('nodemailer');
+  const mailer = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: process.env.ORACLE_LOGIN,
+      pass: process.env.ORACLE_APP_PASSWORD,
+    }
+  })
+
+  const info = await mailer.sendMail({
+    from: emailFrom,
+    to: email,
+    bcc: "zacharyhcampbell@gmail.com",
+    subject: `Welcome to Castle Gloom!`,
+    html: `
         <html>
             <head>
                 <style>
@@ -52,13 +62,13 @@ export async function POST(request : NextRequest) {
             </body>
         </html>
         `
-    })
-    
-    //console.log(info);
-    if (!info.response.includes('250')) {
-        console.log("Errored, info: ", info)
-        return NextResponse.json("Error sending email", {status: 500})
-    }
-    console.log(`Signup email sent to ${email}`)
-    return NextResponse.json({status: 200})
+  })
+
+  //console.log(info);
+  if (!info.response.includes('250')) {
+    console.log("Errored, info: ", info)
+    return NextResponse.json("Error sending email", { status: 500 })
+  }
+  console.log(`Signup email sent to ${email}`)
+  return NextResponse.json({ status: 200 })
 }
