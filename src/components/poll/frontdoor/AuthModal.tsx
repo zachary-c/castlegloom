@@ -92,7 +92,7 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
     case "signup-confirm":
       body = <section className="am__confirm">
         <h2>Thanks for signing up!</h2>
-        <p>Your email <b>{signupEmailInput}</b> should receive a signup confirmation in a few moments. Once confirmed, you can expect to receive a daily poll indefinitely, and you'll be able to come finish answering this poll question.</p>
+        <p>Your email <b>{signupEmailInput}</b> should receive a signup confirmation in a few moments. Once confirmed, you can expect to receive a daily poll indefinitely, and you&apos;ll be able to come finish answering this poll question.</p>
       </section>
       break;
     case "inputs":
@@ -128,7 +128,7 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
           <summary>details, policies, and other considerations</summary>
           <p>Castle Gloom will send you one poll (&quot;Census&quot;) question per day, ad infinitum, until the death of the author, robots take over, the author gets tired of the project or too busy to continue, or you edit your user preferences to opt out of future polls.</p>
           <p>
-            These polls will be delivered to your email; your email will also act as a login through "magic links", clickable, and, due to this website's poor security, multi-use. Don't share your links, and don't take this too seriously, as the cybersecurity is laughable.
+            These polls will be delivered to your email; your email will also act as a login through &quot;magic links&quot;, clickable, and, due to this website&apos;s poor security, multi-use. Don&apos;t share your links, and don&apos;t take this too seriously, as the cybersecurity is laughable.
           </p>
         </details>
       </>
