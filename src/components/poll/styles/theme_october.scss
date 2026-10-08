@@ -331,7 +331,7 @@
       input {
         background-color: $transparent-1;
         color: $charcoal-mining;
-        border: none;
+        border: 1px solid white;
       }
 
       button.am__btn {
@@ -351,6 +351,7 @@
       background-color: $charcoal-mining;
       color: orange;
       font-weight: bold;
+      border-color: $charcoal-mining;
     }
     details {
       color: black;

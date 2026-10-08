@@ -77,6 +77,8 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
     }
   }
 
+  console.log("user id", userId)
+
   return <>
     <div className={`poll montserrat input ${submitting ? 'submitting' : ''}`}>
       <h3 className="poll__header">{question.questionText ? question.questionText : renderPrompt(question.prompt)}</h3>
