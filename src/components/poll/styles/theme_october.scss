@@ -345,6 +345,11 @@
           border: none;
           color: $black;
         }
+        &.muted {
+          background-color: $transparent-1;
+            border: none;
+          color: $black;
+        }
       }
     }
     &__title {

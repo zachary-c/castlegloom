@@ -2,28 +2,46 @@ import { patchClient } from '$/lib/client';
 import { emailFrom, emailRegex } from '@/poll/pollUtil';
 import { NextRequest, NextResponse } from 'next/server';
 
+export type SignupBody = {
+  email: string
+  qualifier: string
+  profession: string
+  isPolledDaily: boolean
+}
+function validateSignupBody(b: Partial<SignupBody>): SignupBody | false {
+  if (!b.qualifier || !b.profession || !b.isPolledDaily || !b.email) {
+    return false
+  }
+  return {
+    email: b.email,
+    qualifier: b.qualifier,
+    profession: b.profession,
+    isPolledDaily: b.isPolledDaily,
+  }
+}
+
 export async function POST(request: NextRequest) {
-  const email: string = request.nextUrl.searchParams.get('email') as string
-  const qualif = request.nextUrl.searchParams.get('q')
-  const prof = request.nextUrl.searchParams.get('p')
-  console.log('Email Signup Received!', email)
-  if (!emailRegex.test(email)) {
+  const body: SignupBody = await request.json()
+  const validBody = validateSignupBody(body)
+  if (!validBody) {
+    return Response.json("Missing arguments", { status: 404 })
+  }
+
+  console.log('Email Signup Received!', validBody.email)
+  if (!emailRegex.test(validBody.email)) {
     return NextResponse.json("Invalid Email Address", { status: 400 })
   }
 
-  let title
-  if (!!qualif && !!prof) {
-    title = {
-      "profession": prof,
-      "qualifier": qualif
-    }
-  }
   let newRecipientRecord
   try {
     newRecipientRecord = await patchClient.create({
       "_type": 'recipient',
-      "email": email,
-      "title": title
+      "email": validBody.email,
+      "title": {
+        "profession": validBody.profession,
+        "qualifier": validBody.qualifier
+      },
+      "isPolledDaily": validBody.isPolledDaily ? undefined : false,
     })
     console.log("result", newRecipientRecord)
   } catch (err) {
@@ -42,7 +60,7 @@ export async function POST(request: NextRequest) {
 
   const info = await mailer.sendMail({
     from: emailFrom,
-    to: email,
+    to: validBody.email,
     bcc: "zacharyhcampbell@gmail.com",
     subject: `Welcome to Castle Gloom!`,
     html: `
@@ -69,6 +87,6 @@ export async function POST(request: NextRequest) {
     console.log("Errored, info: ", info)
     return NextResponse.json("Error sending email", { status: 500 })
   }
-  console.log(`Signup email sent to ${email}`)
+  console.log(`Signup email sent to ${validBody.email}`)
   return NextResponse.json({ status: 200 })
 }

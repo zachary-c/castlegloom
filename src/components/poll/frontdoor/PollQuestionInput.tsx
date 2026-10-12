@@ -2,14 +2,14 @@
 import { PollQuestion_t } from "$/types/documents";
 import "../styles/pollQuestion.scss"
 import "_components/poll/styles/pollQuestionInput.scss"
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { UserContext } from "../dash/DashTabs";
 import { UserQuestionInfo } from "../dash/types";
 import Image from "next/image";
 import pfp from "%/default.png"
 import { renderPrompt } from "./util";
-import { useRouter } from "next/navigation";
 import AuthModal from "./AuthModal";
+import Refresh from "../../icons/Refresh";
 
 export default function PollQuestionInput({ question, setQuestion }: { question: UserQuestionInfo, setQuestion: (p: UserQuestionInfo) => void }) {
   const userId = useContext(UserContext)
@@ -17,9 +17,8 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
   const [userAnswer, setUserAnswer] = useState<string | undefined>(question.userResponse) // this is a responseSlug value
   const [loadingData, setLoadingData] = useState<boolean>(false)
   const [submitting, setSubmitting] = useState<boolean>(false)
-  const router = useRouter()
 
-  const userHasAnswered = useMemo(() => !!question.userResponse, [question])
+  const [showResponses, setShowResponses] = useState(!!question.userResponse)
 
   const totalResponses = useMemo(() => {
     let count = 0;
@@ -48,6 +47,7 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
     if (submitting || newUserAnswer == userAnswer) return;
     const oldAnswer = userAnswer;
     setUserAnswer(newUserAnswer);
+    setShowResponses(true)
     setSubmitting(true);
 
     const response = await fetch(`/api/poll/${encodeURIComponent(question.title)}?responder=${encodeURIComponent(userId)}&choice=${encodeURIComponent(newUserAnswer)}&date=${encodeURIComponent(question.date)}`, {
@@ -85,22 +85,18 @@ export default function PollQuestionInput({ question, setQuestion }: { question:
       <ul className="poll__options">
         {question.responses.map((r, i) =>
           <li key={i} className={`poll__options__item${r.responseSlug.current === userAnswer ? ' selected' : ''}`} onClick={() => submitNewAnswer(r.responseSlug.current)}>
-            <div className="poll__options__item__fill-bar" style={{ width: userHasAnswered ? `${(r.responseCount / totalResponses) * 100}%` : "0%" }}></div>
+            <div className="poll__options__item__fill-bar" style={{ width: showResponses ? `${(r.responseCount / totalResponses) * 100}%` : "0%" }}></div>
             <span className="poll__options__item__text">{r.responseText}</span>
-            {userHasAnswered &&
-              <span className="poll__options__item__count">{r.responseCount > 0 ? r.responseCount : ''}</span>
-            }
+            <span className={`poll__options__item__count${!showResponses ? " invis" : ""}`}>{r.responseCount > 0 || !showResponses ? r.responseCount : ''}</span>
           </li>
         )}
       </ul>
       <div className="poll__footer">
-        <div>
-          {userId === null ?
-            <button className="poll__footer__refresh" onClick={() => setAuthModalOpen(true)}>Login</button>
-            : <button className="poll__footer__refresh" onClick={getData}>Refresh</button>
-          }
+        <div className="poll__footer__group">
+          <button className="poll__footer__refresh" onClick={() => setShowResponses(!showResponses)}>{showResponses ? "Hide Responses" : "Show Responses"}</button>
+          <button className={`poll__footer__refresh-icon${loadingData ? " loading" : ""}`} onClick={getData}><Refresh /></button>
+
           {submitting && <span className="loading-notice">Saving...</span>}
-          {loadingData && <span className="loading-notice">Refreshing...</span>}
         </div>
         <span className="poll__footer__rc">Total Responses: {totalResponses ?? '?'}</span>
       </div>

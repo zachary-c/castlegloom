@@ -4,9 +4,10 @@ import { useEffect, useMemo, useState } from "react"
 import "_components/poll/styles/authModal.scss"
 import { emailRegex } from "@/poll/pollUtil"
 import { getRandomTitle } from "./util"
+import { SignupBody } from "@/api/poll/signup/route"
 
 type SignupStatus = "need-title" | "ready" | "submitting"
-type CompSwitch = "inputs" | "login-confirm" | "signup-confirm"
+type CompSwitch = "inputs" | "login-confirm" | "signup-details" | "signup-confirm"
 
 export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: boolean, setModalOpen: (a: boolean) => void }) {
   const [prof, setProf] = useState("")
@@ -16,8 +17,9 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
     if (prof !== "" && qualif !== "") {
       return prof + " " + qualif
     }
-    return "An Unknown Traveler"
+    return "Mysterious Traveler"
   }, [prof, qualif])
+  const [isPolledDaily, setIsPolledDaily] = useState(true)
 
   const [signupMessage, setSignupMessage] = useState("")
   const [signupEmailInput, setSignupEmailInput] = useState("")
@@ -48,12 +50,14 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
 
   async function submitSignup() {
     if (signupStatus !== "ready") return;
-    if (!emailRegex.test(signupEmailInput.trim())) {
-      setSignupMessage("Invalid email address.")
-      return;
-    }
     setSignupStatus("submitting")
-    const response = await fetch(`/api/poll/signup?email=${encodeURIComponent(signupEmailInput.toLowerCase())}&p=${encodeURIComponent(prof)}&q=${encodeURIComponent(qualif)}`, { method: "POST" })
+    const signupFields: SignupBody = {
+      email: signupEmailInput,
+      profession: prof,
+      qualifier: qualif,
+      isPolledDaily: isPolledDaily
+    }
+    const response = await fetch(`/api/poll/signup`, { method: "POST", body: JSON.stringify(signupFields) })
     if (response.ok) {
       setCompSwitch("signup-confirm")
     } else {
@@ -77,6 +81,22 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
     setSignupEmailInput("")
     setLoginEmailInput("")
   }
+  function moveToSignupDetails() {
+    if (!emailRegex.test(signupEmailInput.trim())) {
+      setSignupMessage("Invalid email address.")
+      return;
+    }
+    setSignupMessage("")
+    setCompSwitch("signup-details")
+  }
+  function moveToInitial() {
+    setSignupMessage("")
+    setCompSwitch("inputs")
+    setQualif("")
+    setProf("")
+    setIsPolledDaily(true)
+    setSignupStatus("need-title")
+  }
 
   if (!modalOpen) return <></>
 
@@ -92,7 +112,28 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
     case "signup-confirm":
       body = <section className="am__confirm">
         <h2>Thanks for signing up!</h2>
-        <p>Your email <b>{signupEmailInput}</b> should receive a signup confirmation in a few moments. Once confirmed, you can expect to receive a daily poll indefinitely, and you&apos;ll be able to come finish answering this poll question.</p>
+        <p>Your email <b>{signupEmailInput}</b> should receive a signup confirmation in a few moments. Once confirmed, you&apos;ll be able to come finish answering this poll question, <b>{signupTitle}</b>!</p>
+      </section>
+      break;
+    case "signup-details":
+      body = <section className="am__input-section">
+        <h2>Account Details</h2>
+        <p className="am__text">In the court of Castle Gloom, you are known as the...</p>
+        <span className="am__title">{signupTitle}</span>
+        <button onClick={generateTitle} className={`am__btn generate`}>Generate Title</button>
+
+        <section className="am__checkbox">
+          <label htmlFor="poll-emails">Send Daily Poll Emails?</label>
+          <input id="poll-emails" type="checkbox" checked={isPolledDaily} onChange={(e) => setIsPolledDaily(e.target.checked)} />
+        </section>
+        <p className="am__text note">Note: Daily emails will not begin until your email is confirmed, so as to avoid spam.</p>
+        <section className="button-group justified">
+          <button className="am__btn muted" onClick={moveToInitial}>Back</button>
+          <button onClick={submitSignup} className={`am__btn submit ${signupStatus}`}>{signupStatus === "submitting" ? 'Submitting...' : "Submit"}</button>
+        </section>
+        {signupMessage.length > 0 &&
+          <span className="login__body__input-section__message">{signupMessage}</span>
+        }
       </section>
       break;
     case "inputs":
@@ -110,19 +151,17 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
         </section>
         <div className="am__divider" />
         <section className="am__input-section signup">
-          <h2 className="right">...<span>or</span> Sign Up</h2>
+          <h2 className="left">...<span>or</span> Sign Up</h2>
           <div className="am__input-section__inline-label">
             <label>Email:</label>
-            <input value={signupEmailInput} onKeyDown={(e) => { if (e.key === 'Enter') submitSignup() }} onChange={(e) => setSignupEmailInput(e.target.value)} placeholder="mysterious_newcomer@castlegloom.com" />
+            <input value={signupEmailInput} onKeyDown={(e) => { if (e.key === 'Enter') moveToSignupDetails() }} onChange={(e) => setSignupEmailInput(e.target.value)} placeholder="mysterious_newcomer@castlegloom.com" />
           </div>
-          <span className="am__title">{signupTitle}</span>
           <section className="button-group">
-            <button onClick={generateTitle} className={`am__btn generate`}>Generate Title</button>
-            <button onClick={submitSignup} className={`am__btn submit ${signupStatus}`}>{signupStatus === "submitting" ? 'Submitting...' : "Sign Up"}</button>
+            {signupMessage.length > 0 &&
+              <span className="login__body__input-section__message">{signupMessage}</span>
+            }
+            <button onClick={moveToSignupDetails} className={`am__btn submit`}>Sign Up &gt;</button>
           </section>
-          {signupMessage.length > 0 &&
-            <span className="login__body__input-section__message">{signupMessage}</span>
-          }
         </section>
         <details>
           <summary>details, policies, and other considerations</summary>
@@ -137,8 +176,8 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
 
   return <>
     <section className="am am__wrapper">
-      <button onClick={closeModal} className="am__close">X</button>
       {body}
+      <button onClick={closeModal} className="am__close">X</button>
     </section>
     <div className="am__background-filter" onClick={closeModal} />
   </>

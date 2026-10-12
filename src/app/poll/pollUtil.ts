@@ -179,7 +179,7 @@ export const emailToForBCC = `Citizenry <${process.env.ORACLE_LOGIN}>`
 export function randomInRange(min: number, max: number) {
   return Math.floor(Math.random() * max) + min;
 }
-export const emailRegex = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi)
+export const emailRegex = new RegExp(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)
 
 export function cleanSuggestedByPlaintext(name: string) {
   const trimmed = name.trim()

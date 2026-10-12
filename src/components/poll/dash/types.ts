@@ -317,6 +317,7 @@ export const professionList = [
   "Wendigo",
   "Window Washer",
   "Welder",
+  "Wellerman",
   "Whitecollar Criminal",
   "Warlock",
   "Wizard",
@@ -405,6 +406,7 @@ export const qualifierList = [
   "of All Yet to Come",
   "of Last Thursday",
   "of Symmetry",
+  "of the Good Ship Ragamuffin",
 
   "in Orbit",
   "of Starfleet",
@@ -413,6 +415,14 @@ export const qualifierList = [
   "in Another Life",
   "in Defense of the Accused",
   "in Place of the Amateur",
+
+  "on the Amtrak",
+  "on a Unicycle",
+  "on a Path of Destiny",
+  "on Approach Vector",
+  "on Cloud Nine",
+  "on a Quest for Vengeance",
+  "on a Quest for Baker Lexington's Bagels",
 
   "for all Time",
   "for all Mankind",
@@ -429,5 +439,5 @@ export const qualifierList = [
   "Who is Colorblind",
   "Who was There When it Happened",
   "Who Will Not be Stopped",
-  "Who has More Things to Say but Not Enough Space On His Tombstone to Say Them"
+  "Who has More Things to Say but Not Enough Space On Their Tombstone to Say Them"
 ]
