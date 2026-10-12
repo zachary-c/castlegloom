@@ -55,7 +55,7 @@ export default function AuthModal({ modalOpen, setModalOpen }: { modalOpen: bool
       email: signupEmailInput,
       profession: prof,
       qualifier: qualif,
-      isPolledDaily: isPolledDaily
+      isPolledDaily: isPolledDaily ?? false
     }
     const response = await fetch(`/api/poll/signup`, { method: "POST", body: JSON.stringify(signupFields) })
     if (response.ok) {
