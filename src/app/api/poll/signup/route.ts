@@ -9,7 +9,7 @@ export type SignupBody = {
   isPolledDaily: boolean
 }
 function validateSignupBody(b: Partial<SignupBody>): SignupBody | false {
-  if (!b.qualifier || !b.profession || !b.isPolledDaily || !b.email) {
+  if (!b.qualifier || !b.profession || !b.email || (b.isPolledDaily !== true && b.isPolledDaily !== false)) {
     return false
   }
   return {
@@ -24,7 +24,8 @@ export async function POST(request: NextRequest) {
   const body: SignupBody = await request.json()
   const validBody = validateSignupBody(body)
   if (!validBody) {
-    return Response.json("Missing arguments", { status: 404 })
+    console.log("Invalid Body:", body)
+    return Response.json("Missing arguments", { status: 400 })
   }
 
   console.log('Email Signup Received!', validBody.email)
