@@ -2,7 +2,7 @@
 import { PollQuestion_t } from "$/types/documents";
 import "../styles/pollQuestion.scss"
 import "_components/poll/styles/pollQuestionInput.scss"
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { UserContext } from "../dash/DashTabs";
 import { UserQuestionInfo } from "../dash/types";
 import Image from "next/image";

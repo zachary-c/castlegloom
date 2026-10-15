@@ -152,7 +152,7 @@
         z-index: 4;
         color: black;
         &.invis {
-          color: transparent;
+          color: transparent !important;
         }
       }
 
