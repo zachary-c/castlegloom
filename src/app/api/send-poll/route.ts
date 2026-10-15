@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
   console.log(pollQuestion);
   console.log("emails", emails)
-  let attachments;
+  let attachments: { filename: string, path: string }[] = [];
 
   const todaysMeme: EmailableMeme = await client.fetch(todays_meme_by_date, { date: pollQuestion.date });
   if (todaysMeme?.imgAsset) {
@@ -63,6 +63,24 @@ export async function GET(request: NextRequest) {
       }
     ]
   } else if (todaysMeme?.youtubeURL) {
+  }
+  if (pollQuestion.date === "2026-10-15") {
+    const extraWoops: EmailableMeme = await client.fetch(`*[_type == 'meme' && date == '2026-10-14'][0] {
+      "imgAsset": mainImage.asset->{
+          mimeType,
+          url,
+          extension
+      },
+      "cslug": slug.current,
+      date,
+    }
+  `)
+    if (extraWoops?.imgAsset) {
+      attachments?.push({
+        filename: extraWoops.cslug + '.' + extraWoops.imgAsset.extension,
+        path: extraWoops.imgAsset.url
+      })
+    }
   }
   console.log("Today's meme", todaysMeme)
 
