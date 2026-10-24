@@ -64,24 +64,24 @@ export async function GET(request: NextRequest) {
     ]
   } else if (todaysMeme?.youtubeURL) {
   }
-  if (pollQuestion.date === "2026-10-23") {
-    const extraWoops: EmailableMeme = await client.fetch(`*[_type == 'meme' && date == '2026-10-22'][0] {
-      "imgAsset": mainImage.asset->{
-          mimeType,
-          url,
-          extension
-      },
-      "cslug": slug.current,
-      date,
-    }
-  `)
-    if (extraWoops?.imgAsset) {
-      attachments?.push({
-        filename: extraWoops.cslug + '.' + extraWoops.imgAsset.extension,
-        path: extraWoops.imgAsset.url
-      })
-    }
-  }
+  // if (pollQuestion.date === "2026-10-23") {
+  //   const extraWoops: EmailableMeme = await client.fetch(`*[_type == 'meme' && date == '2026-10-22'][0] {
+  //     "imgAsset": mainImage.asset->{
+  //         mimeType,
+  //         url,
+  //         extension
+  //     },
+  //     "cslug": slug.current,
+  //     date,
+  //   }
+  // `)
+  //   if (extraWoops?.imgAsset) {
+  //     attachments?.push({
+  //       filename: extraWoops.cslug + '.' + extraWoops.imgAsset.extension,
+  //       path: extraWoops.imgAsset.url
+  //     })
+  //   }
+  // }
   console.log("Today's meme", todaysMeme)
 
 
