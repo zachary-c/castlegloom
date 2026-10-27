@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 import { pollQuestionFields } from '../types/documents'
 
-export const DATE_DST_OFFSET = `date + "T00:00:00-06:00"`
+export const DATE_DST_OFFSET = `date + "T00:00:00-05:00"`
 
 export const page_by_slug = groq`
     *[_type == 'page' && slug.current == $cslug][0]

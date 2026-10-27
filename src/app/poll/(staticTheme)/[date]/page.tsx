@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: { date: string } }) {
   const cookieJar = cookies()
   const userid = cookieJar.get(poll_cookie_user_id)
 
-  if (!params.date.match(/202[0-9]-[01][0-9]-[0-3][0-9]/g)) {
+  if (!params.date.match(/20[0-9][0-9]-[01][0-9]-[0-3][0-9]/g)) {
     notFound()
   }
   const datetime = new Date(params.date);
